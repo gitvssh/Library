@@ -15,6 +15,7 @@ public class Member implements Data{
 		this.name = name;
 		this.ssn = ssn;
 		this.tel = tel;
+		
 	}
 	void IdStatus(boolean status) {
 		if(status == true) {
