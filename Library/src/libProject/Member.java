@@ -1,12 +1,12 @@
 package libProject;
 
 public class Member implements Data{
-	String id;
-	String password;
-	String name;
-	String ssn;
-	String tel;
-	boolean status;
+	private String id;
+	private String password;
+	private String name;
+	private String ssn;
+	private String tel;
+	private boolean status;
 	
 		
 	public Member(String id, String password, String name, String ssn, String tel) {
@@ -15,6 +15,7 @@ public class Member implements Data{
 		this.name = name;
 		this.ssn = ssn;
 		this.tel = tel;
+		
 	}
 	void IdStatus(boolean status) {
 		if(status == true) {
