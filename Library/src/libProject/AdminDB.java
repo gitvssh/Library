@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AdminDB extends DB {
-
+//2018.05.28 18:10pm.
 	List<Admin> adminList;
 
 	Data input() {
@@ -46,10 +46,19 @@ public class AdminDB extends DB {
 		adminList.add((Admin) admin);
 	}
 
-	@Override
-	List search(String title) {
-		// TODO Auto-generated method stub
-		return null;
+	List searchid(String id) {//검색 : id 
+		List<Admin> searchId = new ArrayList<Admin>();
+		for(Admin a:adminList) {
+			if(a.getName().contains(id)) searchId.add(a);
+		}
+		return searchId;
+	}
+	List searchname(String name) {//검색 : 이름
+		List<Admin> searchName = new ArrayList<Admin>();
+		for(Admin a:adminList) {
+			if(a.getName().contains(name)) searchName.add(a);
+		}
+		return searchName;
 	}
 
 	@Override
@@ -80,6 +89,12 @@ public class AdminDB extends DB {
 
 	@Override
 	List align() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	List search(String title) {
 		// TODO Auto-generated method stub
 		return null;
 	}
