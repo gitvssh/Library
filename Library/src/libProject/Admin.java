@@ -1,7 +1,7 @@
 package libProject;
 
 public class Admin implements Data {
-
+//1
 	private String id;
 	private String password;
 	private String name;
