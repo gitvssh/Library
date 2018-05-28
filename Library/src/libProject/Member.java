@@ -1,12 +1,12 @@
 package libProject;
 
 public class Member implements Data{
-	private String id;
-	private String password;
-	private String name;
-	private String ssn;
-	private String tel;
-	private boolean status;
+	String id;
+	String password;
+	String name;
+	String ssn;
+	String tel;
+	boolean status;
 	
 		
 	public Member(String id, String password, String name, String ssn, String tel) {

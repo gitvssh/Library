@@ -25,13 +25,13 @@ public class Controller {
 
 		MemberDB memberDB = new MemberDB(); // 회원 DB 객체생성
 
-		memberDB.insert(new Member("김자바")); // 회원 DB 객체생성
-		memberDB.insert(new Member("이자바"));
-		memberDB.insert(new Member("박자바"));
+//		memberDB.insert(new Member("김자바")); // 회원 DB 객체생성
+//		memberDB.insert(new Member("이자바"));
+//		memberDB.insert(new Member("박자바"));
 		List<Member> searchMembers = memberDB.search("자바"); // 회원 DB 객체생성
 
 		for (Member m : searchMembers) {
-			System.out.println(m.name);
+			System.out.println(m.getName());
 		} // 회원 DB 객체생성
 
 		// -----------------메인시작-----------------------
@@ -83,14 +83,14 @@ public class Controller {
 					System.out.println("아이디를 입력하세요.");
 					String id = scan.nextLine();
 					System.out.println("비밀번호를 입력하세요.");
-					String pass = scan.nextLine();
+					String password = scan.nextLine();
 					// 로그인 메서드
 					continue main;//메인으로 보내서 판별
 				case 4:// 관리자로그인
 					System.out.println("아이디를 입력하세요.");
 					id = scan.nextLine();
 					System.out.println("비밀번호를 입력하세요.");
-					pass = scan.nextLine();
+					password = scan.nextLine();
 					// 로그인 메서드
 					break observer;// 성공시 비회원메뉴 종료
 				case 5:// 아이디 비밀번호찾기
