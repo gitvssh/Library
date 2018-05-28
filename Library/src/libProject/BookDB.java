@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class BookDB extends DB{
 	List<Book> bookList;
 	
-	//검색, 전체검색, 정렬 미완성
+	//검색, 전체검색, 정렬 미완성, toString 규격에 맞게 수정
 	
 	public BookDB() {
 		this.bookList = new ArrayList();

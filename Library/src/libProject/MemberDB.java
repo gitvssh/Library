@@ -1,9 +1,6 @@
 package libProject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.lang.reflect.Member;
+
 import java.util.*;
 public class MemberDB extends DB{
 	List<Member> memberList;
@@ -23,11 +20,38 @@ public class MemberDB extends DB{
 	List search(String str) {
 		List<Member> searchList = new ArrayList<Member>();
 		for(Member m:memberList) {
-			if(m.name.contains(str)) searchList.add(m);
+			if(m.getName().contains(str)) searchList.add(m);
 		}
 		return searchList;
 	}
 
+	Data input() {
+		System.out.println("아이디를 입력해주세요");
+		id = scanner.nextLine();
+		System.out.println("비밀번호를 입력해주세요");
+		password = scanner.nextLine();
+		System.out.println("비밀번호를 한번 더 입력해주세요");
+		String passright = scanner.nextLine();
+		while(true) {
+			if(passright.equals(password)){
+				System.out.println("비밀번호를 확인하였습니다.");
+				break;
+			}
+			else {
+				System.out.println("비밀번호가 틀렸습니다. 다시 입력해주세요.");
+				continue;
+			}
+		}
+		System.out.println("이름을 입력해주세요.");
+		name = scanner.nextLine();
+		System.out.println("생년월일을 입력해주세요.");
+		ssn = scanner.nextLine();
+		System.out.println("전화번호를 입력해주세요.");
+		tel = scanner.nextLine();
+		
+		Member m = new Member(id, password, name, ssn, tel);
+		return m;
+	}
 	@Override
 	void insert(Data data) {
 		memberList.add((Member)data);
@@ -53,11 +77,11 @@ public class MemberDB extends DB{
 			System.out.println("수정되셨습니다. 아이디 : "+m.getId());
 			break;
 		case 2:
-			System.out.println("수정하실 비밀번호를 입력해주세요.");
-			m.setPassword(getPassword());
-			System.out.println("비밀번호를 한번 더 입력해주세요");
-			String passright = scanner.nextLine();
 			while(true) {
+				System.out.println("수정하실 비밀번호를 입력해주세요.");
+				m.setPassword(m.getPassword());
+				System.out.println("비밀번호를 한번 더 입력해주세요");
+				String passright = scanner.nextLine();
 				if(passright.equals(m.getPassword())){
 					System.out.println("비밀번호를 확인하였습니다.");
 					break;
@@ -88,10 +112,19 @@ public class MemberDB extends DB{
 			System.out.println("수정되셨습니다. 전화번호 : "+m.getTel());
 			break;
 		case 0:
+			System.out.println("이전메뉴로 이동합니다.");
 			break;
 		}
 	}
-
+//void Login(Data data) {
+//	System.out.println("아이디를 입력하세요.");
+//	String idinput = scanner.nextLine();
+//	for(int i=0;i<memberList.size();i++) {
+//if(((Member)memberList.get(i).id).equals(idinput)) {
+	
+//}
+//	}
+//}
 	@Override
 	List searchAll() {
 		for(int i=0;i<memberList.size();i++) {
@@ -105,31 +138,4 @@ public class MemberDB extends DB{
 		// TODO Auto-generated method stub
 		return null;
 	}
-Data input() {
-	System.out.println("아이디를 입력해주세요");
-	id = scanner.nextLine();
-	System.out.println("비밀번호를 입력해주세요");
-	password = scanner.nextLine();
-	System.out.println("비밀번호를 한번 더 입력해주세요");
-	String passright = scanner.nextLine();
-	while(true) {
-		if(passright.equals(password)){
-			System.out.println("비밀번호를 확인하였습니다.");
-			break;
-		}
-		else {
-			System.out.println("비밀번호가 틀렸습니다. 다시 입력해주세요.");
-			continue;
-		}
-	}
-	System.out.println("이름을 입력해주세요.");
-	name = scanner.nextLine();
-	System.out.println("생년월일을 입력해주세요.");
-	ssn = scanner.nextLine();
-	System.out.println("전화번호를 입력해주세요.");
-	tel = scanner.nextLine();
-	
-	Member m = new Member(id, password, name, ssn, tel);
-	return m;
-}
 }

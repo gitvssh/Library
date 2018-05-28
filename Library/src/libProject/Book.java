@@ -1,7 +1,9 @@
 package libProject;
 
+//toString 규격에 맞게 수정
 public class Book implements Data{
-
+	
+	
 	String index;//인덱스는 분야(ex ㄱ. ㄷ. ㅂ.)+책생성카운트(1,2,...) 합쳐서 문자열로 생성
 	String title;//제목
 	String author;//저자

@@ -25,9 +25,9 @@ public class Controller {
 
 		MemberDB memberDB = new MemberDB(); // 회원 DB 객체생성
 
-		memberDB.insert(new Member("김자바")); // 회원 DB 객체생성
-		memberDB.insert(new Member("이자바"));
-		memberDB.insert(new Member("박자바"));
+//		memberDB.insert(new Member("김자바")); // 회원 DB 객체생성
+//		memberDB.insert(new Member("이자바"));
+//		memberDB.insert(new Member("박자바"));
 		List<Member> searchMembers = memberDB.search("자바"); // 회원 DB 객체생성
 
 		for (Member m : searchMembers) {
