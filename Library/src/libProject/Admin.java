@@ -2,6 +2,7 @@ package libProject;
 
 public class Admin implements Data {
 //1
+	int test;//테스트용
 	private String id;
 	private String password;
 	private String name;
