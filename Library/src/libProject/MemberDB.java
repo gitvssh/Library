@@ -132,7 +132,7 @@ public class MemberDB extends DB{
 		}
 		return null;
 	}
-//.
+
 	@Override
 	List align() {
 		// TODO Auto-generated method stub
