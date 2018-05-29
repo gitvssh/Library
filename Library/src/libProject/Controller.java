@@ -134,11 +134,11 @@ public class Controller {
 						case 1:// 아이디 찾기
 							osys.observer_findId();// 아이디찾기 화면
 							memberDB.FindId();// 아이디 찾기 메서드
-							continue;
+							break;
 						case 2:// 비밀번호 찾기
 							osys.observer_findPass();// 비밀번호찾기 화면
 							memberDB.FindPw();// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
-							continue;
+							break;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue observer;
