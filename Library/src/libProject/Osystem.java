@@ -1,5 +1,7 @@
 package libProject;
 
+import java.util.List;
+
 public class Osystem {
 	// 히스토리 출력창에 넣을지, 메인에 넣을지, 아이디 포함출력 에러사항
 	// 출력이 1줄인 메뉴는 메인화면에서
@@ -151,5 +153,31 @@ public class Osystem {
 		System.out.println("--------------------------------------");
 
 	}
+	
+	void showBookList(List<Book> list) {	//검색한 책 리스트를 출력하는 메서드
+		System.out.println("-------------------------------------------------------------");
+		System.out.printf("%7s %20s %8s %8s %5s %5s", "인덱스","제목","저자","출판사","ISBN","주제");
+		for(Book b:list) {//인덱스(7), 제목(20), 저자(8), 출판사(8), ISBN(5), 주제(5)
+			System.out.println(b);
+		}
+		System.out.println("-------------------------------------------------------------");
+		System.out.println("총"+list.size()+"개의 검색결과가 있습니다.");
+	}
 
+	//히스토리 메서드(오버로딩)
+	String history(String menu) {
+		return menu;
+	}//회원이나 관리자 아이디를 메뉴창에 표시할 때도 사용.
+	
+	String history(String menu, String subMenu1) {
+		return menu + " >> "+ subMenu1;
+	}
+	
+	String history(String menu, String subMenu1, String subMenu2) {
+		return menu + " >> " + subMenu1 + " >> " + subMenu2;
+	}
+	
+	String history(String menu, String subMenu1, String subMenu2, String subMenu3) {
+		return menu + " >> " + subMenu1 + " >> " + subMenu2 + " >> " + subMenu3;
+	}
 }

@@ -53,8 +53,8 @@ public class MemberDB extends DB{
 		return m;
 	}
 	@Override
-	void insert(Data data) {
-		memberList.add((Member)data);
+	void insert() {
+		
 	}
 
 	@Override

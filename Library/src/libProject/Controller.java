@@ -11,7 +11,12 @@ public class Controller {
 		int menu;// 화면 메뉴선택에 활용할 메뉴
 		int login = 0;//로그인 검사
 		Scanner scan = new Scanner(System.in);// 메뉴 입력시 사용할 스캐너
-		BookDB bookDB = new BookDB(); // 책 DB 객체생성
+		
+		BookDB bookDB = new BookDB();			//책 DB 객체생성
+		MemberDB memberDB = new MemberDB();		//회원 DB 객체생성
+		AdminDB adminDB = new AdminDB();		//관리자 DB 객체생성
+		
+		/*BookDB bookDB = new BookDB(); // 책 DB 객체생성
 
 		// bookDB.insert(new Book("전쟁과 평화1")); //책 DB에 책 객체저장
 		// bookDB.insert(new Book("전쟁과 평화2"));
@@ -33,7 +38,7 @@ public class Controller {
 		for (Member m : searchMembers) {
 			System.out.println(m.getName());
 		} // 회원 DB 객체생성
-
+*/
 		// -----------------메인시작-----------------------
 		main: while (true) {
 			switch(login) {

@@ -62,9 +62,8 @@ public class AdminDB extends DB {
 	}
 
 	@Override
-	void insert(Data data) {
-		// TODO Auto-generated method stub
-
+	void insert() {
+		
 	}
 
 	@Override

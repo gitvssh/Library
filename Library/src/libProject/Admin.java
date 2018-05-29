@@ -62,5 +62,10 @@ public class Admin implements Data {
 		this.tel = tel;
 	}
 
+	@Override
+	public String toString() {
+		return "Admin [test=" + test + ", id=" + id + ", password=" + password + ", name=" + name + ", ssn=" + ssn
+				+ ", tel=" + tel + "]";
+	}	//관리자 정보를 문자열로 리턴하게 toString 메서드 오버라이딩.
 	//
 }

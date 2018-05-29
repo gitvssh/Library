@@ -54,8 +54,8 @@ public class BookDB extends DB{
 	
 	//리스트 삽입
 	@Override
-	void insert(Data data) {
-		bookList.add((Book)data);
+	void insert() {
+		
 	}
 
 	//삭제

@@ -61,4 +61,10 @@ public class Member implements Data{
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", password=" + password + ", name=" + name + ", ssn=" + ssn + ", tel=" + tel
+				+ ", status=" + status + "]";
+	}	//회원 정보를 문자열로 리턴하게 toString 메서드 오버라이딩.
 }
