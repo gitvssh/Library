@@ -12,6 +12,9 @@ public class Controller {
 		int login = 0;// 로그인 검사
 		Scanner scan = new Scanner(System.in);// 메뉴 입력시 사용할 스캐너
 		
+		Member loginMem = null;	//로그인한 회원의 정보가 저장되는 변수
+		Admin loginAdm = null;	//로그인한 관리자의 정보가 저장되는 변수
+		
 		BookDB bookDB = new BookDB();			//책 DB 객체생성
 		MemberDB memberDB = new MemberDB();		//회원 DB 객체생성
 		AdminDB adminDB = new AdminDB();		//관리자 DB 객체생성
