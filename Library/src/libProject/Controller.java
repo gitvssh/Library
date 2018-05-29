@@ -309,7 +309,7 @@ public class Controller {
 								String menu2 = scan.nextLine();
 								newadm: while (true) {
 									if (menu2.equalsIgnoreCase("y")) {
-										adminDB.insert(adminDB.input());// 관리자 추가 메서드
+										//adminDB.insert(adminDB.input());// 관리자 추가 메서드
 										break newadm;
 									} else if (menu2.equalsIgnoreCase("n")) {
 										System.out.println("관리자 관리화면으로 돌아갑니다.");
