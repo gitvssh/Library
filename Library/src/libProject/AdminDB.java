@@ -30,11 +30,9 @@ public class AdminDB extends DB {
 		System.out.println("이름을 입력해주세요.");
 		String name = sc.nextLine();
 		System.out.println("생년월일을 입력하세요. ex)92년10월2일생일시 -> '921002'");
-		int ssn = sc.nextInt();
-		sc.nextLine();
+		String ssn = sc.nextLine();
 		System.out.println("전화번호를 입력하시오. 하이픈(-)은 생략하여 입력하세요. ");
-		int tel = sc.nextInt();
-		sc.nextLine();
+		String tel = sc.nextLine();
 		Admin a = new Admin(id, password, name, ssn, tel);
 
 		return a;
