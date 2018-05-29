@@ -18,7 +18,13 @@ public class Member implements Data{
 		this.ssn = ssn;
 		this.tel = tel;
 	}
+//<<<<<<< HEAD
+	public Member() {
+		// TODO Auto-generated constructor stub
+	}
+//=======
 	
+//>>>>>>> branch 'master' of https://github.com/gitvssh/Library
 	void IdStatus(boolean status) {
 		if(status == true) {
 			System.out.println("Á¤»ó");
