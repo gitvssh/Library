@@ -86,6 +86,9 @@ public class BookDB extends DB{
 		publisher = scan.nextLine();
 		System.out.println();
 		Book b = new Book(title,author,subject,publisher); 
+		Book.isbn_count++;//책 일련번호(카운트)+1
+		b.isbn = Book.isbn_count;//일련번호 인덱스 대입
+		b.setIndex(b.change_subject(subject)+b.isbn);//분야 + isbn -> 인덱스
 		bookList.add(b);
 	}
 
