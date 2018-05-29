@@ -58,32 +58,32 @@ public class Controller {
 						switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
 						case 1:// 제목
 							System.out.println("검색하실 제목을 입력하세요");
-							osys.showBookList(bookDB.search(scan.nextLine(),1));
-							// 제목 검색 메서드
+							osys.showBookList(bookDB.search(scan.nextLine(), 1));
 							break;
 						case 2:// 저자
 							System.out.println("검색하실 저자를 입력하세요");
-							// 저자 검색 메서드
+							osys.showBookList(bookDB.search(scan.nextLine(), 2));
 							break;
 						case 3:// 출판사
 							System.out.println("검색하실 출판사를 입력하세요");
-							// 출판사 검색 메서드
+							osys.showBookList(bookDB.search(scan.nextLine(), 3));
 							break;
 						case 4:// 분야
 							System.out.println("검색하실 분야를 입력하세요");
-							// 분야 검색 메서드
+							osys.showBookList(bookDB.search(scan.nextLine(), 4));
 							break;
 						case 5:// 인덱스
 							System.out.println("검색하실 인덱스를 입력하세요");
-							// 인덱스 검색 메서드
+							osys.showBookList(bookDB.search(scan.nextLine(), 5));
 							break;
 						case 6:// ISBN
+							osys.showBookList(bookDB.search(scan.nextLine(), 6));
 							System.out.println("검색하실 ISBN을 입력하세요");
-							// ISBN검색 메서드
 							break;
 						case 7:// 전체 도서목록
 							System.out.println("전체 도서 목록입니다.");
 							bookDB.searchAll();
+							bookDB.align();
 							break;
 						case 0:// 이전화면으로
 							System.out.println("이전화면으로 돌아갑니다.");
@@ -159,28 +159,41 @@ public class Controller {
 						osys.member_search();// 회원 도서검색화면
 						menu = scan.nextInt();
 						scan.nextLine();
-						switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
+						switch (menu) {// 1.제목 2.저자 3.출판사 4.분류 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
 						// 아래에 대출기능도 추가
 						case 1:// 제목
-								// 제목 검색 메서드
+							System.out.println("검색하실 제목을 입력하세요");
+							osys.showBookList(bookDB.search(scan.nextLine(), 1));//검색메서드
+							bookDB.rentBooks(bookDB, loginMem);//대출메서드
 							break;
 						case 2:// 저자
-								// 저자 검색 메서드
+							System.out.println("검색하실 저자를 입력하세요");
+							osys.showBookList(bookDB.search(scan.nextLine(), 2));
+							bookDB.rentBooks(bookDB, loginMem);
 							break;
 						case 3:// 출판사
-								// 출판사 검색 메서드
+							System.out.println("검색하실 출판사를 입력하세요");
+							osys.showBookList(bookDB.search(scan.nextLine(), 3));
+							bookDB.rentBooks(bookDB, loginMem);
 							break;
-						case 4:// 주제
-								// 주제 검색 메서드
+						case 4:// 분야
+							System.out.println("검색하실 분야를 입력하세요");
+							osys.showBookList(bookDB.search(scan.nextLine(), 4));
+							bookDB.rentBooks(bookDB, loginMem);
 							break;
 						case 5:// 인덱스
-								// 인덱스 검색 메서드
+							System.out.println("검색하실 인덱스를 입력하세요");
+							osys.showBookList(bookDB.search(scan.nextLine(), 5));
+							bookDB.rentBooks(bookDB, loginMem);
 							break;
 						case 6:// ISBN
-								// ISBN검색 메서드
+							System.out.println("검색하실 ISBN을 입력하세요");
+							osys.showBookList(bookDB.search(scan.nextLine(), 6));
+							bookDB.rentBooks(bookDB, loginMem);
 							break;
 						case 7:// 전체 도서목록
-								// 전체도서목록 출력메서드
+							System.out.println("전체 도서 목록입니다.");
+							bookDB.searchAll();
 							break;
 						case 0:// 이전화면으로
 							System.out.println("이전화면으로 돌아갑니다.");
@@ -239,7 +252,7 @@ public class Controller {
 						scan.nextLine();
 						bookmng: while (true) {// 도서관리메뉴 while
 							switch (menu) {// 1.도서검색 2.도서추가 3.도서수정 4.도서삭제 0.이전 화면으로
-							//->승현씨 메서드 받아서 구현
+							// ->승현씨 메서드 받아서 구현
 							case 1:// 도서검색
 								osys.admin_search();
 								// 도서검색 메서드
@@ -304,27 +317,24 @@ public class Controller {
 						admng: while (true) {// 관리자관리메뉴 while
 							switch (menu) {// 1.관리자 검색 2.전체 관리자 목록 3.새 관리자 등록 0.이전화면
 							case 1:// 관리자 검색
-								System.out.println("검색할 관리자 아이디를 입력해주세요.");
+								System.out.println("검색할 관리자 아이디 혹은 이름을 입력해주세요.");
 								String searchAdminId = scan.nextLine();
 								adminDB.search(searchAdminId);// 관리자 검색 메서드
-								break;
+								break admng;
 							case 2:// 전체 관리자 목록
 								adminDB.searchAll();// 전체 관리자 목록 출력 메서드
-								break;
+								break admng;
 							case 3:// 새 관리자 등록
 								osys.admin_newad();// y or n
 								String menu2 = scan.nextLine();
 								newadm: while (true) {
 									if (menu2.equalsIgnoreCase("y")) {
-										// adminDB.insert(adminDB.input());// 관리자 추가 메서드
+										adminDB.input();// 관리자 추가 메서드
 										break newadm;
-									} else if (menu2.equalsIgnoreCase("n")) {
+									} else  {
 										System.out.println("관리자 관리화면으로 돌아갑니다.");
-										break newadm;
-									} else {
-										System.out.println("잘못된 입력입니다.");
-										break;
-									}
+										break admng;
+									} 
 								} // end while_newadm
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");

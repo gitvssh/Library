@@ -1,5 +1,7 @@
 package libProject;
 
+import java.util.ArrayList;
+
 public class Member implements Data{
 	String id;
 	String password;
@@ -7,19 +9,22 @@ public class Member implements Data{
 	String ssn;
 	String tel;
 	boolean status;
+	ArrayList<Book> rentList;	//빌린 책 리스트
 	
-		
 	public Member(String id, String password, String name, String ssn, String tel) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.ssn = ssn;
 		this.tel = tel;
-		
 	}
+//<<<<<<< HEAD
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
+//=======
+	
+//>>>>>>> branch 'master' of https://github.com/gitvssh/Library
 	void IdStatus(boolean status) {
 		if(status == true) {
 			System.out.println("정상");
@@ -63,6 +68,13 @@ public class Member implements Data{
 	}
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	
+	public ArrayList<Book> getRentList() {
+		return rentList;
+	}
+	public void setRentList(ArrayList<Book> rentList) {
+		this.rentList = rentList;
 	}
 	
 	@Override
