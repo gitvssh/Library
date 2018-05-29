@@ -12,10 +12,10 @@ public class MemberDB extends DB {
 	String name = "";
 	String ssn = "";
 	String tel = "";
-
+//....
 	public MemberDB() {
 		memberList = new ArrayList<>();
-		Member b = new Member("java111", "88030490", "박자바", "991120", "01042326814");
+		Member b = new Member("java111", "1234", "박자바", "991120", "01042326814");
 		memberList.add(b);
 	}
 
