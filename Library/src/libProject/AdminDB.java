@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AdminDB extends DB {
-
+	// 2018.05.28 18:10pm.
 	List<Admin> adminList;
 
 	Data input() {
@@ -13,10 +13,8 @@ public class AdminDB extends DB {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("새로운 관리자를 등록합니다.");
 		System.out.println();
-
 		System.out.println("아이디를 입력하세요.");
 		String id = sc.nextLine();
-
 		System.out.println("패스워드를 입력하세요.");
 		String password = sc.nextLine();
 		while (true) { // 패스워드 확인하는 구문
@@ -32,11 +30,9 @@ public class AdminDB extends DB {
 		System.out.println("이름을 입력해주세요.");
 		String name = sc.nextLine();
 		System.out.println("생년월일을 입력하세요. ex)92년10월2일생일시 -> '921002'");
-		int ssn = sc.nextInt();
-		sc.nextLine();
+		String ssn = sc.nextLine();
 		System.out.println("전화번호를 입력하시오. 하이픈(-)은 생략하여 입력하세요. ");
-		int tel = sc.nextInt();
-		sc.nextLine();
+		String tel = sc.nextLine();
 		Admin a = new Admin(id, password, name, ssn, tel);
 
 		return a;
@@ -47,9 +43,13 @@ public class AdminDB extends DB {
 	}
 
 	@Override
-	List search(String title) {
-		// TODO Auto-generated method stub
-		return null;
+	List search(String id) {
+		List<Admin> searchId = new ArrayList<Admin>();
+		for (Admin a : adminList) {
+			if (a.getName().contains(id))
+				searchId.add(a);
+		}
+		return searchId;
 	}
 
 	@Override
