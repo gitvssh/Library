@@ -17,7 +17,7 @@ public class MemberDB extends DB{
 	}
 
 	@Override
-	List search(String str) {
+	List<Member> search(String str) {
 		List<Member> searchList = new ArrayList<Member>();
 		for(Member m:memberList) {
 			if(m.getName().contains(str)) searchList.add(m);
@@ -116,17 +116,38 @@ public class MemberDB extends DB{
 			break;
 		}
 	}
-//void Login(Data data) {
-//	System.out.println("아이디를 입력하세요.");
-//	String idinput = scanner.nextLine();
-//	for(int i=0;i<memberList.size();i++) {
-//if(((Member)memberList.get(i).id).equals(idinput)) {
-	
-//}
-//	}
-//}
+void Login(Data data) {
+	Member m = (Member)data;
+	login : while(true) {
+		
+		System.out.println("아이디를 입력하세요. 이전메뉴로 이동(0)");
+		String idInput = scanner.nextLine();
+		int premenu = Integer.parseInt(idInput);
+		if(premenu == 0) {
+			break login;
+			
+		}
+		for(int i=0;i<memberList.size();i++) {
+			if(m.getId().equals(idInput)) {
+				System.out.println("비밀번호를 입력하세요.");
+				String passInput = scanner.nextLine();
+				if(m.getPassword().equals(passInput)) {
+					System.out.println(m.getName()+"님이 로그인 하셨습니다.");
+					System.out.println("회원 메뉴로 이동합니다.");
+					break login;
+				}else {
+					System.out.println("비밀번호를 잘못 입력하셨습니다. 다시 입력해주세요.");
+					continue;
+				}
+			}else {
+				System.out.println("존재하지 않는 아이디입니다. 다시 입력해주세요.");
+				continue login;
+			}
+		}
+	}
+}
 	@Override
-	List searchAll() {
+	List<Member> searchAll() {
 		for(int i=0;i<memberList.size();i++) {
 			System.out.println((Member)memberList.get(i));
 		}
