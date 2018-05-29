@@ -239,6 +239,7 @@ public class Controller {
 							if(out.equals("y")) {
 								System.out.println("로그아웃 되었습니다.");
 								login = 0;
+								break;
 							}else if(out.equals("n")) {
 								System.out.println("로그아웃이 취소되었습니다.");
 								login = 1;
