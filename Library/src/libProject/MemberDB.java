@@ -15,6 +15,8 @@ public class MemberDB extends DB {
 
 	public MemberDB() {
 		memberList = new ArrayList<>();
+		Member b = new Member("java111", "88030490", "¹ÚÀÚ¹Ù", "991120", "01042326814");
+		memberList.add(b);
 	}
 
 	@Override
