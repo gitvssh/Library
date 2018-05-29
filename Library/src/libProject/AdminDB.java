@@ -7,7 +7,14 @@ import java.util.Scanner;
 public class AdminDB extends DB {
 	// 2018.05.28 18:10pm.
 	List<Admin> adminList;
-
+	
+	
+	AdminDB(){
+		adminList = new ArrayList<>();
+		Admin a = new Admin("admin1", "1234", "관리자", "921002", "01012341234");
+		adminList.add(a);
+	}
+	
 	Data input() {
 
 		Scanner sc = new Scanner(System.in);
@@ -42,18 +49,20 @@ public class AdminDB extends DB {
 		adminList.add((Admin) admin);
 	}
 
-	int login(String id, String password) {
-//		adminList.get(int i).g
-		Admin a = new Admin("admin1", "1234", "관리자", "921002", "01012341234");
-		int login = 0;
-		if (a.getId().equals(id) && a.getPassword().equals(password)) {
-			System.out.println("로그인에 성공하셨습니다.");
-			login = 2;
-		} else { //
-			System.out.println("잘못된 아이디 혹은 비밀번호입니다. ");
-			login = 0;
+	Admin login(String id, String password) {
+		// adminList.get(int i).g
+
+		Admin loginAdm = null;
+
+		for (int i = 0; i < adminList.size(); i++) {
+			if (adminList.get(i).getId().equals(id) && adminList.get(i).getPassword().equals(password)) {
+				System.out.printf("[%s] 계정으로 로그인 합니다.%n[%s]님 환영합니다.",adminList.get(i).getId(),adminList.get(i).getName());
+				loginAdm = adminList.get(i);
+				break;
+			} 
+			
 		}
-		return login;
+		return loginAdm;
 	}
 
 	@Override
@@ -68,7 +77,7 @@ public class AdminDB extends DB {
 
 	@Override
 	void insert() {
-		
+
 	}
 
 	@Override
