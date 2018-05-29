@@ -220,7 +220,7 @@ public class Controller {
 							osys.member_modify();// 회원정보 수정 화면
 							modify: while (true) {
 								memberDB.update(loginMem);
-								continue;
+								break;
 								}// end switch_modify
 							 // end while modify;
 						case 0:// 이전화면

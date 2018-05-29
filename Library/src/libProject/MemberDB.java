@@ -66,52 +66,53 @@ public class MemberDB extends DB {
 		int menu = scanner.nextInt();
 		scanner.nextLine();
 		switch (menu) {
-		case 1:
-			System.out.println("수정하실 아이디를 입력해주세요.");
-			System.out.println("아이디 : " + m.getId());
-			m.setId(scanner.nextLine());
-			System.out.println("수정되셨습니다. 아이디 : " + m.getId());
-			break;
-		case 2:
-			while (true) {
-				System.out.println("수정하실 비밀번호를 입력해주세요.");
-				m.setPassword(m.getPassword());
-				System.out.println("비밀번호를 한번 더 입력해주세요");
-				String passright = scanner.nextLine();
-				if (passright.equals(m.getPassword())) {
-					System.out.println("비밀번호를 확인하였습니다.");
-					break;
-				} else {
-					System.out.println("비밀번호가 틀렸습니다. 다시 입력해주세요.");
-					continue;
+			case 1:
+				System.out.println("수정하실 아이디를 입력해주세요.");
+				System.out.println("아이디 : " + m.getId());
+				m.setId(scanner.nextLine());
+				System.out.println("수정되셨습니다. 아이디 : " + m.getId());
+				break;
+			case 2:
+				while (true) {
+					System.out.println("수정하실 비밀번호를 입력해주세요.");
+					m.setPassword(m.getPassword());
+					System.out.println("비밀번호를 한번 더 입력해주세요");
+					String passright = scanner.nextLine();
+					if (passright.equals(m.getPassword())) {
+						System.out.println("비밀번호를 확인하였습니다.");
+						break;
+					} else {
+						System.out.println("비밀번호가 틀렸습니다. 다시 입력해주세요.");
+						continue;
+					}
 				}
+				break;
+			case 3:
+				System.out.println("수정하실 이름을 입력해주세요.");
+				System.out.println("이름 : " + m.getName());
+				m.setName(scanner.nextLine());
+				System.out.println("수정되셨습니다. 이름 : " + m.getName());
+				break;
+				
+			case 4:
+				System.out.println("수정하실 생년월일를 입력해주세요.");
+				System.out.println("생년월일 : " + m.getSsn());
+				m.setSsn(scanner.nextLine());
+				System.out.println("수정되셨습니다. 생년월일 : " + m.getSsn());
+				break;
+			case 5:
+				System.out.println("수정하실 전화번호를 입력해주세요.");
+				System.out.println("전화번호 : " + m.getTel());
+				m.setTel(scanner.nextLine());
+				System.out.println("수정되셨습니다. 전화번호 : " + m.getTel());
+				break;
+			case 0:
+				System.out.println("이전메뉴로 이동합니다.");
+				break;
 			}
-			break;
-		case 3:
-			System.out.println("수정하실 이름을 입력해주세요.");
-			System.out.println("이름 : " + m.getName());
-			m.setName(scanner.nextLine());
-			System.out.println("수정되셨습니다. 이름 : " + m.getName());
-			break;
-
-		case 4:
-			System.out.println("수정하실 생년월일를 입력해주세요.");
-			System.out.println("생년월일 : " + m.getSsn());
-			m.setSsn(scanner.nextLine());
-			System.out.println("수정되셨습니다. 생년월일 : " + m.getSsn());
-			break;
-		case 5:
-			System.out.println("수정하실 전화번호를 입력해주세요.");
-			System.out.println("전화번호 : " + m.getTel());
-			m.setTel(scanner.nextLine());
-			System.out.println("수정되셨습니다. 전화번호 : " + m.getTel());
-			break;
-		case 0:
-			System.out.println("이전메뉴로 이동합니다.");
-			break;
+			return;
 		}
-		return;
-	}
+		
 
 	Member Login(String id, String password) { // 로그인 메서드
 		Member loginMem = null;
