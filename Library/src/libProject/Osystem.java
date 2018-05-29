@@ -177,20 +177,20 @@ public class Osystem {
 	//리스트 추가 
 
 	//히스토리 메서드(오버로딩)
-	String history(String menu) {
-		return menu;
+	void history(String menu) {
+		System.out.println("["+menu+"]");
 	} //회원이나 관리자 아이디를 메뉴창에 표시할 때도 사용.
 	
 	
-	String history(String menu, String subMenu1) {
-		return menu + " >> "+ subMenu1;
+	void history(String menu, String subMenu1) {
+		System.out.println("["+menu + " >> "+ subMenu1+"]");
 	}
 	
-	String history(String menu, String subMenu1, String subMenu2) {
-		return menu + " >> " + subMenu1 + " >> " + subMenu2;
+	void history(String menu, String subMenu1, String subMenu2) {
+		System.out.println("["+menu + " >> " + subMenu1 + " >> " + subMenu2+"]");
 	}
 	
-	String history(String menu, String subMenu1, String subMenu2, String subMenu3) {
-		return menu + " >> " + subMenu1 + " >> " + subMenu2 + " >> " + subMenu3;
+	void history(String menu, String subMenu1, String subMenu2, String subMenu3) {
+		System.out.println("["+menu + " >> " + subMenu1 + " >> " + subMenu2 + " >> " + subMenu3+"]");
 	}
 }
