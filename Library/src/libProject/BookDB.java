@@ -11,6 +11,18 @@ public class BookDB extends DB{
 	
 	public BookDB() {
 		this.bookList = new ArrayList();
+		this.bookList.add(new Book("소피의 세계","요슈타인가아더 ",1,"현암사"));
+		this.bookList.add(new Book("간다, 봐라","법정",2,"김영사"));
+		this.bookList.add(new Book("프로테스탄트 윤리","막스 베버",3,"현대지성"));
+		this.bookList.add(new Book("별, 빛의과학","지웅배",4,"위즈덤하우스"));
+		this.bookList.add(new Book("신소재공학","오세동",5,"복두출판사"));
+		this.bookList.add(new Book("공공미술, 도시를그리다","홍경표",6,"재승출판"));
+		this.bookList.add(new Book("쓸어담는 한자","권작가",7,"쓸어담는 한자"));
+		this.bookList.add(new Book("전쟁과 평화","레프 톨스토이",8,"홍진미디어"));
+		this.bookList.add(new Book("블랙어스","티머시 스나이더",9,"열린책들"));
+		this.bookList.add(new Book("온돌, 기원과 역사","손진태",9,"온이퍼브"));
+//		System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
+//		System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
 	}
 
 	//검색
@@ -86,6 +98,9 @@ public class BookDB extends DB{
 		publisher = scan.nextLine();
 		System.out.println();
 		Book b = new Book(title,author,subject,publisher); 
+		Book.isbn_count++;//책 일련번호(카운트)+1
+		b.isbn = Book.isbn_count;//일련번호 인덱스 대입
+		b.setIndex(b.change_subject(subject)+b.isbn);//분야 + isbn -> 인덱스
 		bookList.add(b);
 	}
 
@@ -141,12 +156,57 @@ public class BookDB extends DB{
 		return null;
 	}
 
-	Book rentBooks(String index){//책대출
-		Book book = null;
-		//빌릴 책 찾기
-		//대출자 빌린도서 리스트 <- 책 객체
-		//책 <- 대출자 객체
-		return book;
+	void rentBooks(BookDB bookDB,Member loginMem){//책대출
+		Scanner scan = new Scanner(System.in);
+		Book rentcart = null;//도서대출에 필요한 대출카트 참조변수
+		rentcheck: while (true) {
+			System.out.println("대출을 원하는 도서의 인덱스를 입력해주세요.(7자리)(0.이전화면)");
+			String rent = scan.nextLine();
+			if (rent.length() != 7) {//7자리 아닐경우 예외처리
+				System.out.println("잘못된 입력입니다.");
+				break;
+			}
+			else if(rent.equals("0")){//이전화면 예외처리
+				System.out.println("이전화면으로 돌아갑니다.");
+				break rentcheck;
+			}
+			else {//정상입력일경우
+				int index = Integer.parseInt(rent.substring(2, 6));//인덱스 추출
+				for(Book b:bookDB.bookList) {
+					if(b.isbn==index&&b.status==true) {//검색결과 확인,재고확인
+						System.out.println("선택하신 도서는 "+b.title+"입니다.");
+						rentcart = b;//선택한 도서 대출카트에 등록
+						break;
+					}
+					else {//재고가 없거나, 잘못된 입력일 경우
+						System.out.println("대출가능 도서가 없습니다.");
+						break;
+					}
+				}
+				
+			}//인덱스 검색 끝
+			break;
+		} // end while_rentcheck
+			// 대출확인----------------------------------------------------
+		System.out.println("책을 대출하시겠습니까? Y/N");
+		String menu2 = scan.nextLine();
+		rentbook: while (true) {
+			if (menu2.equalsIgnoreCase("y")) {
+				rentcart.setStatus(false);//대출도서 상태 대출중
+				rentcart.setRenter(loginMem);//대출도서에 대출자 등록
+				rentcart.setRentCount(rentcart.getRentCount()+1);//대출횟수 증가
+				//로그인멤버에 rentcart 추가
+				System.out.println("정상적으로 대출되었습니다.");
+				break rentbook;
+			} else if (menu2.equalsIgnoreCase("n")) {
+				System.out.println("도서검색화면으로 돌아갑니다.");
+				break rentbook;
+			} else {
+				System.out.println("잘못된 입력입니다.");
+				break;
+			}
+		} // end while_rentbook;
+			// 대출확인끝---------------------------------------------------
 	}
 	
 	boolean returnBooks(String index){//책반납
