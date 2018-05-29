@@ -93,15 +93,25 @@ public class Controller {
 
 					case 2:// 회원가입
 						osys.observer_signin();// 회원가입 화면
-						// 회원가입 메서드
+						memberDB.input();// 회원가입 메서드
 						break;
 					case 3:// 로그인
 						System.out.println("아이디를 입력하세요.");
 						String id = scan.nextLine();
+						if(id.equals("0")) {
+							System.out.println("이전화면으로 이동합니다.");
+							break;
+						}
 						System.out.println("비밀번호를 입력하세요.");
 						String password = scan.nextLine();
-						// 로그인 메서드
+						loginMem = memberDB.Login(id, password);// 로그인 메서드
+						if (loginMem == null) {
+							System.out.println("로그인에 실패하였습니다. 아이디 비밀번호를 다시 확인해주세요.");
+							break;
+						} else {
+							login = 1;
 						continue main;// 메인으로 보내서 판별
+						}
 					case 4:// 관리자로그인
 						System.out.println("아이디를 입력하세요.");
 						id = scan.nextLine();
@@ -123,10 +133,12 @@ public class Controller {
 						switch (menu) {// 1. 아이디 찾기 2.비밀번호 찾기 0. 이전화면
 						case 1:// 아이디 찾기
 							osys.observer_findId();// 아이디찾기 화면
-							// 아이디 찾기 메서드
+							memberDB.FindId();// 아이디 찾기 메서드
+							break;
 						case 2:// 비밀번호 찾기
 							osys.observer_findPass();// 비밀번호찾기 화면
-							// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
+							memberDB.FindPw();// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
+							break;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue observer;
@@ -202,37 +214,19 @@ public class Controller {
 						switch (menu) {// 1.회원정보 조회 2.회원정보 수정 0. 이전화면
 						case 1:// 회원정보 조회
 							osys.member_myinform();// 회원정보 조회 화면
+							break;
 							// 회원정보 조회 메서드
 						case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.member_modify();// 회원정보 수정 화면
-							menu = scan.nextInt();
-							scan.nextLine();
 							modify: while (true) {
-								switch (menu) {// 1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
-								case 1:// 아이디
-										// 아이디 수정 메서드
-									break;
-								case 2:// 비밀번호
-										// 비밀번호 수정 메서드
-									break;
-								case 3:// 이름
-										// 이름 수정 메서드
-									break;
-								case 4:// 생년월일
-										// 생년월일 수정 메서드
-									break;
-								case 5:// 전화번호
-										// 전화번호 수정 메서드
-									break;
-								case 0:// 회원메뉴
-									continue member;
+								memberDB.update(loginMem);
+								break;
 								}// end switch_modify
-							} // end while modify;
+							 // end while modify;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue member;
 						}// end switch 회원정보메뉴
-						break;
 					case 5:// 건의사항
 						osys.member_request();
 						// 건의사항 메서드
@@ -253,27 +247,64 @@ public class Controller {
 					scan.nextLine();
 					switch (menu) {// 1.도서관리 2. 회원관리 3.건의사항 4.관리자 관리 5.로그아웃 0.시스템 종료
 					case 1:// 도서관리
+						Book selected = null;//도서 수정,삭제를 위한 참조변수
 						osys.admin_bookmng();
 						menu = scan.nextInt();
 						scan.nextLine();
 						bookmng: while (true) {// 도서관리메뉴 while
 							switch (menu) {// 1.도서검색 2.도서추가 3.도서수정 4.도서삭제 0.이전 화면으로
-							// ->승현씨 메서드 받아서 구현
 							case 1:// 도서검색
 								osys.admin_search();
-								// 도서검색 메서드
+								menu = scan.nextInt();
+								scan.nextLine();
+								switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
+								case 1:// 제목
+									System.out.println("검색하실 제목을 입력하세요");
+									osys.showBookList(bookDB.search(scan.nextLine(), 1));
+									break;
+								case 2:// 저자
+									System.out.println("검색하실 저자를 입력하세요");
+									osys.showBookList(bookDB.search(scan.nextLine(), 2));
+									break;
+								case 3:// 출판사
+									System.out.println("검색하실 출판사를 입력하세요");
+									osys.showBookList(bookDB.search(scan.nextLine(), 3));
+									break;
+								case 4:// 분야
+									System.out.println("검색하실 분야를 입력하세요");
+									osys.showBookList(bookDB.search(scan.nextLine(), 4));
+									break;
+								case 5:// 인덱스
+									System.out.println("검색하실 인덱스를 입력하세요");
+									osys.showBookList(bookDB.search(scan.nextLine(), 5));
+									break;
+								case 6:// ISBN
+									osys.showBookList(bookDB.search(scan.nextLine(), 6));
+									System.out.println("검색하실 ISBN을 입력하세요");
+									break;
+								case 7:// 전체 도서목록
+									System.out.println("전체 도서 목록입니다.");
+									bookDB.searchAll();
+									bookDB.align();
+									break;
+								case 0:// 이전화면으로
+									System.out.println("이전화면으로 돌아갑니다.");
+									continue admin;
+								}
 								break;
 							case 2:// 도서추가
 								osys.admin_addbook();
-								// 도서추가 메서드
+								bookDB.input();
 								break;
 							case 3:// 도서수정
 								osys.admin_modifybook();
-								// 도서수정 메서드
+								selected = bookDB.adminsearch(bookDB);
+								bookDB.update(selected);
 								break;
 							case 4:// 도서삭제
 								osys.admin_delbook();
-								// 도서삭제 메서드
+								selected = bookDB.adminsearch(bookDB);
+								bookDB.delete(selected);
 								break;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");

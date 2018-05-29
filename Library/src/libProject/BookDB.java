@@ -177,7 +177,39 @@ public class BookDB extends DB{
 		
 		return null;
 	}
-
+	
+	Book adminsearch(BookDB bookDB) {
+		Scanner scan = new Scanner(System.in);
+		Book selected = null;//도서대출에 필요한 대출카트 참조변수
+		check: while (true) {
+			String rent = scan.nextLine();
+			if (rent.length() != 7) {//7자리 아닐경우 예외처리
+				System.out.println("잘못된 입력입니다.");
+				break;
+			}
+			else if(rent.equals("0")){//이전화면 예외처리
+				System.out.println("이전화면으로 돌아갑니다.");
+				break check;
+			}
+			else {//정상입력일경우
+				int index = Integer.parseInt(rent.substring(2, 6));//인덱스 추출
+				for(Book b:bookDB.bookList) {
+					if(b.isbn==index&&b.status==true) {//검색결과 확인,재고확인
+						System.out.println("선택하신 도서는 "+b.title+"입니다.");
+						selected = b;//선택한 도서 샘플에 등록
+						break;
+					}
+					else {//재고가 없거나, 잘못된 입력일 경우
+						System.out.println("선택가능한 도서가 없습니다.");
+						break;
+					}
+				}
+				
+			}//인덱스 검색 끝
+		}
+		return selected;
+	}
+	
 	void rentBooks(BookDB bookDB,Member loginMem){//책대출
 		Scanner scan = new Scanner(System.in);
 		Book rentcart = null;//도서대출에 필요한 대출카트 참조변수
@@ -217,7 +249,7 @@ public class BookDB extends DB{
 				rentcart.setStatus(false);//대출도서 상태 대출중
 				rentcart.setRenter(loginMem);//대출도서에 대출자 등록
 				rentcart.setRentCount(rentcart.getRentCount()+1);//대출횟수 증가
-				//로그인멤버에 rentcart 추가
+				loginMem.rentList.add(rentcart);//대출자 대출카트에 대출한 책 추가
 				System.out.println("정상적으로 대출되었습니다.");
 				break rentbook;
 			} else if (menu2.equalsIgnoreCase("n")) {

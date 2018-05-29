@@ -19,4 +19,5 @@ public abstract class DB {//데이터 베이스의 부모 클래스
 	abstract List searchAll();	//DB자료 전체를 보여주는 메서드
 	
 	abstract List align(); //DB자료를 정렬하는 메서드
+
 }
