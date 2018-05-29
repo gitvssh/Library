@@ -93,15 +93,25 @@ public class Controller {
 
 					case 2:// 회원가입
 						osys.observer_signin();// 회원가입 화면
-						// 회원가입 메서드
+						memberDB.input();// 회원가입 메서드
 						break;
 					case 3:// 로그인
 						System.out.println("아이디를 입력하세요.");
 						String id = scan.nextLine();
+						if(id.equals("0")) {
+							System.out.println("이전화면으로 이동합니다.");
+							break;
+						}
 						System.out.println("비밀번호를 입력하세요.");
 						String password = scan.nextLine();
-						// 로그인 메서드
+						loginMem = memberDB.Login(id, password);// 로그인 메서드
+						if (loginMem == null) {
+							System.out.println("로그인에 실패하였습니다. 아이디 비밀번호를 다시 확인해주세요.");
+							break;
+						} else {
+							login = 1;
 						continue main;// 메인으로 보내서 판별
+						}
 					case 4:// 관리자로그인
 						System.out.println("아이디를 입력하세요.");
 						id = scan.nextLine();
@@ -123,10 +133,12 @@ public class Controller {
 						switch (menu) {// 1. 아이디 찾기 2.비밀번호 찾기 0. 이전화면
 						case 1:// 아이디 찾기
 							osys.observer_findId();// 아이디찾기 화면
-							// 아이디 찾기 메서드
+							memberDB.FindId();// 아이디 찾기 메서드
+							continue;
 						case 2:// 비밀번호 찾기
 							osys.observer_findPass();// 비밀번호찾기 화면
-							// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
+							memberDB.FindPw();// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
+							continue;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue observer;
@@ -189,37 +201,19 @@ public class Controller {
 						switch (menu) {// 1.회원정보 조회 2.회원정보 수정 0. 이전화면
 						case 1:// 회원정보 조회
 							osys.member_myinform();// 회원정보 조회 화면
+							break;
 							// 회원정보 조회 메서드
 						case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.member_modify();// 회원정보 수정 화면
-							menu = scan.nextInt();
-							scan.nextLine();
 							modify: while (true) {
-								switch (menu) {// 1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
-								case 1:// 아이디
-										// 아이디 수정 메서드
-									break;
-								case 2:// 비밀번호
-										// 비밀번호 수정 메서드
-									break;
-								case 3:// 이름
-										// 이름 수정 메서드
-									break;
-								case 4:// 생년월일
-										// 생년월일 수정 메서드
-									break;
-								case 5:// 전화번호
-										// 전화번호 수정 메서드
-									break;
-								case 0:// 회원메뉴
-									continue member;
+								memberDB.update(loginMem);
+								continue;
 								}// end switch_modify
-							} // end while modify;
+							 // end while modify;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue member;
 						}// end switch 회원정보메뉴
-						break;
 					case 5:// 건의사항
 						osys.member_request();
 						// 건의사항 메서드

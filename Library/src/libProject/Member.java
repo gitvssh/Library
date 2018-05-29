@@ -17,6 +17,9 @@ public class Member implements Data{
 		this.tel = tel;
 		
 	}
+	public Member() {
+		// TODO Auto-generated constructor stub
+	}
 	void IdStatus(boolean status) {
 		if(status == true) {
 			System.out.println("Á¤»ó");
