@@ -151,7 +151,7 @@ public class Osystem {
 	}
 	void admin_newad() {
 		System.out.println("┌─────────────────────────────────────┐");
-		System.out.println("│새로운 관리자를 등록하시겠습니까? (Y/N) >>	  │");
+		System.out.println("│새로운 관리자를 등록하시겠습니까? (Y/N) >> ");
 		System.out.println("└─────────────────────────────────────┘");
 
 	}

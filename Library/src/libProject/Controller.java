@@ -322,27 +322,24 @@ public class Controller {
 						admng: while (true) {// 관리자관리메뉴 while
 							switch (menu) {// 1.관리자 검색 2.전체 관리자 목록 3.새 관리자 등록 0.이전화면
 							case 1:// 관리자 검색
-								System.out.println("검색할 관리자 아이디를 입력해주세요.");
+								System.out.println("검색할 관리자 아이디 혹은 이름을 입력해주세요.");
 								String searchAdminId = scan.nextLine();
 								adminDB.search(searchAdminId);// 관리자 검색 메서드
-								break;
+								break admng;
 							case 2:// 전체 관리자 목록
 								adminDB.searchAll();// 전체 관리자 목록 출력 메서드
-								break;
+								break admng;
 							case 3:// 새 관리자 등록
 								osys.admin_newad();// y or n
 								String menu2 = scan.nextLine();
 								newadm: while (true) {
 									if (menu2.equalsIgnoreCase("y")) {
-										// adminDB.insert(adminDB.input());// 관리자 추가 메서드
+										adminDB.input();// 관리자 추가 메서드
 										break newadm;
-									} else if (menu2.equalsIgnoreCase("n")) {
+									} else  {
 										System.out.println("관리자 관리화면으로 돌아갑니다.");
-										break newadm;
-									} else {
-										System.out.println("잘못된 입력입니다.");
-										break;
-									}
+										break admng;
+									} 
 								} // end while_newadm
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
