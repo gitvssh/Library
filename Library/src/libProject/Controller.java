@@ -58,25 +58,33 @@ public class Controller {
 						scan.nextLine();
 						switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
 						case 1:// 제목
+							System.out.println("검색하실 제목을 입력하세요");
+							//출력메서드 ~~~ .(검색결과 list반환)bookDB.search(scan.nextLine(),1);
 								// 제목 검색 메서드
 							break;
 						case 2:// 저자
+							System.out.println("검색하실 저자를 입력하세요");
 								// 저자 검색 메서드
 							break;
 						case 3:// 출판사
+							System.out.println("검색하실 출판사를 입력하세요");
 								// 출판사 검색 메서드
 							break;
-						case 4:// 주제
-								// 주제 검색 메서드
+						case 4:// 분야
+							System.out.println("검색하실 분야를 입력하세요");
+								// 분야 검색 메서드
 							break;
 						case 5:// 인덱스
+							System.out.println("검색하실 인덱스를 입력하세요");
 								// 인덱스 검색 메서드
 							break;
 						case 6:// ISBN
+							System.out.println("검색하실 ISBN을 입력하세요");
 								// ISBN검색 메서드
 							break;
 						case 7:// 전체 도서목록
-								// 전체도서목록 출력메서드
+							System.out.println("전체 도서 목록입니다.");
+							bookDB.searchAll();
 							break;
 						case 0:// 이전화면으로
 							System.out.println("이전화면으로 돌아갑니다.");

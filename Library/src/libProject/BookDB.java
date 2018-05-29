@@ -14,14 +14,51 @@ public class BookDB extends DB{
 	}
 
 	//검색
-	@Override
-	List search(String title) {
-		List<Book> searchList = new ArrayList<Book>();
-		for(Book b:bookList) {
-			if(b.title.contains(title)) searchList.add(b);
+		@Override
+		List search(String title) {
+			List<Book> searchList = new ArrayList<Book>();
+			for(Book b:bookList) {
+				if(b.title.contains(title)) searchList.add(b);
+			}
+			return searchList;
 		}
-		return searchList;
-	}
+		
+		List search(String string, int std) {
+			List<Book> searchList = new ArrayList<Book>();
+			switch(std) {//1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 
+			case 1:	//제목
+			for(Book b:bookList) {
+				if(b.title.contains(string)) searchList.add(b);
+			}
+			return searchList;
+			case 2://저자
+				for(Book b:bookList) {
+					if(b.author.contains(string)) searchList.add(b);
+				}
+				return searchList;
+			case 3://출판사
+				for(Book b:bookList) {
+					if(b.publisher.contains(string)) searchList.add(b);
+				}
+				return searchList;
+			case 4://분야
+				for(Book b:bookList) {
+					if(b.subject==Integer.parseInt(string)) searchList.add(b);
+				}
+				return searchList;
+			case 5://인덱스
+				for(Book b:bookList) {
+					if(b.index.contains(string)) searchList.add(b);
+				}
+				return searchList;
+			case 6://ISBN
+				for(Book b:bookList) {
+					if(b.isbn==Integer.parseInt(string)) searchList.add(b);
+				}
+				return searchList;
+			}//end switch_std
+			return null;
+		}//end search
 
 	//도서 자료 입력받고 가공, 데이터반환
 	Data input() {
