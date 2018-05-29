@@ -61,7 +61,7 @@ public class BookDB extends DB{
 		}//end search
 
 	//도서 자료 입력받고 가공, 데이터반환
-	Data input() {
+	void input() {
 		//변수 선언
 		Scanner scan = new Scanner(System.in);
 		String title="";
@@ -86,13 +86,7 @@ public class BookDB extends DB{
 		publisher = scan.nextLine();
 		System.out.println();
 		Book b = new Book(title,author,subject,publisher); 
-		return b;
-	}
-	
-	//리스트 삽입
-	@Override
-	void insert() {
-		
+		bookList.add(b);
 	}
 
 	//삭제
@@ -147,5 +141,18 @@ public class BookDB extends DB{
 		return null;
 	}
 
+	Book rentBooks(String index){//책대출
+		Book book = null;
+		//빌릴 책 찾기
+		//대출자 빌린도서 리스트 <- 책 객체
+		//책 <- 대출자 객체
+		return book;
+	}
 	
+	boolean returnBooks(String index){//책반납
+		boolean result=false;
+		//인덱스를 받아서 책 반납
+		//있으면 true, 없으면 false.
+		return result;
+	}
 }

@@ -27,7 +27,7 @@ public class MemberDB extends DB {
 		return searchList;
 	}
 
-	Data input() { // 회원가입 메서드
+	void input() { // 회원가입 메서드
 		System.out.println("아이디를 입력해주세요");
 		id = scanner.nextLine();
 		while (true) {
@@ -51,13 +51,8 @@ public class MemberDB extends DB {
 		tel = scanner.nextLine();
 
 		Member m = new Member(id, password, name, ssn, tel);
-		return m;
-	}
-
-	@Override
-	void insert() {}
-	void insert(Data data) {
-		memberList.add((Member) data);
+		memberList.add(m);
+		System.out.println("회원가입이 성공했습니다.");
 	}
 
 	@Override

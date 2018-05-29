@@ -15,7 +15,7 @@ public class AdminDB extends DB {
 		adminList.add(a);
 	}
 	
-	Data input() {
+	void input() {
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("새로운 관리자를 등록합니다.");
@@ -42,11 +42,7 @@ public class AdminDB extends DB {
 		String tel = sc.nextLine();
 		Admin a = new Admin(id, password, name, ssn, tel);
 
-		return a;
-	}
-
-	void insert(Admin admin) {
-		adminList.add((Admin) admin);
+		adminList.add(a);
 	}
 
 	Admin login(String id, String password) {
@@ -73,11 +69,6 @@ public class AdminDB extends DB {
 				searchId.add(a);
 		}
 		return searchId;
-	}
-
-	@Override
-	void insert() {
-
 	}
 
 	@Override

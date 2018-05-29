@@ -58,7 +58,7 @@ public class Controller {
 						switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
 						case 1:// 제목
 							System.out.println("검색하실 제목을 입력하세요");
-							// 출력메서드 ~~~ .(검색결과 list반환)bookDB.search(scan.nextLine(),1);
+							osys.showBookList(bookDB.search(scan.nextLine(),1));
 							// 제목 검색 메서드
 							break;
 						case 2:// 저자
@@ -126,7 +126,7 @@ public class Controller {
 							// 아이디 찾기 메서드
 						case 2:// 비밀번호 찾기
 							osys.observer_findPass();// 비밀번호찾기 화면
-							// 비밀번호 찾기 메서드
+							// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue observer;
@@ -245,6 +245,7 @@ public class Controller {
 						scan.nextLine();
 						bookmng: while (true) {// 도서관리메뉴 while
 							switch (menu) {// 1.도서검색 2.도서추가 3.도서수정 4.도서삭제 0.이전 화면으로
+							//->승현씨 메서드 받아서 구현
 							case 1:// 도서검색
 								osys.admin_search();
 								// 도서검색 메서드

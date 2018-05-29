@@ -28,13 +28,13 @@ public class Book implements Data{
 	int rentCount;//대출회수 대출할때마다 카운트 되도록
 	//static에서 인스턴트로 변경, static은 전체 책이 카운트가 되기때문에 책 종류로 구별이 안됨
 	
+	Member renter;
+	
 //	상세정보(Desc) 
 // 객체를 인스턴스변수로 받아서 사용하는것 나중에 구현
-	
+
 	//기본생성자
-	public Book() {
-		
-	}
+	public Book() {}
 	
 	//매개변수 생성자
 	public Book(String title, String author, int subject,String publisher) {
@@ -162,6 +162,14 @@ public class Book implements Data{
 
 	public void setRentCount(int rentCount) {
 		this.rentCount = rentCount;
+	}
+	
+	public Member getRenter() {
+		return renter;
+	}
+
+	public void setRenter(Member renter) {
+		this.renter = renter;
 	}
 
 	@Override
