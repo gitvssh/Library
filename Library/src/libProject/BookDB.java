@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+import Comparators.BookIndexComparator;
 import Comparators.BookTitleComparator;
 
 public class BookDB extends DB{
@@ -145,23 +146,36 @@ public class BookDB extends DB{
 
 	//전체검색
 	@Override
-	List searchAll() {
-		// TODO Auto-generated method stub
-		for(int i=0;i<bookList.size();i++) {
-			System.out.println(bookList.get(i));
-		}
+	List searchAll() {	//책 전체 리스트 출력 메서드
+		Osystem osys = new Osystem();
+		osys.showBookList(bookList);
+		align();	//책 정렬 메서드 호출
 		return null;
 	}
 
 	//정렬
 	@Override
-	List align() {
-		
+	List align() {	//책 정렬 메서드
+		Osystem osys = new Osystem();
+		osys.observer_align();
+
 		Scanner scan = new Scanner(System.in);
+		int std = scan.nextInt();
+			
+		if(std==0) {
+			BookIndexComparator c = new BookIndexComparator();
+			Collections.sort(bookList, c);
+			return null;
+		}
+			
+		if(std==1) {
+			BookTitleComparator c = new BookTitleComparator();
+			Collections.sort(bookList, c);
+			searchAll();
+			return null;
+		}
 		
-		BookTitleComparator c = new BookTitleComparator();
-		Collections.sort(bookList, c);
-		return bookList;
+		return null;
 	}
 
 	void rentBooks(BookDB bookDB,Member loginMem){//책대출
