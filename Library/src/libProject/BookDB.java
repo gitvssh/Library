@@ -1,8 +1,12 @@
 package libProject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+
+import Comparators.BookTitleComparator;
 
 public class BookDB extends DB{
 	List<Book> bookList;
@@ -129,7 +133,7 @@ public class BookDB extends DB{
 	List searchAll() {
 		// TODO Auto-generated method stub
 		for(int i=0;i<bookList.size();i++) {
-			System.out.println((Book)bookList.get(i));
+			System.out.println(bookList.get(i));
 		}
 		return null;
 	}
@@ -137,8 +141,9 @@ public class BookDB extends DB{
 	//정렬
 	@Override
 	List align() {
-		// TODO Auto-generated method stub
-		return null;
+		BookTitleComparator c = new BookTitleComparator();
+		Collections.sort(bookList, c);
+		return bookList;
 	}
 
 	Book rentBooks(String index){//책대출
