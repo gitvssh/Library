@@ -42,6 +42,20 @@ public class AdminDB extends DB {
 		adminList.add((Admin) admin);
 	}
 
+	int login(String id, String password) {
+//		adminList.get(int i).g
+		Admin a = new Admin("admin1", "1234", "관리자", "921002", "01012341234");
+		int login = 0;
+		if (a.getId().equals(id) && a.getPassword().equals(password)) {
+			System.out.println("로그인에 성공하셨습니다.");
+			login = 2;
+		} else { //
+			System.out.println("잘못된 아이디 혹은 비밀번호입니다. ");
+			login = 0;
+		}
+		return login;
+	}
+
 	@Override
 	List search(String id) {
 		List<Admin> searchId = new ArrayList<Admin>();
