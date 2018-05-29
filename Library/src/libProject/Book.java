@@ -44,6 +44,7 @@ public class Book implements Data{
 		this.subject = subject;
 		this.publisher = publisher;
 		this.isbn = isbn_count;
+		this.index = isbn_count+"";	//정렬 기능 시험하기 위해 임시 생성(형주).
 		this.status = true;// 기본 도서관 생성시 1
 		this.rentCount = 0; // 기본 대여회수 0
 	}

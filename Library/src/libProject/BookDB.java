@@ -6,8 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-import Comparators.BookIndexComparator;
-import Comparators.BookTitleComparator;
+import Comparators.*;
 
 public class BookDB extends DB{
 	List<Book> bookList;
@@ -148,34 +147,68 @@ public class BookDB extends DB{
 	@Override
 	List searchAll() {	//책 전체 리스트 출력 메서드
 		Osystem osys = new Osystem();
-		osys.showBookList(bookList);
-		align();	//책 정렬 메서드 호출
+		osys.showBookList(bookList);	//전체 리스트 콘솔출력
+		align();	//책 정렬 메서드 호출 -> align()에서 std에 0을 입력하지 않는 한 계속해서 호출되는 것에 주목.
 		return null;
 	}
 
 	//정렬
 	@Override
-	List align() {	//책 정렬 메서드
-		Osystem osys = new Osystem();
-		osys.observer_align();
-
-		Scanner scan = new Scanner(System.in);
-		int std = scan.nextInt();
-			
-		if(std==0) {
-			BookIndexComparator c = new BookIndexComparator();
-			Collections.sort(bookList, c);
-			return null;
-		}
-			
-		if(std==1) {
-			BookTitleComparator c = new BookTitleComparator();
-			Collections.sort(bookList, c);
-			searchAll();
-			return null;
-		}
+	void align() {	//책 정렬 메서드(책 정렬 디폴트 기준은 인덱스 순.)
+		Osystem osys = new Osystem();	
 		
-		return null;
+		while(true) {	//반복문 while - 잘못된 입력발생시 다시 입력가능하게 루프함.
+			osys.observer_align();	//정렬메뉴 콘솔 출력(0은 이전화면)
+			Scanner scan = new Scanner(System.in);
+			int std = scan.nextInt();	//정렬기준(std) 입력 받기.
+			scan.nextLine();
+			
+			switch(std) {	//std에 따라 책 정렬
+			case 1:	//제목
+				//책 제목순으로 오름차순 정렬시켜주는 Comparator객체(정확하게는 구현객체) 생성.
+				BookTitleComparator cTitle = new BookTitleComparator();
+				Collections.sort(bookList, cTitle);	//책 DB의 모든 책 객체를 제목순 정렬.
+				osys.showBookList(bookList);	//정렬된 책 리스트를 출력하기 위해 전체 리스트 출력 메서드 호출(재귀!).
+				continue;
+			case 2:	//저자
+				//저자 순으로 오름차순 정렬시켜주는 Comparator객체.
+				BookAuthorComparator cAuthor = new BookAuthorComparator();
+				Collections.sort(bookList, cAuthor);	//책 DB를 저자 순 정렬.
+				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
+				continue;
+			case 3:	//출판사
+				//출판사 순으로 오름차순 정렬시켜주는 Comparator객체.
+				BookPublisherComparator cPublisher = new BookPublisherComparator();
+				Collections.sort(bookList, cPublisher);	//책 DB를 출판사 순 정렬.
+				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
+				continue;
+			case 4:	//주제
+				//주제 순으로 오름차순 정렬시켜주는 Comparator객체.
+				BookSubjectComparator cSubject = new BookSubjectComparator();
+				Collections.sort(bookList, cSubject);	//책 DB를 주제 순 정렬.
+				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
+				continue;
+			case 5:	//인덱스
+				//인덱스 순으로 오름차순 정렬시켜주는 Comparator객체.
+				BookIndexComparator cIndex = new BookIndexComparator();
+				Collections.sort(bookList, cIndex);	//책 DB를 인덱스 순 정렬.
+				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
+				continue;
+			case 6:	//ISBN
+				//ISBN 순으로 오름차순 정렬시켜주는 Comparator객체.
+				BookISBNComparator cISBN = new BookISBNComparator();
+				Collections.sort(bookList, cISBN);	//책 DB를 인덱스 순 정렬.
+				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
+				continue;
+			case 0: //이전화면 - 뒤로 가기 전에 반드시 책 목록을 인덱스 순(디폴트!)으로 정렬
+				BookIndexComparator c = new BookIndexComparator();
+				Collections.sort(bookList, c);
+				return;
+			default: //잘못된 입력
+				System.out.println("잘못된 입력입니다!");
+				continue;	//정렬 입력 다시 받음.
+			}
+		}
 	}
 	
 	Book adminsearch(BookDB bookDB) {

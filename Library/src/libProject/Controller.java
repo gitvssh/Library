@@ -83,8 +83,7 @@ public class Controller {
 						case 7:// 전체 도서목록
 							System.out.println("전체 도서 목록입니다.");
 							bookDB.searchAll();
-							bookDB.align();
-							break;
+							continue observer;
 						case 0:// 이전화면으로
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue observer;
