@@ -32,7 +32,7 @@ public class Controller {
 
 		AdminDB adminDB = new AdminDB(); // 관리자 DB 객체생성
 		
-		
+		new Admin("admin1", "1234", "관리자", "921002", "01012341234"); //관리자 예시
 
 		for (Member m : searchMembers) {
 			System.out.println(m.getName());
@@ -90,13 +90,15 @@ public class Controller {
 						String password = scan.nextLine();
 						// 로그인 메서드
 						continue main;// 메인으로 보내서 판별
-					case 4:// 관리자로그인
+					case 4:// 관리자로그인  
 						System.out.println("아이디를 입력하세요.");
 						id = scan.nextLine();
 						System.out.println("비밀번호를 입력하세요.");
 						password = scan.nextLine();
-						// 로그인 메서드
-						break observer;// 성공시 비회원메뉴 종료
+						login = adminDB.login(id, password); // 로그인 메서드
+						continue main;// 메인으로 보내서 판별
+						
+						
 					case 5:// 아이디 비밀번호찾기
 						osys.observer_findMember();// 정보찾기 화면
 						menu = scan.nextInt();
