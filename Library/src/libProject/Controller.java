@@ -232,7 +232,22 @@ public class Controller {
 						// 건의사항 메서드
 						break;
 					case 9:// 로그아웃
-							// 로그아웃 메서드
+						while(true) {
+							
+							System.out.println("로그아웃을 하시겠습니까? y/n");
+							String out = scan.nextLine();
+							if(out.equals("y")) {
+								System.out.println("로그아웃 되었습니다.");
+								login = 0;
+							}else if(out.equals("n")) {
+								System.out.println("로그아웃이 취소되었습니다.");
+								login = 1;
+								break;
+								}else {
+								System.out.println("잘못입력하셨습니다.");
+								continue;
+							}
+						}
 						continue main;// 메인으로 보내서 판별
 					case 0:// 종료
 						System.out.println("프로그램을 종료합니다...");

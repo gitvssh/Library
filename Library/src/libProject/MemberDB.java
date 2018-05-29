@@ -186,6 +186,7 @@ void FindPw() {
 	}
 	}
 }
+
 	@Override
 	List<Member> searchAll() {
 		for (int i = 0; i < memberList.size(); i++) {
