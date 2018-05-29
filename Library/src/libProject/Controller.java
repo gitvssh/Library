@@ -253,27 +253,64 @@ public class Controller {
 					scan.nextLine();
 					switch (menu) {// 1.도서관리 2. 회원관리 3.건의사항 4.관리자 관리 5.로그아웃 0.시스템 종료
 					case 1:// 도서관리
+						Book selected = null;//도서 수정,삭제를 위한 참조변수
 						osys.admin_bookmng();
 						menu = scan.nextInt();
 						scan.nextLine();
 						bookmng: while (true) {// 도서관리메뉴 while
 							switch (menu) {// 1.도서검색 2.도서추가 3.도서수정 4.도서삭제 0.이전 화면으로
-							// ->승현씨 메서드 받아서 구현
 							case 1:// 도서검색
 								osys.admin_search();
-								// 도서검색 메서드
+								menu = scan.nextInt();
+								scan.nextLine();
+								switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
+								case 1:// 제목
+									System.out.println("검색하실 제목을 입력하세요");
+									osys.showBookList(bookDB.search(scan.nextLine(), 1));
+									break;
+								case 2:// 저자
+									System.out.println("검색하실 저자를 입력하세요");
+									osys.showBookList(bookDB.search(scan.nextLine(), 2));
+									break;
+								case 3:// 출판사
+									System.out.println("검색하실 출판사를 입력하세요");
+									osys.showBookList(bookDB.search(scan.nextLine(), 3));
+									break;
+								case 4:// 분야
+									System.out.println("검색하실 분야를 입력하세요");
+									osys.showBookList(bookDB.search(scan.nextLine(), 4));
+									break;
+								case 5:// 인덱스
+									System.out.println("검색하실 인덱스를 입력하세요");
+									osys.showBookList(bookDB.search(scan.nextLine(), 5));
+									break;
+								case 6:// ISBN
+									osys.showBookList(bookDB.search(scan.nextLine(), 6));
+									System.out.println("검색하실 ISBN을 입력하세요");
+									break;
+								case 7:// 전체 도서목록
+									System.out.println("전체 도서 목록입니다.");
+									bookDB.searchAll();
+									bookDB.align();
+									break;
+								case 0:// 이전화면으로
+									System.out.println("이전화면으로 돌아갑니다.");
+									continue admin;
+								}
 								break;
 							case 2:// 도서추가
 								osys.admin_addbook();
-								// 도서추가 메서드
+								bookDB.input();
 								break;
 							case 3:// 도서수정
 								osys.admin_modifybook();
-								// 도서수정 메서드
+								selected = bookDB.adminsearch(bookDB);
+								bookDB.update(selected);
 								break;
 							case 4:// 도서삭제
 								osys.admin_delbook();
-								// 도서삭제 메서드
+								selected = bookDB.adminsearch(bookDB);
+								bookDB.delete(selected);
 								break;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
