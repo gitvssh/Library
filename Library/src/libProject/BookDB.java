@@ -156,6 +156,9 @@ public class BookDB extends DB{
 	//Á¤·Ä
 	@Override
 	List align() {
+		
+		Scanner scan = new Scanner(System.in);
+		
 		BookTitleComparator c = new BookTitleComparator();
 		Collections.sort(bookList, c);
 		return bookList;
