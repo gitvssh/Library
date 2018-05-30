@@ -3,6 +3,7 @@ package Comments;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import libProject.Admin;
@@ -105,6 +106,38 @@ public class CommentDB {	//건의사항 DB클래스
 				continue;
 			}
 		}
+	}
+	
+	public void showPages(int page) {//전체 관리자 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
+		int totalPages = (int)Math.ceil(commentList.size()/10.);
+		
+		if(page<1 || page>totalPages) {
+			System.out.println("페이지 없음!");
+			if(page<1) page=1;
+			else page = totalPages;
+			return;
+		}
+		
+		for(int i=(page-1)*10; i<page*10; i++) {
+			System.out.println(commentList.get(i));
+		}
+		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
+	}
+	
+	public void showPages(int page, List<Comment> searchList) {//검색한 관리자 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
+		int totalPages = (int)Math.ceil(searchList.size()/10.);
+		
+		if(page<1 || page>totalPages) {
+			System.out.println("페이지 없음!");
+			if(page<1) page=1;
+			else page = totalPages;
+			return;
+		}
+		
+		for(int i=(page-1)*10; i<page*10; i++) {
+			System.out.println(searchList.get(i));
+		}
+		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
 	}
 	
 	public void showAllCommentList() {	//건의사항을 전부 보여주는 리스트
