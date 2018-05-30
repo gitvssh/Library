@@ -202,7 +202,7 @@ public class Controller {
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue member;
 						}// end switch
-						break;
+						continue member;
 					case 2:// 빌린도서
 						osys.history(loginMem.getId(),"빌린 도서");
 						osys.showBookList(loginMem.getRentList());	// 빌린도서 출력 메서드
