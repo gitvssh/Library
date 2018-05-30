@@ -28,8 +28,7 @@ public class MemberDB extends DB {
 	List search(String str) {
 		for (int i=0;i<memberList.size();i++) {
 			if (memberList.get(i).id.contains(str)) {
-				System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
-						+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
+				System.out.printf("%s, %s, %s, %s, %s",memberList.get(i).id,memberList.get(i).name,memberList.get(i).ssn,memberList.get(i).tel,memberList.get(i).idstatus);
 			}else if(!memberList.get(i).id.contains(str)) {
 				System.out.println("존재하지 않는 회원입니다.");
 				break;
@@ -143,27 +142,82 @@ public class MemberDB extends DB {
 		
 	}
 	void blackList() {
+			
+			Osystem osys = new Osystem();
 		System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
 		System.out.println("메뉴를 선택해주세요.");
 		int menu = scanner.nextInt();
 		scanner.nextLine();
 		switch(menu) {
 		case 1:
+			while(true) {
 			System.out.println("1.아이디 2.이름 3.생년월일 4.전화번호 5.상태 0.이전화면");
 			System.out.println("정렬을 원하는 항목을 선택해주세요.");
 			int input = scanner.nextInt();
 			scanner.nextLine();
 			switch(input) {
-			case 1:
+			case 1:	// 아이디
 				MemberIdComparator cId = new MemberIdComparator();
 				Collections.sort(memberList, cId);
+				osys.showMemberList(memberList);
+				continue;
+			case 2:	// 이름
+				MemberNameComparator cName = new MemberNameComparator();
+				Collections.sort(memberList, cName);
+				osys.showMemberList(memberList);
+				continue;
+			case 3:	// 생년월일
+				MemberSsnComparator cSsn = new MemberSsnComparator();
+				Collections.sort(memberList, cSsn);
+				osys.showMemberList(memberList);
+				continue;
+			case 4:	// 전화번호
+				MemberTelComparator cTel = new MemberTelComparator();
+				Collections.sort(memberList, cTel);
+				osys.showMemberList(memberList);
+				continue;
+			case 5:	// 상태
+				MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
+				Collections.sort(memberList, cIdStatus);
+				osys.showMemberList(memberList);
+				continue;
+			case 0:
+				MemberIdComparator c = new MemberIdComparator();
+				Collections.sort(memberList, c);
+				return;
+				default:
+					System.out.println("잘못된 입력입니다.");
+					continue;
+			}
+			}
+		case 2:
+			System.out.println("정지하려는 계정의 아이디를 입력해주세요. 0.이전화면");
+			id=scanner.nextLine();
+			if(id.equals("0")) {
+			System.out.println("이전화면으로 이동합니다");
+			break;
+			}
+			for(int i=0;i<memberList.size();i++) {
+				if(memberList.get(i).id.equals(id)) {
+					memberList.get(i).blackstatus = true;
+				}
 			}
 			break;
-		case 2:
-			break;
 		case 3:
+			System.out.println("복구하려는 계정의 아이디를 입력해주세요. 0.이전화면");
+			id=scanner.nextLine();
+			if(id.equals("0")) {
+				System.out.println("이전화면으로 이동합니다");
+				break;
+				}
+			for(int i=0;i<memberList.size();i++) {
+				if(memberList.get(i).id.equals(id)) {
+					memberList.get(i).blackstatus = false;
+				}
+			}
 			break;
 		case 0:
+			System.out.println("이전화면으로 이동합니다.");
 			break;
 		}
 	}

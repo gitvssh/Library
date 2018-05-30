@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import libProject.Member;
 
-public class MemberStatusComparator implements Comparator<Member>{
+public class MemberIdStatusComparator implements Comparator<Member>{
 
 	@Override
 	public int compare(Member m1, Member m2) {
