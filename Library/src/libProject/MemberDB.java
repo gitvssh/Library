@@ -2,6 +2,7 @@ package libProject;
 
 import java.util.*;
 
+import Comments.Comment;
 import Comparators.*;
 
 public class MemberDB extends DB {
@@ -323,5 +324,39 @@ public MemberDB() {
 	void align() {
 		System.out.println("");
 		return;
+	}
+	
+	public int showPages(int page) {//전체 관리자 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
+		int totalPages = (int)Math.ceil(memberList.size()/10.);
+		
+		if(page<1 || page>totalPages) {
+			System.out.println("페이지 없음!");
+			if(page<1) return 0;
+			else return totalPages+1;
+		}
+		
+		int limit = (page != totalPages) ? page*10:memberList.size();
+		for(int i=(page-1)*10; i<limit; i++) {
+			System.out.println(memberList.get(i));
+		}
+		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
+		return page;
+	}
+	
+	public int showPages(int page, List<Member> searchList) {//검색한 관리자 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
+		int totalPages = (int)Math.ceil(searchList.size()/10.);
+		
+		if(page<1 || page>totalPages) {
+			System.out.println("페이지 없음!");
+			if(page<1) return 0;
+			else return totalPages+1;
+		}
+		
+		int limit = (page != totalPages) ? page*10:searchList.size();
+		for(int i=(page-1)*10; i<limit; i++) {
+			System.out.println(searchList.get(i));
+		}
+		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
+		return page;
 	}
 }
