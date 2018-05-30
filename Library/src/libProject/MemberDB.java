@@ -15,6 +15,7 @@ public class MemberDB extends DB {
 	String ssn = "";
 	String tel = "";
 	boolean status;
+	boolean blackstatus;
 	// ....
 public MemberDB() {
 	memberList = new ArrayList<>();
@@ -22,8 +23,23 @@ public MemberDB() {
 	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
 	this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214", true));
 	this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819", false));
-}
 
+	for(int i=0;i<memberList.size();i++) {
+		
+	if(memberList.get(i).isStatus()==false) {
+		memberList.get(i).setIdstatus("정상");
+	}else if(memberList.get(i).isStatus()==true){
+		
+	
+		if(memberList.get(i).isBlackstatus()==false) {
+			
+			memberList.get(i).setIdstatus("연체중");
+		}else {
+			memberList.get(i).setIdstatus("계정정지");
+		}
+	}
+	}
+	}
 	@Override
 	List search(String str) {
 		for (int i=0;i<memberList.size();i++) {
@@ -194,15 +210,23 @@ public MemberDB() {
 			System.out.println("정지하려는 계정의 아이디를 입력해주세요. 0.이전화면");
 			id=scanner.nextLine();
 			if(id.equals("0")) {
-			System.out.println("이전화면으로 이동합니다");
-			break;
-			}
+				System.out.println("이전화면으로 이동합니다");
+				break;
+			}else {
+			
+				
 			for(int i=0;i<memberList.size();i++) {
 				if(memberList.get(i).id.equals(id)) {
-					memberList.get(i).blackstatus = true;
+					memberList.get(i).setBlackstatus(true);
+					memberList.get(i).setIdstatus("계정정지");
+						
+					System.out.println(memberList.get(i).id+"님이 "+memberList.get(i).getIdstatus()+"상태가 되었습니다.");
+					}
 				}
-			}
+			
 			break;
+			}
+			
 		case 3:
 			System.out.println("복구하려는 계정의 아이디를 입력해주세요. 0.이전화면");
 			id=scanner.nextLine();
@@ -212,8 +236,11 @@ public MemberDB() {
 				}
 			for(int i=0;i<memberList.size();i++) {
 				if(memberList.get(i).id.equals(id)) {
-					memberList.get(i).blackstatus = false;
+					memberList.get(i).setBlackstatus(false);
+					memberList.get(i).setIdstatus("연체중");
+					System.out.println(memberList.get(i).id+"님이 "+memberList.get(i).getIdstatus()+"상태가 되었습니다.");
 				}
+					
 			}
 			break;
 		case 0:

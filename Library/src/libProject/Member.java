@@ -12,25 +12,18 @@ public class Member implements Data {
 	String idstatus;
 	boolean blackstatus;
 
-	ArrayList<Book> rentList; // ºô¸° Ã¥ ¸®½ºÆ®
 
-	public Member(String id, String password, String name, String ssn, String tel,boolean status) {
+	ArrayList<Book> rentList; // ë¹Œë¦° ì±… ë¦¬ìŠ¤íŠ¸
+
+public Member(String id, String password, String name, String ssn, String tel, boolean status) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.ssn = ssn;
 		this.tel = tel;
-		if (this.status == false) { // °èÁ¤ÀÇ »óÅÂ ±âº»°ª : false=Á¤»ó
-			idstatus = "Á¤»ó";
-		} else if (this.status == true) { // ¿¬Ã¼ÁßÀÎ °èÁ¤ÀÇ »óÅÂ status:true blackstatus:false
-			if (this.blackstatus = false) { // °èÁ¤Á¤Áö °èÁ¤ÀÇ »óÅÂ status:true blackstatus:true
-				idstatus = "¿¬Ã¼Áß";
-			} else {
-				idstatus = "°èÁ¤Á¤Áö";
-			}
-		}
+		this.status = status;
 
-		rentList = new ArrayList<>();
+//		rentList = new ArrayList<>();
 	}
 
 	// <<<<<<< HEAD
@@ -41,6 +34,13 @@ public class Member implements Data {
 
 	// >>>>>>> branch 'master' of https://github.com/gitvssh/Library
 
+	public boolean isBlackstatus() {
+		return blackstatus;
+	}
+	
+	public void setBlackstatus(boolean blackstatus) {
+		this.blackstatus = blackstatus;
+	}
 	public String getIdstatus() {
 		return idstatus;
 	}
@@ -109,5 +109,5 @@ public class Member implements Data {
 	public String toString() {
 		return "Member [id=" + id + ", password=" + password + ", name=" + name + ", ssn=" + ssn + ", tel=" + tel
 				+ ", status=" + status + "]";
-	} // È¸¿ø Á¤º¸¸¦ ¹®ÀÚ¿­·Î ¸®ÅÏÇÏ°Ô toString ¸Ş¼­µå ¿À¹ö¶óÀÌµù.
+	} // íšŒì› ì •ë³´ë¥¼ ë¬¸ìì—´ë¡œ ë¦¬í„´í•˜ê²Œ toString ë©”ì„œë“œ ì˜¤ë²„ë¼ì´ë”©.
 }
