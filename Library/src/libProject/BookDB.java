@@ -331,4 +331,30 @@ public class BookDB extends DB{
 		//인덱스를 받아서 책 반납
 		//있으면 true, 없으면 false.
 	}
+	
+	void showPages(int page) {//전체 책 목록 페이지별로 보여주기
+		int totalPages = (int)Math.ceil(bookList.size()/10.);
+		
+		if(page<1 || page>totalPages) {
+			System.out.println("페이지 없음!");
+			return;
+		}
+		
+		for(int i=page*10; i<(page+1)*10; i++) {
+			System.out.println(bookList.get(i));
+		}
+	}
+	
+	void showPages(int page, List<Book> searchList) {//검색한 책 목록 페이지별로 보여주기
+		int totalPages = (int)Math.ceil(searchList.size()/10.);
+		
+		if(page<1 || page>totalPages) {
+			System.out.println("페이지 없음!");
+			return;
+		}
+		
+		for(int i=page*10; i<(page+1)*10; i++) {
+			System.out.println(searchList.get(i));
+		}
+	}
 }
