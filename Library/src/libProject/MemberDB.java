@@ -16,11 +16,10 @@ public class MemberDB extends DB {
 	// ....
 	public MemberDB() {
 		memberList = new ArrayList<>();
-		Member b = new Member("java111", "1234", "박자바", "991120", "01042326814");
-		Member b2 = new Member("java222", "1234", "김자바", "900110", "01063127891");
-		Member b3 = new Member("java333", "1234", "최자바", "880106", "01023268214");
-		Member b4 = new Member("java444", "1234", "이자바", "000813", "01032123819");
-		memberList.add(b);
+		this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814"));
+		this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891"));
+		this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214"));
+		this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819"));
 	}
 
 	@Override
@@ -45,10 +44,10 @@ public class MemberDB extends DB {
 	}
 
 	void input() { // 회원가입 메서드
-		System.out.println("아이디를 입력해주세요");
-		id = scanner.nextLine();
+		System.out.println("아이디를 입력해주세요. 0:이전메뉴로 이동");
+		String id = scanner.nextLine();
 		while (true) {
-			System.out.println("비밀번호를 입력해주세요");
+			System.out.println("비밀번호를 입력해주세요.");
 			password = scanner.nextLine();
 			System.out.println("비밀번호를 한번 더 입력해주세요");
 			String passright = scanner.nextLine();
@@ -211,7 +210,7 @@ public class MemberDB extends DB {
 	}
 
 	@Override
-	List<Member> searchAll() {
+	List searchAll() {
 		for (int i = 0; i < memberList.size(); i++) {
 			System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
 					+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
