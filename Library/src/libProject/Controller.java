@@ -219,24 +219,33 @@ public class Controller {
 						osys.member_inform();
 						menu = scan.nextInt();
 						scan.nextLine();
+							
+						
 						switch (menu) {// 1.회원정보 조회 2.회원정보 수정 0. 이전화면
 						case 1:// 회원정보 조회
 							osys.history(loginMem.getId(), "회원정보", "회원정보조회");
 							osys.member_myinform();// 회원정보 조회 화면
-							break;
-						// 회원정보 조회 메서드
+							while(true) {
+								
+								memberDB.MemInform(loginMem);
+								break;
+							}
+							continue member;
+							// 회원정보 조회 메서드
 						case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.history(loginMem.getId(), "회원정보", "회원정보 수정");
 							osys.member_modify();// 회원정보 수정 화면
 							modify: while (true) {
 								memberDB.update(loginMem);
 								break;
-							} // end switch_modify
+								} // end while modify;
+							continue member;
+							 // end switch_modify
 							// end while modify;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue member;
-						}// end switch 회원정보메뉴
+					}// end switch 회원정보메뉴
 					case 5:// 건의사항
 						osys.history(loginMem.getId(), "건의사항");
 						osys.member_request();
@@ -359,27 +368,34 @@ public class Controller {
 							}
 						} // end while_bookmng
 					case 2:// 회원관리
-						osys.history(loginAdm.getId(), "회원관리");
-						osys.admin_membermng();
-						menu = scan.nextInt();
-						scan.nextLine();
 						membermng: while (true) {// 회원관리메뉴 while
+							osys.history(loginAdm.getId(),"회원관리");
+							osys.admin_membermng();
+							menu = scan.nextInt();
+							scan.nextLine();
 							switch (menu) {// 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면
 							case 1:// 회원검색
 								osys.history(loginAdm.getId(), "회원관리", "회원검색");
 								osys.admin_findmem();
-								break;
+								while(true) {
+									String searchMem = scan.nextLine();
+									memberDB.search(searchMem);
+									break;
+								}
+								continue membermng;
 							case 2:// 전체회원목록
-								osys.history(loginAdm.getId(), "회원관리", "전체 회원목록");
-								// 전체회원 출력 메서드
-								break;
+								osys.history(loginAdm.getId(),"회원관리","전체 회원목록");
+								memberDB.searchAll();
+									// 전체회원 출력 메서드
+								continue membermng;
+							
 							case 3:// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
 								// 블랙리스트 출력 메서드
 								break;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
-								break membermng;
+								continue membermng;
 							}// end switch_membermng
 						}
 					case 3:// 건의사항
@@ -437,6 +453,25 @@ public class Controller {
 							}// end switch
 						} // end while_request
 					case 5:// 로그아웃
+						while(true) {
+							System.out.println("로그아웃을 하시겠습니까? y/n");
+							String out = scan.nextLine();
+							if(out.equals("y")) {
+								System.out.println("로그아웃 되었습니다.");
+								login = 0;
+								break;
+							}else if(out.equals("n")) {
+								System.out.println("로그아웃이 취소되었습니다.");
+								login = 2;
+								break;
+								}else {
+								System.out.println("잘못입력하셨습니다.");
+								continue;
+							}
+						}// 로그아웃 메서드
+
+						osys.history(loginAdm.getId(),"로그아웃");
+							// 로그아웃 메서드
 						osys.history(loginAdm.getId(), "로그아웃");
 						System.out.println("로그아웃합니다.");
 						loginAdm = null;
