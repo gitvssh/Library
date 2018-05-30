@@ -25,14 +25,7 @@ public class Member implements Data{
 //=======
 	
 //>>>>>>> branch 'master' of https://github.com/gitvssh/Library
-	void IdStatus(boolean status) {
-		if(status == true) {
-			System.out.println("정상");
-		}
-		else {
-			System.out.println("연체중");
-		}
-	}
+	
 	public String getId() {
 		return id;
 	}

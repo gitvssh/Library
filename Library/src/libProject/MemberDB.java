@@ -110,7 +110,7 @@ public class MemberDB extends DB {
 			System.out.println("수정되셨습니다. 전화번호 : " + m.getTel());
 			break;
 		case 0:
-			System.out.println("이전메뉴로 이동합니다.");
+			System.out.println("이전화면으로 이동합니다.");
 			break;
 		}
 		return;
@@ -130,15 +130,36 @@ public class MemberDB extends DB {
 					System.out.println("비밀번호를 잘못 입력하셨습니다. 다시 입력해주세요.");
 					break;
 				}
-			} else {
-				System.out.println("존재하지 않는 아이디입니다. 다시 입력해주세요.");
-				continue;
 			}
+			
 		}
 		return loginMem;
 	}
 
-	void FindId() {
+
+	void MemInform(Data data) {	// 회원 정보 출력
+		Member m = (Member) data;
+		String idStatus = null;
+		System.out.println("아이디 : "+m.getId());
+		System.out.println("이름 : "+m.getName());
+		System.out.println("생년월일 : "+m.getSsn());
+		System.out.println("전화번호 : "+m.getTel());
+		if(m.isStatus() == false) {
+			idStatus = "정상";
+		}
+		else {
+			idStatus = "연체중";
+		}
+		System.out.println("계정상태 : "+idStatus);
+		System.out.println("0.회원메뉴로 이동");
+		System.out.print(">>");
+		int menu= scanner.nextInt();
+		if(menu == 0) {
+			System.out.println("이전메뉴로 이동합니다");
+		}
+	}
+
+	void FindId() {	// 아이디 찾기
 		System.out.println("이름을 입력해주세요");
 		name = scanner.nextLine();
 		for (int i = 0; i < memberList.size(); i++) {
@@ -155,15 +176,15 @@ public class MemberDB extends DB {
 		}
 	}
 
-	void FindPw() {
-		System.out.println("아이디를 입력해주세요");
-		id = scanner.nextLine();
+	void FindPw() { // 비밀번호 찾기
+		System.out.println("이름를 입력해주세요");	// 아이디 입력
+		name = scanner.nextLine();
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).getName().equals(name)) {
-				System.out.println("이름을 입력해주세요");
-				ssn = scanner.nextLine();
-				if (memberList.get(i).getSsn().equals(ssn)) {
-					System.out.println("전화번호를 입력해주세요");
+				System.out.println("아이디를 입력해주세요"); // 이름입력
+				id = scanner.nextLine();
+				if (memberList.get(i).getId().equals(id)) {
+					System.out.println("전화번호를 입력해주세요"); // 전화번호 입력
 					tel = scanner.nextLine();
 					if (memberList.get(i).getTel().equals(tel)) {
 						System.out.println("해당 번호로 비밀번호를 전송하였습니다.");

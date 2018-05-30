@@ -237,11 +237,18 @@ public class Controller {
 						osys.member_inform();
 						menu = scan.nextInt();
 						scan.nextLine();
+							
+						
 						switch (menu) {// 1.회원정보 조회 2.회원정보 수정 0. 이전화면
 						case 1:// 회원정보 조회
 							osys.history(loginMem.getId(),"회원정보","회원정보조회");
 							osys.member_myinform();// 회원정보 조회 화면
-							break;
+							while(true) {
+								
+								memberDB.MemInform(loginMem);
+								break;
+							}
+							continue member;
 							// 회원정보 조회 메서드
 						case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.history(loginMem.getId(),"회원정보","회원정보 수정");
@@ -249,8 +256,8 @@ public class Controller {
 							modify: while (true) {
 								memberDB.update(loginMem);
 								break;
-								}// end switch_modify
-							 // end while modify;
+								} // end while modify;
+							continue member;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue member;
@@ -448,7 +455,6 @@ public class Controller {
 							}// end switch
 						} // end while_request
 					case 5:// 로그아웃
-<<<<<<< HEAD
 						while(true) {
 							System.out.println("로그아웃을 하시겠습니까? y/n");
 							String out = scan.nextLine();
@@ -458,17 +464,16 @@ public class Controller {
 								break;
 							}else if(out.equals("n")) {
 								System.out.println("로그아웃이 취소되었습니다.");
-								login = 1;
+								login = 2;
 								break;
 								}else {
 								System.out.println("잘못입력하셨습니다.");
 								continue;
 							}
 						}// 로그아웃 메서드
-=======
+
 						osys.history(loginAdm.getId(),"로그아웃");
 							// 로그아웃 메서드
->>>>>>> branch 'master' of https://github.com/gitvssh/Library
 						continue main;// 메인으로 보내서 판별
 					case 0:// 종료
 						System.out.println("프로그램을 종료합니다...");
