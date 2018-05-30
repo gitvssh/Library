@@ -58,6 +58,9 @@ public class MemberDB extends DB {
 				} else {
 					break;
 				}
+			} else {
+				System.out.println("입력하신 아이디 정보가 없습니다.");
+				break;
 			}
 		}
 
@@ -121,9 +124,9 @@ public class MemberDB extends DB {
 		switch (menu) {
 		case 1:
 			System.out.println("수정하실 아이디를 입력해주세요.");
-			System.out.println("아이디 : " + m.getId());
+			System.out.println("현재 아이디 : " + m.getId());
 			m.setId(scanner.nextLine());
-			System.out.println("수정되셨습니다. 아이디 : " + m.getId());
+			System.out.println("수정되셨습니다. 수정된 아이디 : " + "[" + m.getId() + "]");
 			break;
 		case 2:
 			while (true) {
@@ -142,22 +145,22 @@ public class MemberDB extends DB {
 			break;
 		case 3:
 			System.out.println("수정하실 이름을 입력해주세요.");
-			System.out.println("이름 : " + m.getName());
+			System.out.println("현재 이름 : " + m.getName());
 			m.setName(scanner.nextLine());
-			System.out.println("수정되셨습니다. 이름 : " + m.getName());
+			System.out.println("수정되셨습니다. 수정된 이름 : " + "[" + m.getName() + "]");
 			break;
 
 		case 4:
 			System.out.println("수정하실 생년월일를 입력해주세요.");
-			System.out.println("생년월일 : " + m.getSsn());
+			System.out.println("현재 생년월일 : " + m.getSsn());
 			m.setSsn(scanner.nextLine());
-			System.out.println("수정되셨습니다. 생년월일 : " + m.getSsn());
+			System.out.println("수정되셨습니다. 수정된 생년월일 : " + "[" + m.getSsn() + "]");
 			break;
 		case 5:
 			System.out.println("수정하실 전화번호를 입력해주세요.");
-			System.out.println("전화번호 : " + m.getTel());
+			System.out.println("현재 전화번호 : " + m.getTel());
 			m.setTel(scanner.nextLine());
-			System.out.println("수정되셨습니다. 전화번호 : " + m.getTel());
+			System.out.println("수정되셨습니다. 수정된 전화번호 : " + "[" + m.getTel() + "]");
 			break;
 		case 0:
 			System.out.println("이전화면으로 이동합니다.");
