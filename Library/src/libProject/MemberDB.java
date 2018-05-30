@@ -2,6 +2,8 @@ package libProject;
 
 import java.util.*;
 
+import Comparators.*;
+
 public class MemberDB extends DB {
 	List<Member> memberList;
 	// ...
@@ -127,7 +129,99 @@ public class MemberDB extends DB {
 		}
 		return;
 	}
-
+	void blackMem() {
+		int count = 0;
+		for(int i=0; i<memberList.size(); i++) {
+			if(memberList.get(i).status==true) {
+				count++;
+				System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
+						+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
+			}
+		}
+		System.out.println("총 "+count+"명의 회원이 블랙리스트에 있습니다.");
+		
+	}
+	void blackList() {
+			
+			Osystem osys = new Osystem();
+		System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
+		System.out.println("메뉴를 선택해주세요.");
+		int menu = scanner.nextInt();
+		scanner.nextLine();
+		switch(menu) {
+		case 1:
+			while(true) {
+			System.out.println("1.아이디 2.이름 3.생년월일 4.전화번호 5.상태 0.이전화면");
+			System.out.println("정렬을 원하는 항목을 선택해주세요.");
+			int input = scanner.nextInt();
+			scanner.nextLine();
+			switch(input) {
+			case 1:	// 아이디
+				MemberIdComparator cId = new MemberIdComparator();
+				Collections.sort(memberList, cId);
+				osys.showMemberList(memberList);
+				continue;
+			case 2:	// 이름
+				MemberNameComparator cName = new MemberNameComparator();
+				Collections.sort(memberList, cName);
+				osys.showMemberList(memberList);
+				continue;
+			case 3:	// 생년월일
+				MemberSsnComparator cSsn = new MemberSsnComparator();
+				Collections.sort(memberList, cSsn);
+				osys.showMemberList(memberList);
+				continue;
+			case 4:	// 전화번호
+				MemberTelComparator cTel = new MemberTelComparator();
+				Collections.sort(memberList, cTel);
+				osys.showMemberList(memberList);
+				continue;
+			case 5:	// 상태
+				MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
+				Collections.sort(memberList, cIdStatus);
+				osys.showMemberList(memberList);
+				continue;
+			case 0:
+				MemberIdComparator c = new MemberIdComparator();
+				Collections.sort(memberList, c);
+				return;
+				default:
+					System.out.println("잘못된 입력입니다.");
+					continue;
+			}
+			}
+		case 2:
+			System.out.println("정지하려는 계정의 아이디를 입력해주세요. 0.이전화면");
+			id=scanner.nextLine();
+			if(id.equals("0")) {
+			System.out.println("이전화면으로 이동합니다");
+			break;
+			}
+			for(int i=0;i<memberList.size();i++) {
+				if(memberList.get(i).id.equals(id)) {
+					memberList.get(i).blackstatus = true;
+				}
+			}
+			break;
+		case 3:
+			System.out.println("복구하려는 계정의 아이디를 입력해주세요. 0.이전화면");
+			id=scanner.nextLine();
+			if(id.equals("0")) {
+				System.out.println("이전화면으로 이동합니다");
+				break;
+				}
+			for(int i=0;i<memberList.size();i++) {
+				if(memberList.get(i).id.equals(id)) {
+					memberList.get(i).blackstatus = false;
+				}
+			}
+			break;
+		case 0:
+			System.out.println("이전화면으로 이동합니다.");
+			break;
+		}
+	}
+//..
 	Member Login(String id, String password) { // 로그인 메서드
 		Member loginMem = null;
 
@@ -214,6 +308,7 @@ public class MemberDB extends DB {
 			System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
 					+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
 		}
+		System.out.println("회원은 총 "+(memberList.size()-1)+"명입니다.");
 		System.out.println("0.이전메뉴로 이동");
 		System.out.print(">>");
 		int menu= scanner.nextInt();
@@ -226,7 +321,7 @@ public class MemberDB extends DB {
 
 	@Override
 	void align() {
-		// TODO Auto-generated method stub
+		System.out.println("");
 		return;
 	}
 }
