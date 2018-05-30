@@ -2,6 +2,8 @@ package libProject;
 
 import java.util.*;
 
+import Comparators.*;
+
 public class MemberDB extends DB {
 	List<Member> memberList;
 	// ...
@@ -128,6 +130,43 @@ public class MemberDB extends DB {
 		}
 		return;
 	}
+	void blackMem() {
+		int count = 0;
+		for(int i=0; i<memberList.size(); i++) {
+			if(memberList.get(i).status==true) {
+				count++;
+				System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
+						+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
+			}
+		}
+		System.out.println("총 "+count+"명의 회원이 블랙리스트에 있습니다.");
+		
+	}
+	void blackList() {
+		System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
+		System.out.println("메뉴를 선택해주세요.");
+		int menu = scanner.nextInt();
+		scanner.nextLine();
+		switch(menu) {
+		case 1:
+			System.out.println("1.아이디 2.이름 3.생년월일 4.전화번호 5.상태 0.이전화면");
+			System.out.println("정렬을 원하는 항목을 선택해주세요.");
+			int input = scanner.nextInt();
+			scanner.nextLine();
+			switch(input) {
+			case 1:
+				MemberIdComparator cId = new MemberIdComparator();
+				Collections.sort(memberList, cId);
+			}
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 0:
+			break;
+		}
+	}
 
 	Member Login(String id, String password) { // 로그인 메서드
 		Member loginMem = null;
@@ -215,6 +254,7 @@ public class MemberDB extends DB {
 			System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
 					+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
 		}
+		System.out.println("회원은 총 "+(memberList.size()-1)+"명입니다.");
 		System.out.println("0.이전메뉴로 이동");
 		System.out.print(">>");
 		int menu= scanner.nextInt();
@@ -227,7 +267,7 @@ public class MemberDB extends DB {
 
 	@Override
 	void align() {
-		// TODO Auto-generated method stub
+		System.out.println("");
 		return;
 	}
 }

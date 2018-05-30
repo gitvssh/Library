@@ -391,6 +391,7 @@ public class Controller {
 							
 							case 3:// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
+								System.out.println("");
 								// 블랙리스트 출력 메서드
 								break;
 							case 0:// 이전화면
