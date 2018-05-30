@@ -9,6 +9,8 @@ public class Member implements Data{
 	String ssn;
 	String tel;
 	boolean status;
+	String idstatus;
+	String blackstatus;
 	ArrayList<Book> rentList;	//빌린 책 리스트
 	
 	public Member(String id, String password, String name, String ssn, String tel) {
@@ -17,22 +19,29 @@ public class Member implements Data{
 		this.name = name;
 		this.ssn = ssn;
 		this.tel = tel;
+		if(this.status == false) {
+			idstatus = "정상";
+		}else {
+			idstatus = "연체중";
+//			if(this.status)
+		}
+		
+		rentList = new ArrayList<>();
 	}
-//<<<<<<< HEAD
+public String getIdstatus() {
+		return idstatus;
+	}
+	public void setIdstatus(String idstatus) {
+		this.idstatus = idstatus;
+	}
+	//<<<<<<< HEAD
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 //=======
 	
 //>>>>>>> branch 'master' of https://github.com/gitvssh/Library
-	void IdStatus(boolean status) {
-		if(status == true) {
-			System.out.println("정상");
-		}
-		else {
-			System.out.println("연체중");
-		}
-	}
+	
 	public String getId() {
 		return id;
 	}
