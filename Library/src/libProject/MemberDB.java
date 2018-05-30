@@ -22,7 +22,21 @@ public MemberDB() {
 	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
 	this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214", true));
 	this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819", false));
-}
+
+	for(int i=0;i<memberList.size();i++) {
+		
+	if(memberList.get(i).isStatus()==false) {
+		memberList.get(i).setIdstatus("정상");
+	}else if(memberList.get(i).isStatus()==true){
+		if(memberList.get(i).isBlackstatus()==false)
+		memberList.get(i).setIdstatus("연체중");
+		}
+	else {
+		memberList.get(i).setIdstatus("계정정지");
+	}
+	}
+	}
+
 
 	@Override
 	List search(String str) {

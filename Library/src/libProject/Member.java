@@ -12,25 +12,18 @@ public class Member implements Data {
 	String idstatus;
 	boolean blackstatus;
 
+
 	ArrayList<Book> rentList; // 빌린 책 리스트
 
-	public Member(String id, String password, String name, String ssn, String tel) {
+	public Member(String id, String password, String name, String ssn, String tel, boolean status) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.ssn = ssn;
 		this.tel = tel;
-		if (this.status == false) { // 계정의 상태 기본값 : false=정상
-			idstatus = "정상";
-		} else if (this.status == true) { // 연체중인 계정의 상태 status:true blackstatus:false
-			if (this.blackstatus = false) { // 계정정지 계정의 상태 status:true blackstatus:true
-				idstatus = "연체중";
-			} else {
-				idstatus = "계정정지";
-			}
-		}
+		this.status = status;
 
-		rentList = new ArrayList<>();
+//		rentList = new ArrayList<>();
 	}
 
 	// <<<<<<< HEAD
@@ -41,6 +34,13 @@ public class Member implements Data {
 
 	// >>>>>>> branch 'master' of https://github.com/gitvssh/Library
 
+	public boolean isBlackstatus() {
+		return blackstatus;
+	}
+	
+	public void setBlackstatus(boolean blackstatus) {
+		this.blackstatus = blackstatus;
+	}
 	public String getIdstatus() {
 		return idstatus;
 	}
