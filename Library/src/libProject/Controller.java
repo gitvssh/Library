@@ -388,18 +388,22 @@ public class Controller {
 						menu = scan.nextInt();
 						scan.nextLine();
 						membermng: while (true) {// 회원관리메뉴 while
-							switch (menu) {// 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면
+							switch (menu) {// 1.회원검색 2.회원정보수정 3.전체회원목록 4.블랙리스트 0.이전화면
 							case 1:// 회원검색
 								osys.history(loginAdm.getId(),"회원관리","회원검색");
 								osys.admin_findmem();
-								String id=scan.nextLine();
-								memberDB.search(id);
-								break;
-							case 2:// 전체회원목록
+								memberDB.search(scan.nextLine());
+								break admin;
+							case 2:
+								osys.history(loginAdm.getId(),"회원관리","회원정보수정");
+								osys.admin_findmem();
+								memberDB.adminsearch(scan.nextLine());
+								break admin;
+							case 3:// 전체회원목록
 								osys.history(loginAdm.getId(),"회원관리","전체 회원목록");
 									memberDB.searchAll();// 전체회원 출력 메서드
-								break;
-							case 3:// 블랙리스트
+								break admin;
+							case 4:// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
 								System.out.println("블랙리스트 회원목록입니다.");
 								memberDB.blackMem();// 블랙리스트 출력 메서드
@@ -409,10 +413,10 @@ public class Controller {
 								osys.history(loginAdm.getId(),"회원관리","블랙리스트");
 									// 블랙리스트 출력 메서드
 									// 블랙리스트 출력 메서드
-								break;
+								break admin;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
-								break membermng;
+								break admin;
 							}// end switch_membermng
 						}
 					case 3:// 건의사항

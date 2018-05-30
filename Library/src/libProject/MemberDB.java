@@ -7,6 +7,7 @@ import Comparators.*;
 public class MemberDB extends DB {
 	List<Member> memberList;
 	// ...
+	Osystem osys = new Osystem();
 
 	Scanner scanner = new Scanner(System.in);
 	String id = "";
@@ -15,32 +16,60 @@ public class MemberDB extends DB {
 	String ssn = "";
 	String tel = "";
 	boolean status;
+
 	// ....
-public MemberDB() {
-	memberList = new ArrayList<>();
-	this.memberList.add(new Member("java111", "1234", "¹ÚÀÚ¹Ù", "991120", "01042326814", false));
-	this.memberList.add(new Member("java222", "1234", "±èÀÚ¹Ù", "900110", "01063127891", true));
-	this.memberList.add(new Member("java333", "1234", "ÃÖÀÚ¹Ù", "880106", "01023268214", true));
-	this.memberList.add(new Member("java444", "1234", "ÀÌÀÚ¹Ù", "000813", "01032123819", false));
-}
+	public MemberDB() {
+		memberList = new ArrayList<>();
+		this.memberList.add(new Member("java111", "1234", "¹ÚÀÚ¹Ù", "991120", "01042326814", false));
+		this.memberList.add(new Member("java222", "1234", "±èÀÚ¹Ù", "900110", "01063127891", true));
+		this.memberList.add(new Member("java333", "1234", "ÃÖÀÚ¹Ù", "880106", "01023268214", true));
+		this.memberList.add(new Member("java444", "1234", "ÀÌÀÚ¹Ù", "000813", "01032123819", false));
+	}
 
 	@Override
-	List search(String str) {
-		for (int i=0;i<memberList.size();i++) {
-			if (memberList.get(i).id.contains(str)) {
-				System.out.printf("%s, %s, %s, %s, %s",memberList.get(i).id,memberList.get(i).name,memberList.get(i).ssn,memberList.get(i).tel,memberList.get(i).idstatus);
-			}else if(!memberList.get(i).id.contains(str)) {
-				System.out.println("Á¸ÀçÇÏÁö ¾Ê´Â È¸¿øÀÔ´Ï´Ù.");
-				break;
+	List search(String search) {
+		System.out.println("¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤");
+		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "È¸¿øID", "ÀÌ¸§", "»ý³â¿ùÀÏ", "ÀüÈ­¹øÈ£", "»óÅÂ");
+		System.out.println("¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥");
+		System.out.println("¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤");
+		for (int i = 0; i < memberList.size(); i++) {
+			if (memberList.get(i).getId().contains(search) || memberList.get(i).getName().contains(search)) {
+				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4b  %n", memberList.get(i).id,
+						memberList.get(i).name, memberList.get(i).ssn, memberList.get(i).tel,
+						memberList.get(i).idstatus);
 			}
 		}
-		System.out.println("0.ÀÌÀü¸Þ´º·Î ÀÌµ¿");
-		System.out.print(">>");
-		int menu= scanner.nextInt();
-		scanner.nextLine();
-		if(menu == 0) {
-			System.out.println("ÀÌÀü¸Þ´º·Î ÀÌµ¿ÇÕ´Ï´Ù");
+		System.out.println("¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥");
+		return null;
+	}
+	
+	List adminsearch(String id) {
+		for(int i=0;i<memberList.size();i++) {
+			if(memberList.get(i).getId().equals(id)) {
+				osys.member_modify();
+				
+				update(memberList.get(i));
+				System.out.printf("[%s]´ÔÀÇ Á¤º¸¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.",memberList.get(i));
+			}
 		}
+		
+		
+		return null;
+	}
+
+	@Override
+	List searchAll() {
+		System.out.println("¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤");
+		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "È¸¿øID", "ÀÌ¸§", "»ý³â¿ùÀÏ", "ÀüÈ­¹øÈ£", "»óÅÂ");
+		System.out.println("¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥");
+		System.out.println("¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤");
+
+		for (int i = 0; i < memberList.size(); i++) {
+			System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4b  %n", memberList.get(i).id, memberList.get(i).name,
+					memberList.get(i).ssn, memberList.get(i).tel, memberList.get(i).idstatus);
+			System.out.println("¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥");
+		}
+		System.out.printf("  È¸¿øÀº ÃÑ %s ¸í ÀÔ´Ï´Ù.%n", memberList.size());
 		return null;
 	}
 
@@ -129,89 +158,91 @@ public MemberDB() {
 		}
 		return;
 	}
+
 	void blackMem() {
 		int count = 0;
-		for(int i=0; i<memberList.size(); i++) {
-			if(memberList.get(i).status==true) {
+		for (int i = 0; i < memberList.size(); i++) {
+			if (memberList.get(i).status == true) {
 				count++;
-				System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
-						+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
+				System.out.println(memberList.get(i).id + "/" + memberList.get(i).name + "/" + memberList.get(i).ssn
+						+ "/" + memberList.get(i).tel + "/" + memberList.get(i).idstatus);
 			}
 		}
-		System.out.println("ÃÑ "+count+"¸íÀÇ È¸¿øÀÌ ºí·¢¸®½ºÆ®¿¡ ÀÖ½À´Ï´Ù.");
-		
+		System.out.println("ÃÑ " + count + "¸íÀÇ È¸¿øÀÌ ºí·¢¸®½ºÆ®¿¡ ÀÖ½À´Ï´Ù.");
+
 	}
+
 	void blackList() {
-			
-			Osystem osys = new Osystem();
+
+		Osystem osys = new Osystem();
 		System.out.println("1.Á¤·Ä 2.°èÁ¤Á¤Áö 3.°èÁ¤º¹±¸ 0.ÀÌÀüÈ­¸é");
 		System.out.println("¸Þ´º¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä.");
 		int menu = scanner.nextInt();
 		scanner.nextLine();
-		switch(menu) {
+		switch (menu) {
 		case 1:
-			while(true) {
-			System.out.println("1.¾ÆÀÌµð 2.ÀÌ¸§ 3.»ý³â¿ùÀÏ 4.ÀüÈ­¹øÈ£ 5.»óÅÂ 0.ÀÌÀüÈ­¸é");
-			System.out.println("Á¤·ÄÀ» ¿øÇÏ´Â Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.");
-			int input = scanner.nextInt();
-			scanner.nextLine();
-			switch(input) {
-			case 1:	// ¾ÆÀÌµð
-				MemberIdComparator cId = new MemberIdComparator();
-				Collections.sort(memberList, cId);
-				osys.showMemberList(memberList);
-				continue;
-			case 2:	// ÀÌ¸§
-				MemberNameComparator cName = new MemberNameComparator();
-				Collections.sort(memberList, cName);
-				osys.showMemberList(memberList);
-				continue;
-			case 3:	// »ý³â¿ùÀÏ
-				MemberSsnComparator cSsn = new MemberSsnComparator();
-				Collections.sort(memberList, cSsn);
-				osys.showMemberList(memberList);
-				continue;
-			case 4:	// ÀüÈ­¹øÈ£
-				MemberTelComparator cTel = new MemberTelComparator();
-				Collections.sort(memberList, cTel);
-				osys.showMemberList(memberList);
-				continue;
-			case 5:	// »óÅÂ
-				MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
-				Collections.sort(memberList, cIdStatus);
-				osys.showMemberList(memberList);
-				continue;
-			case 0:
-				MemberIdComparator c = new MemberIdComparator();
-				Collections.sort(memberList, c);
-				return;
+			while (true) {
+				System.out.println("1.¾ÆÀÌµð 2.ÀÌ¸§ 3.»ý³â¿ùÀÏ 4.ÀüÈ­¹øÈ£ 5.»óÅÂ 0.ÀÌÀüÈ­¸é");
+				System.out.println("Á¤·ÄÀ» ¿øÇÏ´Â Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+				int input = scanner.nextInt();
+				scanner.nextLine();
+				switch (input) {
+				case 1: // ¾ÆÀÌµð
+					MemberIdComparator cId = new MemberIdComparator();
+					Collections.sort(memberList, cId);
+					osys.showMemberList(memberList);
+					continue;
+				case 2: // ÀÌ¸§
+					MemberNameComparator cName = new MemberNameComparator();
+					Collections.sort(memberList, cName);
+					osys.showMemberList(memberList);
+					continue;
+				case 3: // »ý³â¿ùÀÏ
+					MemberSsnComparator cSsn = new MemberSsnComparator();
+					Collections.sort(memberList, cSsn);
+					osys.showMemberList(memberList);
+					continue;
+				case 4: // ÀüÈ­¹øÈ£
+					MemberTelComparator cTel = new MemberTelComparator();
+					Collections.sort(memberList, cTel);
+					osys.showMemberList(memberList);
+					continue;
+				case 5: // »óÅÂ
+					MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
+					Collections.sort(memberList, cIdStatus);
+					osys.showMemberList(memberList);
+					continue;
+				case 0:
+					MemberIdComparator c = new MemberIdComparator();
+					Collections.sort(memberList, c);
+					return;
 				default:
 					System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
 					continue;
-			}
+				}
 			}
 		case 2:
 			System.out.println("Á¤ÁöÇÏ·Á´Â °èÁ¤ÀÇ ¾ÆÀÌµð¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. 0.ÀÌÀüÈ­¸é");
-			id=scanner.nextLine();
-			if(id.equals("0")) {
-			System.out.println("ÀÌÀüÈ­¸éÀ¸·Î ÀÌµ¿ÇÕ´Ï´Ù");
-			break;
+			id = scanner.nextLine();
+			if (id.equals("0")) {
+				System.out.println("ÀÌÀüÈ­¸éÀ¸·Î ÀÌµ¿ÇÕ´Ï´Ù");
+				break;
 			}
-			for(int i=0;i<memberList.size();i++) {
-				if(memberList.get(i).id.equals(id)) {
+			for (int i = 0; i < memberList.size(); i++) {
+				if (memberList.get(i).id.equals(id)) {
 					memberList.get(i).blackstatus = true;
 				}
 			}
 			break;
 		case 3:
 			System.out.println("º¹±¸ÇÏ·Á´Â °èÁ¤ÀÇ ¾ÆÀÌµð¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. 0.ÀÌÀüÈ­¸é");
-			id=scanner.nextLine();
-			if(id.equals("0")) {
+			id = scanner.nextLine();
+			if (id.equals("0")) {
 				System.out.println("ÀÌÀüÈ­¸éÀ¸·Î ÀÌµ¿ÇÕ´Ï´Ù");
 				break;
-				}
-			for(int i=0;i<memberList.size();i++) {
-				if(memberList.get(i).id.equals(id)) {
+			}
+			for (int i = 0; i < memberList.size(); i++) {
+				if (memberList.get(i).id.equals(id)) {
 					memberList.get(i).blackstatus = false;
 				}
 			}
@@ -221,45 +252,45 @@ public MemberDB() {
 			break;
 		}
 	}
-//..
+
+	// ..
 	Member Login(String id, String password) { // ·Î±×ÀÎ ¸Þ¼­µå
 		Member loginMem = null;
 
 		for (int i = 0; i < memberList.size(); i++) {
-		 if (memberList.get(i).getId().equals(id)) {
+			if (memberList.get(i).getId().equals(id)) {
 				if (memberList.get(i).getPassword().equals(password)) {
 					System.out.println(memberList.get(i).getId() + "´ÔÀÌ ·Î±×ÀÎ ÇÏ¼Ì½À´Ï´Ù.");
 					System.out.println("È¸¿ø ¸Þ´º·Î ÀÌµ¿ÇÕ´Ï´Ù.");
 					loginMem = memberList.get(i);
-					
+
 				} else {
 					System.out.println("ºñ¹Ð¹øÈ£¸¦ Àß¸ø ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.");
 					break;
 				}
 			}
-			
+
 		}
 		return loginMem;
 	}
 
-
-	void MemInform(Data data) {	// È¸¿ø Á¤º¸ Ãâ·Â
+	void MemInform(Data data) { // È¸¿ø Á¤º¸ Ãâ·Â
 		Member m = (Member) data;
-		System.out.println("¾ÆÀÌµð : "+m.getId());
-		System.out.println("ÀÌ¸§ : "+m.getName());
-		System.out.println("»ý³â¿ùÀÏ : "+m.getSsn());
-		System.out.println("ÀüÈ­¹øÈ£ : "+m.getTel());
-		System.out.println("°èÁ¤»óÅÂ : "+m.getIdstatus());
+		System.out.println("¾ÆÀÌµð : " + m.getId());
+		System.out.println("ÀÌ¸§ : " + m.getName());
+		System.out.println("»ý³â¿ùÀÏ : " + m.getSsn());
+		System.out.println("ÀüÈ­¹øÈ£ : " + m.getTel());
+		System.out.println("°èÁ¤»óÅÂ : " + m.getIdstatus());
 		System.out.println("0.ÀÌÀü¸Þ´º·Î ÀÌµ¿");
 		System.out.print(">>");
-		int menu= scanner.nextInt();
+		int menu = scanner.nextInt();
 		scanner.nextLine();
-		if(menu == 0) {
+		if (menu == 0) {
 			System.out.println("ÀÌÀü¸Þ´º·Î ÀÌµ¿ÇÕ´Ï´Ù");
 		}
 	}
 
-	void FindId() {	// ¾ÆÀÌµð Ã£±â
+	void FindId() { // ¾ÆÀÌµð Ã£±â
 		System.out.println("ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä");
 		name = scanner.nextLine();
 		for (int i = 0; i < memberList.size(); i++) {
@@ -279,7 +310,7 @@ public MemberDB() {
 	}
 
 	void FindPw() { // ºñ¹Ð¹øÈ£ Ã£±â
-		System.out.println("ÀÌ¸§¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");	// ¾ÆÀÌµð ÀÔ·Â
+		System.out.println("ÀÌ¸§¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä"); // ¾ÆÀÌµð ÀÔ·Â
 		name = scanner.nextLine();
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).getName().equals(name)) {
@@ -300,23 +331,6 @@ public MemberDB() {
 				}
 			}
 		}
-	}
-
-	@Override
-	List searchAll() {
-		for (int i = 0; i < memberList.size(); i++) {
-			System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
-					+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
-		}
-		System.out.println("È¸¿øÀº ÃÑ "+(memberList.size()-1)+"¸íÀÔ´Ï´Ù.");
-		System.out.println("0.ÀÌÀü¸Þ´º·Î ÀÌµ¿");
-		System.out.print(">>");
-		int menu= scanner.nextInt();
-		scanner.nextLine();
-		if(menu == 0) {
-			System.out.println("ÀÌÀü¸Þ´º·Î ÀÌµ¿ÇÕ´Ï´Ù");
-		}
-		return null;
 	}
 
 	@Override

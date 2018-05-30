@@ -136,15 +136,15 @@ public class Osystem {
 	}
 	void admin_membermng() {
 		System.out.println("회원관리 메뉴입니다. 원하시는 기능의 번호를 입력해주세요.");
-		System.out.println("┌──────────────────────────────────────┐");
-		System.out.println(" 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면");
-		System.out.println("└──────────────────────────────────────┘");
+		System.out.println("┌──────────────────────────────────────────────────┐");
+		System.out.println(" 1.회원검색 2.회원정보수정 3.전체회원목록 4.블랙리스트 0.이전화면");
+		System.out.println("└──────────────────────────────────────────────────┘");
 
 	}
 	void admin_findmem() {
-		System.out.println("┌───────────────────────────────────────┐");
-		System.out.println(" 찾으시는 회원의 아이디를 입력하세요. (0은 이전화면)");
-		System.out.println("└───────────────────────────────────────┘");
+		System.out.println("┌─────────────────────────────────────────────┐");
+		System.out.println(" 찾으시는 회원의 아이디 혹은 이름를 입력하세요. (0은 이전화면)");
+		System.out.println("└─────────────────────────────────────────────┘");
 
 	}
 	void admin_admng() {
@@ -181,9 +181,9 @@ public class Osystem {
 	void showMemberList(List<Member> list) {	//검색한 회원 리스트 출력 양식
 		if(list == null || list.size()==0) System.out.println("조회할 회원이 없습니다.");
 		else {
-			System.out.println("┌───────────────────────────────────────────────────────────┐");
-			System.out.printf("  %-8s | %-12s | %-15s | %-25s | %-9s   │%n", "회원ID","이름","생년월일","전화번호","상태");
-			System.out.println("└───────────────────────────────────────────────────────────┘");
+			System.out.println("┌────────────────────────────────────────────────────────────┐");
+			System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
+			System.out.println("└────────────────────────────────────────────────────────────┘");
 			for(Member m:list) {
 				System.out.println(m);
 			}
