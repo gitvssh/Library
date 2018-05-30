@@ -85,10 +85,11 @@ public class Osystem {
 
 	void member_modify() {
 		System.out.println("┌───────────────────────────────────────────────────┐");
-		System.out.println(" 1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동  ");
+		System.out.println(" 1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.이전메뉴로 이동  ");
 		System.out.println("└───────────────────────────────────────────────────┘");
 		System.out.println("수정을 원하시는 항목을 선택해주세요.");
 	}
+	
 
 	void member_request() {
 		System.out.println("┌───────────────────────────────────────────┐");
@@ -146,6 +147,12 @@ public class Osystem {
 		System.out.println(" 찾으시는 회원의 아이디 혹은 이름를 입력하세요. (0은 이전화면)");
 		System.out.println("└─────────────────────────────────────────────┘");
 
+	}
+	void admin_findmem2() {
+		System.out.println("┌────────────────────────────────────────────┐");
+		System.out.println(" 정보를 수정하려는 회원의 아이디를  입력하세요 (0은 이전화면)");
+		System.out.println("└────────────────────────────────────────────┘");
+		
 	}
 	void admin_admng() {
 		System.out.println(" ━━━━━━━━━━━━━");

@@ -42,18 +42,25 @@ public class MemberDB extends DB {
 		System.out.println("└────────────────────────────────────────────────────────────┘");
 		return null;
 	}
-	
+
 	List adminsearch(String id) {
-		for(int i=0;i<memberList.size();i++) {
-			if(memberList.get(i).getId().equals(id)) {
+
+		int count = 0;
+
+		for (int i = 0; i < memberList.size(); i++) {
+			if (memberList.get(i).getId().equals(id)) {
+				System.out.printf("[%s]님의 정보를 불러왔습니다. 수정하실 항목을 선택해주세요. %n", memberList.get(i).getId());
 				osys.member_modify();
-				
 				update(memberList.get(i));
-				System.out.printf("[%s]님의 정보수정이 완료되었습니다.",memberList.get(i));
+				count++;
+				if (!(count == 0)) {
+					System.out.printf("[%s]님의 정보수정이 완료되었습니다.%n", memberList.get(i).getId());
+				} else {
+					break;
+				}
 			}
 		}
-		
-		
+
 		return null;
 	}
 

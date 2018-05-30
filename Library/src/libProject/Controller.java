@@ -396,7 +396,7 @@ public class Controller {
 								break admin;
 							case 2:
 								osys.history(loginAdm.getId(),"회원관리","회원정보수정");
-								osys.admin_findmem();
+								osys.admin_findmem2();
 								memberDB.adminsearch(scan.nextLine());
 								break admin;
 							case 3:// 전체회원목록
