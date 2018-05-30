@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Comments.*;
+
 public class Controller {
 
 	public static void main(String[] args) {
@@ -18,6 +20,7 @@ public class Controller {
 		BookDB bookDB = new BookDB(); // 책 DB 객체생성
 		MemberDB memberDB = new MemberDB(); // 회원 DB 객체생성
 		AdminDB adminDB = new AdminDB(); // 관리자 DB 객체생성
+		CommentDB commentDB = new CommentDB();	//건의사항 DB 객체생성
 
 		// -----------------메인시작-----------------------
 		main: while (true) {
@@ -236,10 +239,36 @@ public class Controller {
 							continue member;
 						}// end switch 회원정보메뉴
 					case 5:// 건의사항
-						osys.history(loginMem.getId(),"건의사항");
-						osys.member_request();
-						// 건의사항 메서드
-						break;
+						comment:while(true) {
+							osys.history(loginMem.getId(),"건의사항");
+							osys.member_request();
+							menu = scan.nextInt(); // 건의사항 메서드
+							switch(menu) {
+							case 1: //1.새 건의사항 입력
+								osys.history(loginMem.getId(),"건의사항","1.새 건의사항 입력");
+								commentDB.addComment(loginMem);
+								continue comment;
+							case 2: //2.이전 건의사항 보기
+								osys.history(loginMem.getId(),"건의사항","2.이전 건의사항 보기");
+								//회원 아이디로 작성된 건의사항을 검색해 리스트로 받기
+								ArrayList<Comment> searchList = commentDB.searchComments(loginMem.getId());
+								//검색결과가 있으면 리스트를 매개변수로 이전 건의사항들을 출력
+								if(searchList!=null) {
+									commentDB.showCommentList(searchList);
+								} else {
+									System.out.println("등록된 건의사항이 없습니다.");
+									continue comment;
+								}
+								while(true) {
+									System.out.println("0.이전 화면");
+									if(scan.nextInt()==0) continue comment;
+									else continue;
+								}
+							case 0: //0.회원메뉴로 이동 
+								System.out.println("이전화면으로 돌아갑니다.");
+								continue member;
+							}
+						}
 					case 9:// 로그아웃
 						while(true) {
 							osys.history(loginMem.getId(),"로그아웃");

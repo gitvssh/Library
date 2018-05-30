@@ -14,17 +14,18 @@ public class CommentDB {	//건의사항 DB클래스
 		commentList = new ArrayList<>();
 	}
 	
-	ArrayList<Comment> searchComments(String id) {	//입력 키워드로 해당 아이디의 건의사항을 검색하는 메서드
-		ArrayList<Comment> searchList = null;	//검색결과를 담는 리스트(결과가 없으면 null 리턴)
+	public ArrayList<Comment> searchComments(String id) {	//입력 키워드로 해당 아이디의 건의사항을 검색하는 메서드
+		ArrayList<Comment> searchList = new ArrayList<>();	//검색결과를 담는 리스트(결과가 없으면 null 리턴)
 		for(Comment comment:commentList) {	//해당 키워드를 포함하는 아이디의 건의사항을 저장된 리스트에서 검색
-			if(comment.getId().contains(id)) searchList.add(comment);
+			if(comment.getId().equals(id)) searchList.add(comment);
 		}
-		return searchList;	//검색결과 리턴
+		if(searchList.size()==0) return null;
+		else return searchList;	//검색결과 리턴
 	}
 	
-	void AddComment(Member loginMember){	//로그인한 회원 건의사항을 입력하는 메서드
+	public void addComment(Member loginMem){	//로그인한 회원 건의사항을 입력하는 메서드
 		Scanner scan = new Scanner(System.in);
-		String id = loginMember.getId();	//로그인 회원 아이디
+		String id = loginMem.getId();	//로그인 회원 아이디
 		Date date = new Date();	//현재 날짜 객체
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	//현재 날짜를 해당 형식으로 포매팅.
 		
@@ -40,11 +41,14 @@ public class CommentDB {	//건의사항 DB클래스
 			if(yn.equals("Y")) {
 				if(commentList.add(new Comment(id, date, title, content))) {
 					System.out.println("건의사항이 추가됐습니다.");
+					return;
 				} else {
 					System.out.println("에러발생! 건의사항이 추가되지 않았습니다.");
+					return;
 				}
 			} else if(yn.equals("N")) {
 				System.out.println("건의사항 작성이 취소됐습니다. 이전 페이지로 돌아갑니다.");
+				return;
 			} else {
 				System.out.println("잘못된 입력입니다!");
 				continue;
@@ -52,11 +56,11 @@ public class CommentDB {	//건의사항 DB클래스
 		}
 	}
 	
-	void showAllCommentList() {	//건의사항을 전부 보여주는 리스트
+	public void showAllCommentList() {	//건의사항을 전부 보여주는 리스트
 		for(Comment c:commentList) System.out.println(c);
 	}
 	
-	void showCommentList(ArrayList<Comment> searchList) {	//특정 건의사항 리스트만을 보여주는 리스트
+	public void showCommentList(ArrayList<Comment> searchList) {	//특정 건의사항 리스트만을 보여주는 리스트
 		for(Comment c:searchList) System.out.println(c);
 	}
 }

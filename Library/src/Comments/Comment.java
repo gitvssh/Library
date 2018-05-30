@@ -1,5 +1,6 @@
 package Comments;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Comment {	//건의사항 클래스
@@ -68,8 +69,9 @@ public class Comment {	//건의사항 클래스
 
 	@Override
 	public String toString() {
-		return no+".\t[" + id + ", " + date + ", 제목:" + title + "]\n"
-				+ "\t내용:" + content + "]";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return no+".\t" + id + " (" + sdf.format(date) + ")\n\t[제목]:" + title + "\n"
+				+ "\t[내용]:" + content;
 	}
 
 }
