@@ -97,6 +97,7 @@ public class BookDB extends DB{
 		System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
 		System.out.print("분야 :");
 		subject = scan.nextInt();
+		scan.nextLine();
 		System.out.println();
 		System.out.print("출판사 :");
 		publisher = scan.nextLine();
@@ -106,6 +107,7 @@ public class BookDB extends DB{
 		b.isbn = Book.isbn_count;//일련번호 인덱스 대입
 		b.setIndex(b.change_subject(subject)+b.isbn);//분야 + isbn -> 인덱스
 		bookList.add(b);
+		System.out.println("도서등록이 완료되었습니다.");
 	}
 
 	//삭제
