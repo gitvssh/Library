@@ -398,14 +398,11 @@ public class Controller {
 									// 전체회원 출력 메서드
 								break;
 							case 3:// 블랙리스트
-<<<<<<< HEAD
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
 								System.out.println("");
 								// 블랙리스트 출력 메서드
-=======
 								osys.history(loginAdm.getId(),"회원관리","블랙리스트");
 									// 블랙리스트 출력 메서드
->>>>>>> branch 'master' of https://github.com/gitvssh/Library
 								break;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
