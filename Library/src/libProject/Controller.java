@@ -229,9 +229,8 @@ public class Controller {
 						break;
 					case 3:// 도서반납
 						osys.history(loginMem.getId(),"도서 반납");
-							// 빌린도서 출력 메서드
-							// 도서반납 메서드
-						break;
+						bookDB.returnBooks(loginMem);	// 도서반납 메서드
+						continue member;
 					case 4:// 회원정보
 						osys.history(loginMem.getId(),"회원정보");
 						osys.member_inform();
