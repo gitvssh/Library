@@ -261,8 +261,8 @@ public class Controller {
 										menu = scan.nextInt();
 										scan.nextLine();
 										if(menu==0) continue comment;	//0을 입력받으면 건의사항 메뉴로.
-										if(menu==1) commentDB.showPages(++page,searchList); 
-										else if(menu==2) commentDB.showPages(--page,searchList);
+										if(menu==1) commentDB.showPages(--page,searchList); 
+										else if(menu==2) commentDB.showPages(++page,searchList);
 										commentDB.showPages(menu,searchList);
 									}
 								} else {

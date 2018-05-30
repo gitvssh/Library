@@ -15,6 +15,8 @@ public class CommentDB {	//건의사항 DB클래스
 	
 	public CommentDB() {	//DB객체 생성시 리스트도 객체생성.
 		commentList = new ArrayList<>();
+		for(int i=0; i<31; i++)	//더미 건의사항 생성
+		commentList.add(new Comment(i+1, "java111", new Date(), i+1+"", i+1+""));
 	}
 	
 	public ArrayList<Comment> searchComments(String id) {	//입력 키워드로 해당 아이디의 건의사항을 검색하는 메서드
@@ -118,7 +120,8 @@ public class CommentDB {	//건의사항 DB클래스
 			return;
 		}
 		
-		for(int i=(page-1)*10; i<page*10; i++) {
+		int limit = (page != totalPages) ? page*10:commentList.size();
+		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(commentList.get(i));
 		}
 		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
@@ -134,7 +137,8 @@ public class CommentDB {	//건의사항 DB클래스
 			return;
 		}
 		
-		for(int i=(page-1)*10; i<page*10; i++) {
+		int limit = (page != totalPages) ? page*10:commentList.size();
+		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(searchList.get(i));
 		}
 		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
