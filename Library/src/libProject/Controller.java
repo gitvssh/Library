@@ -411,10 +411,42 @@ public class Controller {
 							switch (menu) {
 							case 1:// 검색
 								osys.history(loginAdm.getId(),"건의사항","검색");
-								break;
+								System.out.println("검색하시고자 하는 건의사항의 아이디를 입력해주세요.(0은 이전 화면)");
+								System.out.print("아이디: ");
+								String searchId = scan.nextLine();
+								if(searchId.equals("0")) continue admin;
+								
+								ArrayList<Comment> searchList = commentDB.searchComments(searchId);
+								
+								if(searchList!=null) {
+									commentDB.showCommentList(searchList);
+									continue request;
+								} else {
+									System.out.println("등록된 건의사항이 없습니다.");
+									continue request;
+								}
 							case 2:// 답변
 								osys.history(loginAdm.getId(),"건의사항","답변");
-								break;
+								System.out.println("답변하시고자 하는 건의사항의 아이디를 입력해주세요. (0은 이전 화면)");
+								searchId = scan.nextLine();
+								if(searchId.equals("0")) continue admin;
+								
+								searchList = commentDB.searchComments(searchId);
+								
+								if(searchList!=null) {
+									commentDB.showCommentList(searchList);
+									
+									System.out.println("답변하시고자 하는 건의사항의 번호를 입력해주세요.");
+									System.out.print("번호: ");
+									
+									int searchNo = scan.nextInt();
+									scan.nextLine();
+									commentDB.replyComment(searchNo,searchList,loginAdm);
+									continue request;
+								} else {
+									System.out.println("등록된 건의사항이 없습니다.");
+									continue request;
+								}
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								break request;
