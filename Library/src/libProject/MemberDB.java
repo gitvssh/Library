@@ -26,8 +26,7 @@ public class MemberDB extends DB {
 	List search(String str) {
 		for (int i=0;i<memberList.size();i++) {
 			if (memberList.get(i).id.contains(str)) {
-				System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
-						+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
+				System.out.printf("%s, %s, %s, %s, %s",memberList.get(i).id,memberList.get(i).name,memberList.get(i).ssn,memberList.get(i).tel,memberList.get(i).idstatus);
 			}else if(!memberList.get(i).id.contains(str)) {
 				System.out.println("존재하지 않는 회원입니다.");
 				break;

@@ -379,14 +379,15 @@ public class Controller {
 								osys.admin_findmem();
 								while(true) {
 									String searchMem = scan.nextLine();
+									osys.showMemberList();
 									memberDB.search(searchMem);
 									break;
 								}
 								continue membermng;
 							case 2:// 전체회원목록
 								osys.history(loginAdm.getId(),"회원관리","전체 회원목록");
+								osys.showMemberList();
 								memberDB.searchAll();
-									// 전체회원 출력 메서드
 								continue membermng;
 							
 							case 3:// 블랙리스트
