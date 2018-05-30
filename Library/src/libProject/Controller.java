@@ -19,29 +19,6 @@ public class Controller {
 		MemberDB memberDB = new MemberDB(); // 회원 DB 객체생성
 		AdminDB adminDB = new AdminDB(); // 관리자 DB 객체생성
 
-		/*
-		 * BookDB bookDB = new BookDB(); // 책 DB 객체생성
-		 * 
-		 * // bookDB.insert(new Book("전쟁과 평화1")); //책 DB에 책 객체저장 // bookDB.insert(new
-		 * Book("전쟁과 평화2")); // bookDB.insert(new Book("전쟁과 평화3")); List<Book>
-		 * searchBooks = bookDB.search("전쟁과 평화"); // 책 DB에서 책 검색
-		 * 
-		 * for (Book b : searchBooks) { System.out.println(b.title); } // 책 검색 결과 출력
-		 * System.out.println("---------------------------------");
-		 * 
-		 * MemberDB memberDB = new MemberDB(); // 회원 DB 객체생성
-		 * 
-		 * // memberDB.insert(new Member("김자바")); // 회원 DB 객체생성 // memberDB.insert(new
-		 * Member("이자바")); // memberDB.insert(new Member("박자바")); List<Member>
-		 * searchMembers = memberDB.search("자바"); // 회원 DB 객체생성
-		 * 
-		 * AdminDB adminDB = new AdminDB(); // 관리자 DB 객체생성
-		 * 
-		 * new Admin("admin1", "1234", "관리자", "921002", "01012341234"); //관리자 예시
-		 * 
-		 * for (Member m : searchMembers) { System.out.println(m.getName()); } // 회원 DB
-		 * 객체생성
-		 */
 		// -----------------메인시작-----------------------
 		main: while (true) {
 			switch (login) {
@@ -217,7 +194,7 @@ public class Controller {
 							osys.history(loginMem.getId(),"도서대출","전체 도서목록");
 							System.out.println("전체 도서목록입니다.");
 							bookDB.searchAll();
-							break;
+							continue member;
 						case 0:// 이전화면으로
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue member;

@@ -44,7 +44,7 @@ public class Book implements Data{
 		this.subject = subject;
 		this.publisher = publisher;
 		this.isbn = isbn_count;
-		this.index = isbn_count+"";	//정렬 기능 시험하기 위해 임시 생성(형주).
+		this.index = this.change_subject(subject)+this.isbn;	//정렬 기능 시험하기 위해 임시 생성(형주).
 		this.status = true;// 기본 도서관 생성시 1
 		this.rentCount = 0; // 기본 대여회수 0
 	}
@@ -175,8 +175,7 @@ public class Book implements Data{
 
 	@Override
 	public String toString() {
-		return "Book [index=" + index + ", title=" + title + ", author=" + author + ", subject=" + subject
-				+ ", publisher=" + publisher + ", isbn=" + isbn + "]";
+		return String.format(" %-7s | %-38s | %-8s | %-8s | %-5s | %-5s │%n",index,title,author,publisher,isbn,this.change_subject2(subject)); 
 	}
 
 	
