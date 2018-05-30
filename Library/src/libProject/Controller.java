@@ -194,7 +194,7 @@ public class Controller {
 							osys.history(loginMem.getId(),"도서대출","전체 도서목록");
 							System.out.println("전체 도서목록입니다.");
 							bookDB.searchAll();
-							break;
+							continue member;
 						case 0:// 이전화면으로
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue member;
@@ -316,8 +316,7 @@ public class Controller {
 									osys.history(loginAdm.getId(),"도서관리","도서검색","전체 도서목록");
 									System.out.println("전체 도서 목록입니다.");
 									bookDB.searchAll();
-									bookDB.align();
-									break;
+									continue admin;
 								case 0:// 이전화면으로
 									System.out.println("이전화면으로 돌아갑니다.");
 									continue admin;
