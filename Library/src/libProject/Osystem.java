@@ -193,6 +193,26 @@ public class Osystem {
 		}
 	
 	}
+	void showBlackList(List<Member> list) {	//검색한 회원 리스트 출력 양식
+		if(list == null || list.size()==0) System.out.println("조회할 회원이 없습니다.");
+		else {
+			System.out.println("┌───────────────────────────────────────────────────────────┐");
+			System.out.printf("  %-8s | %-12s | %-15s | %-25s | %-9s   │%n", "회원ID","이름","생년월일","전화번호","상태");
+			System.out.println("└───────────────────────────────────────────────────────────┘");
+			int count = 0;
+			for(int i=0;i<list.size();i++) {
+				if(list.get(i).isStatus()==true) {
+					count++;
+					System.out.println(list.get(i).id+"/"+list.get(i).name+"/"
+							+list.get(i).ssn+"/"+list.get(i).tel+"/"+list.get(i).idstatus);
+				}
+			}
+			System.out.println("┌──────────────────────────────────┐");
+			System.out.printf("  총 %2d개의 검색결과가 있습니다.              %n",count);
+			System.out.println("└──────────────────────────────────┘");
+		}
+		
+	}
 	
 	//리스트 추가 
 

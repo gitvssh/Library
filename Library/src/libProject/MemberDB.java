@@ -145,7 +145,8 @@ public MemberDB() {
 		}
 		return;
 	}
-	void blackMem() {
+
+	void blackList() {
 		int count = 0;
 		for(int i=0; i<memberList.size(); i++) {
 			if(memberList.get(i).status==true) {
@@ -155,9 +156,6 @@ public MemberDB() {
 			}
 		}
 		System.out.println("총 "+count+"명의 회원이 블랙리스트에 있습니다.");
-		
-	}
-	void blackList() {
 			
 			Osystem osys = new Osystem();
 		System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
@@ -175,32 +173,32 @@ public MemberDB() {
 			case 1:	// 아이디
 				MemberIdComparator cId = new MemberIdComparator();
 				Collections.sort(memberList, cId);
-				osys.showMemberList(memberList);
+				osys.showBlackList(memberList);
 				continue;
 			case 2:	// 이름
 				MemberNameComparator cName = new MemberNameComparator();
 				Collections.sort(memberList, cName);
-				osys.showMemberList(memberList);
+				osys.showBlackList(memberList);
 				continue;
 			case 3:	// 생년월일
 				MemberSsnComparator cSsn = new MemberSsnComparator();
 				Collections.sort(memberList, cSsn);
-				osys.showMemberList(memberList);
+				osys.showBlackList(memberList);
 				continue;
 			case 4:	// 전화번호
 				MemberTelComparator cTel = new MemberTelComparator();
 				Collections.sort(memberList, cTel);
-				osys.showMemberList(memberList);
+				osys.showBlackList(memberList);
 				continue;
 			case 5:	// 상태
 				MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
 				Collections.sort(memberList, cIdStatus);
-				osys.showMemberList(memberList);
+				osys.showBlackList(memberList);
 				continue;
 			case 0:
 				MemberIdComparator c = new MemberIdComparator();
 				Collections.sort(memberList, c);
-				return;
+				break;
 				default:
 					System.out.println("잘못된 입력입니다.");
 					continue;

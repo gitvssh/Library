@@ -402,7 +402,7 @@ public class Controller {
 							case 3:// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
 								System.out.println("블랙리스트 회원목록입니다.");
-								memberDB.blackMem();// 블랙리스트 출력 메서드
+								// 블랙리스트 출력 메서드
 								memberDB.blackList();
 								// 블랙리스트 출력 메서드
 								break;
