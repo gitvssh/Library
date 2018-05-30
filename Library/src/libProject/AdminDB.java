@@ -124,9 +124,9 @@ public class AdminDB extends DB {
 	}
 
 	@Override
-	List align() {
+	void align() {
 		// TODO Auto-generated method stub
-		return null;
+		return;
 	}
 
 }
