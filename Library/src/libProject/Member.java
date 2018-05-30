@@ -17,6 +17,7 @@ public class Member implements Data{
 		this.name = name;
 		this.ssn = ssn;
 		this.tel = tel;
+		rentList = new ArrayList<>();
 	}
 //<<<<<<< HEAD
 	public Member() {

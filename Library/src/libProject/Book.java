@@ -13,7 +13,7 @@ public class Book implements Data{
 	 */
 	
 	String publisher;//출판사
-	int isbn;//isbn을 카운터로 대신 쓰고, 나중에 분야와 조합해서 인덱스로 활용
+	String isbn;//isbn을 카운터로 대신 쓰고, 나중에 분야와 조합해서 인덱스로 활용
 	static int isbn_count=0;
 	//인스턴스에서 static으로 변경
 	/*isbn이란	
@@ -43,10 +43,31 @@ public class Book implements Data{
 		this.author = author;
 		this.subject = subject;
 		this.publisher = publisher;
-		this.isbn = isbn_count;
-		this.index = this.change_subject(subject)+this.isbn;	//정렬 기능 시험하기 위해 임시 생성(형주).
+		this.isbn = this.isbnMaker(isbn_count);
+		this.index = this.change_subject(subject)+this.isbnMaker(isbn_count);	//정렬 기능 시험하기 위해 임시 생성(형주).
 		this.status = true;// 기본 도서관 생성시 1
 		this.rentCount = 0; // 기본 대여회수 0
+	}
+	
+	String isbnMaker(int isbn) {
+	 String tmp = isbn+"";
+	 switch(tmp.length()) {
+	 case 1:
+		 tmp = "0000"+tmp;
+		 return tmp;
+	 case 2:
+		 tmp = "000"+tmp;
+		 return tmp;
+	 case 3:
+		 tmp = "00"+tmp;
+		 return tmp;
+	 case 4:
+		 tmp = "0"+tmp;
+		 return tmp;
+	 case 5:
+		 return tmp;
+	 }
+	 return null;
 	}
 	
 	//인덱스 생성시 활용될 ㄱ.ㄴ.ㄷ. 변환메서드
@@ -141,11 +162,11 @@ public class Book implements Data{
 		this.publisher = publisher;
 	}
 
-	public int getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(int isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 
