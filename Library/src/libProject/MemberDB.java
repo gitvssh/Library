@@ -221,7 +221,7 @@ public class MemberDB extends DB {
 			break;
 		}
 	}
-
+//..
 	Member Login(String id, String password) { // 로그인 메서드
 		Member loginMem = null;
 
