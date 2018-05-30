@@ -297,7 +297,6 @@ public class Controller {
 						System.out.println("프로그램을 종료합니다...");
 						break main;
 					}// end switch
-					break;
 				} // -----------------------------회원 while end-----------------------
 			case 2:// 관리자 2
 				admin: while (true) {
@@ -369,13 +368,21 @@ public class Controller {
 								osys.history(loginAdm.getId(),"도서관리","도서수정");
 								osys.admin_modifybook();
 								selected = bookDB.adminsearch(bookDB);
+								if(selected==null) {
+								}
+								else {
 								bookDB.update(selected);
+								}
 								break;
 							case 4:// 도서삭제
 								osys.history(loginAdm.getId(),"도서관리","도서삭제");
 								osys.admin_delbook();
 								selected = bookDB.adminsearch(bookDB);
+								if(selected==null) {
+								}
+								else {
 								bookDB.delete(selected);
+								}
 								break;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
@@ -524,7 +531,6 @@ public class Controller {
 						System.out.println("프로그램을 종료합니다...");
 						break main;
 					}
-					break;
 				} // --------------------------------관리자 while end-------------------------
 			}// end switch_login
 		} // end while_main
