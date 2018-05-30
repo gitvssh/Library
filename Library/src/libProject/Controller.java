@@ -365,9 +365,15 @@ public class Controller {
 							case 1:// 회원검색
 								osys.history(loginAdm.getId(),"회원관리","회원검색");
 								osys.admin_findmem();
-								break;
+								while(true) {
+									String searchMem = scan.nextLine();
+									memberDB.search(searchMem);
+									break;
+								}
+								continue admin;
 							case 2:// 전체회원목록
 								osys.history(loginAdm.getId(),"회원관리","전체 회원목록");
+								memberDB.searchAll();
 									// 전체회원 출력 메서드
 								break;
 							case 3:// 블랙리스트

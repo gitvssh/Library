@@ -17,17 +17,31 @@ public class MemberDB extends DB {
 	public MemberDB() {
 		memberList = new ArrayList<>();
 		Member b = new Member("java111", "1234", "박자바", "991120", "01042326814");
+		Member b2 = new Member("java222", "1234", "김자바", "900110", "01063127891");
+		Member b3 = new Member("java333", "1234", "최자바", "880106", "01023268214");
+		Member b4 = new Member("java444", "1234", "이자바", "000813", "01032123819");
 		memberList.add(b);
 	}
 
 	@Override
-	List<Member> search(String str) {
-		List<Member> searchList = new ArrayList<Member>();
-		for (Member m : memberList) {
-			if (m.getName().contains(str))
-				searchList.add(m);
+	List search(String str) {
+		for (int i=0;i<memberList.size();i++) {
+			if (memberList.get(i).id.contains(str)) {
+				System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
+						+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
+			}else if(!memberList.get(i).id.contains(str)) {
+				System.out.println("존재하지 않는 회원입니다.");
+				break;
+			}
 		}
-		return searchList;
+		System.out.println("0.관리자메뉴로 이동");
+		System.out.print(">>");
+		int menu= scanner.nextInt();
+		scanner.nextLine();
+		if(menu == 0) {
+			System.out.println("이전메뉴로 이동합니다");
+		}
+		return null;
 	}
 
 	void input() { // 회원가입 메서드
@@ -139,21 +153,15 @@ public class MemberDB extends DB {
 
 	void MemInform(Data data) {	// 회원 정보 출력
 		Member m = (Member) data;
-		String idStatus = null;
 		System.out.println("아이디 : "+m.getId());
 		System.out.println("이름 : "+m.getName());
 		System.out.println("생년월일 : "+m.getSsn());
 		System.out.println("전화번호 : "+m.getTel());
-		if(m.isStatus() == false) {
-			idStatus = "정상";
-		}
-		else {
-			idStatus = "연체중";
-		}
-		System.out.println("계정상태 : "+idStatus);
+		System.out.println("계정상태 : "+m.getIdstatus());
 		System.out.println("0.회원메뉴로 이동");
 		System.out.print(">>");
 		int menu= scanner.nextInt();
+		scanner.nextLine();
 		if(menu == 0) {
 			System.out.println("이전메뉴로 이동합니다");
 		}
@@ -169,8 +177,10 @@ public class MemberDB extends DB {
 				tel = scanner.nextLine();
 				if (memberList.get(i).getTel().equals(tel)) {
 					System.out.println("귀하의 아이디는 :" + memberList.get(i).getId() + "입니다.");
+					break;
 				} else {
 					System.out.println("잘못된 전화번호 입니다.");
+					break;
 				}
 			}
 		}
@@ -190,12 +200,12 @@ public class MemberDB extends DB {
 						System.out.println("해당 번호로 비밀번호를 전송하였습니다.");
 					} else {
 						System.out.println("잘못된 전화번호 입니다.");
+						break;
 					}
 				} else {
 					System.out.println("잘못된 이름 입니다.");
+					break;
 				}
-			} else {
-				System.out.println("존재하지 않는 회원입니다.");
 			}
 		}
 	}
@@ -203,7 +213,8 @@ public class MemberDB extends DB {
 	@Override
 	List<Member> searchAll() {
 		for (int i = 0; i < memberList.size(); i++) {
-			System.out.println((Member) memberList.get(i));
+			System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
+					+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
 		}
 		return null;
 	}

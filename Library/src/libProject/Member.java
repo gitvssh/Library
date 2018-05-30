@@ -9,6 +9,7 @@ public class Member implements Data{
 	String ssn;
 	String tel;
 	boolean status;
+	String idstatus;
 	ArrayList<Book> rentList;	//빌린 책 리스트
 	
 	public Member(String id, String password, String name, String ssn, String tel) {
@@ -17,8 +18,20 @@ public class Member implements Data{
 		this.name = name;
 		this.ssn = ssn;
 		this.tel = tel;
+		if(this.status == false) {
+			idstatus = "정상";
+		}else {
+			idstatus = "연체중";
+		}
+		
 	}
-//<<<<<<< HEAD
+public String getIdstatus() {
+		return idstatus;
+	}
+	public void setIdstatus(String idstatus) {
+		this.idstatus = idstatus;
+	}
+	//<<<<<<< HEAD
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
