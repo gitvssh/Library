@@ -254,15 +254,20 @@ public class Controller {
 								ArrayList<Comment> searchList = commentDB.searchComments(loginMem.getId());
 								//검색결과가 있으면 리스트를 매개변수로 이전 건의사항들을 출력
 								if(searchList!=null) {
-									commentDB.showCommentList(searchList);
+									int page = 1;
+									commentDB.showPages(page,searchList);
+									while(true) {
+										System.out.println("1.이전 페이지  2.다음 페이지  0.이전 화면");
+										menu = scan.nextInt();
+										scan.nextLine();
+										if(menu==0) continue comment;	//0을 입력받으면 건의사항 메뉴로.
+										if(menu==1) commentDB.showPages(++page,searchList); 
+										else if(menu==2) commentDB.showPages(--page,searchList);
+										commentDB.showPages(menu,searchList);
+									}
 								} else {
 									System.out.println("등록된 건의사항이 없습니다.");
 									continue comment;
-								}
-								while(true) {
-									System.out.println("0.이전 화면");
-									if(scan.nextInt()==0) continue comment;
-									else continue;
 								}
 							case 0: //0.회원메뉴로 이동 
 								System.out.println("이전화면으로 돌아갑니다.");
@@ -394,13 +399,26 @@ public class Controller {
 								osys.history(loginAdm.getId(),"회원관리","전체 회원목록");
 									memberDB.searchAll();// 전체회원 출력 메서드
 								break;
+<<<<<<< HEAD
 							case 3:// 블랙리스트
+=======
+							case 3:// 블랙리스트
+>>>>>>> branch 'master' of https://github.com/gitvssh/Library
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
+<<<<<<< HEAD
 								System.out.println("블랙리스트 회원목록입니다.");
 								memberDB.blackMem();// 블랙리스트 출력 메서드
 								memberDB.blackList();
+=======
+								System.out.println("");
+								// 블랙리스트 출력 메서드
+>>>>>>> branch 'master' of https://github.com/gitvssh/Library
 								osys.history(loginAdm.getId(),"회원관리","블랙리스트");
+<<<<<<< HEAD
 									// 블랙리스트 출력 메서드
+=======
+									// 블랙리스트 출력 메서드
+>>>>>>> branch 'master' of https://github.com/gitvssh/Library
 								break;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
