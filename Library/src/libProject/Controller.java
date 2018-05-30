@@ -395,7 +395,22 @@ public class Controller {
 							}// end switch
 						} // end while_request
 					case 5:// 로그아웃
-							// 로그아웃 메서드
+						while(true) {
+							System.out.println("로그아웃을 하시겠습니까? y/n");
+							String out = scan.nextLine();
+							if(out.equals("y")) {
+								System.out.println("로그아웃 되었습니다.");
+								login = 0;
+								break;
+							}else if(out.equals("n")) {
+								System.out.println("로그아웃이 취소되었습니다.");
+								login = 1;
+								break;
+								}else {
+								System.out.println("잘못입력하셨습니다.");
+								continue;
+							}
+						}// 로그아웃 메서드
 						continue main;// 메인으로 보내서 판별
 					case 0:// 종료
 						System.out.println("프로그램을 종료합니다...");
