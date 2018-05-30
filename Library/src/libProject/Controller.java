@@ -261,9 +261,9 @@ public class Controller {
 										menu = scan.nextInt();
 										scan.nextLine();
 										if(menu==0) continue comment;	//0을 입력받으면 건의사항 메뉴로.
-										if(menu==1) commentDB.showPages(--page,searchList); 
-										else if(menu==2) commentDB.showPages(++page,searchList);
-										commentDB.showPages(menu,searchList);
+										if(menu==1) page = commentDB.showPages(--page,searchList); 
+										else if(menu==2) page = commentDB.showPages(++page,searchList);
+										else System.out.println("잘못된 입력!");
 									}
 								} else {
 									System.out.println("등록된 건의사항이 없습니다.");
@@ -440,8 +440,17 @@ public class Controller {
 								ArrayList<Comment> searchList = commentDB.searchComments(searchId);
 								
 								if(searchList!=null) {
-									commentDB.showCommentList(searchList);
-									continue request;
+									int page = 1;
+									commentDB.showPages(page,searchList);
+									while(true) {
+										System.out.println("1.이전 페이지  2.다음 페이지  0.이전 화면");
+										int subMenu = scan.nextInt();
+										scan.nextLine();
+										if(subMenu==0) continue request;	//0을 입력받으면 건의사항 메뉴로.
+										if(subMenu==1) page = commentDB.showPages(--page,searchList); 
+										else if(subMenu==2) page = commentDB.showPages(++page,searchList);
+										else System.out.println("잘못된 입력!");
+									}
 								} else {
 									System.out.println("등록된 건의사항이 없습니다.");
 									continue request;

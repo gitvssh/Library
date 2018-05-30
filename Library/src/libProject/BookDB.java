@@ -303,6 +303,12 @@ public class BookDB extends DB{
 		}
 		
 		while(true) {
+			if(rentList==null || rentList.size()==0) {
+				System.out.println("책을 모두 반납하셨습니다!");
+				break;
+			}
+			
+			Scanner scan = new Scanner(System.in);
 			System.out.println("반납하실 책의 인덱스를 입력해주세요.(0은 이전 화면)");
 			System.out.print("인덱스: ");
 			String returnI = scan.nextLine();	//인덱스 입력을 받음
