@@ -202,12 +202,16 @@ public class Controller {
 						break;
 					case 2:// 빌린도서
 						osys.history(loginMem.getId(),"빌린 도서");
-							// 빌린도서 출력 메서드
-						break;
+						osys.showBookList(loginMem.getRentList());	// 빌린도서 출력 메서드
+						while(true) {
+							System.out.println("0.이전 화면");
+							if (scan.nextInt()==0) continue member;
+							else continue;	//빌린 도서 조회 끝나면 회원 메뉴로.
+						}
 					case 3:// 도서반납
 						osys.history(loginMem.getId(),"도서 반납");
-						bookDB.returnBooks(loginMem);	// 도서반납 메서드
-						continue member;
+						bookDB.returnBooks(loginMem.getRentList());	// 도서반납 메서드
+						continue member;	//반납 끝나면 회원 메뉴로.
 					case 4:// 회원정보
 						osys.history(loginMem.getId(),"회원정보");
 						osys.member_inform();
@@ -276,12 +280,12 @@ public class Controller {
 					scan.nextLine();
 					switch (menu) {// 1.도서관리 2. 회원관리 3.건의사항 4.관리자 관리 5.로그아웃 0.시스템 종료
 					case 1:// 도서관리
-						Book selected = null;//도서 수정,삭제를 위한 참조변수 
-						osys.history(loginAdm.getId(),"도서관리");
-						osys.admin_bookmng();
-						menu = scan.nextInt();
-						scan.nextLine();
 						bookmng: while (true) {// 도서관리메뉴 while
+							Book selected = null;//도서 수정,삭제를 위한 참조변수 
+							osys.history(loginAdm.getId(),"도서관리");
+							osys.admin_bookmng();
+							menu = scan.nextInt();
+							scan.nextLine();
 							switch (menu) {// 1.도서검색 2.도서추가 3.도서수정 4.도서삭제 0.이전 화면으로
 							case 1:// 도서검색
 								osys.history(loginAdm.getId(),"도서관리","도서검색");
@@ -323,7 +327,7 @@ public class Controller {
 									osys.history(loginAdm.getId(),"도서관리","도서검색","전체 도서목록");
 									System.out.println("전체 도서 목록입니다.");
 									bookDB.searchAll();
-									continue admin;
+									continue bookmng;
 								case 0:// 이전화면으로
 									System.out.println("이전화면으로 돌아갑니다.");
 									continue admin;

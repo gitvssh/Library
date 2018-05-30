@@ -97,6 +97,7 @@ public class BookDB extends DB{
 		System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
 		System.out.print("분야 :");
 		subject = scan.nextInt();
+		scan.nextLine();
 		System.out.println();
 		System.out.print("출판사 :");
 		publisher = scan.nextLine();
@@ -106,6 +107,7 @@ public class BookDB extends DB{
 		b.isbn = Book.isbn_count;//일련번호 인덱스 대입
 		b.setIndex(b.change_subject(subject)+b.isbn);//분야 + isbn -> 인덱스
 		bookList.add(b);
+		System.out.println("도서등록이 완료되었습니다.");
 	}
 
 	//삭제
@@ -296,14 +298,13 @@ public class BookDB extends DB{
 			// 대출확인끝---------------------------------------------------
 	}
 	
-	void returnBooks(Member loginMem){//책반납 메서드
+	void returnBooks(List<Book> rentList){//책반납 메서드
+		if(rentList==null || rentList.size()==0) {	//대출한 책이 없을 경우(대출리스트가 null이거나 길이가 0)
+			System.out.println("대출하신 책이 없습니다.");
+			return;	//메서드 종료
+		}
+		
 		while(true) {
-			ArrayList<Book> rentList = loginMem.getRentList();	//로그인 회원이 대출한 책 리스트를 받음
-			if(rentList==null || rentList.size()==0) {	//대출한 책이 없을 경우(대출리스트가 null이거나 길이가 0)
-				System.out.println("대출하신 책이 없습니다.");
-				return;	//메서드 종료
-			}
-			
 			Scanner scan = new Scanner(System.in);
 			System.out.println("반납하실 책의 인덱스를 입력해주세요.(0은 이전 화면)");
 			System.out.print("인덱스: ");
