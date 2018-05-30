@@ -296,10 +296,36 @@ public class BookDB extends DB{
 			// 대출확인끝---------------------------------------------------
 	}
 	
-	boolean returnBooks(String index){//책반납
-		boolean result=false;
+	void returnBooks(Member loginMem){//책반납 메서드
+		while(true) {
+			ArrayList<Book> rentList = loginMem.getRentList();	//로그인 회원이 대출한 책 리스트를 받음
+			if(rentList==null || rentList.size()==0) {	//대출한 책이 없을 경우(대출리스트가 null이거나 길이가 0)
+				System.out.println("대출하신 책이 없습니다.");
+				return;	//메서드 종료
+			}
+			
+			Scanner scan = new Scanner(System.in);
+			System.out.println("반납하실 책의 인덱스를 입력해주세요.(0은 이전 화면)");
+			System.out.print("인덱스: ");
+			String returnI = scan.nextLine();	//인덱스 입력을 받음
+			
+			if(returnI.equals("0")) break;	//0은 메서드 종료
+			
+			for(Book b:rentList) {	//입력 인덱스와 일치하는 대출 도서 검색
+				if(b.getIndex().equals(returnI)) {	//입력 인덱스와 일치하는 도서를 찾았을 경우
+					if(rentList.remove(b)) {	//대출 리스트에서 해당 책 제거
+						b.setStatus(true);		//제거 성공시 해당 도서의 상태를 "대출가능"으로 바꾸고
+						System.out.println(b.getTitle()+"(을)를 반납했습니다.");	//성공 메시지 띄움
+						continue;	//다시 인덱스 입력 창으로 돌아감
+					} else {	//대출 리스트에서 책이 제거되지 않을 때 명령어
+						System.out.println("반납오류! 이전 화면으로 돌아갑니다.");
+						continue;
+					}
+				}
+			}
+			System.out.println("대출 도서 중 해당 인덱스의 도서가 존재하지 않습니다.");	//if문에 걸리지 않을 경우, 해당도서가 없음.
+		}
 		//인덱스를 받아서 책 반납
 		//있으면 true, 없으면 false.
-		return result;
 	}
 }
