@@ -164,15 +164,18 @@ public class Osystem {
 	}
 	
 	void showBookList(List<Book> list) {	//검색한 책 리스트를 출력하는 메서드
-		System.out.println("┌───────────────────────────────────────────────────────────┐");
-		System.out.printf("│ %-7s | %-38s | %-8s | %-8s | %-5s | %-5s │%n", "인덱스","제목","저자","출판사","ISBN","주제");
-		System.out.println("└───────────────────────────────────────────────────────────┘");
-		for(Book b:list) {//인덱스(7), 제목(20), 저자(8), 출판사(8), ISBN(5), 주제(5)
-			System.out.println(b);
+		if(list == null || list.size()==0) System.out.println("조회할 도서가 없습니다.");	//매개변수인 리스트가 null이거나 길이가 0일 때
+		else {
+			System.out.println("┌───────────────────────────────────────────────────────────┐");
+			System.out.printf("│ %-7s | %-38s | %-8s | %-8s | %-5s | %-5s │%n", "인덱스","제목","저자","출판사","ISBN","주제");
+			System.out.println("└───────────────────────────────────────────────────────────┘");
+			for(Book b:list) {//인덱스(7), 제목(20), 저자(8), 출판사(8), ISBN(5), 주제(5)
+				System.out.println(b);
+			}
+			System.out.println("┌──────────────────────────────────┐");
+			System.out.printf("│총 %2d개의 검색결과가 있습니다.              │%n",list.size());
+			System.out.println("└──────────────────────────────────┘");
 		}
-		System.out.println("┌──────────────────────────────────┐");
-		System.out.printf("│총 %2d개의 검색결과가 있습니다.              │%n",list.size());
-		System.out.println("└──────────────────────────────────┘");
 	}
 	
 	//리스트 추가 

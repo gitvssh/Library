@@ -298,14 +298,13 @@ public class BookDB extends DB{
 			// 대출확인끝---------------------------------------------------
 	}
 	
-	void returnBooks(Member loginMem){//책반납 메서드
+	void returnBooks(List<Book> rentList){//책반납 메서드
+		if(rentList==null || rentList.size()==0) {	//대출한 책이 없을 경우(대출리스트가 null이거나 길이가 0)
+			System.out.println("대출하신 책이 없습니다.");
+			return;	//메서드 종료
+		}
+		
 		while(true) {
-			ArrayList<Book> rentList = loginMem.getRentList();	//로그인 회원이 대출한 책 리스트를 받음
-			if(rentList==null || rentList.size()==0) {	//대출한 책이 없을 경우(대출리스트가 null이거나 길이가 0)
-				System.out.println("대출하신 책이 없습니다.");
-				return;	//메서드 종료
-			}
-			
 			Scanner scan = new Scanner(System.in);
 			System.out.println("반납하실 책의 인덱스를 입력해주세요.(0은 이전 화면)");
 			System.out.print("인덱스: ");

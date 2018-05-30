@@ -202,12 +202,16 @@ public class Controller {
 						break;
 					case 2:// 빌린도서
 						osys.history(loginMem.getId(),"빌린 도서");
-							// 빌린도서 출력 메서드
-						break;
+						osys.showBookList(loginMem.getRentList());	// 빌린도서 출력 메서드
+						while(true) {
+							System.out.println("0.이전 화면");
+							if (scan.nextInt()==0) continue member;
+							else continue;	//빌린 도서 조회 끝나면 회원 메뉴로.
+						}
 					case 3:// 도서반납
 						osys.history(loginMem.getId(),"도서 반납");
-						bookDB.returnBooks(loginMem);	// 도서반납 메서드
-						continue member;
+						bookDB.returnBooks(loginMem.getRentList());	// 도서반납 메서드
+						continue member;	//반납 끝나면 회원 메뉴로.
 					case 4:// 회원정보
 						osys.history(loginMem.getId(),"회원정보");
 						osys.member_inform();
@@ -316,7 +320,7 @@ public class Controller {
 									osys.history(loginAdm.getId(),"도서관리","도서검색","전체 도서목록");
 									System.out.println("전체 도서 목록입니다.");
 									bookDB.searchAll();
-									continue admin;
+									continue bookmng;
 								case 0:// 이전화면으로
 									System.out.println("이전화면으로 돌아갑니다.");
 									continue admin;
