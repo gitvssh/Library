@@ -14,15 +14,15 @@ public class MemberDB extends DB {
 	String name = "";
 	String ssn = "";
 	String tel = "";
-
+	boolean status;
 	// ....
-	public MemberDB() {
-		memberList = new ArrayList<>();
-		this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814"));
-		this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891"));
-		this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214"));
-		this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819"));
-	}
+public MemberDB() {
+	memberList = new ArrayList<>();
+	this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814", false));
+	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
+	this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214", true));
+	this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819", false));
+}
 
 	@Override
 	List search(String str) {
@@ -67,7 +67,7 @@ public class MemberDB extends DB {
 		System.out.println("전화번호를 입력해주세요.");
 		tel = scanner.nextLine();
 
-		Member m = new Member(id, password, name, ssn, tel);
+		Member m = new Member(id, password, name, ssn, tel, status);
 		memberList.add(m);
 		System.out.println("회원가입이 성공했습니다.");
 	}

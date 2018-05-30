@@ -387,20 +387,20 @@ public class Controller {
 							case 1:// 회원검색
 								osys.history(loginAdm.getId(),"회원관리","회원검색");
 								osys.admin_findmem();
+								String id=scan.nextLine();
+								memberDB.search(id);
 								break;
 							case 2:// 전체회원목록
 								osys.history(loginAdm.getId(),"회원관리","전체 회원목록");
-									// 전체회원 출력 메서드
+									memberDB.searchAll();// 전체회원 출력 메서드
 								break;
 							case 3:// 블랙리스트
-<<<<<<< HEAD
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
-								System.out.println("");
-								// 블랙리스트 출력 메서드
-=======
+								System.out.println("블랙리스트 회원목록입니다.");
+								memberDB.blackMem();// 블랙리스트 출력 메서드
+								memberDB.blackList();
 								osys.history(loginAdm.getId(),"회원관리","블랙리스트");
 									// 블랙리스트 출력 메서드
->>>>>>> branch 'master' of https://github.com/gitvssh/Library
 								break;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
@@ -494,8 +494,23 @@ public class Controller {
 							}// end switch
 						} // end while_request
 					case 5:// 로그아웃
-						osys.history(loginAdm.getId(),"로그아웃");
-							// 로그아웃 메서드
+						while(true) {// 로그아웃 메서드
+							osys.history(loginMem.getId(),"로그아웃");
+							System.out.println("로그아웃을 하시겠습니까? y/n");
+							String out = scan.nextLine();
+							if(out.equals("y")) {
+								System.out.println("로그아웃 되었습니다.");
+								login = 0;
+								break;
+							}else if(out.equals("n")) {
+								System.out.println("로그아웃이 취소되었습니다.");
+								login = 2;
+								break;
+								}else {
+								System.out.println("잘못입력하셨습니다.");
+								continue;
+							}
+						}
 						continue main;// 메인으로 보내서 판별
 					case 0:// 종료
 						System.out.println("프로그램을 종료합니다...");
