@@ -110,14 +110,13 @@ public class CommentDB {	//건의사항 DB클래스
 		}
 	}
 	
-	public void showPages(int page) {//전체 관리자 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
+	public int showPages(int page) {//전체 관리자 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
 		int totalPages = (int)Math.ceil(commentList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
 			System.out.println("페이지 없음!");
-			if(page<1) page=1;
-			else page = totalPages;
-			return;
+			if(page<1) return 1;
+			else return totalPages;
 		}
 		
 		int limit = (page != totalPages) ? page*10:commentList.size();
@@ -125,16 +124,16 @@ public class CommentDB {	//건의사항 DB클래스
 			System.out.println(commentList.get(i));
 		}
 		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
+		return page;
 	}
 	
-	public void showPages(int page, List<Comment> searchList) {//검색한 관리자 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
+	public int showPages(int page, List<Comment> searchList) {//검색한 관리자 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
 		int totalPages = (int)Math.ceil(searchList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
 			System.out.println("페이지 없음!");
-			if(page<1) page=1;
-			else page = totalPages;
-			return;
+			if(page<1) return 0;
+			else return totalPages+1;
 		}
 		
 		int limit = (page != totalPages) ? page*10:commentList.size();
@@ -142,10 +141,7 @@ public class CommentDB {	//건의사항 DB클래스
 			System.out.println(searchList.get(i));
 		}
 		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
-	}
-	
-	public void showAllCommentList() {	//건의사항을 전부 보여주는 리스트
-		for(Comment c:commentList) System.out.println(c);
+		return page;
 	}
 	
 	public void showCommentList(ArrayList<Comment> searchList) {	//특정 건의사항 리스트만을 보여주는 리스트
