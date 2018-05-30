@@ -69,7 +69,7 @@ public class BookDB extends DB{
 				return searchList;
 			case 6://ISBN
 				for(Book b:bookList) {
-					if(b.isbn==Integer.parseInt(string)) searchList.add(b);
+					if(b.isbn.contains(string)) searchList.add(b);
 				}
 				return searchList;
 			}//end switch_std
@@ -104,7 +104,6 @@ public class BookDB extends DB{
 		System.out.println();
 		Book b = new Book(title,author,subject,publisher); 
 		Book.isbn_count++;//책 일련번호(카운트)+1
-		b.isbn = Book.isbn_count;//일련번호 인덱스 대입
 		b.setIndex(b.change_subject(subject)+b.isbn);//분야 + isbn -> 인덱스
 		bookList.add(b);
 		System.out.println("도서등록이 완료되었습니다.");
@@ -113,8 +112,10 @@ public class BookDB extends DB{
 	//삭제
 	@Override
 	void delete(Data data) {
-		Book b = (Book)data;//get,set이용을 위한 형변환		
+		Book b = (Book)data;//get,set이용을 위한 형변환
+		System.out.println(b.getTitle()+"이/가 삭제됩니다.");
 		bookList.remove(b);
+		
 	}
 
 	@Override
@@ -135,7 +136,7 @@ public class BookDB extends DB{
 		System.out.println("분야 리스트");
 		System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
 		System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
-		System.out.printf("현재 입력된 분야 : %s%n",b.change_subject(b.getSubject()));
+		System.out.printf("현재 입력된 분야 : %s%n",b.change_subject2(b.getSubject()));
 		System.out.print("수정하실 분야 :");
 		b.setSubject(scan.nextInt());
 		System.out.println();
@@ -227,12 +228,13 @@ public class BookDB extends DB{
 				break check;
 			}
 			else {//정상입력일경우
-				int index = Integer.parseInt(rent.substring(2, 6));//인덱스 추출
+				String index = rent.substring(2, 7);//인덱스 추출
+				System.out.println(index);
 				for(Book b:bookDB.bookList) {
-					if(b.isbn==index&&b.status==true) {//검색결과 확인,재고확인
+					if(b.isbn.equals(index)&&b.status==true) {//검색결과 확인,재고확인
 						System.out.println("선택하신 도서는 "+b.title+"입니다.");
 						selected = b;//선택한 도서 샘플에 등록
-						break;
+						return selected;
 					}
 					else {//재고가 없거나, 잘못된 입력일 경우
 						System.out.println("선택가능한 도서가 없습니다.");
@@ -260,16 +262,16 @@ public class BookDB extends DB{
 				break rentcheck;
 			}
 			else {//정상입력일경우
-				int index = Integer.parseInt(rent.substring(2, 6));//인덱스 추출
+				String index = rent.substring(2, 7);//인덱스 추출
 				for(Book b:bookDB.bookList) {
-					if(b.isbn==index&&b.status==true) {//검색결과 확인,재고확인
+					if(b.isbn.equals(index)&&b.status==true) {//검색결과 확인,재고확인
 						System.out.println("선택하신 도서는 "+b.title+"입니다.");
 						rentcart = b;//선택한 도서 대출카트에 등록
 						break;
 					}
 					else {//재고가 없거나, 잘못된 입력일 경우
 						System.out.println("대출가능 도서가 없습니다.");
-						break;
+						return;
 					}
 				}
 				

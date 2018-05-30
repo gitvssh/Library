@@ -29,9 +29,9 @@ public class CommentDB {	//건의사항 DB클래스
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	//현재 날짜를 해당 형식으로 포매팅.
 		
 		System.out.printf("아이디: %s (%s)\n", id, sdf.format(date));
-		System.out.println("제목: ");
+		System.out.print("제목: ");
 		String title = scan.nextLine();
-		System.out.println("내용: ");
+		System.out.println("[내용]");
 		String content = scan.nextLine();
 		
 		while(true) {	//내용확인

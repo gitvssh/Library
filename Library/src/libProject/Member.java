@@ -10,6 +10,7 @@ public class Member implements Data{
 	String tel;
 	boolean status;
 	String idstatus;
+	String blackstatus;
 	ArrayList<Book> rentList;	//빌린 책 리스트
 	
 	public Member(String id, String password, String name, String ssn, String tel) {
@@ -22,8 +23,10 @@ public class Member implements Data{
 			idstatus = "정상";
 		}else {
 			idstatus = "연체중";
+//			if(this.status)
 		}
 		
+		rentList = new ArrayList<>();
 	}
 public String getIdstatus() {
 		return idstatus;

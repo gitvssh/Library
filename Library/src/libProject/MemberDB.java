@@ -33,7 +33,7 @@ public class MemberDB extends DB {
 				break;
 			}
 		}
-		System.out.println("0.관리자메뉴로 이동");
+		System.out.println("0.이전메뉴로 이동");
 		System.out.print(">>");
 		int menu= scanner.nextInt();
 		scanner.nextLine();
@@ -157,7 +157,7 @@ public class MemberDB extends DB {
 		System.out.println("생년월일 : "+m.getSsn());
 		System.out.println("전화번호 : "+m.getTel());
 		System.out.println("계정상태 : "+m.getIdstatus());
-		System.out.println("0.회원메뉴로 이동");
+		System.out.println("0.이전메뉴로 이동");
 		System.out.print(">>");
 		int menu= scanner.nextInt();
 		scanner.nextLine();
@@ -214,6 +214,13 @@ public class MemberDB extends DB {
 		for (int i = 0; i < memberList.size(); i++) {
 			System.out.println(memberList.get(i).id+"/"+memberList.get(i).name+"/"
 					+memberList.get(i).ssn+"/"+memberList.get(i).tel+"/"+memberList.get(i).idstatus);
+		}
+		System.out.println("0.이전메뉴로 이동");
+		System.out.print(">>");
+		int menu= scanner.nextInt();
+		scanner.nextLine();
+		if(menu == 0) {
+			System.out.println("이전메뉴로 이동합니다");
 		}
 		return null;
 	}
