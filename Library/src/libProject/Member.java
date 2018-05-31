@@ -13,9 +13,9 @@ public class Member implements Data {
 	boolean blackstatus;
 
 
-	ArrayList<Book> rentList; // ºô¸° Ã¥ ¸®½ºÆ®
+	ArrayList<Book> rentList; // ë¹Œë¦° ì±… ë¦¬ìŠ¤íŠ¸
 
-	public Member(String id, String password, String name, String ssn, String tel, boolean status) {
+public Member(String id, String password, String name, String ssn, String tel, boolean status) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -109,5 +109,5 @@ public class Member implements Data {
 	public String toString() {
 		return "Member [id=" + id + ", password=" + password + ", name=" + name + ", ssn=" + ssn + ", tel=" + tel
 				+ ", status=" + status + "]";
-	} // È¸¿ø Á¤º¸¸¦ ¹®ÀÚ¿­·Î ¸®ÅÏÇÏ°Ô toString ¸Ş¼­µå ¿À¹ö¶óÀÌµù.
+	} // íšŒì› ì •ë³´ë¥¼ ë¬¸ìì—´ë¡œ ë¦¬í„´í•˜ê²Œ toString ë©”ì„œë“œ ì˜¤ë²„ë¼ì´ë”©.
 }

@@ -11,7 +11,7 @@ import Comparators.*;
 
 public class BookDB extends DB{
 	List<Book> bookList;
-	
+	Scanner scan = new Scanner(System.in);
 	//검색, 전체검색, 정렬 미완성, toString 규격에 맞게 수정
 	
 	public BookDB() {
@@ -80,7 +80,6 @@ public class BookDB extends DB{
 	//도서 자료 입력받고 가공, 데이터반환
 	void input() {
 		//변수 선언
-		Scanner scan = new Scanner(System.in);
 		String title="";
 		String author="";
 		int subject=0;
@@ -122,7 +121,6 @@ public class BookDB extends DB{
 	@Override
 	void update(Data data) {
 		Book b = (Book)data;//get,set이용을 위한 형변환
-		Scanner scan = new Scanner(System.in);
 		//수정시작
 		System.out.printf("현재 입력된 제목 : %s%n",b.getTitle());
 		System.out.print("수정하실 제목 :");
@@ -163,7 +161,6 @@ public class BookDB extends DB{
 		
 		while(true) {	//반복문 while - 잘못된 입력발생시 다시 입력가능하게 루프함.
 			osys.observer_align();	//정렬메뉴 콘솔 출력(0은 이전화면)
-			Scanner scan = new Scanner(System.in);
 			int std = scan.nextInt();	//정렬기준(std) 입력 받기.
 			scan.nextLine();
 			
@@ -216,7 +213,6 @@ public class BookDB extends DB{
 	}
 	
 	Book adminsearch(BookDB bookDB) {
-		Scanner scan = new Scanner(System.in);
 		Book selected = null;//도서대출에 필요한 대출카트 참조변수
 		check: while (true) {
 			String rent = scan.nextLine();
@@ -249,7 +245,6 @@ public class BookDB extends DB{
 	}
 	
 	void rentBooks(BookDB bookDB,Member loginMem){//책대출
-		Scanner scan = new Scanner(System.in);
 		Book rentcart = null;//도서대출에 필요한 대출카트 참조변수
 		rentcheck: while (true) {
 			System.out.println("대출을 원하는 도서의 인덱스를 입력해주세요.(7자리)(0.이전화면)");
@@ -308,6 +303,11 @@ public class BookDB extends DB{
 		}
 		
 		while(true) {
+			if(rentList==null || rentList.size()==0) {
+				System.out.println("책을 모두 반납하셨습니다!");
+				break;
+			}
+			
 			Scanner scan = new Scanner(System.in);
 			System.out.println("반납하실 책의 인덱스를 입력해주세요.(0은 이전 화면)");
 			System.out.print("인덱스: ");
