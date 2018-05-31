@@ -90,7 +90,7 @@ public class Osystem {
 		System.out.println("수정을 원하시는 항목을 선택해주세요.");
 	}
 	
-
+/..
 	void member_request() {
 		System.out.println("┌───────────────────────────────────────────┐");
 		System.out.println(" 1.새 건의사항 입력 2.이전 건의사항 보기 0.회원메뉴로 이동 ");
