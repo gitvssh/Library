@@ -1,6 +1,8 @@
 package libProject;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -268,7 +270,7 @@ public class BookDB extends DB{
 					if(b.isbn.equals(index)&&b.status==true) {//검색결과 확인,재고확인
 						System.out.println("선택하신 도서는 "+b.title+"입니다.");
 						LocalDate date = LocalDate.now();	//현재 날짜 정보를 LocalDate 객체로 생성
-						LocalDate returnDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()+7);	//반납 날짜를 생성
+						LocalDate returnDate = date.with(TemporalAdjusters.next(date.getDayOfWeek()));	//반납 날짜를 생성
 						b.setReturnDate(returnDate); //반납 일자를 빌리는 책 객체에 전달
 						rentcart = b;//선택한 도서 대출카트에 등록
 						break;
@@ -279,6 +281,7 @@ public class BookDB extends DB{
 				return;
 				}
 			}//인덱스 검색 끝
+			break;
 		} // end while_rentcheck
 			// 대출확인----------------------------------------------------
 		System.out.println("책을 대출하시겠습니까? Y/N");
