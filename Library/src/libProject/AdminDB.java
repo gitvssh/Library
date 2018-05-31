@@ -74,8 +74,8 @@ public class AdminDB extends DB {
 				System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 				Scanner sc= new Scanner(System.in);
 				System.out.println("비밀번호를 새로 설정하시겠습니까?(Y/N)");
-				String yes = sc.nextLine();
-				if(yes.equals("y")) {
+				String yes = sc.nextLine().toUpperCase().trim();
+				if(yes.equals("Y")) {
 					System.out.println("생년월일을 입력해주세요.");
 					String birth = sc.nextLine();
 					if(birth.equals(adminList.get(i).getSsn())){

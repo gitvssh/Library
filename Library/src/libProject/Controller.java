@@ -413,12 +413,14 @@ public class Controller {
 								osys.history(loginAdm.getId(),"회원관리","회원검색");
 								osys.admin_findmem();
 								String id=scan.nextLine();
+								if(id.equals("0")) continue admin;
 								memberDB.search(id);
-								continue admin;
+								continue membermng;
 							case 2:// 전체회원목록
 								osys.history(loginAdm.getId(),"회원관리","전체 회원목록");
-									memberDB.searchAll();// 전체회원 출력 메서드
-								continue admin;
+								memberDB.searchAll();// 전체회원 출력 메서드
+								if(scan.nextLine().equals("0")) continue admin;
+								continue membermng;
 							case 3:// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
 								System.out.println("블랙리스트 회원목록입니다.");
@@ -502,11 +504,11 @@ public class Controller {
 								System.out.println("검색할 관리자 아이디 혹은 이름을 입력해주세요.");
 								String searchAdminId = scan.nextLine();
 								adminDB.search(searchAdminId);// 관리자 검색 메서드
-								break admng;
+								continue admin;
 							case 2:// 전체 관리자 목록
 								osys.history(loginAdm.getId(),"관리자 관리","전체 관리자 목록");
 								adminDB.searchAll();// 전체 관리자 목록 출력 메서드
-								break admng;
+								continue admin;
 							case 3:// 새 관리자 등록
 								osys.history(loginAdm.getId(),"관리자 관리","새 관리자 등록");
 								osys.admin_newad();// y or n
@@ -517,12 +519,12 @@ public class Controller {
 										break newadm;
 									} else  {
 										System.out.println("관리자 관리화면으로 돌아갑니다.");
-										break admng;
+										continue admin;
 									} 
 								} // end while_newadm
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
-								break admng;
+								continue admin;
 							}// end switch
 						} // end while_request
 					case 5:// 로그아웃

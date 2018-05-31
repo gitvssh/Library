@@ -109,7 +109,7 @@ public MemberDB() {
 					memberList.get(i).ssn, memberList.get(i).tel, memberList.get(i).idstatus);
 			System.out.println("└────────────────────────────────────────────────────────────┘");
 		}
-		System.out.printf("  회원은 총 %s 명 입니다.%n", memberList.size());
+		System.out.printf("  회원은 총 %s 명 입니다. (0은 이전 화면)%n", memberList.size());
 		return null;
 	}
 

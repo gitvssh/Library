@@ -138,7 +138,7 @@ public class Osystem {
 	void admin_membermng() {
 		System.out.println("회원관리 메뉴입니다. 원하시는 기능의 번호를 입력해주세요.");
 		System.out.println("┌──────────────────────────────────────────────────┐");
-		System.out.println(" 1.회원검색 2.회원정보수정 3.전체회원목록 4.블랙리스트 0.이전화면");
+		System.out.println(" 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면");
 		System.out.println("└──────────────────────────────────────────────────┘");
 
 	}
