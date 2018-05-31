@@ -16,7 +16,7 @@ public class Member implements Data {
 
 	ArrayList<Book> rentList; // 빌린 책 리스트
 
-	public Member(String id, String password, String name, String ssn, String tel, boolean status) {
+	public Member(String id, String password, String name, String ssn, String tel) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
