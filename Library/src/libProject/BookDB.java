@@ -26,8 +26,6 @@ public class BookDB extends DB{
 		this.bookList.add(new Book("전쟁과 평화","레프 톨스토이",8,"홍진미디어"));
 		this.bookList.add(new Book("블랙어스","티머시 스나이더",9,"열린책들"));
 		this.bookList.add(new Book("온돌, 기원과 역사","손진태",9,"온이퍼브"));
-//		System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
-//		System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
 	}
 
 	//검색
