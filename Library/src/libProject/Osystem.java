@@ -102,7 +102,7 @@ public class Osystem {
 	void admin_main() {
 	    System.out.println("원하시는 기능의 번호를 입력해주세요.");
 		System.out.println("┌────────────────────────────────────────────────────────┐");
-	    System.out.println(" 1.도서관리 2. 회원관리 3.건의사항 4.관리자 관리 5.로그아웃 0.시스템 종료 ");
+	    System.out.println(" 1.도서관리 2.회원관리 3.건의사항 4.관리자 관리 5.로그아웃 0.시스템 종료 ");
 		System.out.println("└────────────────────────────────────────────────────────┘");
 	    System.out.println("메뉴를 선택하세요>");
 	}

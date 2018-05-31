@@ -116,6 +116,7 @@ public MemberDB() {
 	void input() { // 회원가입 메서드
 		System.out.println("아이디를 입력해주세요. 0:이전메뉴로 이동");
 		String id = scanner.nextLine();
+		if(id.equals("0")) return;
 		while (true) {
 			System.out.println("비밀번호를 입력해주세요.");
 			password = scanner.nextLine();
@@ -161,11 +162,12 @@ public MemberDB() {
 		case 2:
 			while (true) {
 				System.out.println("수정하실 비밀번호를 입력해주세요.");
-				m.setPassword(m.getPassword());
+				String passright1 = scanner.nextLine();
 				System.out.println("비밀번호를 한번 더 입력해주세요");
-				String passright = scanner.nextLine();
-				if (passright.equals(m.getPassword())) {
-					System.out.println("비밀번호를 확인하였습니다.");
+				String passright2 = scanner.nextLine();
+				if (passright1.equals(passright2)) {
+					m.setPassword(passright2);
+					System.out.println("비밀번호를 수정하였습니다.");
 					break;
 				} else {
 					System.out.println("비밀번호가 틀렸습니다. 다시 입력해주세요.");

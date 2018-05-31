@@ -88,10 +88,10 @@ public class Controller {
 						osys.history("비회원","회원가입");
 						osys.observer_signin();// 회원가입 화면
 						memberDB.input();// 회원가입 메서드
-						break;
+						continue observer;
 					case 3:// 로그인
 						osys.history("비회원","로그인");
-						System.out.println("아이디를 입력하세요.");
+						System.out.println("아이디를 입력하세요. (0은 이전 화면)");
 						String id = scan.nextLine();
 						if(id.equals("0")) {
 							System.out.println("이전화면으로 이동합니다.");
@@ -229,15 +229,13 @@ public class Controller {
 						case 1:// 회원정보 조회
 							osys.history(loginMem.getId(),"회원정보","회원정보조회");
 							osys.member_myinform();// 회원정보 조회 화면
-              memberDB.MemInform(loginMem);
-							break;
-							case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
+							memberDB.MemInform(loginMem);
+							continue member;
+						case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.history(loginMem.getId(),"회원정보","회원정보 수정");
 							osys.member_modify();// 회원정보 수정 화면
-							modify: while (true) {
-								memberDB.update(loginMem);
-								break;
-								}// end switch_modify
+							memberDB.update(loginMem);
+							continue member;
 							 // end while modify;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
@@ -407,20 +405,20 @@ public class Controller {
 								osys.admin_findmem();
 								String id=scan.nextLine();
 								memberDB.search(id);
-								break;
+								continue admin;
 							case 2:// 전체회원목록
 								osys.history(loginAdm.getId(),"회원관리","전체 회원목록");
 									memberDB.searchAll();// 전체회원 출력 메서드
-								break;
+								continue admin;
 							case 3:// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
 								System.out.println("블랙리스트 회원목록입니다.");
 								memberDB.blackMem();// 블랙리스트 출력 메서드
 								memberDB.blackList();
-								break;
+								continue admin;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
-								break membermng;
+								continue admin;
 							}// end switch_membermng
 						}
 					case 3:// 건의사항

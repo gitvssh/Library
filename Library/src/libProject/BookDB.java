@@ -16,6 +16,7 @@ public class BookDB extends DB{
 	//검색, 전체검색, 정렬 미완성, toString 규격에 맞게 수정
 	
 	public BookDB() {
+		//더미 데이터로 대출 횟수 임의로 입력해둘 것.
 		this.bookList = new ArrayList();
 		this.bookList.add(new Book("소피의 세계","요슈타인가아더 ",1,"현암사"));
 		this.bookList.add(new Book("간다, 봐라","법정",2,"김영사"));
@@ -137,6 +138,7 @@ public class BookDB extends DB{
 		System.out.printf("현재 입력된 분야 : %s%n",b.change_subject2(b.getSubject()));
 		System.out.print("수정하실 분야 :");
 		b.setSubject(scan.nextInt());
+		scan.nextLine();
 		System.out.println();
 		System.out.printf("현재 입력된 출판사 : %s%n",b.getPublisher());
 		System.out.print("수정하실 출판사 :");
