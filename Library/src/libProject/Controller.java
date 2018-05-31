@@ -9,18 +9,20 @@ import Comments.*;
 public class Controller {
 
 	public static void main(String[] args) {
-		Osystem osys = new Osystem(); // 화면출력 객채생성
-		int menu;// 화면 메뉴선택에 활용할 메뉴
-		int login = 0;// 로그인 검사
+		//Db 객체 선언절
+		BookDB bookDB = new BookDB(); //Book Db object definition
+		MemberDB memberDB = new MemberDB(); //Membeb Db object definition
+		AdminDB adminDB = new AdminDB(); // Admin Db object definition
+		CommentDB commentDB = new CommentDB();	//Comment Db object definition
+		//기타 객체 선언절
+		Osystem osys = new Osystem(); //Outprint object definition
 		Scanner scan = new Scanner(System.in);// 메뉴 입력시 사용할 스캐너
-
+		//클래스변수 선언절
 		Member loginMem = null; // 로그인한 회원의 정보가 저장되는 변수
 		Admin loginAdm = null; // 로그인한 관리자의 정보가 저장되는 변수
-
-		BookDB bookDB = new BookDB(); // 책 DB 객체생성
-		MemberDB memberDB = new MemberDB(); // 회원 DB 객체생성
-		AdminDB adminDB = new AdminDB(); // 관리자 DB 객체생성
-		CommentDB commentDB = new CommentDB();	//건의사항 DB 객체생성
+		//멤버변수 선언절
+		int menu;// 화면 메뉴선택에 활용할 메뉴
+		int login = 0;// 로그인 검사
 
 		// -----------------메인시작-----------------------
 		main: while (true) {
@@ -224,9 +226,9 @@ public class Controller {
 						case 1:// 회원정보 조회
 							osys.history(loginMem.getId(),"회원정보","회원정보조회");
 							osys.member_myinform();// 회원정보 조회 화면
+              memberDB.MemInform(loginMem);
 							break;
-							// 회원정보 조회 메서드
-						case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
+							case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.history(loginMem.getId(),"회원정보","회원정보 수정");
 							osys.member_modify();// 회원정보 수정 화면
 							modify: while (true) {
