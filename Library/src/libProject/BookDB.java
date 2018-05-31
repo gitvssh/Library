@@ -273,14 +273,12 @@ public class BookDB extends DB{
 						rentcart = b;//선택한 도서 대출카트에 등록
 						break;
 					}
-					else {//재고가 없거나, 잘못된 입력일 경우
-						System.out.println("대출가능 도서가 없습니다.");
-						return;
-					}
 				}
-				
+				if(rentcart == null) {
+				System.out.println("대출가능 도서가 없습니다.");
+				return;
+				}
 			}//인덱스 검색 끝
-			break;
 		} // end while_rentcheck
 			// 대출확인----------------------------------------------------
 		System.out.println("책을 대출하시겠습니까? Y/N");
