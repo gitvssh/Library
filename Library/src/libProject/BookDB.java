@@ -201,6 +201,12 @@ public class BookDB extends DB{
 				Collections.sort(bookList, cISBN);	//책 DB를 인덱스 순 정렬.
 				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
 				continue;
+			case 7:	//최다대출도서
+				//최다대출 순으로 오름차순 정렬시켜주는 Comparator객체.
+				BookRentCountComparator crentCount = new BookRentCountComparator();
+				Collections.sort(bookList, crentCount);	//책 DB를 인덱스 순 정렬.
+				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
+				continue;
 			case 0: //이전화면 - 뒤로 가기 전에 반드시 책 목록을 인덱스 순(디폴트!)으로 정렬
 				BookIndexComparator c = new BookIndexComparator();
 				Collections.sort(bookList, c);
