@@ -187,10 +187,15 @@ public MemberDB() {
 	}
 
 
+
+
+
+
+			
+
+
+
 	void blackList() {
-
-
-
 		int count = 0;
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).status == true) {
@@ -200,18 +205,7 @@ public MemberDB() {
 			}
 		}
 
-		System.out.println("�� "+count+"���� ȸ���� ������Ʈ�� �ֽ�ϴ�.");
-			
-			Osystem osys = new Osystem();
-		System.out.println("1.��� 2.������ 3.������� 0.����ȭ��");
-		System.out.println("�޴��� �������ּ���.");
-
 		System.out.println("총 " + count + "명의 회원이 블랙리스트에 있습니다.");
-
-	}
-
-	void blackList() {
-
 		Osystem osys = new Osystem();
 		System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
 		System.out.println("메뉴를 선택해주세요.");
@@ -257,46 +251,8 @@ public MemberDB() {
 				Collections.sort(memberList, c);
 				break;
 
-			while (true) {
-				System.out.println("1.아이디 2.이름 3.생년월일 4.전화번호 5.상태 0.이전화면");
-				System.out.println("정렬을 원하는 항목을 선택해주세요.");
-				int input = scanner.nextInt();
-				scanner.nextLine();
-				switch (input) {
-				case 1: // 아이디
-					MemberIdComparator cId = new MemberIdComparator();
-					Collections.sort(memberList, cId);
-					osys.showMemberList(memberList);
-					continue;
-				case 2: // 이름
-					MemberNameComparator cName = new MemberNameComparator();
-					Collections.sort(memberList, cName);
-					osys.showMemberList(memberList);
-					continue;
-				case 3: // 생년월일
-					MemberSsnComparator cSsn = new MemberSsnComparator();
-					Collections.sort(memberList, cSsn);
-					osys.showMemberList(memberList);
-					continue;
-				case 4: // 전화번호
-					MemberTelComparator cTel = new MemberTelComparator();
-					Collections.sort(memberList, cTel);
-					osys.showMemberList(memberList);
-					continue;
-				case 5: // 상태
-					MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
-					Collections.sort(memberList, cIdStatus);
-					osys.showMemberList(memberList);
-					continue;
-				case 0:
-					MemberIdComparator c = new MemberIdComparator();
-					Collections.sort(memberList, c);
-					return;
-
-				default:
-					System.out.println("잘못된 입력입니다.");
-					continue;
-				}
+			
+			}
 			}
 		case 2:
 			System.out.println("정지하려는 계정의 아이디를 입력해주세요. 0.이전화면");
@@ -342,7 +298,7 @@ public MemberDB() {
 			break;
 		}
 	}
-
+		
 	// ..
 	Member Login(String id, String password) { // 로그인 메서드
 		Member loginMem = null;
