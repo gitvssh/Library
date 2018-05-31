@@ -85,12 +85,13 @@ public class Book implements Data{
 	}
 
 	String printStatus(boolean status) {
-		if(status=true) {
+		if(status==true) {
 		return "대출 가능";
 		}
-		else {
+		else if(status==false){
 		return "대출 중";
 		}
+		return "";
 	}
 	//인덱스 생성시 활용될 ㄱ.ㄴ.ㄷ. 변환메서드
 	String change_subject(int subject) {
