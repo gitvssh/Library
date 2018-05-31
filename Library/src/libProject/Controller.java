@@ -61,6 +61,9 @@ public class Controller {
 						case 4:// 분야
 							osys.history("비회원","도서검색","분야");
 							System.out.println("검색하실 분야를 입력하세요");
+							System.out.println("분야 리스트");
+							System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
+							System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
 							osys.showBookList(bookDB.search(scan.nextLine(), 4));
 							break;
 						case 5:// 인덱스
@@ -183,6 +186,9 @@ public class Controller {
 						case 4:// 분야
 							osys.history(loginMem.getId(),"도서대출","분야");
 							System.out.println("검색하실 분야를 입력하세요");
+							System.out.println("분야 리스트");
+							System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
+							System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
 							osys.showBookList(bookDB.search(scan.nextLine(), 4));
 							bookDB.rentBooks(bookDB, loginMem);
 							break;
@@ -342,6 +348,9 @@ public class Controller {
 								case 4:// 분야
 									osys.history(loginAdm.getId(),"도서관리","도서검색","분야");
 									System.out.println("검색하실 분야를 입력하세요");
+									System.out.println("분야 리스트");
+									System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
+									System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
 									osys.showBookList(bookDB.search(scan.nextLine(), 4));
 									break;
 								case 5:// 인덱스
