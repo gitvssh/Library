@@ -2,8 +2,11 @@ package libProject;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import Comments.*;
 
@@ -435,6 +438,18 @@ public class Controller {
 					case 3:// 건의사항
 							// 건의사항 출력 메서드(db)
 						osys.history(loginAdm.getId(),"건의사항");
+						
+						ArrayList<Comment> cList = commentDB.getCommentList();
+						if(cList == null || cList.size()==0) {
+							System.out.println("새로 등록된 건의사항이 없습니다.");
+						} else {
+							HashSet<String> idSet = new HashSet<>();
+							for(Comment c:cList) {
+								if(c.getReply()==null) idSet.add(c.getId());
+							}
+							System.out.println("미답변 건의사항: " + idSet);
+						}
+						
 						System.out.println("1.검색	2.답변	0.이전화면");
 						menu = scan.nextInt();
 						scan.nextLine();
@@ -531,7 +546,7 @@ public class Controller {
 						while(true) {// 로그아웃 메서드
 							osys.history(loginMem.getId(),"로그아웃");
 							System.out.println("로그아웃을 하시겠습니까? y/n");
-							String out = scan.nextLine();
+							String out = scan.nextLine().toLowerCase();
 							if(out.equals("y")) {
 								System.out.println("로그아웃 되었습니다.");
 								login = 0;
