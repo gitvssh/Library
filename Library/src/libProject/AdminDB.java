@@ -136,8 +136,10 @@ public class AdminDB extends DB {
 		
 		if(page<1 || page>totalPages) {
 			System.out.println("페이지 없음!");
+
 			if(page<1) page=0;
 			else page = totalPages+1;
+
 			return;
 		}
 		
@@ -152,8 +154,10 @@ public class AdminDB extends DB {
 		
 		if(page<1 || page>totalPages) {
 			System.out.println("페이지 없음!");
+
 			if(page<1) page=0;
 			else page = totalPages+1;
+
 			return;
 		}
 		
