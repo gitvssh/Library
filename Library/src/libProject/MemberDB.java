@@ -186,7 +186,11 @@ public MemberDB() {
 		return;
 	}
 
-	void blackMem() {
+
+	void blackList() {
+
+
+
 		int count = 0;
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).status == true) {
@@ -195,6 +199,13 @@ public MemberDB() {
 						+ "/" + memberList.get(i).tel + "/" + memberList.get(i).idstatus);
 			}
 		}
+
+		System.out.println("ï¿½ï¿½ "+count+"ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö½ï¿½Ï´ï¿½.");
+			
+			Osystem osys = new Osystem();
+		System.out.println("1.ï¿½ï¿½ï¿½ 2.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½");
+		System.out.println("ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
+
 		System.out.println("ì´ " + count + "ëª…ì˜ íšŒì›ì´ ë¸”ëž™ë¦¬ìŠ¤íŠ¸ì— ìžˆìŠµë‹ˆë‹¤.");
 
 	}
@@ -204,10 +215,48 @@ public MemberDB() {
 		Osystem osys = new Osystem();
 		System.out.println("1.ì •ë ¬ 2.ê³„ì •ì •ì§€ 3.ê³„ì •ë³µêµ¬ 0.ì´ì „í™”ë©´");
 		System.out.println("ë©”ë‰´ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.");
+
 		int menu = scanner.nextInt();
 		scanner.nextLine();
 		switch (menu) {
 		case 1:
+
+			while(true) {
+			System.out.println("1.ï¿½ï¿½ï¿½Ìµï¿½ 2.ï¿½Ì¸ï¿½ 3.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4.ï¿½ï¿½È­ï¿½ï¿½È£ 5.ï¿½ï¿½ï¿½ï¿½ 0.ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½×¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
+			int input = scanner.nextInt();
+			scanner.nextLine();
+			switch(input) {
+			case 1:	// ï¿½ï¿½ï¿½Ìµï¿½
+				MemberIdComparator cId = new MemberIdComparator();
+				Collections.sort(memberList, cId);
+				osys.showBlackList(memberList);
+				continue;
+			case 2:	// ï¿½Ì¸ï¿½
+				MemberNameComparator cName = new MemberNameComparator();
+				Collections.sort(memberList, cName);
+				osys.showBlackList(memberList);
+				continue;
+			case 3:	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				MemberSsnComparator cSsn = new MemberSsnComparator();
+				Collections.sort(memberList, cSsn);
+				osys.showBlackList(memberList);
+				continue;
+			case 4:	// ï¿½ï¿½È­ï¿½ï¿½È£
+				MemberTelComparator cTel = new MemberTelComparator();
+				Collections.sort(memberList, cTel);
+				osys.showBlackList(memberList);
+				continue;
+			case 5:	// ï¿½ï¿½ï¿½ï¿½
+				MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
+				Collections.sort(memberList, cIdStatus);
+				osys.showBlackList(memberList);
+				continue;
+			case 0:
+				MemberIdComparator c = new MemberIdComparator();
+				Collections.sort(memberList, c);
+				break;
+
 			while (true) {
 				System.out.println("1.ì•„ì´ë”” 2.ì´ë¦„ 3.ìƒë…„ì›”ì¼ 4.ì „í™”ë²ˆí˜¸ 5.ìƒíƒœ 0.ì´ì „í™”ë©´");
 				System.out.println("ì •ë ¬ì„ ì›í•˜ëŠ” í•­ëª©ì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
@@ -243,6 +292,7 @@ public MemberDB() {
 					MemberIdComparator c = new MemberIdComparator();
 					Collections.sort(memberList, c);
 					return;
+
 				default:
 					System.out.println("ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤.");
 					continue;
@@ -379,11 +429,11 @@ public MemberDB() {
 		return;
 	}
 	
-	public int showPages(int page) {//ÀüÃ¼ °ü¸®ÀÚ ¸ñ·Ï ÆäÀÌÁöº°·Î º¸¿©ÁÖ±â(¸Å°³º¯¼ö´Â °Ë»öÇÏ°íÀÚ ÇÏ´Â ÆäÀÌÁö)
+	public int showPages(int page) {//ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½(ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 		int totalPages = (int)Math.ceil(memberList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
-			System.out.println("ÆäÀÌÁö ¾øÀ½!");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½!");
 			if(page<1) return 0;
 			else return totalPages+1;
 		}
@@ -392,15 +442,15 @@ public MemberDB() {
 		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(memberList.get(i));
 		}
-		System.out.println("ÇöÀç "+page+"ÆäÀÌÁö/"+totalPages+"ÆäÀÌÁö");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ "+page+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/"+totalPages+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		return page;
 	}
 	
-	public int showPages(int page, List<Member> searchList) {//°Ë»öÇÑ °ü¸®ÀÚ ¸ñ·Ï ÆäÀÌÁöº°·Î º¸¿©ÁÖ±â(¸Å°³ ¸®½ºÆ®´Â °Ë»ö ¸®½ºÆ®)
+	public int showPages(int page, List<Member> searchList) {//ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½(ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®)
 		int totalPages = (int)Math.ceil(searchList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
-			System.out.println("ÆäÀÌÁö ¾øÀ½!");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½!");
 			if(page<1) return 0;
 			else return totalPages+1;
 		}
@@ -409,7 +459,7 @@ public MemberDB() {
 		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(searchList.get(i));
 		}
-		System.out.println("ÇöÀç "+page+"ÆäÀÌÁö/"+totalPages+"ÆäÀÌÁö");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ "+page+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/"+totalPages+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		return page;
 	}
 }
