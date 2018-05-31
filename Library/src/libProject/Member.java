@@ -26,14 +26,10 @@ public Member(String id, String password, String name, String ssn, String tel, b
 //		rentList = new ArrayList<>();
 	}
 
-	// <<<<<<< HEAD
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
-	// =======
-
-	// >>>>>>> branch 'master' of https://github.com/gitvssh/Library
-
+	
 	public boolean isBlackstatus() {
 		return blackstatus;
 	}

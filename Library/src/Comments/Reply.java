@@ -4,10 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Reply {
-	private String id;		//ÀÛ¼ºÀÚ ¾ÆÀÌµğ
-	private Date date;		//ÀÛ¼º³¯Â¥
-	private String title;	//°ÇÀÇ»çÇ× Á¦¸ñ
-	private String content;	//°ÇÀÇ»çÇ× ³»¿ë
+	private String id;		//ì‘ì„±ì ì•„ì´ë””
+	private Date date;		//ì‘ì„±ë‚ ì§œ
+	private String title;	//ê±´ì˜ì‚¬í•­ ì œëª©
+	private String content;	//ê±´ì˜ì‚¬í•­ ë‚´ìš©
 	
 	public Reply(String id, Date date, String title, String content) {
 		super();
@@ -52,7 +52,7 @@ public class Reply {
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		return "<°ü¸®ÀÚ>\t" + id + " (" + sdf.format(date) + ")\n\t[Á¦¸ñ]:" + title + "\n"
-				+ "\t[³»¿ë]:" + content;
+		return "<ê´€ë¦¬ì>\t" + id + " (" + sdf.format(date) + ")\n\t[ì œëª©]:" + title + "\n"
+				+ "\t[ë‚´ìš©]:" + content;
 	}
 }
