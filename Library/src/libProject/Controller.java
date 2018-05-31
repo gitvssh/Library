@@ -394,6 +394,7 @@ public class Controller {
 						osys.admin_membermng();
 						menu = scan.nextInt();
 						scan.nextLine();
+
 						membermng: while (true) {// 회원관리메뉴 while
 							switch (menu) {// 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면
 							case 1:// 회원검색
