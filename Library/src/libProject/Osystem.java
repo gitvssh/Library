@@ -23,7 +23,7 @@ public class Osystem {
 	
 	void observer_align() {	//정렬 메뉴
 		System.out.println("┌─────────────────────────────────────────────────────────────┐");
-		System.out.println("        1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 0.이전화면으로 	   ");
+		System.out.println("        1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.최다대출도서 0.이전화면으로 	   ");
 		System.out.println("└─────────────────────────────────────────────────────────────┘");
 		System.out.println("정렬 기준을 선택하세요>");
 	}

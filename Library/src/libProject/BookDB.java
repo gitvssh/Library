@@ -1,5 +1,6 @@
 package libProject;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -199,6 +200,12 @@ public class BookDB extends DB{
 				Collections.sort(bookList, cISBN);	//책 DB를 인덱스 순 정렬.
 				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
 				continue;
+			case 7:	//최다대출도서
+				//최다대출 순으로 오름차순 정렬시켜주는 Comparator객체.
+				BookRentCountComparator crentCount = new BookRentCountComparator();
+				Collections.sort(bookList, crentCount);	//책 DB를 인덱스 순 정렬.
+				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
+				continue;
 			case 0: //이전화면 - 뒤로 가기 전에 반드시 책 목록을 인덱스 순(디폴트!)으로 정렬
 				BookIndexComparator c = new BookIndexComparator();
 				Collections.sort(bookList, c);
@@ -260,6 +267,9 @@ public class BookDB extends DB{
 				for(Book b:bookDB.bookList) {
 					if(b.isbn.equals(index)&&b.status==true) {//검색결과 확인,재고확인
 						System.out.println("선택하신 도서는 "+b.title+"입니다.");
+						LocalDate date = LocalDate.now();	//현재 날짜 정보를 LocalDate 객체로 생성
+						LocalDate returnDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()+7);	//반납 날짜를 생성
+						b.setReturnDate(returnDate); //반납 일자를 빌리는 책 객체에 전달
 						rentcart = b;//선택한 도서 대출카트에 등록
 						break;
 					}
@@ -332,7 +342,7 @@ public class BookDB extends DB{
 		//있으면 true, 없으면 false.
 	}
 	
-	public int showPages(int page) {//전체 관리자 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
+	public int showPages(int page) {//전체 책 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
 		int totalPages = (int)Math.ceil(bookList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
@@ -349,7 +359,7 @@ public class BookDB extends DB{
 		return page;
 	}
 	
-	public int showPages(int page, List<Comment> searchList) {//검색한 관리자 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
+	public int showPages(int page, List<Book> searchList) {//검색한 책 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
 		int totalPages = (int)Math.ceil(searchList.size()/10.);
 		
 		if(page<1 || page>totalPages) {

@@ -1,5 +1,6 @@
 package libProject;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,6 +24,8 @@ public class Controller {
 		//멤버변수 선언절
 		int menu;// 화면 메뉴선택에 활용할 메뉴
 		int login = 0;// 로그인 검사
+		
+		detectBlackList(memberDB.memberList); //부팅시 반납일자 연체 중인 회원 자동 탐지
 
 		// -----------------메인시작-----------------------
 		main: while (true) {
@@ -544,4 +547,19 @@ public class Controller {
 
 	}// end main
 
+	static void detectBlackList(List<Member> list) {	//전체 회원의 도서 연체 여부 검사
+		if(list == null || list.size()==0) return;	//가입된 회원이 없을 경우 메서드 종료.
+		for(Member m:list) {	//for문으로 회원정보 하나씩 검색
+			List<Book> rentList = m.getRentList();	//회원이 대출한 도서 목록을 받음
+			if(rentList == null || rentList.size()==0) continue;	//대출한 도서가 없을 경우 바로 다음 회원 검색
+			else {	//대출한 도서가 있을 경우
+				for(Book b:rentList) {	//대출 도서의 반납일을 하나씩 검색
+					if(LocalDate.now().isAfter(b.getReturnDate())) {	//도서반납일이 현재보다 이전인 책이 하나라도 있을 경우
+						m.setStatus(true);	//회원상태를 연체 중(블랙리스트에 표시)으로 바꿈.
+						break;	//회원 상태를 바꿨으면 바로 다음 회원으로 넘어감.
+					}
+				}
+			}
+		}
+	}
 }// end class

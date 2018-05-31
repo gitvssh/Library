@@ -3,13 +3,13 @@ package Comments;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Comment {	//°ÇÀÇ»çÇ× Å¬·¡½º
-	private int no;	//°ÇÀÇ»çÇ× ¹øÈ£
-	private String id;		//ÀÛ¼ºÀÚ ¾ÆÀÌµğ
-	private Date date;		//ÀÛ¼º³¯Â¥
-	private String title;	//°ÇÀÇ»çÇ× Á¦¸ñ
-	private String content;	//°ÇÀÇ»çÇ× ³»¿ë
-	private Reply reply;	//°ü¸®ÀÚ ´äº¯
+public class Comment {	//ê±´ì˜ì‚¬í•­ í´ë˜ìŠ¤
+	private int no;	//ê±´ì˜ì‚¬í•­ ë²ˆí˜¸
+	private String id;		//ì‘ì„±ì ì•„ì´ë””
+	private Date date;		//ì‘ì„±ë‚ ì§œ
+	private String title;	//ê±´ì˜ì‚¬í•­ ì œëª©
+	private String content;	//ê±´ì˜ì‚¬í•­ ë‚´ìš©
+	private Reply reply;	//ê´€ë¦¬ì ë‹µë³€
 	
 	public Comment(int no, String id, Date date, String title, String content) {
 		this.no = no;
@@ -71,8 +71,8 @@ public class Comment {	//°ÇÀÇ»çÇ× Å¬·¡½º
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		String print = no+".\t" + id + " (" + sdf.format(date) + ")\n\t[Á¦¸ñ]:" + title + "\n"
-				+ "\t[³»¿ë]:" + content+"\n";
+		String print = no+".\t" + id + " (" + sdf.format(date) + ")\n\t[ì œëª©]:" + title + "\n"
+				+ "\t[ë‚´ìš©]:" + content+"\n";
 		if(reply==null)
 			return print;
 		else

@@ -1,5 +1,8 @@
 package libProject;
 
+
+import java.time.LocalDate;
+
 //toString 규격에 맞게 수정
 public class Book implements Data{
 	
@@ -29,9 +32,20 @@ public class Book implements Data{
 	//static에서 인스턴트로 변경, static은 전체 책이 카운트가 되기때문에 책 종류로 구별이 안됨
 	
 	Member renter;
+
+	LocalDate returnDate;
 	
 //	상세정보(Desc) 
 // 객체를 인스턴스변수로 받아서 사용하는것 나중에 구현
+
+	public LocalDate getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(LocalDate returnDate) {
+		this.returnDate = returnDate;
+	}
+
 
 	//기본생성자
 	public Book() {}
@@ -69,6 +83,7 @@ public class Book implements Data{
 	 }
 	 return null;
 	}
+
 	String printStatus(boolean status) {
 		if(status=true) {
 		return "대출 가능";
@@ -203,7 +218,9 @@ public class Book implements Data{
 
 	@Override
 	public String toString() {
+
 		return String.format(" %-7s | %-24s | %-8s | %-8s | %-5s | %-5s | %-7s %n",index,title,author,publisher,isbn,this.change_subject2(subject),printStatus(this.status)); 
+
 	}
 
 	

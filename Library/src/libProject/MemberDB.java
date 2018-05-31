@@ -1,5 +1,6 @@
 package libProject;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import Comments.Comment;
@@ -21,6 +22,18 @@ public class MemberDB extends DB {
 	// ....
 public MemberDB() {
 	memberList = new ArrayList<>();
+	
+	//ë”ë¯¸ ë°ì´í„°(ì—°ì²´ì ì²´í¬ìš©)
+	ArrayList<Book> dumRentList = new ArrayList<>();
+	Book dumBook = new Book("ì†Œí”¼ì˜ ì„¸ê³„","ìš”ìŠˆíƒ€ì¸ê°€ì•„ë” ",1,"í˜„ì•”ì‚¬");
+	LocalDate date = LocalDate.now();
+	LocalDate returnDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()-7);
+	dumBook.setReturnDate(returnDate);
+	dumRentList.add(dumBook);
+	Member dumMember = new Member("blacKim", "1234", "ê¹€ë¸”ë™", "991120", "01042326814", false);
+	dumMember.setRentList(dumRentList);
+	this.memberList.add(dumMember);
+	
 	this.memberList.add(new Member("java111", "1234", "ë°•ìë°”", "991120", "01042326814", false));
 	this.memberList.add(new Member("java222", "1234", "ê¹€ìë°”", "900110", "01063127891", true));
 	this.memberList.add(new Member("java333", "1234", "ìµœìë°”", "880106", "01023268214", true));
@@ -379,11 +392,11 @@ public MemberDB() {
 		return;
 	}
 	
-	public int showPages(int page) {//ÀüÃ¼ °ü¸®ÀÚ ¸ñ·Ï ÆäÀÌÁöº°·Î º¸¿©ÁÖ±â(¸Å°³º¯¼ö´Â °Ë»öÇÏ°íÀÚ ÇÏ´Â ÆäÀÌÁö)
+	public int showPages(int page) {//ì „ì²´ íšŒì› ëª©ë¡ í˜ì´ì§€ë³„ë¡œ ë³´ì—¬ì£¼ê¸°(ë§¤ê°œë³€ìˆ˜ëŠ” ê²€ìƒ‰í•˜ê³ ì í•˜ëŠ” í˜ì´ì§€)
 		int totalPages = (int)Math.ceil(memberList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
-			System.out.println("ÆäÀÌÁö ¾øÀ½!");
+			System.out.println("í˜ì´ì§€ ì—†ìŒ!");
 			if(page<1) return 0;
 			else return totalPages+1;
 		}
@@ -392,15 +405,15 @@ public MemberDB() {
 		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(memberList.get(i));
 		}
-		System.out.println("ÇöÀç "+page+"ÆäÀÌÁö/"+totalPages+"ÆäÀÌÁö");
+		System.out.println("í˜„ì¬ "+page+"í˜ì´ì§€/"+totalPages+"í˜ì´ì§€");
 		return page;
 	}
 	
-	public int showPages(int page, List<Member> searchList) {//°Ë»öÇÑ °ü¸®ÀÚ ¸ñ·Ï ÆäÀÌÁöº°·Î º¸¿©ÁÖ±â(¸Å°³ ¸®½ºÆ®´Â °Ë»ö ¸®½ºÆ®)
+	public int showPages(int page, List<Member> searchList) {//ê²€ìƒ‰í•œ íšŒì› ëª©ë¡ í˜ì´ì§€ë³„ë¡œ ë³´ì—¬ì£¼ê¸°(ë§¤ê°œ ë¦¬ìŠ¤íŠ¸ëŠ” ê²€ìƒ‰ ë¦¬ìŠ¤íŠ¸)
 		int totalPages = (int)Math.ceil(searchList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
-			System.out.println("ÆäÀÌÁö ¾øÀ½!");
+			System.out.println("í˜ì´ì§€ ì—†ìŒ!");
 			if(page<1) return 0;
 			else return totalPages+1;
 		}
@@ -409,7 +422,7 @@ public MemberDB() {
 		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(searchList.get(i));
 		}
-		System.out.println("ÇöÀç "+page+"ÆäÀÌÁö/"+totalPages+"ÆäÀÌÁö");
+		System.out.println("í˜„ì¬ "+page+"í˜ì´ì§€/"+totalPages+"í˜ì´ì§€");
 		return page;
 	}
 }
