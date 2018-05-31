@@ -9,18 +9,20 @@ import Comments.*;
 public class Controller {
 
 	public static void main(String[] args) {
-		Osystem osys = new Osystem(); // 화면출력 객채생성
-		int menu;// 화면 메뉴선택에 활용할 메뉴
-		int login = 0;// 로그인 검사
-		Scanner scan = new Scanner(System.in);// 메뉴 입력시 사용할 스캐너
-
-		Member loginMem = null; // 로그인한 회원의 정보가 저장되는 변수
-		Admin loginAdm = null; // 로그인한 관리자의 정보가 저장되는 변수
-
+		//DB객체 선언절
 		BookDB bookDB = new BookDB(); // 책 DB 객체생성
 		MemberDB memberDB = new MemberDB(); // 회원 DB 객체생성
 		AdminDB adminDB = new AdminDB(); // 관리자 DB 객체생성
 		CommentDB commentDB = new CommentDB();	//건의사항 DB 객체생성
+		//기타 객체 선언절
+		Osystem osys = new Osystem(); // 화면출력 객채생성
+		Scanner scan = new Scanner(System.in);// 메뉴 입력시 사용할 스캐너
+		//클래스변수 선언절
+		Member loginMem = null; // 로그인한 회원의 정보가 저장되는 변수
+		Admin loginAdm = null; // 로그인한 관리자의 정보가 저장되는 변수
+		//멤버변수 선언절
+		int menu;// 화면 메뉴선택에 활용할 메뉴
+		int login = 0;// 로그인 검사
 
 		// -----------------메인시작-----------------------
 		main: while (true) {
