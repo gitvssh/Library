@@ -23,7 +23,7 @@ public Member(String id, String password, String name, String ssn, String tel, b
 		this.tel = tel;
 		this.status = status;
 
-//		rentList = new ArrayList<>();
+		rentList = new ArrayList<>();
 	}
 
 	public Member() {
