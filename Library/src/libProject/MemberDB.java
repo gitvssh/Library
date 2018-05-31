@@ -19,43 +19,46 @@ public class MemberDB extends DB {
 	String tel = "";
 	boolean status;
 	boolean blackstatus;
+
 	// ....
-public MemberDB() {
-	memberList = new ArrayList<>();
-	
-	//더미 데이터(연체자 체크용)
-	ArrayList<Book> dumRentList = new ArrayList<>();
-	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
-	LocalDate date = LocalDate.now();
-	LocalDate returnDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()-7);
-	dumBook.setReturnDate(returnDate);
-	dumRentList.add(dumBook);
-	Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814", false);
-	dumMember.setRentList(dumRentList);
-	this.memberList.add(dumMember);
-	
-	this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814", false));
-	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
-	this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214", true));
-	this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819", false));
+	public MemberDB() {
+		memberList = new ArrayList<>();
 
+		// 더미 데이터(연체자 체크용)
+		ArrayList<Book> dumRentList = new ArrayList<>();
+		Book dumBook = new Book("소피의 세계", "요슈타인가아더 ", 1, "현암사");
+		LocalDate date = LocalDate.now();
+		LocalDate returnDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth() - 7);
+		dumBook.setReturnDate(returnDate);
+		dumRentList.add(dumBook);
+		Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814", true);
+		dumMember.setRentList(dumRentList);
+		this.memberList.add(dumMember);
 
-	for(int i=0;i<memberList.size();i++) {
-		
-	if(memberList.get(i).isStatus()==false) {
-		memberList.get(i).setIdstatus("정상");
-	}else if(memberList.get(i).isStatus()==true){
-		
-	
-		if(memberList.get(i).isBlackstatus()==false) {
-			
-			memberList.get(i).setIdstatus("연체중");
-		}else {
-			memberList.get(i).setIdstatus("계정정지");
+		this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814", false));
+		this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
+		this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214", true));
+		this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819", false));
+	}
+
+	void checkStatus() {
+
+		for (int i = 0; i < memberList.size(); i++) {
+
+			if (memberList.get(i).status == false) {
+				memberList.get(i).idstatus = "정상";
+			} else if (memberList.get(i).status == true) {
+
+				if (memberList.get(i).blackstatus == false) {
+
+					memberList.get(i).idstatus = "연체중";
+				} else {
+					memberList.get(i).idstatus = "계정정지";
+				}
+			}
 		}
 	}
-	}
-	}
+
 	@Override
 	List search(String search) {
 		System.out.println("┌────────────────────────────────────────────────────────────┐");
@@ -64,12 +67,12 @@ public MemberDB() {
 		System.out.println("┌────────────────────────────────────────────────────────────┐");
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).getId().contains(search) || memberList.get(i).getName().contains(search)) {
-				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4b  %n", memberList.get(i).id,
+				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", memberList.get(i).id,
 						memberList.get(i).name, memberList.get(i).ssn, memberList.get(i).tel,
 						memberList.get(i).idstatus);
+				System.out.println("└────────────────────────────────────────────────────────────┘");
 			}
 		}
-		System.out.println("└────────────────────────────────────────────────────────────┘");
 		return null;
 	}
 
@@ -97,26 +100,11 @@ public MemberDB() {
 		return null;
 	}
 
-	@Override
-	List searchAll() {
-		System.out.println("┌────────────────────────────────────────────────────────────┐");
-		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
-		System.out.println("└────────────────────────────────────────────────────────────┘");
-		System.out.println("┌────────────────────────────────────────────────────────────┐");
-
-		for (int i = 0; i < memberList.size(); i++) {
-			System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4b  %n", memberList.get(i).id, memberList.get(i).name,
-					memberList.get(i).ssn, memberList.get(i).tel, memberList.get(i).idstatus);
-			System.out.println("└────────────────────────────────────────────────────────────┘");
-		}
-		System.out.printf("  회원은 총 %s 명 입니다.%n", memberList.size());
-		return null;
-	}
-
 	void input() { // 회원가입 메서드
 		System.out.println("아이디를 입력해주세요. 0:이전메뉴로 이동");
 		String id = scanner.nextLine();
-		if(id.equals("0")) return;
+		if (id.equals("0"))
+			return;
 		while (true) {
 			System.out.println("비밀번호를 입력해주세요.");
 			password = scanner.nextLine();
@@ -201,20 +189,23 @@ public MemberDB() {
 		return;
 	}
 
-	void blackMem() {
+	void printBlack() {
 		int count = 0;
+		System.out.println("┌────────────────────────────────────────────────────────────┐");
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).status == true) {
 				count++;
-				System.out.println(memberList.get(i).id + "/" + memberList.get(i).name + "/" + memberList.get(i).ssn
-						+ "/" + memberList.get(i).tel + "/" + memberList.get(i).idstatus);
+				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", memberList.get(i).id,
+						memberList.get(i).name, memberList.get(i).ssn, memberList.get(i).tel,
+						memberList.get(i).idstatus);
+				System.out.println("└────────────────────────────────────────────────────────────┘");
 			}
 		}
 		System.out.println("총 " + count + "명의 회원이 블랙리스트에 있습니다.");
 
 	}
 
-	void blackList() {
+	void alignBlack() {
 
 		Osystem osys = new Osystem();
 		System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
@@ -232,27 +223,27 @@ public MemberDB() {
 				case 1: // 아이디
 					MemberIdComparator cId = new MemberIdComparator();
 					Collections.sort(memberList, cId);
-					osys.showMemberList(memberList);
+					osys.showBlackList(memberList);
 					continue;
 				case 2: // 이름
 					MemberNameComparator cName = new MemberNameComparator();
 					Collections.sort(memberList, cName);
-					osys.showMemberList(memberList);
+					osys.showBlackList(memberList);
 					continue;
 				case 3: // 생년월일
 					MemberSsnComparator cSsn = new MemberSsnComparator();
 					Collections.sort(memberList, cSsn);
-					osys.showMemberList(memberList);
+					osys.showBlackList(memberList);
 					continue;
 				case 4: // 전화번호
 					MemberTelComparator cTel = new MemberTelComparator();
 					Collections.sort(memberList, cTel);
-					osys.showMemberList(memberList);
+					osys.showBlackList(memberList);
 					continue;
 				case 5: // 상태
 					MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
 					Collections.sort(memberList, cIdStatus);
-					osys.showMemberList(memberList);
+					osys.showBlackList(memberList);
 					continue;
 				case 0:
 					MemberIdComparator c = new MemberIdComparator();
@@ -266,25 +257,26 @@ public MemberDB() {
 		case 2:
 			System.out.println("정지하려는 계정의 아이디를 입력해주세요. 0.이전화면");
 
-			id=scanner.nextLine();
-			if(id.equals("0")) {
+			id = scanner.nextLine();
+			if (id.equals("0")) {
 				System.out.println("이전화면으로 이동합니다");
 				break;
-			}else {
-			
-				
-			for(int i=0;i<memberList.size();i++) {
-				if(memberList.get(i).id.equals(id)) {
-					memberList.get(i).setBlackstatus(true);
-					memberList.get(i).setIdstatus("계정정지");
-						
-					System.out.println(memberList.get(i).id+"님이 "+memberList.get(i).getIdstatus()+"상태가 되었습니다.");
+			} else {
+
+				for (int i = 0; i < memberList.size(); i++) {
+					if (memberList.get(i).id.equals(id)) {
+						memberList.get(i).setBlackstatus(true);
+						memberList.get(i).setIdstatus("계정정지");
+						System.out.println("┌────────────────────────────────────────────────────────────┐");
+						System.out
+								.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
+						System.out.println("└────────────────────────────────────────────────────────────┘");
 					}
 				}
-			
-			break;
+
+				break;
 			}
-			
+
 		case 3:
 			System.out.println("복구하려는 계정의 아이디를 입력해주세요. 0.이전화면");
 			id = scanner.nextLine();
@@ -292,14 +284,16 @@ public MemberDB() {
 				System.out.println("이전화면으로 이동합니다");
 				break;
 
-				}
-			for(int i=0;i<memberList.size();i++) {
-				if(memberList.get(i).id.equals(id)) {
+			}
+			for (int i = 0; i < memberList.size(); i++) {
+				if (memberList.get(i).id.equals(id)) {
 					memberList.get(i).setBlackstatus(false);
 					memberList.get(i).setIdstatus("연체중");
-					System.out.println(memberList.get(i).id+"님이 "+memberList.get(i).getIdstatus()+"상태가 되었습니다.");
+					System.out.println("┌────────────────────────────────────────────────────────────┐");
+					System.out.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
+					System.out.println("└────────────────────────────────────────────────────────────┘");
 				}
-					
+
 			}
 			break;
 		case 0:
@@ -309,13 +303,16 @@ public MemberDB() {
 	}
 
 	// ..
-	Member Login(String id, String password) { // 로그인 메서드
+	Member loginMem(String id, String password) { // 로그인 메서드
+
 		Member loginMem = null;
 
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).getId().equals(id)) {
 				if (memberList.get(i).getPassword().equals(password)) {
+					System.out.println("┌────────────────────────────────────────────────────────────┐");
 					System.out.println(memberList.get(i).getId() + "님이 로그인 하셨습니다.");
+					System.out.println("└────────────────────────────────────────────────────────────┘");
 					System.out.println("회원 메뉴로 이동합니다.");
 					loginMem = memberList.get(i);
 
@@ -329,7 +326,7 @@ public MemberDB() {
 		return loginMem;
 	}
 
-	void MemInform(Data data) { // 회원 정보 출력
+	void printMemInform(Data data) { // 회원 정보 출력
 		Member m = (Member) data;
 		System.out.println("아이디 : " + m.getId());
 		System.out.println("이름 : " + m.getName());
@@ -345,7 +342,7 @@ public MemberDB() {
 		}
 	}
 
-	void FindId() { // 아이디 찾기
+	void findId() { // 아이디 찾기
 		System.out.println("이름을 입력해주세요");
 		name = scanner.nextLine();
 		for (int i = 0; i < memberList.size(); i++) {
@@ -354,7 +351,9 @@ public MemberDB() {
 				System.out.println("전화번호를 입력해주세요");
 				tel = scanner.nextLine();
 				if (memberList.get(i).getTel().equals(tel)) {
+					System.out.println("┌────────────────────────────────────────────────────────────┐");
 					System.out.println("귀하의 아이디는 :" + memberList.get(i).getId() + "입니다.");
+					System.out.println("└────────────────────────────────────────────────────────────┘");
 					break;
 				} else {
 					System.out.println("잘못된 전화번호 입니다.");
@@ -364,7 +363,7 @@ public MemberDB() {
 		}
 	}
 
-	void FindPw() { // 비밀번호 찾기
+	void findPw() { // 비밀번호 찾기
 		System.out.println("이름를 입력해주세요"); // 아이디 입력
 		name = scanner.nextLine();
 		for (int i = 0; i < memberList.size(); i++) {
@@ -375,7 +374,9 @@ public MemberDB() {
 					System.out.println("전화번호를 입력해주세요"); // 전화번호 입력
 					tel = scanner.nextLine();
 					if (memberList.get(i).getTel().equals(tel)) {
+						System.out.println("┌────────────────────────────────────────────────────────────┐");
 						System.out.println("해당 번호로 비밀번호를 전송하였습니다.");
+						System.out.println("└────────────────────────────────────────────────────────────┘");
 					} else {
 						System.out.println("잘못된 전화번호 입니다.");
 						break;
@@ -389,42 +390,64 @@ public MemberDB() {
 	}
 
 	@Override
+	List searchAll() {
+
+		System.out.println("┌────────────────────────────────────────────────────────────┐");
+		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
+		System.out.println("└────────────────────────────────────────────────────────────┘");
+
+		System.out.println("┌────────────────────────────────────────────────────────────┐");
+		for (int i = 0; i < memberList.size(); i++) {
+			System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", memberList.get(i).getId(),
+					memberList.get(i).getName(), memberList.get(i).getSsn(), memberList.get(i).getTel(),
+					memberList.get(i).getIdstatus());
+			System.out.println("└────────────────────────────────────────────────────────────┘");
+		}
+		System.out.printf("  회원은 총 %s 명 입니다.%n", memberList.size());
+		return null;
+	}
+
+	@Override
 	void align() {
 		System.out.println("");
 		return;
 	}
-	
-	public int showPages(int page) {//전체 회원 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
-		int totalPages = (int)Math.ceil(memberList.size()/10.);
-		
-		if(page<1 || page>totalPages) {
+
+	public int showPages(int page) {// 전체 회원 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
+		int totalPages = (int) Math.ceil(memberList.size() / 10.);
+
+		if (page < 1 || page > totalPages) {
 			System.out.println("페이지 없음!");
-			if(page<1) return 0;
-			else return totalPages+1;
+			if (page < 1)
+				return 0;
+			else
+				return totalPages + 1;
 		}
-		
-		int limit = (page != totalPages) ? page*10:memberList.size();
-		for(int i=(page-1)*10; i<limit; i++) {
+
+		int limit = (page != totalPages) ? page * 10 : memberList.size();
+		for (int i = (page - 1) * 10; i < limit; i++) {
 			System.out.println(memberList.get(i));
 		}
-		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
+		System.out.println("현재 " + page + "페이지/" + totalPages + "페이지");
 		return page;
 	}
-	
-	public int showPages(int page, List<Member> searchList) {//검색한 회원 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
-		int totalPages = (int)Math.ceil(searchList.size()/10.);
-		
-		if(page<1 || page>totalPages) {
+
+	public int showPages(int page, List<Member> searchList) {// 검색한 회원 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
+		int totalPages = (int) Math.ceil(searchList.size() / 10.);
+
+		if (page < 1 || page > totalPages) {
 			System.out.println("페이지 없음!");
-			if(page<1) return 0;
-			else return totalPages+1;
+			if (page < 1)
+				return 0;
+			else
+				return totalPages + 1;
 		}
-		
-		int limit = (page != totalPages) ? page*10:searchList.size();
-		for(int i=(page-1)*10; i<limit; i++) {
+
+		int limit = (page != totalPages) ? page * 10 : searchList.size();
+		for (int i = (page - 1) * 10; i < limit; i++) {
 			System.out.println(searchList.get(i));
 		}
-		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
+		System.out.println("현재 " + page + "페이지/" + totalPages + "페이지");
 		return page;
 	}
 }

@@ -102,7 +102,7 @@ public class Controller {
 						}
 						System.out.println("비밀번호를 입력하세요.");
 						String password = scan.nextLine();
-						loginMem = memberDB.Login(id, password);// 로그인 메서드
+						loginMem = memberDB.loginMem(id, password);// 로그인 메서드
 						if (loginMem == null) {
 							System.out.println("로그인에 실패하였습니다. 아이디 비밀번호를 다시 확인해주세요.");
 							break;
@@ -134,12 +134,12 @@ public class Controller {
 						case 1:// 아이디 찾기
 							osys.history("비회원","아이디/비밀번호 찾기","아이디 찾기");
 							osys.observer_findId();// 아이디찾기 화면
-							memberDB.FindId();// 아이디 찾기 메서드
+							memberDB.findId();// 아이디 찾기 메서드
 							break;
 						case 2:// 비밀번호 찾기
 							osys.history("비회원","아이디/비밀번호 찾기","비밀번호 찾기");
 							osys.observer_findPass();// 비밀번호찾기 화면
-							memberDB.FindPw();// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
+							memberDB.findPw();// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
 							break;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
@@ -153,6 +153,7 @@ public class Controller {
 				} // --------------------------비회원 while end-----------------------
 			case 1:// 회원 1
 				member: while (true) {
+					memberDB.checkStatus();
 					osys.history(loginMem.getId());
 					osys.member_main();
 					menu = scan.nextInt();
@@ -235,14 +236,16 @@ public class Controller {
 						case 1:// 회원정보 조회
 							osys.history(loginMem.getId(),"회원정보","회원정보조회");
 							osys.member_myinform();// 회원정보 조회 화면
-							memberDB.MemInform(loginMem);
+              memberDB.printMemInform(loginMem);
 							continue member;
-						case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
+							case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.history(loginMem.getId(),"회원정보","회원정보 수정");
 							osys.member_modify();// 회원정보 수정 화면
-							memberDB.update(loginMem);
-							continue member;
-							 // end while modify;
+							modify: while (true) {
+								memberDB.update(loginMem);
+								break;
+								}// end switch_modify
+							 continue member;// end while modify;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue member;
@@ -309,6 +312,7 @@ public class Controller {
 				} // -----------------------------회원 while end-----------------------
 			case 2:// 관리자 2
 				admin: while (true) {
+					memberDB.checkStatus();
 					osys.history(loginAdm.getId());
 					osys.admin_main();// 관리자 메인화면
 					menu = scan.nextInt();
@@ -422,13 +426,14 @@ public class Controller {
 							case 3:// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
 								System.out.println("블랙리스트 회원목록입니다.");
-								memberDB.blackMem();// 블랙리스트 출력 메서드
-								memberDB.blackList();
+								memberDB.printBlack();// 블랙리스트 출력 메서드
+								memberDB.alignBlack();
 								continue admin;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue admin;
 							}// end switch_membermng
+							break;
 						}
 					case 3:// 건의사항
 							// 건의사항 출력 메서드(db)
@@ -487,7 +492,7 @@ public class Controller {
 								}
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
-								break request;
+								continue admin;
 							}// end switch
 						} // end while_request
 					case 4:// 관리자 관리

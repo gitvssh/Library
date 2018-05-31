@@ -200,6 +200,27 @@ public class Osystem {
 		}
 	
 	}
+	void showBlackList(List<Member> list) {	
+		if(list == null || list.size()==0) System.out.println("조회할 회원이 없습니다.");
+		else {
+			System.out.println("┌────────────────────────────────────────────────────────────┐");
+			System.out.printf("  %-8s | %-12s | %-15s | %-25s | %-9s   %n", "회원ID","이름","생년월일","전화번호","상태");
+			System.out.println("└────────────────────────────────────────────────────────────┘");
+			int count = 0;
+			System.out.println("┌────────────────────────────────────────────────────────────┐");
+			for(int i=0;i<list.size();i++) {
+				if(list.get(i).isStatus()==true) {
+					count++;
+					System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", list.get(i).getId(), list.get(i).getName(),
+							list.get(i).getSsn(), list.get(i).getTel(), list.get(i).getIdstatus());
+					System.out.println("└────────────────────────────────────────────────────────────┘");
+				}
+			}
+			System.out.println("┌──────────────────────────────────┐");
+			System.out.printf("  총 %2d개의 검색결과가 있습니다.              %n",count);
+			System.out.println("└──────────────────────────────────┘");
+		}
+	}
 	
 	//리스트 추가 
 
