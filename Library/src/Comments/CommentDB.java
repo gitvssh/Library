@@ -115,8 +115,8 @@ public class CommentDB {	//건의사항 DB클래스
 		
 		if(page<1 || page>totalPages) {
 			System.out.println("페이지 없음!");
-			if(page<1) return 1;
-			else return totalPages;
+			if(page<1) return 0;
+			else return totalPages+1;
 		}
 		
 		int limit = (page != totalPages) ? page*10:commentList.size();
@@ -136,7 +136,7 @@ public class CommentDB {	//건의사항 DB클래스
 			else return totalPages+1;
 		}
 		
-		int limit = (page != totalPages) ? page*10:commentList.size();
+		int limit = (page != totalPages) ? page*10:searchList.size();
 		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(searchList.get(i));
 		}

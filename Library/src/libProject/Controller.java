@@ -9,363 +9,363 @@ import Comments.*;
 public class Controller {
 
 	public static void main(String[] args) {
-		Osystem osys = new Osystem(); // È­¸éÃâ·Â °´Ã¤»ý¼º
-		int menu;// È­¸é ¸Þ´º¼±ÅÃ¿¡ È°¿ëÇÒ ¸Þ´º
-		int login = 0;// ·Î±×ÀÎ °Ë»ç
-		Scanner scan = new Scanner(System.in);// ¸Þ´º ÀÔ·Â½Ã »ç¿ëÇÒ ½ºÄ³³Ê
+		Osystem osys = new Osystem(); // È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¤ï¿½ï¿½
+		int menu;// È­ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ È°ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½
+		int login = 0;// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+		Scanner scan = new Scanner(System.in);// ï¿½Þ´ï¿½ ï¿½Ô·Â½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä³ï¿½ï¿½
 
-		Member loginMem = null; // ·Î±×ÀÎÇÑ È¸¿øÀÇ Á¤º¸°¡ ÀúÀåµÇ´Â º¯¼ö
-		Admin loginAdm = null; // ·Î±×ÀÎÇÑ °ü¸®ÀÚÀÇ Á¤º¸°¡ ÀúÀåµÇ´Â º¯¼ö
+		Member loginMem = null; // ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½
+		Admin loginAdm = null; // ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-		BookDB bookDB = new BookDB(); // Ã¥ DB °´Ã¼»ý¼º
-		MemberDB memberDB = new MemberDB(); // È¸¿ø DB °´Ã¼»ý¼º
-		AdminDB adminDB = new AdminDB(); // °ü¸®ÀÚ DB °´Ã¼»ý¼º
-		CommentDB commentDB = new CommentDB();	//°ÇÀÇ»çÇ× DB °´Ã¼»ý¼º
+		BookDB bookDB = new BookDB(); // Ã¥ DB ï¿½ï¿½Ã¼ï¿½ï¿½
+		MemberDB memberDB = new MemberDB(); // È¸ï¿½ï¿½ DB ï¿½ï¿½Ã¼ï¿½ï¿½
+		AdminDB adminDB = new AdminDB(); // ï¿½ï¿½ï¿½ï¿½ DB ï¿½ï¿½Ã¼ï¿½ï¿½
+		CommentDB commentDB = new CommentDB();	//ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ DB ï¿½ï¿½Ã¼ï¿½ï¿½
 
-		// -----------------¸ÞÀÎ½ÃÀÛ-----------------------
+		// -----------------ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½-----------------------
 		main: while (true) {
 			switch (login) {
-			case 0:// ºñÈ¸¿ø 0
-				observer: while (true) {// ----------------------ºñÈ¸¿ø while-------------------
-					osys.history("ºñÈ¸¿ø");//È÷½ºÅä¸®(Áö±Ý±îÁö Áö³ª¿Â ¸Þ´º Ç¥½Ã)
-					osys.observer_main();// ºñÈ¸¿ø ¸ÞÀÎÈ­¸é
+			case 0:// ï¿½ï¿½È¸ï¿½ï¿½ 0
+				observer: while (true) {// ----------------------ï¿½ï¿½È¸ï¿½ï¿½ while-------------------
+					osys.history("ï¿½ï¿½È¸ï¿½ï¿½");//ï¿½ï¿½ï¿½ä¸®(ï¿½ï¿½Ý±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ Ç¥ï¿½ï¿½)
+					osys.observer_main();// ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
 					menu = scan.nextInt();
 					scan.nextLine();
-					switch (menu) {// 1.µµ¼­°Ë»ö 2.È¸¿ø°¡ÀÔ 3.·Î±×ÀÎ 4.°ü¸®ÀÚ·Î±×ÀÎ 5.¾ÆÀÌµð/ºñ¹Ð¹øÈ£ Ã£±â
-					case 1:// 1.µµ¼­°Ë»ö
-						osys.history("ºñÈ¸¿ø","µµ¼­°Ë»ö");
-						osys.observer_search();// ºñÈ¸¿ø µµ¼­°Ë»ö È­¸é
+					switch (menu) {// 1.ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ 2.È¸ï¿½ï¿½ï¿½ï¿½ 3.ï¿½Î±ï¿½ï¿½ï¿½ 4.ï¿½ï¿½ï¿½Ú·Î±ï¿½ï¿½ï¿½ 5.ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½
+					case 1:// 1.ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½
+						osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½");
+						osys.observer_search();// ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ È­ï¿½ï¿½
 						menu = scan.nextInt();
 						scan.nextLine();
-						switch (menu) {// 1.Á¦¸ñ 2.ÀúÀÚ 3.ÃâÆÇ»ç 4.ÁÖÁ¦ 5.ÀÎµ¦½º 6.ISBN 7.ÀüÃ¼ µµ¼­¸ñ·Ï 0.ÀÌÀüÈ­¸éÀ¸·Î
-						case 1:// Á¦¸ñ
-							osys.history("ºñÈ¸¿ø","µµ¼­°Ë»ö","Á¦¸ñ");
-							System.out.println("°Ë»öÇÏ½Ç Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä");
+						switch (menu) {// 1.ï¿½ï¿½ï¿½ 2.ï¿½ï¿½ï¿½ï¿½ 3.ï¿½ï¿½ï¿½Ç»ï¿½ 4.ï¿½ï¿½ï¿½ 5.ï¿½Îµï¿½ï¿½ï¿½ 6.ISBN 7.ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½
+						case 1:// ï¿½ï¿½ï¿½
+							osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½ï¿½ï¿½");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							osys.showBookList(bookDB.search(scan.nextLine(), 1));
 							break;
-						case 2:// ÀúÀÚ
-							osys.history("ºñÈ¸¿ø","µµ¼­°Ë»ö","ÀúÀÚ");
-							System.out.println("°Ë»öÇÏ½Ç ÀúÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+						case 2:// ï¿½ï¿½ï¿½ï¿½
+							osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½ï¿½ï¿½ï¿½");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							osys.showBookList(bookDB.search(scan.nextLine(), 2));
 							break;
-						case 3:// ÃâÆÇ»ç
-							osys.history("ºñÈ¸¿ø","µµ¼­°Ë»ö","ÃâÆÇ»ç");
-							System.out.println("°Ë»öÇÏ½Ç ÃâÆÇ»ç¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+						case 3:// ï¿½ï¿½ï¿½Ç»ï¿½
+							osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½ï¿½ï¿½Ç»ï¿½");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½Ç»ç¸¦ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							osys.showBookList(bookDB.search(scan.nextLine(), 3));
 							break;
-						case 4:// ºÐ¾ß
-							osys.history("ºñÈ¸¿ø","µµ¼­°Ë»ö","ºÐ¾ß");
-							System.out.println("°Ë»öÇÏ½Ç ºÐ¾ß¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+						case 4:// ï¿½Ð¾ï¿½
+							osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½Ð¾ï¿½");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½Ð¾ß¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							osys.showBookList(bookDB.search(scan.nextLine(), 4));
 							break;
-						case 5:// ÀÎµ¦½º
-							osys.history("ºñÈ¸¿ø","µµ¼­°Ë»ö","ÀÎµ¦½º");
-							System.out.println("°Ë»öÇÏ½Ç ÀÎµ¦½º¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+						case 5:// ï¿½Îµï¿½ï¿½ï¿½
+							osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½Îµï¿½ï¿½ï¿½");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							osys.showBookList(bookDB.search(scan.nextLine(), 5));
 							break;
 						case 6:// ISBN
-							osys.history("ºñÈ¸¿ø","µµ¼­°Ë»ö","ISBN");
+							osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ISBN");
 							osys.showBookList(bookDB.search(scan.nextLine(), 6));
-							System.out.println("°Ë»öÇÏ½Ç ISBNÀ» ÀÔ·ÂÇÏ¼¼¿ä");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ISBNï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							break;
-						case 7:// ÀüÃ¼ µµ¼­¸ñ·Ï
-							osys.history("ºñÈ¸¿ø","µµ¼­°Ë»ö","ÀüÃ¼ µµ¼­ ¸ñ·Ï");
-							System.out.println("ÀüÃ¼ µµ¼­ ¸ñ·ÏÀÔ´Ï´Ù.");
+						case 7:// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
+							System.out.println("ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
 							bookDB.searchAll();
 							continue observer;
-						case 0:// ÀÌÀüÈ­¸éÀ¸·Î
-							System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+						case 0:// ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½
+							System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 							continue observer;
 						}
 						break;
 
-					case 2:// È¸¿ø°¡ÀÔ
-						osys.history("ºñÈ¸¿ø","È¸¿ø°¡ÀÔ");
-						osys.observer_signin();// È¸¿ø°¡ÀÔ È­¸é
-						memberDB.input();// È¸¿ø°¡ÀÔ ¸Þ¼­µå
+					case 2:// È¸ï¿½ï¿½ï¿½ï¿½
+						osys.history("ï¿½ï¿½È¸ï¿½ï¿½","È¸ï¿½ï¿½ï¿½ï¿½");
+						osys.observer_signin();// È¸ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½
+						memberDB.input();// È¸ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 						break;
-					case 3:// ·Î±×ÀÎ
-						osys.history("ºñÈ¸¿ø","·Î±×ÀÎ");
-						System.out.println("¾ÆÀÌµð¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+					case 3:// ï¿½Î±ï¿½ï¿½ï¿½
+						osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½Î±ï¿½ï¿½ï¿½");
+						System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
 						String id = scan.nextLine();
 						if(id.equals("0")) {
-							System.out.println("ÀÌÀüÈ­¸éÀ¸·Î ÀÌµ¿ÇÕ´Ï´Ù.");
+							System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Õ´Ï´ï¿½.");
 							break;
 						}
-						System.out.println("ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+						System.out.println("ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
 						String password = scan.nextLine();
-						loginMem = memberDB.Login(id, password);// ·Î±×ÀÎ ¸Þ¼­µå
+						loginMem = memberDB.Login(id, password);// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 						if (loginMem == null) {
-							System.out.println("·Î±×ÀÎ¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù. ¾ÆÀÌµð ºñ¹Ð¹øÈ£¸¦ ´Ù½Ã È®ÀÎÇØÁÖ¼¼¿ä.");
+							System.out.println("ï¿½Î±ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½Ù½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
 							break;
 						} else {
 							login = 1;
-						continue main;// ¸ÞÀÎÀ¸·Î º¸³»¼­ ÆÇº°
+						continue main;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Çºï¿½
 						}
-					case 4:// °ü¸®ÀÚ·Î±×ÀÎ
-						osys.history("ºñÈ¸¿ø","°ü¸®ÀÚ ·Î±×ÀÎ");
-						System.out.println("¾ÆÀÌµð¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+					case 4:// ï¿½ï¿½ï¿½Ú·Î±ï¿½ï¿½ï¿½
+						osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½");
+						System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
 						id = scan.nextLine();
-						System.out.println("ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+						System.out.println("ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
 						password = scan.nextLine();
-						loginAdm = adminDB.login(id, password); // ·Î±×ÀÎ ¸Þ¼­µå
+						loginAdm = adminDB.login(id, password); // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 						if (loginAdm == null) {
-							System.out.println("·Î±×ÀÎ¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù. ¾ÆÀÌµð ºñ¹Ð¹øÈ£¸¦ ´Ù½Ã È®ÀÎÇØÁÖ¼¼¿ä.");
+							System.out.println("ï¿½Î±ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½Ù½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
 							break;
 						} else {
 							login = 2;
 							continue main;
 						}
 
-					case 5:// ¾ÆÀÌµð ºñ¹Ð¹øÈ£Ã£±â
-						osys.history("ºñÈ¸¿ø","¾ÆÀÌµð/ºñ¹Ð¹øÈ£ Ã£±â");
-						osys.observer_findMember();// Á¤º¸Ã£±â È­¸é
+					case 5:// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Ð¹ï¿½È£Ã£ï¿½ï¿½
+						osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½");
+						osys.observer_findMember();// ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ È­ï¿½ï¿½
 						menu = scan.nextInt();
 						scan.nextLine();
-						switch (menu) {// 1. ¾ÆÀÌµð Ã£±â 2.ºñ¹Ð¹øÈ£ Ã£±â 0. ÀÌÀüÈ­¸é
-						case 1:// ¾ÆÀÌµð Ã£±â
-							osys.history("ºñÈ¸¿ø","¾ÆÀÌµð/ºñ¹Ð¹øÈ£ Ã£±â","¾ÆÀÌµð Ã£±â");
-							osys.observer_findId();// ¾ÆÀÌµðÃ£±â È­¸é
-							memberDB.FindId();// ¾ÆÀÌµð Ã£±â ¸Þ¼­µå
+						switch (menu) {// 1. ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ 2.ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ 0. ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
+						case 1:// ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
+							osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½","ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½");
+							osys.observer_findId();// ï¿½ï¿½ï¿½Ìµï¿½Ã£ï¿½ï¿½ È­ï¿½ï¿½
+							memberDB.FindId();// ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 							break;
-						case 2:// ºñ¹Ð¹øÈ£ Ã£±â
-							osys.history("ºñÈ¸¿ø","¾ÆÀÌµð/ºñ¹Ð¹øÈ£ Ã£±â","ºñ¹Ð¹øÈ£ Ã£±â");
-							osys.observer_findPass();// ºñ¹Ð¹øÈ£Ã£±â È­¸é
-							memberDB.FindPw();// ºñ¹Ð¹øÈ£ Ã£±â ¸Þ¼­µå -> ºñ¹Ð¹øÈ£¸¦ ¹øÈ£·Î º¸³»µå·È½À´Ï´Ù!
+						case 2:// ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½
+							osys.history("ï¿½ï¿½È¸ï¿½ï¿½","ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½","ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½");
+							osys.observer_findPass();// ï¿½ï¿½Ð¹ï¿½È£Ã£ï¿½ï¿½ È­ï¿½ï¿½
+							memberDB.FindPw();// ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ -> ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½ï¿½Ï´ï¿½!
 							break;
-						case 0:// ÀÌÀüÈ­¸é
-							System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+						case 0:// ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
+							System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 							continue observer;
 						}
 						break;
-					case 0:// ÇÁ·Î±×·¥ Á¾·á
-						System.out.println("ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù...");
+					case 0:// ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½
+						System.out.println("ï¿½ï¿½Î±×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½...");
 						break main;
 					}// end switch
-				} // --------------------------ºñÈ¸¿ø while end-----------------------
-			case 1:// È¸¿ø 1
+				} // --------------------------ï¿½ï¿½È¸ï¿½ï¿½ while end-----------------------
+			case 1:// È¸ï¿½ï¿½ 1
 				member: while (true) {
 					osys.history(loginMem.getId());
 					osys.member_main();
 					menu = scan.nextInt();
 					scan.nextLine();
-					switch (menu) {// 1.µµ¼­°Ë»ö´ëÃâ 2.ºô¸°µµ¼­ 3.µµ¼­¹Ý³³ 4.È¸¿øÁ¤º¸ 5.°ÇÀÇ»çÇ× 9.·Î±×¾Æ¿ô 0.Á¾·á");
-					case 1:// µµ¼­°Ë»ö´ëÃâ
-						osys.history(loginMem.getId(),"µµ¼­´ëÃâ");
-						osys.member_search();// È¸¿ø µµ¼­°Ë»öÈ­¸é
+					switch (menu) {// 1.ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ 2.ï¿½ï¿½ï¿½ï¿½ï¿½ 3.ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ 4.È¸ï¿½ï¿½ï¿½ï¿½ï¿½ 5.ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ 9.ï¿½Î±×¾Æ¿ï¿½ 0.ï¿½ï¿½ï¿½");
+					case 1:// ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½
+						osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+						osys.member_search();// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½È­ï¿½ï¿½
 						menu = scan.nextInt();
 						scan.nextLine();
-						switch (menu) {// 1.Á¦¸ñ 2.ÀúÀÚ 3.ÃâÆÇ»ç 4.ºÐ·ù 5.ÀÎµ¦½º 6.ISBN 7.ÀüÃ¼ µµ¼­¸ñ·Ï 0.ÀÌÀüÈ­¸éÀ¸·Î
-						// ¾Æ·¡¿¡ ´ëÃâ±â´Éµµ Ãß°¡
-						case 1:// Á¦¸ñ
-							osys.history(loginMem.getId(),"µµ¼­´ëÃâ","Á¦¸ñ");
-							System.out.println("°Ë»öÇÏ½Ç Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä");
-							osys.showBookList(bookDB.search(scan.nextLine(), 1));//°Ë»ö¸Þ¼­µå
-							bookDB.rentBooks(bookDB, loginMem);//´ëÃâ¸Þ¼­µå
+						switch (menu) {// 1.ï¿½ï¿½ï¿½ 2.ï¿½ï¿½ï¿½ï¿½ 3.ï¿½ï¿½ï¿½Ç»ï¿½ 4.ï¿½Ð·ï¿½ 5.ï¿½Îµï¿½ï¿½ï¿½ 6.ISBN 7.ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½
+						// ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½ ï¿½ß°ï¿½
+						case 1:// ï¿½ï¿½ï¿½
+							osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
+							osys.showBookList(bookDB.search(scan.nextLine(), 1));//ï¿½Ë»ï¿½Þ¼ï¿½ï¿½ï¿½
+							bookDB.rentBooks(bookDB, loginMem);//ï¿½ï¿½ï¿½ï¿½Þ¼ï¿½ï¿½ï¿½
 							break;
-						case 2:// ÀúÀÚ
-							osys.history(loginMem.getId(),"µµ¼­´ëÃâ","ÀúÀÚ");
-							System.out.println("°Ë»öÇÏ½Ç ÀúÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+						case 2:// ï¿½ï¿½ï¿½ï¿½
+							osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							osys.showBookList(bookDB.search(scan.nextLine(), 2));
 							bookDB.rentBooks(bookDB, loginMem);
 							break;
-						case 3:// ÃâÆÇ»ç
-							osys.history(loginMem.getId(),"µµ¼­´ëÃâ","ÃâÆÇ»ç");
-							System.out.println("°Ë»öÇÏ½Ç ÃâÆÇ»ç¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+						case 3:// ï¿½ï¿½ï¿½Ç»ï¿½
+							osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½Ç»ï¿½");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½Ç»ç¸¦ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							osys.showBookList(bookDB.search(scan.nextLine(), 3));
 							bookDB.rentBooks(bookDB, loginMem);
 							break;
-						case 4:// ºÐ¾ß
-							osys.history(loginMem.getId(),"µµ¼­´ëÃâ","ºÐ¾ß");
-							System.out.println("°Ë»öÇÏ½Ç ºÐ¾ß¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+						case 4:// ï¿½Ð¾ï¿½
+							osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½Ð¾ï¿½");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½Ð¾ß¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							osys.showBookList(bookDB.search(scan.nextLine(), 4));
 							bookDB.rentBooks(bookDB, loginMem);
 							break;
-						case 5:// ÀÎµ¦½º
-							osys.history(loginMem.getId(),"µµ¼­´ëÃâ","ÀÎµ¦½º");
-							System.out.println("°Ë»öÇÏ½Ç ÀÎµ¦½º¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+						case 5:// ï¿½Îµï¿½ï¿½ï¿½
+							osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½Îµï¿½ï¿½ï¿½");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							osys.showBookList(bookDB.search(scan.nextLine(), 5));
 							bookDB.rentBooks(bookDB, loginMem);
 							break;
 						case 6:// ISBN
-							osys.history(loginMem.getId(),"µµ¼­´ëÃâ","ISBN");
-							System.out.println("°Ë»öÇÏ½Ç ISBNÀ» ÀÔ·ÂÇÏ¼¼¿ä");
+							osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ISBN");
+							System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ISBNï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 							osys.showBookList(bookDB.search(scan.nextLine(), 6));
 							bookDB.rentBooks(bookDB, loginMem);
 							break;
-						case 7:// ÀüÃ¼ µµ¼­¸ñ·Ï
-							osys.history(loginMem.getId(),"µµ¼­´ëÃâ","ÀüÃ¼ µµ¼­¸ñ·Ï");
-							System.out.println("ÀüÃ¼ µµ¼­¸ñ·ÏÀÔ´Ï´Ù.");
+						case 7:// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+							System.out.println("ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
 							bookDB.searchAll();
 							continue member;
-						case 0:// ÀÌÀüÈ­¸éÀ¸·Î
-							System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+						case 0:// ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½
+							System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 							continue member;
 						}// end switch
 						continue member;
-					case 2:// ºô¸°µµ¼­
-						osys.history(loginMem.getId(),"ºô¸° µµ¼­");
-						osys.showBookList(loginMem.getRentList());	// ºô¸°µµ¼­ Ãâ·Â ¸Þ¼­µå
+					case 2:// ï¿½ï¿½ï¿½ï¿½ï¿½
+						osys.history(loginMem.getId(),"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+						osys.showBookList(loginMem.getRentList());	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 						while(true) {
-							System.out.println("0.ÀÌÀü È­¸é");
+							System.out.println("0.ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½");
 							if (scan.nextInt()==0) continue member;
-							else continue;	//ºô¸° µµ¼­ Á¶È¸ ³¡³ª¸é È¸¿ø ¸Þ´º·Î.
+							else continue;	//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¸ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½.
 						}
-					case 3:// µµ¼­¹Ý³³
-						osys.history(loginMem.getId(),"µµ¼­ ¹Ý³³");
-						bookDB.returnBooks(loginMem.getRentList());	// µµ¼­¹Ý³³ ¸Þ¼­µå
-						continue member;	//¹Ý³³ ³¡³ª¸é È¸¿ø ¸Þ´º·Î.
-					case 4:// È¸¿øÁ¤º¸
-						osys.history(loginMem.getId(),"È¸¿øÁ¤º¸");
+					case 3:// ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½
+						osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½ï¿½ ï¿½Ý³ï¿½");
+						bookDB.returnBooks(loginMem.getRentList());	// ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+						continue member;	//ï¿½Ý³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½.
+					case 4:// È¸ï¿½ï¿½ï¿½ï¿½ï¿½
+						osys.history(loginMem.getId(),"È¸ï¿½ï¿½ï¿½ï¿½ï¿½");
 						osys.member_inform();
 						menu = scan.nextInt();
 						scan.nextLine();
-						switch (menu) {// 1.È¸¿øÁ¤º¸ Á¶È¸ 2.È¸¿øÁ¤º¸ ¼öÁ¤ 0. ÀÌÀüÈ­¸é
-						case 1:// È¸¿øÁ¤º¸ Á¶È¸
-							osys.history(loginMem.getId(),"È¸¿øÁ¤º¸","È¸¿øÁ¤º¸Á¶È¸");
-							osys.member_myinform();// È¸¿øÁ¤º¸ Á¶È¸ È­¸é
+						switch (menu) {// 1.È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¸ 2.È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 0. ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
+						case 1:// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¸
+							osys.history(loginMem.getId(),"È¸ï¿½ï¿½ï¿½ï¿½ï¿½","È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸");
+							osys.member_myinform();// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¸ È­ï¿½ï¿½
 							break;
-							// È¸¿øÁ¤º¸ Á¶È¸ ¸Þ¼­µå
-						case 2:// È¸¿øÁ¤º¸ ¼öÁ¤1.¾ÆÀÌµð 2.ºñ¹Ð¹øÈ£ 3.ÀÌ¸§ 4.»ý³â¿ùÀÏ 5.ÀüÈ­¹øÈ£ 0.È¸¿ø¸Þ´º·Î ÀÌµ¿
-							osys.history(loginMem.getId(),"È¸¿øÁ¤º¸","È¸¿øÁ¤º¸ ¼öÁ¤");
-							osys.member_modify();// È¸¿øÁ¤º¸ ¼öÁ¤ È­¸é
+							// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¸ ï¿½Þ¼ï¿½ï¿½ï¿½
+						case 2:// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½1.ï¿½ï¿½ï¿½Ìµï¿½ 2.ï¿½ï¿½Ð¹ï¿½È£ 3.ï¿½Ì¸ï¿½ 4.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 5.ï¿½ï¿½È­ï¿½ï¿½È£ 0.È¸ï¿½ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+							osys.history(loginMem.getId(),"È¸ï¿½ï¿½ï¿½ï¿½ï¿½","È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
+							osys.member_modify();// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ È­ï¿½ï¿½
 							modify: while (true) {
 								memberDB.update(loginMem);
 								break;
 								}// end switch_modify
 							 // end while modify;
-						case 0:// ÀÌÀüÈ­¸é
-							System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+						case 0:// ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
+							System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 							continue member;
-						}// end switch È¸¿øÁ¤º¸¸Þ´º
-					case 5:// °ÇÀÇ»çÇ×
+						}// end switch È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ´ï¿½
+					case 5:// ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½
 						comment:while(true) {
-							osys.history(loginMem.getId(),"°ÇÀÇ»çÇ×");
+							osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½");
 							osys.member_request();
-							menu = scan.nextInt(); // °ÇÀÇ»çÇ× ¸Þ¼­µå
+							menu = scan.nextInt(); // ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 							switch(menu) {
-							case 1: //1.»õ °ÇÀÇ»çÇ× ÀÔ·Â
-								osys.history(loginMem.getId(),"°ÇÀÇ»çÇ×","1.»õ °ÇÀÇ»çÇ× ÀÔ·Â");
+							case 1: //1.ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
+								osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½","1.ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½");
 								commentDB.addComment(loginMem);
 								continue comment;
-							case 2: //2.ÀÌÀü °ÇÀÇ»çÇ× º¸±â
-								osys.history(loginMem.getId(),"°ÇÀÇ»çÇ×","2.ÀÌÀü °ÇÀÇ»çÇ× º¸±â");
-								//È¸¿ø ¾ÆÀÌµð·Î ÀÛ¼ºµÈ °ÇÀÇ»çÇ×À» °Ë»öÇØ ¸®½ºÆ®·Î ¹Þ±â
+							case 2: //2.ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+								osys.history(loginMem.getId(),"ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½","2.ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+								//È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Þ±ï¿½
 								ArrayList<Comment> searchList = commentDB.searchComments(loginMem.getId());
-								//°Ë»ö°á°ú°¡ ÀÖÀ¸¸é ¸®½ºÆ®¸¦ ¸Å°³º¯¼ö·Î ÀÌÀü °ÇÀÇ»çÇ×µéÀ» Ãâ·Â
+								//ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½×µï¿½ï¿½ ï¿½ï¿½ï¿½
 								if(searchList!=null) {
 									int page = 1;
 									commentDB.showPages(page,searchList);
 									while(true) {
-										System.out.println("1.ÀÌÀü ÆäÀÌÁö  2.´ÙÀ½ ÆäÀÌÁö  0.ÀÌÀü È­¸é");
+										System.out.println("1.ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  2.ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  0.ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½");
 										menu = scan.nextInt();
 										scan.nextLine();
-										if(menu==0) continue comment;	//0À» ÀÔ·Â¹ÞÀ¸¸é °ÇÀÇ»çÇ× ¸Þ´º·Î.
+										if(menu==0) continue comment;	//0ï¿½ ï¿½Ô·Â¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½.
 										if(menu==1) page = commentDB.showPages(--page,searchList); 
 										else if(menu==2) page = commentDB.showPages(++page,searchList);
-										else System.out.println("Àß¸øµÈ ÀÔ·Â!");
+										else System.out.println("ï¿½ß¸ï¿½ï¿½ ï¿½Ô·ï¿½!");
 									}
 								} else {
-									System.out.println("µî·ÏµÈ °ÇÀÇ»çÇ×ÀÌ ¾ø½À´Ï´Ù.");
+									System.out.println("ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½.");
 									continue comment;
 								}
-							case 0: //0.È¸¿ø¸Þ´º·Î ÀÌµ¿ 
-								System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+							case 0: //0.È¸ï¿½ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ 
+								System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 								continue member;
 							}
 						}
-					case 9:// ·Î±×¾Æ¿ô
+					case 9:// ï¿½Î±×¾Æ¿ï¿½
 						while(true) {
-							osys.history(loginMem.getId(),"·Î±×¾Æ¿ô");
-							System.out.println("·Î±×¾Æ¿ôÀ» ÇÏ½Ã°Ú½À´Ï±î? y/n");
+							osys.history(loginMem.getId(),"ï¿½Î±×¾Æ¿ï¿½");
+							System.out.println("ï¿½Î±×¾Æ¿ï¿½ï¿½ ï¿½Ï½Ã°Ú½ï¿½Ï±ï¿½? y/n");
 							String out = scan.nextLine();
 							if(out.equals("y")) {
-								System.out.println("·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù.");
+								System.out.println("ï¿½Î±×¾Æ¿ï¿½ ï¿½Ç¾ï¿½ï¿½Ï´ï¿½.");
 								login = 0;
 								break;
 							}else if(out.equals("n")) {
-								System.out.println("·Î±×¾Æ¿ôÀÌ Ãë¼ÒµÇ¾ú½À´Ï´Ù.");
+								System.out.println("ï¿½Î±×¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ÒµÇ¾ï¿½ï¿½Ï´ï¿½.");
 								login = 1;
 								break;
 								}else {
-								System.out.println("Àß¸øÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
+								System.out.println("ï¿½ß¸ï¿½ï¿½Ô·ï¿½ï¿½Ï¼Ì½ï¿½Ï´ï¿½.");
 								continue;
 							}
 						}
-						continue main;// ¸ÞÀÎÀ¸·Î º¸³»¼­ ÆÇº°
-					case 0:// Á¾·á
-						System.out.println("ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù...");
+						continue main;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Çºï¿½
+					case 0:// ï¿½ï¿½ï¿½
+						System.out.println("ï¿½ï¿½Î±×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½...");
 						break main;
 					}// end switch
-				} // -----------------------------È¸¿ø while end-----------------------
-			case 2:// °ü¸®ÀÚ 2
+				} // -----------------------------È¸ï¿½ï¿½ while end-----------------------
+			case 2:// ï¿½ï¿½ï¿½ï¿½ 2
 				admin: while (true) {
 					osys.history(loginAdm.getId());
-					osys.admin_main();// °ü¸®ÀÚ ¸ÞÀÎÈ­¸é
+					osys.admin_main();// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
 					menu = scan.nextInt();
 					scan.nextLine();
-					switch (menu) {// 1.µµ¼­°ü¸® 2. È¸¿ø°ü¸® 3.°ÇÀÇ»çÇ× 4.°ü¸®ÀÚ °ü¸® 5.·Î±×¾Æ¿ô 0.½Ã½ºÅÛ Á¾·á
-					case 1:// µµ¼­°ü¸®
-						bookmng: while (true) {// µµ¼­°ü¸®¸Þ´º while
-							Book selected = null;//µµ¼­ ¼öÁ¤,»èÁ¦¸¦ À§ÇÑ ÂüÁ¶º¯¼ö 
-							osys.history(loginAdm.getId(),"µµ¼­°ü¸®");
+					switch (menu) {// 1.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2. È¸ï¿½ï¿½ï¿½ 3.ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ 4.ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 5.ï¿½Î±×¾Æ¿ï¿½ 0.ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+					case 1:// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+						bookmng: while (true) {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ´ï¿½ while
+							Book selected = null;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+							osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 							osys.admin_bookmng();
 							menu = scan.nextInt();
 							scan.nextLine();
-							switch (menu) {// 1.µµ¼­°Ë»ö 2.µµ¼­Ãß°¡ 3.µµ¼­¼öÁ¤ 4.µµ¼­»èÁ¦ 0.ÀÌÀü È­¸éÀ¸·Î
-							case 1:// µµ¼­°Ë»ö
-								osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­°Ë»ö");
+							switch (menu) {// 1.ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ 2.ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½ 3.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½
+							case 1:// ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½
+								osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½");
 								osys.admin_search();
 								menu = scan.nextInt();
 								scan.nextLine();
-								switch (menu) {// 1.Á¦¸ñ 2.ÀúÀÚ 3.ÃâÆÇ»ç 4.ÁÖÁ¦ 5.ÀÎµ¦½º 6.ISBN 7.ÀüÃ¼ µµ¼­¸ñ·Ï 0.ÀÌÀüÈ­¸éÀ¸·Î
-								case 1:// Á¦¸ñ
-									osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­°Ë»ö","Á¦¸ñ");
-									System.out.println("°Ë»öÇÏ½Ç Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä");
+								switch (menu) {// 1.ï¿½ï¿½ï¿½ 2.ï¿½ï¿½ï¿½ï¿½ 3.ï¿½ï¿½ï¿½Ç»ï¿½ 4.ï¿½ï¿½ï¿½ 5.ï¿½Îµï¿½ï¿½ï¿½ 6.ISBN 7.ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½
+								case 1:// ï¿½ï¿½ï¿½
+									osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½ï¿½ï¿½");
+									System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 									osys.showBookList(bookDB.search(scan.nextLine(), 1));
 									break;
-								case 2:// ÀúÀÚ
-									osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­°Ë»ö","ÀúÀÚ");
-									System.out.println("°Ë»öÇÏ½Ç ÀúÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+								case 2:// ï¿½ï¿½ï¿½ï¿½
+									osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½ï¿½ï¿½ï¿½");
+									System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 									osys.showBookList(bookDB.search(scan.nextLine(), 2));
 									break;
-								case 3:// ÃâÆÇ»ç
-									osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­°Ë»ö","ÃâÆÇ»ç");
-									System.out.println("°Ë»öÇÏ½Ç ÃâÆÇ»ç¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+								case 3:// ï¿½ï¿½ï¿½Ç»ï¿½
+									osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½ï¿½ï¿½Ç»ï¿½");
+									System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½Ç»ç¸¦ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 									osys.showBookList(bookDB.search(scan.nextLine(), 3));
 									break;
-								case 4:// ºÐ¾ß
-									osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­°Ë»ö","ºÐ¾ß");
-									System.out.println("°Ë»öÇÏ½Ç ºÐ¾ß¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+								case 4:// ï¿½Ð¾ï¿½
+									osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½Ð¾ï¿½");
+									System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½Ð¾ß¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 									osys.showBookList(bookDB.search(scan.nextLine(), 4));
 									break;
-								case 5:// ÀÎµ¦½º
-									osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­°Ë»ö","ÀÎµ¦½º");
-									System.out.println("°Ë»öÇÏ½Ç ÀÎµ¦½º¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+								case 5:// ï¿½Îµï¿½ï¿½ï¿½
+									osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½Îµï¿½ï¿½ï¿½");
+									System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 									osys.showBookList(bookDB.search(scan.nextLine(), 5));
 									break;
 								case 6:// ISBN
-									osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­°Ë»ö","ISBN");
+									osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ISBN");
 									osys.showBookList(bookDB.search(scan.nextLine(), 6));
-									System.out.println("°Ë»öÇÏ½Ç ISBNÀ» ÀÔ·ÂÇÏ¼¼¿ä");
+									System.out.println("ï¿½Ë»ï¿½ï¿½Ï½ï¿½ ISBNï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 									break;
-								case 7:// ÀüÃ¼ µµ¼­¸ñ·Ï
-									osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­°Ë»ö","ÀüÃ¼ µµ¼­¸ñ·Ï");
-									System.out.println("ÀüÃ¼ µµ¼­ ¸ñ·ÏÀÔ´Ï´Ù.");
+								case 7:// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+									osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½","ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+									System.out.println("ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
 									bookDB.searchAll();
 									continue admin;
-								case 0:// ÀÌÀüÈ­¸éÀ¸·Î
-									System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+								case 0:// ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½
+									System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 									continue admin;
 								}
 								break;
-							case 2:// µµ¼­Ãß°¡
-								osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­Ãß°¡");
+							case 2:// ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½
+								osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½");
 								osys.admin_addbook();
 								bookDB.input();
 								break;
-							case 3:// µµ¼­¼öÁ¤
-								osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­¼öÁ¤");
+							case 3:// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+								osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 								osys.admin_modifybook();
 								selected = bookDB.adminsearch(bookDB);
 								if(selected==null) {
@@ -374,8 +374,8 @@ public class Controller {
 								bookDB.update(selected);
 								}
 								break;
-							case 4:// µµ¼­»èÁ¦
-								osys.history(loginAdm.getId(),"µµ¼­°ü¸®","µµ¼­»èÁ¦");
+							case 4:// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+								osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 								osys.admin_delbook();
 								selected = bookDB.adminsearch(bookDB);
 								if(selected==null) {
@@ -384,51 +384,53 @@ public class Controller {
 								bookDB.delete(selected);
 								}
 								break;
-							case 0:// ÀÌÀüÈ­¸é
-								System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+							case 0:// ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
+								System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 								break bookmng;
 							}
 						} // end while_bookmng
-					case 2:// È¸¿ø°ü¸®
-						osys.history(loginAdm.getId(),"È¸¿ø°ü¸®");
+					case 2:// È¸ï¿½ï¿½ï¿½
+						osys.history(loginAdm.getId(),"È¸ï¿½ï¿½ï¿½");
 						osys.admin_membermng();
 						menu = scan.nextInt();
 						scan.nextLine();
 
-						membermng: while (true) {// È¸¿ø°ü¸®¸Þ´º while
-							switch (menu) {// 1.È¸¿ø°Ë»ö 2.ÀüÃ¼È¸¿ø¸ñ·Ï 3.ºí·¢¸®½ºÆ® 0.ÀÌÀüÈ­¸é
-							case 1:// È¸¿ø°Ë»ö
-								osys.history(loginAdm.getId(),"È¸¿ø°ü¸®","È¸¿ø°Ë»ö");
+
+						membermng: while (true) {// È¸ï¿½ï¿½ï¿½Þ´ï¿½ while
+							switch (menu) {// 1.È¸ï¿½ï¿½Ë»ï¿½ 2.ï¿½ï¿½Ã¼È¸ï¿½ï¿½ï¿½ï¿½ 3.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® 0.ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
+							case 1:// È¸ï¿½ï¿½Ë»ï¿½
+								osys.history(loginAdm.getId(),"È¸ï¿½ï¿½ï¿½","È¸ï¿½ï¿½Ë»ï¿½");
+
 								osys.admin_findmem();
 								String id=scan.nextLine();
 								memberDB.search(id);
 								break;
-							case 2:// ÀüÃ¼È¸¿ø¸ñ·Ï
-								osys.history(loginAdm.getId(),"È¸¿ø°ü¸®","ÀüÃ¼ È¸¿ø¸ñ·Ï");
-									memberDB.searchAll();// ÀüÃ¼È¸¿ø Ãâ·Â ¸Þ¼­µå
+							case 2:// ï¿½ï¿½Ã¼È¸ï¿½ï¿½ï¿½ï¿½
+								osys.history(loginAdm.getId(),"È¸ï¿½ï¿½ï¿½","ï¿½ï¿½Ã¼ È¸ï¿½ï¿½ï¿½ï¿½");
+									memberDB.searchAll();// ï¿½ï¿½Ã¼È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 								break;
-							case 3:// ºí·¢¸®½ºÆ®
-								osys.history(loginAdm.getId(), "È¸¿ø°ü¸®", "ºí·¢¸®½ºÆ®");
-								System.out.println("ºí·¢¸®½ºÆ® È¸¿ø¸ñ·ÏÀÔ´Ï´Ù.");
+							case 3:// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+								osys.history(loginAdm.getId(), "È¸ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®");
+								System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
 								memberDB.blackList();
 								break;
-							case 0:// ÀÌÀüÈ­¸é
-								System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+							case 0:// ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
+								System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 								break membermng;
 							}// end switch_membermng
 						}
-					case 3:// °ÇÀÇ»çÇ×
-							// °ÇÀÇ»çÇ× Ãâ·Â ¸Þ¼­µå(db)
-						osys.history(loginAdm.getId(),"°ÇÀÇ»çÇ×");
-						System.out.println("1.°Ë»ö	2.´äº¯	0.ÀÌÀüÈ­¸é");
+					case 3:// ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½
+							// ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½(db)
+						osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½");
+						System.out.println("1.ï¿½Ë»ï¿½	2.ï¿½äº¯	0.ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½");
 						menu = scan.nextInt();
 						scan.nextLine();
-						request: while (true) {// È¸¿ø°ü¸®¸Þ´º while
+						request: while (true) {// È¸ï¿½ï¿½ï¿½Þ´ï¿½ while
 							switch (menu) {
-							case 1:// °Ë»ö
-								osys.history(loginAdm.getId(),"°ÇÀÇ»çÇ×","°Ë»ö");
-								System.out.println("°Ë»öÇÏ½Ã°íÀÚ ÇÏ´Â °ÇÀÇ»çÇ×ÀÇ ¾ÆÀÌµð¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.(0Àº ÀÌÀü È­¸é)");
-								System.out.print("¾ÆÀÌµð: ");
+							case 1:// ï¿½Ë»ï¿½
+								osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½","ï¿½Ë»ï¿½");
+								System.out.println("ï¿½Ë»ï¿½ï¿½Ï½Ã°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.(0ï¿½ ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½)");
+								System.out.print("ï¿½ï¿½ï¿½Ìµï¿½: ");
 								String searchId = scan.nextLine();
 								if(searchId.equals("0")) continue admin;
 								
@@ -438,21 +440,21 @@ public class Controller {
 									int page = 1;
 									commentDB.showPages(page,searchList);
 									while(true) {
-										System.out.println("1.ÀÌÀü ÆäÀÌÁö  2.´ÙÀ½ ÆäÀÌÁö  0.ÀÌÀü È­¸é");
+										System.out.println("1.ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  2.ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  0.ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½");
 										int subMenu = scan.nextInt();
 										scan.nextLine();
-										if(subMenu==0) continue request;	//0À» ÀÔ·Â¹ÞÀ¸¸é °ÇÀÇ»çÇ× ¸Þ´º·Î.
+										if(subMenu==0) continue request;	//0ï¿½ ï¿½Ô·Â¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½.
 										if(subMenu==1) page = commentDB.showPages(--page,searchList); 
 										else if(subMenu==2) page = commentDB.showPages(++page,searchList);
-										else System.out.println("Àß¸øµÈ ÀÔ·Â!");
+										else System.out.println("ï¿½ß¸ï¿½ï¿½ ï¿½Ô·ï¿½!");
 									}
 								} else {
-									System.out.println("µî·ÏµÈ °ÇÀÇ»çÇ×ÀÌ ¾ø½À´Ï´Ù.");
+									System.out.println("ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½.");
 									continue request;
 								}
-							case 2:// ´äº¯
-								osys.history(loginAdm.getId(),"°ÇÀÇ»çÇ×","´äº¯");
-								System.out.println("´äº¯ÇÏ½Ã°íÀÚ ÇÏ´Â °ÇÀÇ»çÇ×ÀÇ ¾ÆÀÌµð¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. (0Àº ÀÌÀü È­¸é)");
+							case 2:// ï¿½äº¯
+								osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½","ï¿½äº¯");
+								System.out.println("ï¿½äº¯ï¿½Ï½Ã°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½. (0ï¿½ ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½)");
 								searchId = scan.nextLine();
 								if(searchId.equals("0")) continue admin;
 								
@@ -461,81 +463,81 @@ public class Controller {
 								if(searchList!=null) {
 									commentDB.showCommentList(searchList);
 									
-									System.out.println("´äº¯ÇÏ½Ã°íÀÚ ÇÏ´Â °ÇÀÇ»çÇ×ÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
-									System.out.print("¹øÈ£: ");
+									System.out.println("ï¿½äº¯ï¿½Ï½Ã°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
+									System.out.print("ï¿½ï¿½È£: ");
 									
 									int searchNo = scan.nextInt();
 									scan.nextLine();
 									commentDB.replyComment(searchNo,searchList,loginAdm);
 									continue request;
 								} else {
-									System.out.println("µî·ÏµÈ °ÇÀÇ»çÇ×ÀÌ ¾ø½À´Ï´Ù.");
+									System.out.println("ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½.");
 									continue request;
 								}
-							case 0:// ÀÌÀüÈ­¸é
-								System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+							case 0:// ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
+								System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 								break request;
 							}// end switch
 						} // end while_request
-					case 4:// °ü¸®ÀÚ °ü¸®
-						osys.history(loginAdm.getId(),"°ü¸®ÀÚ °ü¸®");
+					case 4:// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+						osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½");
 						osys.admin_admng();
 						menu = scan.nextInt();
 						scan.nextLine();
-						admng: while (true) {// °ü¸®ÀÚ°ü¸®¸Þ´º while
-							switch (menu) {// 1.°ü¸®ÀÚ °Ë»ö 2.ÀüÃ¼ °ü¸®ÀÚ ¸ñ·Ï 3.»õ °ü¸®ÀÚ µî·Ï 0.ÀÌÀüÈ­¸é
-							case 1:// °ü¸®ÀÚ °Ë»ö
-								osys.history(loginAdm.getId(),"°ü¸®ÀÚ °ü¸®","°ü¸®ÀÚ °Ë»ö");
-								System.out.println("°Ë»öÇÒ °ü¸®ÀÚ ¾ÆÀÌµð È¤Àº ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+						admng: while (true) {// ï¿½ï¿½ï¿½Ú°ï¿½Þ´ï¿½ while
+							switch (menu) {// 1.ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ 2.ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 3.ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 0.ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
+							case 1:// ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+								osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½");
+								System.out.println("ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ È¤ï¿½ ï¿½Ì¸ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
 								String searchAdminId = scan.nextLine();
-								adminDB.search(searchAdminId);// °ü¸®ÀÚ °Ë»ö ¸Þ¼­µå
+								adminDB.search(searchAdminId);// ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 								break admng;
-							case 2:// ÀüÃ¼ °ü¸®ÀÚ ¸ñ·Ï
-								osys.history(loginAdm.getId(),"°ü¸®ÀÚ °ü¸®","ÀüÃ¼ °ü¸®ÀÚ ¸ñ·Ï");
-								adminDB.searchAll();// ÀüÃ¼ °ü¸®ÀÚ ¸ñ·Ï Ãâ·Â ¸Þ¼­µå
+							case 2:// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+								osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½","ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
+								adminDB.searchAll();// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 								break admng;
-							case 3:// »õ °ü¸®ÀÚ µî·Ï
-								osys.history(loginAdm.getId(),"°ü¸®ÀÚ °ü¸®","»õ °ü¸®ÀÚ µî·Ï");
+							case 3:// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+								osys.history(loginAdm.getId(),"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½","ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
 								osys.admin_newad();// y or n
 								String menu2 = scan.nextLine();
 								newadm: while (true) {
 									if (menu2.equalsIgnoreCase("y")) {
-										adminDB.input();// °ü¸®ÀÚ Ãß°¡ ¸Þ¼­µå
+										adminDB.input();// ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 										break newadm;
 									} else  {
-										System.out.println("°ü¸®ÀÚ °ü¸®È­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+										System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 										break admng;
 									} 
 								} // end while_newadm
-							case 0:// ÀÌÀüÈ­¸é
-								System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+							case 0:// ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½
+								System.out.println("ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½Ï´ï¿½.");
 								break admng;
 							}// end switch
 						} // end while_request
-					case 5:// ·Î±×¾Æ¿ô
-						while(true) {// ·Î±×¾Æ¿ô ¸Þ¼­µå
-							osys.history(loginMem.getId(),"·Î±×¾Æ¿ô");
-							System.out.println("·Î±×¾Æ¿ôÀ» ÇÏ½Ã°Ú½À´Ï±î? y/n");
+					case 5:// ï¿½Î±×¾Æ¿ï¿½
+						while(true) {// ï¿½Î±×¾Æ¿ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+							osys.history(loginMem.getId(),"ï¿½Î±×¾Æ¿ï¿½");
+							System.out.println("ï¿½Î±×¾Æ¿ï¿½ï¿½ ï¿½Ï½Ã°Ú½ï¿½Ï±ï¿½? y/n");
 							String out = scan.nextLine();
 							if(out.equals("y")) {
-								System.out.println("·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù.");
+								System.out.println("ï¿½Î±×¾Æ¿ï¿½ ï¿½Ç¾ï¿½ï¿½Ï´ï¿½.");
 								login = 0;
 								break;
 							}else if(out.equals("n")) {
-								System.out.println("·Î±×¾Æ¿ôÀÌ Ãë¼ÒµÇ¾ú½À´Ï´Ù.");
+								System.out.println("ï¿½Î±×¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ÒµÇ¾ï¿½ï¿½Ï´ï¿½.");
 								login = 2;
 								break;
 								}else {
-								System.out.println("Àß¸øÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
+								System.out.println("ï¿½ß¸ï¿½ï¿½Ô·ï¿½ï¿½Ï¼Ì½ï¿½Ï´ï¿½.");
 								continue;
 							}
 						}
-						continue main;// ¸ÞÀÎÀ¸·Î º¸³»¼­ ÆÇº°
-					case 0:// Á¾·á
-						System.out.println("ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù...");
+						continue main;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Çºï¿½
+					case 0:// ï¿½ï¿½ï¿½
+						System.out.println("ï¿½ï¿½Î±×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½...");
 						break main;
 					}
-				} // --------------------------------°ü¸®ÀÚ while end-------------------------
+				} // --------------------------------ï¿½ï¿½ï¿½ï¿½ while end-------------------------
 			}// end switch_login
 		} // end while_main
 
