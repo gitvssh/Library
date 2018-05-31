@@ -1,5 +1,7 @@
 package libProject;
 
+import java.time.LocalDate;
+
 //toString 규격에 맞게 수정
 public class Book implements Data{
 	
@@ -30,8 +32,18 @@ public class Book implements Data{
 	
 	Member renter;
 	
+	LocalDate returnDate;
+	
 //	상세정보(Desc) 
 // 객체를 인스턴스변수로 받아서 사용하는것 나중에 구현
+
+	public LocalDate getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(LocalDate returnDate) {
+		this.returnDate = returnDate;
+	}
 
 	//기본생성자
 	public Book() {}

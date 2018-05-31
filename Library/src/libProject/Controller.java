@@ -1,5 +1,6 @@
 package libProject;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,6 +24,8 @@ public class Controller {
 		//멤버변수 선언절
 		int menu;// 화면 메뉴선택에 활용할 메뉴
 		int login = 0;// 로그인 검사
+		
+		detectBlackList(memberDB.memberList); //부팅시 반납일자 연체 중인 회원 자동 탐지
 
 		// -----------------메인시작-----------------------
 		main: while (true) {
@@ -544,4 +547,19 @@ public class Controller {
 
 	}// end main
 
+	static void detectBlackList(List<Member> list) {	//회원의 도서 연체 여부 검사
+		if(list == null || list.size()==0) return;
+		for(Member m:list) {
+			List<Book> rentList = m.getRentList();
+			if(rentList == null || rentList.size()==0) continue;
+			else {
+				for(Book b:rentList) {
+					if(LocalDate.now().isAfter(b.getReturnDate())) {
+						m.setStatus(true);
+						break;
+					}
+				}
+			}
+		}
+	}
 }// end class
