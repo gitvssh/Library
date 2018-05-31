@@ -24,15 +24,15 @@ public MemberDB() {
 	memberList = new ArrayList<>();
 	
 	//더미 데이터(연체자 체크용)
-//	ArrayList<Book> dumRentList = new ArrayList<>();
-//	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
-//	LocalDate date = LocalDate.now();
-//	LocalDate returnDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()-7);
-//	dumBook.setReturnDate(returnDate);
-//	dumRentList.add(dumBook);
-//	Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814", false);
-//	dumMember.setRentList(dumRentList);
-//	this.memberList.add(dumMember);
+	ArrayList<Book> dumRentList = new ArrayList<>();
+	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
+	LocalDate date = LocalDate.now();
+	LocalDate returnDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()-7);
+	dumBook.setReturnDate(returnDate);
+	dumRentList.add(dumBook);
+	Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814", false);
+	dumMember.setRentList(dumRentList);
+	this.memberList.add(dumMember);
 	
 	this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814", false));
 	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
