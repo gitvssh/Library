@@ -266,7 +266,17 @@ public class MemberDB extends DB {
 				for (int i = 0; i < memberList.size(); i++) {
 					if (memberList.get(i).id.equals(id)) {
 						memberList.get(i).setBlackstatus(true);
-						memberList.get(i).setIdstatus("계정정지");
+						if (memberList.get(i).status == false) {
+							memberList.get(i).idstatus = "정상";
+						} else if (memberList.get(i).status == true) {
+
+							if (memberList.get(i).blackstatus == false) {
+
+								memberList.get(i).idstatus = "연체중";
+							} else {
+								memberList.get(i).idstatus = "계정정지";
+							}
+						}
 						System.out.println("┌────────────────────────────────────────────────────────────┐");
 						System.out
 								.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
@@ -288,7 +298,17 @@ public class MemberDB extends DB {
 			for (int i = 0; i < memberList.size(); i++) {
 				if (memberList.get(i).id.equals(id)) {
 					memberList.get(i).setBlackstatus(false);
-					memberList.get(i).setIdstatus("연체중");
+					if (memberList.get(i).status == false) {
+						memberList.get(i).idstatus = "정상";
+					} else if (memberList.get(i).status == true) {
+
+						if (memberList.get(i).blackstatus == false) {
+
+							memberList.get(i).idstatus = "연체중";
+						} else {
+							memberList.get(i).idstatus = "계정정지";
+						}
+					}
 					System.out.println("┌────────────────────────────────────────────────────────────┐");
 					System.out.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
 					System.out.println("└────────────────────────────────────────────────────────────┘");
