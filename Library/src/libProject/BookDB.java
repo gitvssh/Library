@@ -340,7 +340,7 @@ public class BookDB extends DB{
 		//있으면 true, 없으면 false.
 	}
 	
-	public int showPages(int page) {//전체 관리자 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
+	public int showPages(int page) {//전체 책 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
 		int totalPages = (int)Math.ceil(bookList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
@@ -357,7 +357,7 @@ public class BookDB extends DB{
 		return page;
 	}
 	
-	public int showPages(int page, List<Comment> searchList) {//검색한 관리자 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
+	public int showPages(int page, List<Book> searchList) {//검색한 책 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
 		int totalPages = (int)Math.ceil(searchList.size()/10.);
 		
 		if(page<1 || page>totalPages) {

@@ -9,23 +9,23 @@ import java.util.Scanner;
 import libProject.Admin;
 import libProject.Member;
 
-public class CommentDB {	//°ÇÀÇ»çÇ× DBÅ¬·¡½º
+public class CommentDB {	//ê±´ì˜ì‚¬í•­ DBí´ë˜ìŠ¤
 	static int commentNo = 0;
-	ArrayList<Comment> commentList;	//°ÇÀÇ»çÇ×ÀÌ ÀúÀåµÇ´Â ¸®½ºÆ®
+	ArrayList<Comment> commentList;	//ê±´ì˜ì‚¬í•­ì´ ì €ì¥ë˜ëŠ” ë¦¬ìŠ¤íŠ¸
 	
-	public CommentDB() {	//DB°´Ã¼ »ı¼º½Ã ¸®½ºÆ®µµ °´Ã¼»ı¼º.
+	public CommentDB() {	//DBê°ì²´ ìƒì„±ì‹œ ë¦¬ìŠ¤íŠ¸ë„ ê°ì²´ìƒì„±.
 		commentList = new ArrayList<>();
-		for(int i=0; i<31; i++)	//´õ¹Ì °ÇÀÇ»çÇ× »ı¼º
+		for(int i=0; i<31; i++)	//ë”ë¯¸ ê±´ì˜ì‚¬í•­ ìƒì„±
 		commentList.add(new Comment(i+1, "java111", new Date(), i+1+"", i+1+""));
 	}
 	
-	public ArrayList<Comment> searchComments(String id) {	//ÀÔ·Â Å°¿öµå·Î ÇØ´ç ¾ÆÀÌµğÀÇ °ÇÀÇ»çÇ×À» °Ë»öÇÏ´Â ¸Ş¼­µå
-		ArrayList<Comment> searchList = new ArrayList<>();	//°Ë»ö°á°ú¸¦ ´ã´Â ¸®½ºÆ®(°á°ú°¡ ¾øÀ¸¸é null ¸®ÅÏ)
-		for(Comment comment:commentList) {	//ÇØ´ç Å°¿öµå¸¦ Æ÷ÇÔÇÏ´Â ¾ÆÀÌµğÀÇ °ÇÀÇ»çÇ×À» ÀúÀåµÈ ¸®½ºÆ®¿¡¼­ °Ë»ö
+	public ArrayList<Comment> searchComments(String id) {	//ì…ë ¥ í‚¤ì›Œë“œë¡œ í•´ë‹¹ ì•„ì´ë””ì˜ ê±´ì˜ì‚¬í•­ì„ ê²€ìƒ‰í•˜ëŠ” ë©”ì„œë“œ
+		ArrayList<Comment> searchList = new ArrayList<>();	//ê²€ìƒ‰ê²°ê³¼ë¥¼ ë‹´ëŠ” ë¦¬ìŠ¤íŠ¸(ê²°ê³¼ê°€ ì—†ìœ¼ë©´ null ë¦¬í„´)
+		for(Comment comment:commentList) {	//í•´ë‹¹ í‚¤ì›Œë“œë¥¼ í¬í•¨í•˜ëŠ” ì•„ì´ë””ì˜ ê±´ì˜ì‚¬í•­ì„ ì €ì¥ëœ ë¦¬ìŠ¤íŠ¸ì—ì„œ ê²€ìƒ‰
 			if(comment.getId().equals(id)) searchList.add(comment);
 		}
 		if(searchList.size()==0) return null;
-		else return searchList;	//°Ë»ö°á°ú ¸®ÅÏ
+		else return searchList;	//ê²€ìƒ‰ê²°ê³¼ ë¦¬í„´
 	}
 	
 	public void replyComment(int no,ArrayList<Comment> searchList,Admin loginAdm) {
@@ -33,88 +33,88 @@ public class CommentDB {	//°ÇÀÇ»çÇ× DBÅ¬·¡½º
 			if(c.getNo()==no) {
 				System.out.println(c);
 				while(true) {
-					System.out.println("ÇØ´ç °ÇÀÇ»çÇ×¿¡ ´äº¯À» ÀÛ¼ºÇÏ½Ã°Ú½À´Ï±î? (Y/N)");
+					System.out.println("í•´ë‹¹ ê±´ì˜ì‚¬í•­ì— ë‹µë³€ì„ ì‘ì„±í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N)");
 					Scanner scan = new Scanner(System.in);
 					String yn = scan.nextLine().toUpperCase().trim();
 					
 					if(yn.equals("Y")) {
-						System.out.println("<°ü¸®ÀÚ ´äº¯>");
-						String id = loginAdm.getId();	//·Î±×ÀÎ È¸¿ø ¾ÆÀÌµğ
-						Date date = new Date();	//ÇöÀç ³¯Â¥ °´Ã¼
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	//ÇöÀç ³¯Â¥¸¦ ÇØ´ç Çü½ÄÀ¸·Î Æ÷¸ÅÆÃ.
+						System.out.println("<ê´€ë¦¬ì ë‹µë³€>");
+						String id = loginAdm.getId();	//ë¡œê·¸ì¸ íšŒì› ì•„ì´ë””
+						Date date = new Date();	//í˜„ì¬ ë‚ ì§œ ê°ì²´
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	//í˜„ì¬ ë‚ ì§œë¥¼ í•´ë‹¹ í˜•ì‹ìœ¼ë¡œ í¬ë§¤íŒ….
 						
-						System.out.printf("¾ÆÀÌµğ: %s (%s)\n", id, sdf.format(date));
-						System.out.print("Á¦¸ñ: ");
+						System.out.printf("ì•„ì´ë””: %s (%s)\n", id, sdf.format(date));
+						System.out.print("ì œëª©: ");
 						String title = scan.nextLine();
-						System.out.println("[³»¿ë]");
+						System.out.println("[ë‚´ìš©]");
 						String content = scan.nextLine();
 						
-						while(true) {	//³»¿ëÈ®ÀÎ
-							System.out.println("ÀÛ¼ºÇÏ½Å ³»¿ëÀÌ ¸Â½À´Ï±î? (Y/N)");
+						while(true) {	//ë‚´ìš©í™•ì¸
+							System.out.println("ì‘ì„±í•˜ì‹  ë‚´ìš©ì´ ë§ìŠµë‹ˆê¹Œ? (Y/N)");
 							yn = scan.nextLine().toUpperCase().trim();
 							if(yn.equals("Y")) {
 								c.setReply(new Reply(id, date, title, content));
-								System.out.println("´äº¯ÀÌ Ãß°¡µÆ½À´Ï´Ù.");
+								System.out.println("ë‹µë³€ì´ ì¶”ê°€ëìŠµë‹ˆë‹¤.");
 								return;
 							} else if(yn.equals("N")) {
-								System.out.println("´äº¯ ÀÛ¼ºÀÌ Ãë¼ÒµÆ½À´Ï´Ù. ÀÌÀü ÆäÀÌÁö·Î µ¹¾Æ°©´Ï´Ù.");
+								System.out.println("ë‹µë³€ ì‘ì„±ì´ ì·¨ì†ŒëìŠµë‹ˆë‹¤. ì´ì „ í˜ì´ì§€ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 								return;
 							} else {
-								System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù!");
+								System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤!");
 								continue;
 							}
 						}
 					} else if (yn.equals("N")){
-						System.out.println("´äº¯ ÀÛ¼ºÀ» Ãë¼ÒÇÕ´Ï´Ù.");
+						System.out.println("ë‹µë³€ ì‘ì„±ì„ ì·¨ì†Œí•©ë‹ˆë‹¤.");
 						return;
 					} else {
-						System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
+						System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤.");
 						continue;
 					}
-				} //´äº¯ while¹®
+				} //ë‹µë³€ whileë¬¸
 			}
-		}	//°Ë»ö for¹®
-		System.out.println("ÇØ´çÇÏ´Â ¹øÈ£°¡ ¾ø½À´Ï´Ù.");
+		}	//ê²€ìƒ‰ forë¬¸
+		System.out.println("í•´ë‹¹í•˜ëŠ” ë²ˆí˜¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
 	}
 	
-	public void addComment(Member loginMem){	//·Î±×ÀÎÇÑ È¸¿ø °ÇÀÇ»çÇ×À» ÀÔ·ÂÇÏ´Â ¸Ş¼­µå
+	public void addComment(Member loginMem){	//ë¡œê·¸ì¸í•œ íšŒì› ê±´ì˜ì‚¬í•­ì„ ì…ë ¥í•˜ëŠ” ë©”ì„œë“œ
 		Scanner scan = new Scanner(System.in);
-		String id = loginMem.getId();	//·Î±×ÀÎ È¸¿ø ¾ÆÀÌµğ
-		Date date = new Date();	//ÇöÀç ³¯Â¥ °´Ã¼
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	//ÇöÀç ³¯Â¥¸¦ ÇØ´ç Çü½ÄÀ¸·Î Æ÷¸ÅÆÃ.
+		String id = loginMem.getId();	//ë¡œê·¸ì¸ íšŒì› ì•„ì´ë””
+		Date date = new Date();	//í˜„ì¬ ë‚ ì§œ ê°ì²´
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	//í˜„ì¬ ë‚ ì§œë¥¼ í•´ë‹¹ í˜•ì‹ìœ¼ë¡œ í¬ë§¤íŒ….
 		
-		System.out.printf("¾ÆÀÌµğ: %s (%s)\n", id, sdf.format(date));
-		System.out.print("Á¦¸ñ: ");
+		System.out.printf("ì•„ì´ë””: %s (%s)\n", id, sdf.format(date));
+		System.out.print("ì œëª©: ");
 		String title = scan.nextLine();
-		System.out.println("[³»¿ë]");
+		System.out.println("[ë‚´ìš©]");
 		String content = scan.nextLine();
 		
-		while(true) {	//³»¿ëÈ®ÀÎ
-			System.out.println("ÀÛ¼ºÇÏ½Å ³»¿ëÀÌ ¸Â½À´Ï±î? (Y/N)");
+		while(true) {	//ë‚´ìš©í™•ì¸
+			System.out.println("ì‘ì„±í•˜ì‹  ë‚´ìš©ì´ ë§ìŠµë‹ˆê¹Œ? (Y/N)");
 			String yn = scan.nextLine().toUpperCase().trim();
 			if(yn.equals("Y")) {
 				if(commentList.add(new Comment(++commentNo, id, date, title, content))) {
-					System.out.println("°ÇÀÇ»çÇ×ÀÌ Ãß°¡µÆ½À´Ï´Ù.");
+					System.out.println("ê±´ì˜ì‚¬í•­ì´ ì¶”ê°€ëìŠµë‹ˆë‹¤.");
 					return;
 				} else {
-					System.out.println("¿¡·¯¹ß»ı! °ÇÀÇ»çÇ×ÀÌ Ãß°¡µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+					System.out.println("ì—ëŸ¬ë°œìƒ! ê±´ì˜ì‚¬í•­ì´ ì¶”ê°€ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 					return;
 				}
 			} else if(yn.equals("N")) {
-				System.out.println("°ÇÀÇ»çÇ× ÀÛ¼ºÀÌ Ãë¼ÒµÆ½À´Ï´Ù. ÀÌÀü ÆäÀÌÁö·Î µ¹¾Æ°©´Ï´Ù.");
+				System.out.println("ê±´ì˜ì‚¬í•­ ì‘ì„±ì´ ì·¨ì†ŒëìŠµë‹ˆë‹¤. ì´ì „ í˜ì´ì§€ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 				return;
 			} else {
-				System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù!");
+				System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤!");
 				continue;
 			}
 		}
 	}
 	
-	public int showPages(int page) {//ÀüÃ¼ °ü¸®ÀÚ ¸ñ·Ï ÆäÀÌÁöº°·Î º¸¿©ÁÖ±â(¸Å°³º¯¼ö´Â °Ë»öÇÏ°íÀÚ ÇÏ´Â ÆäÀÌÁö)
+	public int showPages(int page) {//ì „ì²´ ê´€ë¦¬ì ëª©ë¡ í˜ì´ì§€ë³„ë¡œ ë³´ì—¬ì£¼ê¸°(ë§¤ê°œë³€ìˆ˜ëŠ” ê²€ìƒ‰í•˜ê³ ì í•˜ëŠ” í˜ì´ì§€)
 		int totalPages = (int)Math.ceil(commentList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
-			System.out.println("ÆäÀÌÁö ¾øÀ½!");
+			System.out.println("í˜ì´ì§€ ì—†ìŒ!");
 			if(page<1) return 0;
 			else return totalPages+1;
 		}
@@ -123,15 +123,15 @@ public class CommentDB {	//°ÇÀÇ»çÇ× DBÅ¬·¡½º
 		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(commentList.get(i));
 		}
-		System.out.println("ÇöÀç "+page+"ÆäÀÌÁö/"+totalPages+"ÆäÀÌÁö");
+		System.out.println("í˜„ì¬ "+page+"í˜ì´ì§€/"+totalPages+"í˜ì´ì§€");
 		return page;
 	}
 	
-	public int showPages(int page, List<Comment> searchList) {//°Ë»öÇÑ °ü¸®ÀÚ ¸ñ·Ï ÆäÀÌÁöº°·Î º¸¿©ÁÖ±â(¸Å°³ ¸®½ºÆ®´Â °Ë»ö ¸®½ºÆ®)
+	public int showPages(int page, List<Comment> searchList) {//ê²€ìƒ‰í•œ ê´€ë¦¬ì ëª©ë¡ í˜ì´ì§€ë³„ë¡œ ë³´ì—¬ì£¼ê¸°(ë§¤ê°œ ë¦¬ìŠ¤íŠ¸ëŠ” ê²€ìƒ‰ ë¦¬ìŠ¤íŠ¸)
 		int totalPages = (int)Math.ceil(searchList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
-			System.out.println("ÆäÀÌÁö ¾øÀ½!");
+			System.out.println("í˜ì´ì§€ ì—†ìŒ!");
 			if(page<1) return 0;
 			else return totalPages+1;
 		}
@@ -140,11 +140,11 @@ public class CommentDB {	//°ÇÀÇ»çÇ× DBÅ¬·¡½º
 		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(searchList.get(i));
 		}
-		System.out.println("ÇöÀç "+page+"ÆäÀÌÁö/"+totalPages+"ÆäÀÌÁö");
+		System.out.println("í˜„ì¬ "+page+"í˜ì´ì§€/"+totalPages+"í˜ì´ì§€");
 		return page;
 	}
 	
-	public void showCommentList(ArrayList<Comment> searchList) {	//Æ¯Á¤ °ÇÀÇ»çÇ× ¸®½ºÆ®¸¸À» º¸¿©ÁÖ´Â ¸®½ºÆ®
+	public void showCommentList(ArrayList<Comment> searchList) {	//íŠ¹ì • ê±´ì˜ì‚¬í•­ ë¦¬ìŠ¤íŠ¸ë§Œì„ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸
 		for(Comment c:searchList) System.out.println(c);
 	}
 }
