@@ -238,13 +238,18 @@ public class MemberDB extends DB {
 		black: while (true) {
 
 			Osystem osys = new Osystem();
+			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 			System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
+			System.out.println("└──────────────────────────────────────────────────────────────────┘");
 			System.out.println("메뉴를 선택해주세요.");
+			System.out.print(">>");
 			String menu = scanner.nextLine();
 			switch (menu) {
 			case "1":
 				inblack: while (true) {
+					System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 					System.out.println("1.아이디 2.이름 3.생년월일 4.전화번호 5.상태 0.이전화면");
+					System.out.println("└──────────────────────────────────────────────────────────────────┘");
 					System.out.println("정렬을 원하는 항목을 선택해주세요.");
 					String input = scanner.nextLine();
 					switch (input) {

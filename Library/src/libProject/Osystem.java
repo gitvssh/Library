@@ -23,6 +23,7 @@ public class Osystem {
 		System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 		System.out.println("    1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.최다대출도서 0.이전화면으로 ");
 		System.out.println("└──────────────────────────────────────────────────────────────────┘");
+		System.out.println("정렬을 원하는 항목을 선택해주세요.");
 		System.out.print(">>");
 
 	}
@@ -208,6 +209,7 @@ public class Osystem {
 			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 			System.out.printf("                                            총 %2d개의 도서를 관리중입니다.%n", list.size());
 			System.out.println("└──────────────────────────────────────────────────────────────────┘");
+			System.out.println();
 		}
 	}
 
@@ -265,7 +267,7 @@ public class Osystem {
 			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 			System.out.printf("  총 %2d개의 검색결과가 있습니다.              %n", count);
 			System.out.println("└──────────────────────────────────────────────────────────────────┘");
-			System.out.print(">>");
+			System.out.println();
 		}
 	}
 
