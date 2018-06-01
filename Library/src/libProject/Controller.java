@@ -40,55 +40,58 @@ public class Controller {
 					menu = scan.nextInt();
 					scan.nextLine();
 					switch (menu) {// 1.도서검색 2.회원가입 3.로그인 4.관리자로그인 5.아이디/비밀번호 찾기
+					
 					case 1:// 1.도서검색
-						osys.history("비회원","도서검색");
-						osys.observer_search();// 비회원 도서검색 화면
-						menu = scan.nextInt();
-						scan.nextLine();
-						switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
-						case 1:// 제목
-							osys.history("비회원","도서검색","제목");
-							System.out.println("검색하실 제목을 입력하세요");
-							osys.showBookList(bookDB.search(scan.nextLine(), 1));
+						bookSearch: while(true) {	//책 검색창을 반복해서 띄움.
+							osys.history("비회원","도서검색");
+							osys.observer_search();// 비회원 도서검색 화면
+							menu = scan.nextInt();
+							scan.nextLine();
+							switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
+							case 1:// 제목
+								osys.history("비회원","도서검색","제목");
+								System.out.println("검색하실 제목을 입력하세요");
+								osys.showBookList(bookDB.search(scan.nextLine(), 1));
+								continue bookSearch;
+							case 2:// 저자
+								osys.history("비회원","도서검색","저자");
+								System.out.println("검색하실 저자를 입력하세요");
+								osys.showBookList(bookDB.search(scan.nextLine(), 2));
+								continue bookSearch;
+							case 3:// 출판사
+								osys.history("비회원","도서검색","출판사");
+								System.out.println("검색하실 출판사를 입력하세요");
+								osys.showBookList(bookDB.search(scan.nextLine(), 3));
+								continue bookSearch;
+							case 4:// 분야
+								osys.history("비회원","도서검색","분야");
+								System.out.println("검색하실 분야를 입력하세요");
+								System.out.println("분야 리스트");
+								System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
+								System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
+								osys.showBookList(bookDB.search(scan.nextLine(), 4));
+								continue bookSearch;
+							case 5:// 인덱스
+								osys.history("비회원","도서검색","인덱스");
+								System.out.println("검색하실 인덱스를 입력하세요");
+								osys.showBookList(bookDB.search(scan.nextLine(), 5));
+								continue bookSearch;
+							case 6:// ISBN
+								osys.history("비회원","도서검색","ISBN");
+								osys.showBookList(bookDB.search(scan.nextLine(), 6));
+								System.out.println("검색하실 ISBN을 입력하세요");
+								continue bookSearch;
+							case 7:// 전체 도서목록
+								osys.history("비회원","도서검색","전체 도서 목록");
+								System.out.println("전체 도서 목록입니다.");
+								bookDB.searchAll();
+								continue bookSearch;
+							case 0:// 이전화면으로
+								System.out.println("이전화면으로 돌아갑니다.");
+								continue observer;
+							}
 							break;
-						case 2:// 저자
-							osys.history("비회원","도서검색","저자");
-							System.out.println("검색하실 저자를 입력하세요");
-							osys.showBookList(bookDB.search(scan.nextLine(), 2));
-							break;
-						case 3:// 출판사
-							osys.history("비회원","도서검색","출판사");
-							System.out.println("검색하실 출판사를 입력하세요");
-							osys.showBookList(bookDB.search(scan.nextLine(), 3));
-							break;
-						case 4:// 분야
-							osys.history("비회원","도서검색","분야");
-							System.out.println("검색하실 분야를 입력하세요");
-							System.out.println("분야 리스트");
-							System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
-							System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
-							osys.showBookList(bookDB.search(scan.nextLine(), 4));
-							break;
-						case 5:// 인덱스
-							osys.history("비회원","도서검색","인덱스");
-							System.out.println("검색하실 인덱스를 입력하세요");
-							osys.showBookList(bookDB.search(scan.nextLine(), 5));
-							break;
-						case 6:// ISBN
-							osys.history("비회원","도서검색","ISBN");
-							osys.showBookList(bookDB.search(scan.nextLine(), 6));
-							System.out.println("검색하실 ISBN을 입력하세요");
-							break;
-						case 7:// 전체 도서목록
-							osys.history("비회원","도서검색","전체 도서 목록");
-							System.out.println("전체 도서 목록입니다.");
-							bookDB.searchAll();
-							continue observer;
-						case 0:// 이전화면으로
-							System.out.println("이전화면으로 돌아갑니다.");
-							continue observer;
 						}
-						break;
 
 					case 2:// 회원가입
 						osys.history("비회원","회원가입");
@@ -129,26 +132,28 @@ public class Controller {
 						}
 
 					case 5:// 아이디 비밀번호찾기
-						osys.history("비회원","아이디/비밀번호 찾기");
-						osys.observer_findMember();// 정보찾기 화면
-						menu = scan.nextInt();
-						scan.nextLine();
-						switch (menu) {// 1. 아이디 찾기 2.비밀번호 찾기 0. 이전화면
-						case 1:// 아이디 찾기
-							osys.history("비회원","아이디/비밀번호 찾기","아이디 찾기");
-							osys.observer_findId();// 아이디찾기 화면
-							memberDB.FindId();// 아이디 찾기 메서드
+						findInfo: while(true) {	//아이디/비밀번호 찾기창 반복해서 띄움.
+							osys.history("비회원","아이디/비밀번호 찾기");
+							osys.observer_findMember();// 정보찾기 화면
+							menu = scan.nextInt();
+							scan.nextLine();
+							switch (menu) {// 1. 아이디 찾기 2.비밀번호 찾기 0. 이전화면
+							case 1:// 아이디 찾기
+								osys.history("비회원","아이디/비밀번호 찾기","아이디 찾기");
+								osys.observer_findId();// 아이디찾기 화면
+								memberDB.FindId();// 아이디 찾기 메서드
+								continue findInfo;
+							case 2:// 비밀번호 찾기
+								osys.history("비회원","아이디/비밀번호 찾기","비밀번호 찾기");
+								osys.observer_findPass();// 비밀번호찾기 화면
+								memberDB.FindPw();// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
+								continue findInfo;
+							case 0:// 이전화면
+								System.out.println("이전화면으로 돌아갑니다.");
+								continue observer;
+							}
 							break;
-						case 2:// 비밀번호 찾기
-							osys.history("비회원","아이디/비밀번호 찾기","비밀번호 찾기");
-							osys.observer_findPass();// 비밀번호찾기 화면
-							memberDB.FindPw();// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
-							break;
-						case 0:// 이전화면
-							System.out.println("이전화면으로 돌아갑니다.");
-							continue observer;
 						}
-						break;
 					case 0:// 프로그램 종료
 						System.out.println("프로그램을 종료합니다...");
 						break main;
