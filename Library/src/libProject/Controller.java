@@ -449,7 +449,6 @@ public class Controller {
 								osys.history(loginAdm.getId(), "회원관리", "전체 회원목록");
 								memberDB.searchAll();// 전체회원 출력 메서드
 								if (scan.nextLine().equals("0"))
-									continue admin;
 								continue membermng;
 							case 3:// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
@@ -591,7 +590,7 @@ public class Controller {
 						} // end while_request
 					case 5:// 로그아웃
 						while (true) {// 로그아웃 메서드
-							osys.history(loginMem.getId(), "로그아웃");
+							osys.history(loginAdm.getId(), "로그아웃");
 							System.out.println("로그아웃을 하시겠습니까? y/n");
 							String out = scan.nextLine().toLowerCase();
 							if (out.equals("y")) {
