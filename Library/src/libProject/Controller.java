@@ -86,10 +86,10 @@ public class Controller {
 							case "0":// 이전화면으로
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue observer;
-								default:
-									System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+							default:
+								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+								continue;
 							}
-							break;
 						}
 
 					case "2":// 회원가입
@@ -152,17 +152,17 @@ public class Controller {
 							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue observer;
-								default:
-									System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-									continue;
+							default:
+								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+								continue;
 							}// end switch
 						} // end findInfo
 					case "0":// 프로그램 종료
 						System.out.println("프로그램을 종료합니다...");
 						break main;
-						default:
-							System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-							continue;
+					default:
+						System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+						continue;
 					}// end switch
 				} // --------------------------비회원 while end-----------------------
 			case 1:// 회원 1
@@ -171,7 +171,7 @@ public class Controller {
 					osys.history(loginMem.getId());
 					osys.member_main();
 					inMenu = scan.nextLine();
-					
+
 					switch (inMenu) {// 1.도서검색대출 2.빌린도서 3.도서반납 4.회원정보 5.건의사항 9.로그아웃 0.종료");
 					case "1":// 도서검색대출
 						rentBook: while (true) {
@@ -237,17 +237,19 @@ public class Controller {
 						osys.showBookList(loginMem.getRentList());
 						while (true) {
 							System.out.println("0.이전 화면");
-							if (scan.nextInt() == 0)
+							if (scan.nextLine().equals("0"))
 								continue member;
 							else
-								continue;
+								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+							continue;
 						}
 					case "3":// 도서반납
 						osys.history(loginMem.getId(), "도서 반납");
 						bookDB.returnBooks(loginMem.getRentList());
 						continue member;
 					case "4":// 회원정보
-						osys.history(loginMem.getId(), "회원정보");
+						while(true) {
+							osys.history(loginMem.getId(), "회원정보");
 						osys.member_inform();
 						menu = scan.nextLine();
 						switch (menu) {// 1.회원정보 조회 2.회원정보 수정 0. 이전화면
@@ -255,20 +257,21 @@ public class Controller {
 							osys.history(loginMem.getId(), "회원정보", "회원정보조회");
 							osys.member_myinform();
 							memberDB.printMemInform(loginMem);
-							continue member;
+							break;
 						case "2":// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.history(loginMem.getId(), "회원정보", "회원정보 수정");
 							osys.member_modify();
 							memberDB.update(loginMem);
-							continue member;
+							break;
 						// end while modify;
 						case "0":// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue member;
-							default:
-								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-								continue;
+						default:
+							System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+							continue;
 						}// end switch 회원정보메뉴
+						}
 					case "5":// 건의사항
 						comment: while (true) {
 							osys.history(loginMem.getId(), "건의사항");
@@ -306,9 +309,9 @@ public class Controller {
 							case "0": // 0.회원메뉴로 이동
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue member;
-								default:
-									System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-									continue;
+							default:
+								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+								continue;
 							}
 						}
 					case "9":// 로그아웃
@@ -398,9 +401,9 @@ public class Controller {
 								case "0":// 이전화면으로
 									System.out.println("이전화면으로 돌아갑니다.");
 									continue admin;
-									default:
-										System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-										continue;
+								default:
+									System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+									continue;
 								}
 								break;
 							case "2":// 도서추가
@@ -429,9 +432,9 @@ public class Controller {
 							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue admin;
-								default:
-									System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-									continue;
+							default:
+								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+								continue;
 							}
 						} // end while_bookmng
 					case "2":// 회원관리
@@ -462,9 +465,9 @@ public class Controller {
 							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue admin;
-								default:
-									System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-									continue;
+							default:
+								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+								continue;
 							}// end switch_membermng
 						}
 					case "3":// 건의사항
