@@ -89,6 +89,9 @@ public class BookDB extends DB{
 
 		System.out.print("제목 :");
 		title = scan.nextLine();
+		if(title.equals("0")) {
+			return;
+		}
 		System.out.println();
 		
 		System.out.print("저자 :");
@@ -164,58 +167,57 @@ public class BookDB extends DB{
 		
 		while(true) {
 			osys.observer_align();	//정렬메뉴 콘솔 출력(0은 이전화면)
-			int std = scan.nextInt();	//정렬기준(std) 입력 받기.
-			scan.nextLine();
+			String std = scan.nextLine();	//정렬기준(std) 입력 받기.
 			
 			switch(std) {	//std에 따라 책 정렬
-			case 1:	//제목
+			case "1":	//제목
 				//책 제목순으로 오름차순 정렬시켜주는 Comparator객체(정확하게는 구현객체) 생성.
 				BookTitleComparator cTitle = new BookTitleComparator();
 				Collections.sort(bookList, cTitle);	//책 DB의 모든 책 객체를 제목순 정렬.
 				osys.showBookList(bookList);	//정렬된 책 리스트를 출력하기 위해 전체 리스트 출력 메서드 호출(재귀!).
 				continue;
-			case 2:	//저자
+			case "2":	//저자
 				//저자 순으로 오름차순 정렬시켜주는 Comparator객체.
 				BookAuthorComparator cAuthor = new BookAuthorComparator();
 				Collections.sort(bookList, cAuthor);	//책 DB를 저자 순 정렬.
 				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
 				continue;
-			case 3:	//출판사
+			case "3":	//출판사
 				//출판사 순으로 오름차순 정렬시켜주는 Comparator객체.
 				BookPublisherComparator cPublisher = new BookPublisherComparator();
 				Collections.sort(bookList, cPublisher);	//책 DB를 출판사 순 정렬.
 				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
 				continue;
-			case 4:	//주제
+			case "4":	//주제
 				//주제 순으로 오름차순 정렬시켜주는 Comparator객체.
 				BookSubjectComparator cSubject = new BookSubjectComparator();
 				Collections.sort(bookList, cSubject);	//책 DB를 주제 순 정렬.
 				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
 				continue;
-			case 5:	//인덱스
+			case "5":	//인덱스
 				//인덱스 순으로 오름차순 정렬시켜주는 Comparator객체.
 				BookIndexComparator cIndex = new BookIndexComparator();
 				Collections.sort(bookList, cIndex);	//책 DB를 인덱스 순 정렬.
 				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
 				continue;
-			case 6:	//ISBN
+			case "6":	//ISBN
 				//ISBN 순으로 오름차순 정렬시켜주는 Comparator객체.
 				BookISBNComparator cISBN = new BookISBNComparator();
 				Collections.sort(bookList, cISBN);	//책 DB를 인덱스 순 정렬.
 				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
 				continue;
-			case 7:	//최다대출도서
+			case "7":	//최다대출도서
 				//최다대출 순으로 오름차순 정렬시켜주는 Comparator객체.
 				BookRentCountComparator crentCount = new BookRentCountComparator();
 				Collections.sort(bookList, crentCount);	//책 DB를 인덱스 순 정렬.
 				osys.showBookList(bookList);	//전체 리스트 출력 메서드 호출(재귀!).
 				continue;
-			case 0: //이전화면 - 뒤로 가기 전에 반드시 책 목록을 인덱스 순(디폴트!)으로 정렬
+			case "0": //이전화면 - 뒤로 가기 전에 반드시 책 목록을 인덱스 순(디폴트!)으로 정렬
 				BookIndexComparator c = new BookIndexComparator();
 				Collections.sort(bookList, c);
 				return;
 			default: //잘못된 입력
-				System.out.println("잘못된 입력입니다!");
+				System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
 				continue;	//정렬 입력 다시 받음.
 			}
 		}
