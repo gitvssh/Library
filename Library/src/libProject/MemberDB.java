@@ -28,7 +28,7 @@ public MemberDB() {
 	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
 	LocalDate returnDate = LocalDate.of(2018,5,18);	//기간이 지난 반납일
 	dumBook.setReturnDate(returnDate); //기간이 지난 반납일을 책 객체에 삽입
-	dumRentList.add(dumBook);
+	dumRentList.add(dumBook);	//더미 대출 리스트에 반납일이 지난 책 삽입
 	Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814", false);
 	dumMember.setRentList(dumRentList);
 	this.memberList.add(dumMember);
@@ -41,20 +41,18 @@ public MemberDB() {
 
 	for(int i=0;i<memberList.size();i++) {
 		
-	if(memberList.get(i).isStatus()==false) {
-		memberList.get(i).setIdstatus("정상");
-	}else if(memberList.get(i).isStatus()==true){
-		
-	
-		if(memberList.get(i).isBlackstatus()==false) {
-			
-			memberList.get(i).setIdstatus("연체중");
-		}else {
+		if(memberList.get(i).isStatus()==false) {
+			memberList.get(i).setIdstatus("정상");
+		}else if(memberList.get(i).isStatus()==true){
+			if(memberList.get(i).isBlackstatus()==false) {
+				memberList.get(i).setIdstatus("연체중");
+			}else {
 			memberList.get(i).setIdstatus("계정정지");
+			}
 		}
 	}
-	}
-	}
+}
+
 	@Override
 	List search(String search) {
 		System.out.println("┌────────────────────────────────────────────────────────────┐");
@@ -349,18 +347,18 @@ public MemberDB() {
 		name = scanner.nextLine();
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).getName().equals(name)) {
-
 				System.out.println("전화번호를 입력해주세요");
 				tel = scanner.nextLine();
 				if (memberList.get(i).getTel().equals(tel)) {
 					System.out.println("귀하의 아이디는 :" + memberList.get(i).getId() + "입니다.");
-					break;
+					return;
 				} else {
 					System.out.println("잘못된 전화번호 입니다.");
-					break;
+					return;
 				}
 			}
 		}
+		System.out.println("존재하지 않는 이름입니다!");
 	}
 
 	void FindPw() { // 비밀번호 찾기
@@ -375,16 +373,19 @@ public MemberDB() {
 					tel = scanner.nextLine();
 					if (memberList.get(i).getTel().equals(tel)) {
 						System.out.println("해당 번호로 비밀번호를 전송하였습니다.");
+						System.out.println("[비밀번호:"+memberList.get(i).getPassword()+"]");
+						return;
 					} else {
 						System.out.println("잘못된 전화번호 입니다.");
 						break;
 					}
 				} else {
-					System.out.println("잘못된 이름 입니다.");
-					break;
+					System.out.println("잘못된 아이디입니다!");
+					return;
 				}
-			}
+			} 
 		}
+		System.out.println("존재하지 않는 이름입니다!");
 	}
 
 	@Override
