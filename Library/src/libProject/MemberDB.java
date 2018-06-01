@@ -237,7 +237,7 @@ black : while(true){
 		String menu = scanner.nextLine();
 		switch (menu) {
 		case "1":
-			while (true) {
+			inblack : while (true) {
 				System.out.println("1.아이디 2.이름 3.생년월일 4.전화번호 5.상태 0.이전화면");
 				System.out.println("정렬을 원하는 항목을 선택해주세요.");
 				String input = scanner.nextLine();
@@ -343,6 +343,7 @@ black : while(true){
 				System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
 				continue;
 		}
+		break;	
 	}
 	}
 
