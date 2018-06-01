@@ -44,7 +44,6 @@ public class Controller {
 							osys.history("비회원", "도서검색");
 							osys.observer_search();// 비회원 도서검색 화면
 							menu = scan.nextLine();
-							scan.nextLine();
 							switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
 							case "1":// 제목
 								osys.history("비회원", "도서검색", "제목");
@@ -163,6 +162,7 @@ public class Controller {
 						break main;
 						default:
 							System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+							continue;
 					}// end switch
 				} // --------------------------비회원 while end-----------------------
 			case 1:// 회원 1
@@ -439,7 +439,6 @@ public class Controller {
 						membermng: while (true) {// 회원관리메뉴 while
 							osys.admin_membermng();
 							menu = scan.nextLine();
-							scan.nextLine();
 							switch (menu) {// 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면
 							case "1":// 회원검색
 								osys.history(loginAdm.getId(), "회원관리", "회원검색");
