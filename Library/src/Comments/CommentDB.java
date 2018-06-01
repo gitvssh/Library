@@ -16,7 +16,7 @@ public class CommentDB {	//건의사항 DB클래스
 	public CommentDB() {	//DB객체 생성시 리스트도 객체생성.
 		commentList = new ArrayList<>();
 		for(int i=0; i<31; i++)	//더미 건의사항 생성
-			commentList.add(new Comment(i+1, "java111", new Date(), i+1+"", i+1+""));
+			commentList.add(new Comment(++commentNo, "java111", new Date(), i+1+"", i+1+""));
 	}
 	
 	public ArrayList<Comment> getCommentList() {

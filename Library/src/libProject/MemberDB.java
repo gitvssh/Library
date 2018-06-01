@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 import Comments.Comment;
+import Comments.CommentDB;
 import Comparators.*;
 
 public class MemberDB extends DB {
@@ -153,7 +154,9 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 		memberList.remove(m);
 	}
 
-	void update(Data data) { // 회원 정보 수정 메서드
+	void update(Data data) {}
+	
+	void update(Data data, CommentDB commentDB) { // 회원 정보 수정 메서드
 		Member m = (Member) data;
 		int menu = scanner.nextInt();
 		scanner.nextLine();
@@ -161,8 +164,25 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 		case 1:
 			System.out.println("수정하실 아이디를 입력해주세요.");
 			System.out.println("현재 아이디 : " + m.getId());
+			String formerId = m.getId();
 			m.setId(scanner.nextLine());
 			System.out.println("수정되셨습니다. 수정된 아이디 : " + "[" + m.getId() + "]");
+			
+			//아이디 수정과 동시에 건의사항 DB의 아이디도 모두 수정
+			ArrayList<Comment> cList = commentDB.getCommentList();	//건의사항 리스트를 받는다
+			if(cList==null||cList.size()==0) System.out.println("아이디가 수정될 건의사항이 없습니다.");
+			else {
+				int cnt=0;	//아이디가 수정될 건의사항의 개수
+				for(int i=0; i<cList.size(); i++) {
+					if(cList.get(i).getId().equals(formerId)) {	//이전 아이디와 동일한 아이디의 건의사항이 있으면
+						cList.get(i).setId(m.getId());		//수정된 아이디로 수정. 
+						cnt++;	//수정된 건의사항 개수+1
+					}
+				}
+				commentDB.setCommentList(cList);
+				System.out.println("총 "+cnt+"개의 건의사항이 새로운 아이디로 수정됐습니다.");
+			}
+			
 			break;
 		case 2:
 			while (true) {
@@ -203,7 +223,6 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 			System.out.println("이전화면으로 이동합니다.");
 			break;
 		}
-		return;
 	}
 
 //	void printBlack() {							// 블랙리스트 회원 출력용 메서드 - 관리자메뉴에서 사용
