@@ -30,27 +30,35 @@ public MemberDB() {
   //dummy blacklist
 	ArrayList<Book> dumRentList = new ArrayList<>();
 	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
-	LocalDate returnDate = LocalDate.of(2018,5,18);	//기간이 지난 반납일
-	dumBook.setReturnDate(returnDate); //기간이 지난 반납일을 책 객체에 삽입
-	dumRentList.add(dumBook);	//더미 대출 리스트에 반납일이 지난 책 삽입
-	Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814", false);
+
+	LocalDate returnDate = LocalDate.of(2018,5,18);
+	dumBook.setReturnDate(returnDate);
+	dumRentList.add(dumBook);
+	Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814");
 	dumMember.setRentList(dumRentList);
 	this.memberList.add(dumMember);
 	
-	for(int i=0;i<memberList.size();i++) {
-		
-		if(memberList.get(i).isStatus()==false) {
-			memberList.get(i).setIdstatus("정상");
-		}else if(memberList.get(i).isStatus()==true){
-			if(memberList.get(i).isBlackstatus()==false) {
-				memberList.get(i).setIdstatus("연체중");
-			}else {
-			memberList.get(i).setIdstatus("계정정지");
+	memberList.get(0).setStatus(true);// 더미 데이터에게 연체중 상태 부여
+	memberList.get(2).setStatus(true);
+	memberList.get(3).setStatus(true);
+	}
+void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하는 메서드 - 회원메뉴, 관리자메뉴에서 사용
+
+	for (int i = 0; i < memberList.size(); i++) {
+
+		if (memberList.get(i).status == false) {	// boolean status의 값이 false면 "정상"상태
+			memberList.get(i).idstatus = "정상";
+		} else if (memberList.get(i).status == true) {	// boolean status의 값이 true면서 boolean blackstatus의 값이 false이면 "연체중"상태
+
+			if (memberList.get(i).blackstatus == false) {
+
+				memberList.get(i).idstatus = "연체중";
+			} else {									// boolean status의 값이 true면서 boolean blackstatus의 값이 true이면 "계정 정지"상태
+				memberList.get(i).idstatus = "계정정지";
 			}
 		}
 	}
-}//end generator
-
+}
 
 	@Override
 	List search(String search) {
@@ -60,7 +68,7 @@ public MemberDB() {
 		System.out.println("┌────────────────────────────────────────────────────────────┐");
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).getId().contains(search) || memberList.get(i).getName().contains(search)) {
-				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4b  %n", memberList.get(i).id,
+				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", memberList.get(i).id,
 						memberList.get(i).name, memberList.get(i).ssn, memberList.get(i).tel,
 						memberList.get(i).idstatus);
 			}
@@ -109,6 +117,7 @@ public MemberDB() {
 		return null;
 	}
 
+
 	void input() { // 회원가입 메서드
 		System.out.println("아이디를 입력해주세요. 0:이전메뉴로 이동");
 		String id = scanner.nextLine();
@@ -133,7 +142,7 @@ public MemberDB() {
 		System.out.println("전화번호를 입력해주세요.");
 		tel = scanner.nextLine();
 
-		Member m = new Member(id, password, name, ssn, tel, status);
+		Member m = new Member(id, password, name, ssn, tel);
 		memberList.add(m);
 		System.out.println("회원가입이 성공했습니다.");
 	}
@@ -197,20 +206,25 @@ public MemberDB() {
 		return;
 	}
 
-	void blackMem() {
-		int count = 0;
-		for (int i = 0; i < memberList.size(); i++) {
-			if (memberList.get(i).status == true) {
-				count++;
-				System.out.println(memberList.get(i).id + "/" + memberList.get(i).name + "/" + memberList.get(i).ssn
-						+ "/" + memberList.get(i).tel + "/" + memberList.get(i).idstatus);
-			}
-		}
-		System.out.println("총 " + count + "명의 회원이 블랙리스트에 있습니다.");
-
-	}
-
-	void blackList() {
+//	void printBlack() {							// 블랙리스트 회원 출력용 메서드 - 관리자메뉴에서 사용
+//		int count = 0;
+//		System.out.println("┌────────────────────────────────────────────────────────────┐");
+//		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
+//		System.out.println("└────────────────────────────────────────────────────────────┘");
+//		System.out.println("┌────────────────────────────────────────────────────────────┐");
+//		for (int i = 0; i < memberList.size(); i++) {
+//			if (memberList.get(i).status == true) {
+//				count++;
+//				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", memberList.get(i).id,
+//						memberList.get(i).name, memberList.get(i).ssn, memberList.get(i).tel,
+//						memberList.get(i).idstatus);
+//				System.out.println("└────────────────────────────────────────────────────────────┘");
+//			}
+//		}
+//		System.out.println("총 " + count + "명의 회원이 블랙리스트에 있습니다.");		// status가 true인 사람이 있을때마다 count + 1
+//
+//	}
+	void alignBlack() {											// 블랙리스트인 회원을 정렬하고 "계정정지", "계정복구" 부여
 
 		Osystem osys = new Osystem();
 		System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
@@ -228,27 +242,27 @@ public MemberDB() {
 				case 1: // 아이디
 					MemberIdComparator cId = new MemberIdComparator();
 					Collections.sort(memberList, cId);
-					osys.showMemberList(memberList);
+					osys.showBlackList(memberList);
 					continue;
 				case 2: // 이름
 					MemberNameComparator cName = new MemberNameComparator();
 					Collections.sort(memberList, cName);
-					osys.showMemberList(memberList);
+					osys.showBlackList(memberList);
 					continue;
 				case 3: // 생년월일
 					MemberSsnComparator cSsn = new MemberSsnComparator();
 					Collections.sort(memberList, cSsn);
-					osys.showMemberList(memberList);
+					osys.showBlackList(memberList);
 					continue;
 				case 4: // 전화번호
 					MemberTelComparator cTel = new MemberTelComparator();
 					Collections.sort(memberList, cTel);
-					osys.showMemberList(memberList);
+					osys.showBlackList(memberList);
 					continue;
 				case 5: // 상태
 					MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
 					Collections.sort(memberList, cIdStatus);
-					osys.showMemberList(memberList);
+					osys.showBlackList(memberList);
 					continue;
 				case 0:
 					MemberIdComparator c = new MemberIdComparator();
@@ -271,10 +285,21 @@ public MemberDB() {
 				for (int i = 0; i < memberList.size(); i++) {
 					if (memberList.get(i).id.equals(id)) {
 						memberList.get(i).setBlackstatus(true);
-						memberList.get(i).setIdstatus("계정정지");
+						if (memberList.get(i).status == false) {
+							memberList.get(i).idstatus = "정상";
+						} else if (memberList.get(i).status == true) {
 
+							if (memberList.get(i).blackstatus == false) {
+
+								memberList.get(i).idstatus = "연체중";
+							} else {
+								memberList.get(i).idstatus = "계정정지";
+							}
+						}
+						System.out.println("┌────────────────────────────────────────────────────────────┐");
 						System.out
 								.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
+						System.out.println("└────────────────────────────────────────────────────────────┘");
 					}
 				}
 
@@ -292,10 +317,21 @@ public MemberDB() {
 			for (int i = 0; i < memberList.size(); i++) {
 				if (memberList.get(i).id.equals(id)) {
 					memberList.get(i).setBlackstatus(false);
-					memberList.get(i).setIdstatus("연체중");
-					System.out.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
-				}
+					if (memberList.get(i).status == false) {
+						memberList.get(i).idstatus = "정상";
+					} else if (memberList.get(i).status == true) {
 
+						if (memberList.get(i).blackstatus == false) {
+
+							memberList.get(i).idstatus = "연체중";
+						} else {
+							memberList.get(i).idstatus = "계정정지";
+						}
+					}
+					System.out.println("┌────────────────────────────────────────────────────────────┐");
+					System.out.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
+					System.out.println("└────────────────────────────────────────────────────────────┘");
+				}
 			}
 			break;
 		case 0:
@@ -305,13 +341,16 @@ public MemberDB() {
 	}
 
 	// ..
-	Member Login(String id, String password) { // 로그인 메서드
+	Member loginMem(String id, String password) { // 로그인 메서드
+
 		Member loginMem = null;
 
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).getId().equals(id)) {
 				if (memberList.get(i).getPassword().equals(password)) {
+					System.out.println("┌────────────────────────────────────────────────────────────┐");
 					System.out.println(memberList.get(i).getId() + "님이 로그인 하셨습니다.");
+					System.out.println("└────────────────────────────────────────────────────────────┘");
 					System.out.println("회원 메뉴로 이동합니다.");
 					loginMem = memberList.get(i);
 
@@ -325,7 +364,7 @@ public MemberDB() {
 		return loginMem;
 	}
 
-	void MemInform(Data data) { // 회원 정보 출력
+	void printMemInform(Data data) { // 회원 정보 출력
 		Member m = (Member) data;
 		System.out.println("아이디 : " + m.getId());
 		System.out.println("이름 : " + m.getName());
@@ -349,8 +388,11 @@ public MemberDB() {
 				System.out.println("전화번호를 입력해주세요");
 				tel = scanner.nextLine();
 				if (memberList.get(i).getTel().equals(tel)) {
+					System.out.println("┌────────────────────────────────────────────────────────────┐");
 					System.out.println("귀하의 아이디는 :" + memberList.get(i).getId() + "입니다.");
+					System.out.println("└────────────────────────────────────────────────────────────┘");
 					return;
+
 				} else {
 					System.out.println("잘못된 전화번호 입니다.");
 					return;
@@ -371,7 +413,9 @@ public MemberDB() {
 					System.out.println("전화번호를 입력해주세요"); // 전화번호 입력
 					tel = scanner.nextLine();
 					if (memberList.get(i).getTel().equals(tel)) {
+						System.out.println("┌────────────────────────────────────────────────────────────┐");
 						System.out.println("해당 번호로 비밀번호를 전송하였습니다.");
+						System.out.println("└────────────────────────────────────────────────────────────┘");
 						System.out.println("[비밀번호:"+memberList.get(i).getPassword()+"]");
 						return;
 					} else {
@@ -386,7 +430,21 @@ public MemberDB() {
 		}
 		System.out.println("존재하지 않는 이름입니다!");
 	}
+	@Override
+	List searchAll() {
+		System.out.println("┌────────────────────────────────────────────────────────────┐");
+		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
+		System.out.println("└────────────────────────────────────────────────────────────┘");
+		System.out.println("┌────────────────────────────────────────────────────────────┐");
 
+		for (int i = 0; i < memberList.size(); i++) {
+			System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", memberList.get(i).id, memberList.get(i).name,
+					memberList.get(i).ssn, memberList.get(i).tel, memberList.get(i).idstatus);
+			System.out.println("└────────────────────────────────────────────────────────────┘");
+		}
+		System.out.printf("  회원은 총 %s 명 입니다. (0은 이전 화면)%n", memberList.size());
+		return null;
+	}
 	@Override
 	void align() {
 		System.out.println("");

@@ -107,7 +107,9 @@ public class Controller {
 						}
 						System.out.println("비밀번호를 입력하세요.");
 						String password = scan.nextLine();
+
 						loginMem = memberDB.Login(id, password);
+
 						if (loginMem == null) {
 							System.out.println("로그인에 실패하였습니다. 아이디 비밀번호를 다시 확인해주세요.");
 							break;
@@ -161,6 +163,7 @@ public class Controller {
 				} // --------------------------비회원 while end-----------------------
 			case 1:// 회원 1
 				member: while (true) {
+					memberDB.checkStatus();
 					osys.history(loginMem.getId());
 					osys.member_main();
 					menu = scan.nextInt();
@@ -323,6 +326,7 @@ public class Controller {
 				} // -----------------------------회원 while end-----------------------
 			case 2:// 관리자 2
 				admin: while (true) {
+					memberDB.checkStatus();
 					osys.history(loginAdm.getId());
 					osys.admin_main();// 관리자 메인화면
 					menu = scan.nextInt();
@@ -449,9 +453,9 @@ public class Controller {
 							case 3:// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
 								System.out.println("블랙리스트 회원목록입니다.");
-								memberDB.blackMem();// 블랙리스트 출력 메서드
-								memberDB.blackList();
-								continue admin;
+								osys.showBlackList(memberDB.memberList);// 블랙리스트 출력 메서드
+								memberDB.alignBlack();
+								break;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue admin;
