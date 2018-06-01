@@ -1,5 +1,8 @@
 package libProject;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,25 +15,24 @@ import Comparators.*;
 public class BookDB extends DB{
 	List<Book> bookList;
 	Scanner scan = new Scanner(System.in);
-	//°Ë»ö, ÀüÃ¼°Ë»ö, Á¤·Ä ¹Ì¿Ï¼º, toString ±Ô°İ¿¡ ¸Â°Ô ¼öÁ¤
+	//ê²€ìƒ‰, ì „ì²´ê²€ìƒ‰, ì •ë ¬ ë¯¸ì™„ì„±, toString ê·œê²©ì— ë§ê²Œ ìˆ˜ì •
 	
 	public BookDB() {
+		//ë”ë¯¸ ë°ì´í„°ë¡œ ëŒ€ì¶œ íšŸìˆ˜ ì„ì˜ë¡œ ì…ë ¥í•´ë‘˜ ê²ƒ.
 		this.bookList = new ArrayList();
-		this.bookList.add(new Book("¼ÒÇÇÀÇ ¼¼°è","¿ä½´Å¸ÀÎ°¡¾Æ´õ ",1,"Çö¾Ï»ç"));
-		this.bookList.add(new Book("°£´Ù, ºÁ¶ó","¹ıÁ¤",2,"±è¿µ»ç"));
-		this.bookList.add(new Book("ÇÁ·ÎÅ×½ºÅºÆ® À±¸®","¸·½º º£¹ö",3,"Çö´ëÁö¼º"));
-		this.bookList.add(new Book("º°, ºûÀÇ°úÇĞ","Áö¿õ¹è",4,"À§Áî´ıÇÏ¿ì½º"));
-		this.bookList.add(new Book("½Å¼ÒÀç°øÇĞ","¿À¼¼µ¿",5,"º¹µÎÃâÆÇ»ç"));
-		this.bookList.add(new Book("°ø°ø¹Ì¼ú, µµ½Ã¸¦±×¸®´Ù","È«°æÇ¥",6,"Àç½ÂÃâÆÇ"));
-		this.bookList.add(new Book("¾µ¾î´ã´Â ÇÑÀÚ","±ÇÀÛ°¡",7,"¾µ¾î´ã´Â ÇÑÀÚ"));
-		this.bookList.add(new Book("ÀüÀï°ú ÆòÈ­","·¹ÇÁ Åç½ºÅäÀÌ",8,"È«Áø¹Ìµğ¾î"));
-		this.bookList.add(new Book("ºí·¢¾î½º","Æ¼¸Ó½Ã ½º³ªÀÌ´õ",9,"¿­¸°Ã¥µé"));
-		this.bookList.add(new Book("¿Âµ¹, ±â¿ø°ú ¿ª»ç","¼ÕÁøÅÂ",9,"¿ÂÀÌÆÛºê"));
-//		System.out.println("1.Ã¶ÇĞ 2.Á¾±³ 3.»çÈ¸ÇĞ 4.ÀÚ¿¬°úÇĞ");
-//		System.out.println("5.±â¼ú°úÇĞ 6.¿¹¼ú 7.¾ğ¾î 8.¹®ÇĞ 9.¿ª»ç");
+		this.bookList.add(new Book("ì†Œí”¼ì˜ ì„¸ê³„","ìš”ìŠˆíƒ€ì¸ê°€ì•„ë” ",1,"í˜„ì•”ì‚¬"));
+		this.bookList.add(new Book("ê°„ë‹¤, ë´ë¼","ë²•ì •",2,"ê¹€ì˜ì‚¬"));
+		this.bookList.add(new Book("í”„ë¡œí…ŒìŠ¤íƒ„íŠ¸ ìœ¤ë¦¬","ë§‰ìŠ¤ ë² ë²„",3,"í˜„ëŒ€ì§€ì„±"));
+		this.bookList.add(new Book("ë³„, ë¹›ì˜ê³¼í•™","ì§€ì›…ë°°",4,"ìœ„ì¦ˆë¤í•˜ìš°ìŠ¤"));
+		this.bookList.add(new Book("ì‹ ì†Œì¬ê³µí•™","ì˜¤ì„¸ë™",5,"ë³µë‘ì¶œíŒì‚¬"));
+		this.bookList.add(new Book("ê³µê³µë¯¸ìˆ , ë„ì‹œë¥¼ê·¸ë¦¬ë‹¤","í™ê²½í‘œ",6,"ì¬ìŠ¹ì¶œíŒ"));
+		this.bookList.add(new Book("ì“¸ì–´ë‹´ëŠ” í•œì","ê¶Œì‘ê°€",7,"ì“¸ì–´ë‹´ëŠ” í•œì"));
+		this.bookList.add(new Book("ì „ìŸê³¼ í‰í™”","ë ˆí”„ í†¨ìŠ¤í† ì´",8,"í™ì§„ë¯¸ë””ì–´"));
+		this.bookList.add(new Book("ë¸”ë™ì–´ìŠ¤","í‹°ë¨¸ì‹œ ìŠ¤ë‚˜ì´ë”",9,"ì—´ë¦°ì±…ë“¤"));
+		this.bookList.add(new Book("ì˜¨ëŒ, ê¸°ì›ê³¼ ì—­ì‚¬","ì†ì§„íƒœ",9,"ì˜¨ì´í¼ë¸Œ"));
 	}
 
-	//°Ë»ö
+	//ê²€ìƒ‰
 		@Override
 		List search(String title) {
 			List<Book> searchList = new ArrayList<Book>();
@@ -42,28 +44,28 @@ public class BookDB extends DB{
 		
 		List search(String string, int std) {
 			List<Book> searchList = new ArrayList<Book>();
-			switch(std) {//1.Á¦¸ñ 2.ÀúÀÚ 3.ÃâÆÇ»ç 4.ÁÖÁ¦ 5.ÀÎµ¦½º 6.ISBN 7.ÀüÃ¼ µµ¼­¸ñ·Ï 
-			case 1:	//Á¦¸ñ
+			switch(std) {//1.ì œëª© 2.ì €ì 3.ì¶œíŒì‚¬ 4.ì£¼ì œ 5.ì¸ë±ìŠ¤ 6.ISBN 7.ì „ì²´ ë„ì„œëª©ë¡ 
+			case 1:	//ì œëª©
 			for(Book b:bookList) {
 				if(b.title.contains(string)) searchList.add(b);
 			}
 			return searchList;
-			case 2://ÀúÀÚ
+			case 2://ì €ì
 				for(Book b:bookList) {
 					if(b.author.contains(string)) searchList.add(b);
 				}
 				return searchList;
-			case 3://ÃâÆÇ»ç
+			case 3://ì¶œíŒì‚¬
 				for(Book b:bookList) {
 					if(b.publisher.contains(string)) searchList.add(b);
 				}
 				return searchList;
-			case 4://ºĞ¾ß
+			case 4://ë¶„ì•¼
 				for(Book b:bookList) {
 					if(b.subject==Integer.parseInt(string)) searchList.add(b);
 				}
 				return searchList;
-			case 5://ÀÎµ¦½º
+			case 5://ì¸ë±ìŠ¤
 				for(Book b:bookList) {
 					if(b.index.contains(string)) searchList.add(b);
 				}
@@ -77,291 +79,303 @@ public class BookDB extends DB{
 			return null;
 		}//end search
 
-	//µµ¼­ ÀÚ·á ÀÔ·Â¹Ş°í °¡°ø, µ¥ÀÌÅÍ¹İÈ¯
+	//ë„ì„œ ìë£Œ ì…ë ¥ë°›ê³  ê°€ê³µ, ë°ì´í„°ë°˜í™˜
 	void input() {
-		//º¯¼ö ¼±¾ğ
+		//ë³€ìˆ˜ ì„ ì–¸
 		String title="";
 		String author="";
 		int subject=0;
 		String publisher="";
-		//ÀÔ·Â½ÃÀÛ
-		System.out.print("Á¦¸ñ :");
+		//ì…ë ¥ì‹œì‘
+		System.out.print("ì œëª© :");
 		title = scan.nextLine();
 		System.out.println();
-		System.out.print("ÀúÀÚ :");
+		System.out.print("ì €ì :");
 		author = scan.nextLine();
 		System.out.println();
-		//Ã¶ÇĞ Á¾±³ »çÈ¸ÇĞ ÀÚ¿¬°úÇĞ ±â¼ú°úÇĞ ¿¹¼ú ¾ğ¾î ¹®ÇĞ ¿ª»ç
-		System.out.println("ºĞ¾ß ¸®½ºÆ®");
-		System.out.println("1.Ã¶ÇĞ 2.Á¾±³ 3.»çÈ¸ÇĞ 4.ÀÚ¿¬°úÇĞ");
-		System.out.println("5.±â¼ú°úÇĞ 6.¿¹¼ú 7.¾ğ¾î 8.¹®ÇĞ 9.¿ª»ç");
-		System.out.print("ºĞ¾ß :");
+		//ì² í•™ ì¢…êµ ì‚¬íšŒí•™ ìì—°ê³¼í•™ ê¸°ìˆ ê³¼í•™ ì˜ˆìˆ  ì–¸ì–´ ë¬¸í•™ ì—­ì‚¬
+		System.out.println("ë¶„ì•¼ ë¦¬ìŠ¤íŠ¸");
+		System.out.println("1.ì² í•™ 2.ì¢…êµ 3.ì‚¬íšŒí•™ 4.ìì—°ê³¼í•™");
+		System.out.println("5.ê¸°ìˆ ê³¼í•™ 6.ì˜ˆìˆ  7.ì–¸ì–´ 8.ë¬¸í•™ 9.ì—­ì‚¬");
+		System.out.print("ë¶„ì•¼ :");
 		subject = scan.nextInt();
 		scan.nextLine();
 		System.out.println();
-		System.out.print("ÃâÆÇ»ç :");
+		System.out.print("ì¶œíŒì‚¬ :");
 		publisher = scan.nextLine();
 		System.out.println();
 		Book b = new Book(title,author,subject,publisher); 
-		Book.isbn_count++;//Ã¥ ÀÏ·Ã¹øÈ£(Ä«¿îÆ®)+1
-		b.setIndex(b.change_subject(subject)+b.isbn);//ºĞ¾ß + isbn -> ÀÎµ¦½º
+		Book.isbn_count++;//ì±… ì¼ë ¨ë²ˆí˜¸(ì¹´ìš´íŠ¸)+1
+		b.setIndex(b.change_subject(subject)+b.isbn);//ë¶„ì•¼ + isbn -> ì¸ë±ìŠ¤
 		bookList.add(b);
-		System.out.println("µµ¼­µî·ÏÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+		System.out.println("ë„ì„œë“±ë¡ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 
-	//»èÁ¦
+	//ì‚­ì œ
 	@Override
 	void delete(Data data) {
-		Book b = (Book)data;//get,setÀÌ¿ëÀ» À§ÇÑ Çüº¯È¯
-		System.out.println(b.getTitle()+"ÀÌ/°¡ »èÁ¦µË´Ï´Ù.");
+		Book b = (Book)data;//get,setì´ìš©ì„ ìœ„í•œ í˜•ë³€í™˜
+		System.out.println(b.getTitle()+"ì´/ê°€ ì‚­ì œë©ë‹ˆë‹¤.");
 		bookList.remove(b);
 		
 	}
 
 	@Override
 	void update(Data data) {
-		Book b = (Book)data;//get,setÀÌ¿ëÀ» À§ÇÑ Çüº¯È¯
-		//¼öÁ¤½ÃÀÛ
-		System.out.printf("ÇöÀç ÀÔ·ÂµÈ Á¦¸ñ : %s%n",b.getTitle());
-		System.out.print("¼öÁ¤ÇÏ½Ç Á¦¸ñ :");
+		Book b = (Book)data;//get,setì´ìš©ì„ ìœ„í•œ í˜•ë³€í™˜
+		//ìˆ˜ì •ì‹œì‘
+		System.out.printf("í˜„ì¬ ì…ë ¥ëœ ì œëª© : %s%n",b.getTitle());
+		System.out.print("ìˆ˜ì •í•˜ì‹¤ ì œëª© :");
 		b.setTitle(scan.nextLine());
 		System.out.println();
 		
-		System.out.printf("ÇöÀç ÀÔ·ÂµÈ ÀúÀÚ : %s%n",b.getAuthor());
-		System.out.print("¼öÁ¤ÇÏ½Ç ÀúÀÚ :");
+		System.out.printf("í˜„ì¬ ì…ë ¥ëœ ì €ì : %s%n",b.getAuthor());
+		System.out.print("ìˆ˜ì •í•˜ì‹¤ ì €ì :");
 		b.setAuthor(scan.nextLine());
 		System.out.println();
-		//Ã¶ÇĞ Á¾±³ »çÈ¸ÇĞ ÀÚ¿¬°úÇĞ ±â¼ú°úÇĞ ¿¹¼ú ¾ğ¾î ¹®ÇĞ ¿ª»ç
-		System.out.println("ºĞ¾ß ¸®½ºÆ®");
-		System.out.println("1.Ã¶ÇĞ 2.Á¾±³ 3.»çÈ¸ÇĞ 4.ÀÚ¿¬°úÇĞ");
-		System.out.println("5.±â¼ú°úÇĞ 6.¿¹¼ú 7.¾ğ¾î 8.¹®ÇĞ 9.¿ª»ç");
-		System.out.printf("ÇöÀç ÀÔ·ÂµÈ ºĞ¾ß : %s%n",b.change_subject2(b.getSubject()));
-		System.out.print("¼öÁ¤ÇÏ½Ç ºĞ¾ß :");
+		//ì² í•™ ì¢…êµ ì‚¬íšŒí•™ ìì—°ê³¼í•™ ê¸°ìˆ ê³¼í•™ ì˜ˆìˆ  ì–¸ì–´ ë¬¸í•™ ì—­ì‚¬
+		System.out.println("ë¶„ì•¼ ë¦¬ìŠ¤íŠ¸");
+		System.out.println("1.ì² í•™ 2.ì¢…êµ 3.ì‚¬íšŒí•™ 4.ìì—°ê³¼í•™");
+		System.out.println("5.ê¸°ìˆ ê³¼í•™ 6.ì˜ˆìˆ  7.ì–¸ì–´ 8.ë¬¸í•™ 9.ì—­ì‚¬");
+		System.out.printf("í˜„ì¬ ì…ë ¥ëœ ë¶„ì•¼ : %s%n",b.change_subject2(b.getSubject()));
+		System.out.print("ìˆ˜ì •í•˜ì‹¤ ë¶„ì•¼ :");
 		b.setSubject(scan.nextInt());
+		scan.nextLine();
 		System.out.println();
-		System.out.printf("ÇöÀç ÀÔ·ÂµÈ ÃâÆÇ»ç : %s%n",b.getPublisher());
-		System.out.print("¼öÁ¤ÇÏ½Ç ÃâÆÇ»ç :");
+		System.out.printf("í˜„ì¬ ì…ë ¥ëœ ì¶œíŒì‚¬ : %s%n",b.getPublisher());
+		System.out.print("ìˆ˜ì •í•˜ì‹¤ ì¶œíŒì‚¬ :");
 		b.setPublisher(scan.nextLine());
 		System.out.println();
 	}
 
-	//ÀüÃ¼°Ë»ö
+	//ì „ì²´ê²€ìƒ‰
 	@Override
-	List searchAll() {	//Ã¥ ÀüÃ¼ ¸®½ºÆ® Ãâ·Â ¸Ş¼­µå
+	List searchAll() {	//ì±… ì „ì²´ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë©”ì„œë“œ
 		Osystem osys = new Osystem();
-		osys.showBookList(bookList);	//ÀüÃ¼ ¸®½ºÆ® ÄÜ¼ÖÃâ·Â
-		align();	//Ã¥ Á¤·Ä ¸Ş¼­µå È£Ãâ -> align()¿¡¼­ std¿¡ 0À» ÀÔ·ÂÇÏÁö ¾Ê´Â ÇÑ °è¼ÓÇØ¼­ È£ÃâµÇ´Â °Í¿¡ ÁÖ¸ñ.
+		osys.showBookList(bookList);	//ì „ì²´ ë¦¬ìŠ¤íŠ¸ ì½˜ì†”ì¶œë ¥
+		align();	//ì±… ì •ë ¬ ë©”ì„œë“œ í˜¸ì¶œ -> align()ì—ì„œ stdì— 0ì„ ì…ë ¥í•˜ì§€ ì•ŠëŠ” í•œ ê³„ì†í•´ì„œ í˜¸ì¶œë˜ëŠ” ê²ƒì— ì£¼ëª©.
 		return null;
 	}
 
-	//Á¤·Ä
+	//ì •ë ¬
 	@Override
-	void align() {	//Ã¥ Á¤·Ä ¸Ş¼­µå(Ã¥ Á¤·Ä µğÆúÆ® ±âÁØÀº ÀÎµ¦½º ¼ø.)
+	void align() {	//ì±… ì •ë ¬ ë©”ì„œë“œ(ì±… ì •ë ¬ ë””í´íŠ¸ ê¸°ì¤€ì€ ì¸ë±ìŠ¤ ìˆœ.)
 		Osystem osys = new Osystem();	
 		
-		while(true) {	//¹İº¹¹® while - Àß¸øµÈ ÀÔ·Â¹ß»ı½Ã ´Ù½Ã ÀÔ·Â°¡´ÉÇÏ°Ô ·çÇÁÇÔ.
-			osys.observer_align();	//Á¤·Ä¸Ş´º ÄÜ¼Ö Ãâ·Â(0Àº ÀÌÀüÈ­¸é)
-			int std = scan.nextInt();	//Á¤·Ä±âÁØ(std) ÀÔ·Â ¹Ş±â.
+		while(true) {	//ë°˜ë³µë¬¸ while - ì˜ëª»ëœ ì…ë ¥ë°œìƒì‹œ ë‹¤ì‹œ ì…ë ¥ê°€ëŠ¥í•˜ê²Œ ë£¨í”„í•¨.
+			osys.observer_align();	//ì •ë ¬ë©”ë‰´ ì½˜ì†” ì¶œë ¥(0ì€ ì´ì „í™”ë©´)
+			int std = scan.nextInt();	//ì •ë ¬ê¸°ì¤€(std) ì…ë ¥ ë°›ê¸°.
 			scan.nextLine();
 			
-			switch(std) {	//std¿¡ µû¶ó Ã¥ Á¤·Ä
-			case 1:	//Á¦¸ñ
-				//Ã¥ Á¦¸ñ¼øÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä½ÃÄÑÁÖ´Â Comparator°´Ã¼(Á¤È®ÇÏ°Ô´Â ±¸Çö°´Ã¼) »ı¼º.
+			switch(std) {	//stdì— ë”°ë¼ ì±… ì •ë ¬
+			case 1:	//ì œëª©
+				//ì±… ì œëª©ìˆœìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ì‹œì¼œì£¼ëŠ” Comparatorê°ì²´(ì •í™•í•˜ê²ŒëŠ” êµ¬í˜„ê°ì²´) ìƒì„±.
 				BookTitleComparator cTitle = new BookTitleComparator();
-				Collections.sort(bookList, cTitle);	//Ã¥ DBÀÇ ¸ğµç Ã¥ °´Ã¼¸¦ Á¦¸ñ¼ø Á¤·Ä.
-				osys.showBookList(bookList);	//Á¤·ÄµÈ Ã¥ ¸®½ºÆ®¸¦ Ãâ·ÂÇÏ±â À§ÇØ ÀüÃ¼ ¸®½ºÆ® Ãâ·Â ¸Ş¼­µå È£Ãâ(Àç±Í!).
+				Collections.sort(bookList, cTitle);	//ì±… DBì˜ ëª¨ë“  ì±… ê°ì²´ë¥¼ ì œëª©ìˆœ ì •ë ¬.
+				osys.showBookList(bookList);	//ì •ë ¬ëœ ì±… ë¦¬ìŠ¤íŠ¸ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•´ ì „ì²´ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë©”ì„œë“œ í˜¸ì¶œ(ì¬ê·€!).
 				continue;
-			case 2:	//ÀúÀÚ
-				//ÀúÀÚ ¼øÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä½ÃÄÑÁÖ´Â Comparator°´Ã¼.
+			case 2:	//ì €ì
+				//ì €ì ìˆœìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ì‹œì¼œì£¼ëŠ” Comparatorê°ì²´.
 				BookAuthorComparator cAuthor = new BookAuthorComparator();
-				Collections.sort(bookList, cAuthor);	//Ã¥ DB¸¦ ÀúÀÚ ¼ø Á¤·Ä.
-				osys.showBookList(bookList);	//ÀüÃ¼ ¸®½ºÆ® Ãâ·Â ¸Ş¼­µå È£Ãâ(Àç±Í!).
+				Collections.sort(bookList, cAuthor);	//ì±… DBë¥¼ ì €ì ìˆœ ì •ë ¬.
+				osys.showBookList(bookList);	//ì „ì²´ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë©”ì„œë“œ í˜¸ì¶œ(ì¬ê·€!).
 				continue;
-			case 3:	//ÃâÆÇ»ç
-				//ÃâÆÇ»ç ¼øÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä½ÃÄÑÁÖ´Â Comparator°´Ã¼.
+			case 3:	//ì¶œíŒì‚¬
+				//ì¶œíŒì‚¬ ìˆœìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ì‹œì¼œì£¼ëŠ” Comparatorê°ì²´.
 				BookPublisherComparator cPublisher = new BookPublisherComparator();
-				Collections.sort(bookList, cPublisher);	//Ã¥ DB¸¦ ÃâÆÇ»ç ¼ø Á¤·Ä.
-				osys.showBookList(bookList);	//ÀüÃ¼ ¸®½ºÆ® Ãâ·Â ¸Ş¼­µå È£Ãâ(Àç±Í!).
+				Collections.sort(bookList, cPublisher);	//ì±… DBë¥¼ ì¶œíŒì‚¬ ìˆœ ì •ë ¬.
+				osys.showBookList(bookList);	//ì „ì²´ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë©”ì„œë“œ í˜¸ì¶œ(ì¬ê·€!).
 				continue;
-			case 4:	//ÁÖÁ¦
-				//ÁÖÁ¦ ¼øÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä½ÃÄÑÁÖ´Â Comparator°´Ã¼.
+			case 4:	//ì£¼ì œ
+				//ì£¼ì œ ìˆœìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ì‹œì¼œì£¼ëŠ” Comparatorê°ì²´.
 				BookSubjectComparator cSubject = new BookSubjectComparator();
-				Collections.sort(bookList, cSubject);	//Ã¥ DB¸¦ ÁÖÁ¦ ¼ø Á¤·Ä.
-				osys.showBookList(bookList);	//ÀüÃ¼ ¸®½ºÆ® Ãâ·Â ¸Ş¼­µå È£Ãâ(Àç±Í!).
+				Collections.sort(bookList, cSubject);	//ì±… DBë¥¼ ì£¼ì œ ìˆœ ì •ë ¬.
+				osys.showBookList(bookList);	//ì „ì²´ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë©”ì„œë“œ í˜¸ì¶œ(ì¬ê·€!).
 				continue;
-			case 5:	//ÀÎµ¦½º
-				//ÀÎµ¦½º ¼øÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä½ÃÄÑÁÖ´Â Comparator°´Ã¼.
+			case 5:	//ì¸ë±ìŠ¤
+				//ì¸ë±ìŠ¤ ìˆœìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ì‹œì¼œì£¼ëŠ” Comparatorê°ì²´.
 				BookIndexComparator cIndex = new BookIndexComparator();
-				Collections.sort(bookList, cIndex);	//Ã¥ DB¸¦ ÀÎµ¦½º ¼ø Á¤·Ä.
-				osys.showBookList(bookList);	//ÀüÃ¼ ¸®½ºÆ® Ãâ·Â ¸Ş¼­µå È£Ãâ(Àç±Í!).
+				Collections.sort(bookList, cIndex);	//ì±… DBë¥¼ ì¸ë±ìŠ¤ ìˆœ ì •ë ¬.
+				osys.showBookList(bookList);	//ì „ì²´ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë©”ì„œë“œ í˜¸ì¶œ(ì¬ê·€!).
 				continue;
 			case 6:	//ISBN
-				//ISBN ¼øÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä½ÃÄÑÁÖ´Â Comparator°´Ã¼.
+				//ISBN ìˆœìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ì‹œì¼œì£¼ëŠ” Comparatorê°ì²´.
 				BookISBNComparator cISBN = new BookISBNComparator();
-				Collections.sort(bookList, cISBN);	//Ã¥ DB¸¦ ÀÎµ¦½º ¼ø Á¤·Ä.
-				osys.showBookList(bookList);	//ÀüÃ¼ ¸®½ºÆ® Ãâ·Â ¸Ş¼­µå È£Ãâ(Àç±Í!).
+				Collections.sort(bookList, cISBN);	//ì±… DBë¥¼ ì¸ë±ìŠ¤ ìˆœ ì •ë ¬.
+				osys.showBookList(bookList);	//ì „ì²´ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë©”ì„œë“œ í˜¸ì¶œ(ì¬ê·€!).
 				continue;
-			case 0: //ÀÌÀüÈ­¸é - µÚ·Î °¡±â Àü¿¡ ¹İµå½Ã Ã¥ ¸ñ·ÏÀ» ÀÎµ¦½º ¼ø(µğÆúÆ®!)À¸·Î Á¤·Ä
+			case 7:	//ìµœë‹¤ëŒ€ì¶œë„ì„œ
+				//ìµœë‹¤ëŒ€ì¶œ ìˆœìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ì‹œì¼œì£¼ëŠ” Comparatorê°ì²´.
+				BookRentCountComparator crentCount = new BookRentCountComparator();
+				Collections.sort(bookList, crentCount);	//ì±… DBë¥¼ ì¸ë±ìŠ¤ ìˆœ ì •ë ¬.
+				osys.showBookList(bookList);	//ì „ì²´ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë©”ì„œë“œ í˜¸ì¶œ(ì¬ê·€!).
+				continue;
+			case 0: //ì´ì „í™”ë©´ - ë’¤ë¡œ ê°€ê¸° ì „ì— ë°˜ë“œì‹œ ì±… ëª©ë¡ì„ ì¸ë±ìŠ¤ ìˆœ(ë””í´íŠ¸!)ìœ¼ë¡œ ì •ë ¬
 				BookIndexComparator c = new BookIndexComparator();
 				Collections.sort(bookList, c);
 				return;
-			default: //Àß¸øµÈ ÀÔ·Â
-				System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù!");
-				continue;	//Á¤·Ä ÀÔ·Â ´Ù½Ã ¹ŞÀ½.
+			default: //ì˜ëª»ëœ ì…ë ¥
+				System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤!");
+				continue;	//ì •ë ¬ ì…ë ¥ ë‹¤ì‹œ ë°›ìŒ.
 			}
 		}
 	}
 	
 	Book adminsearch(BookDB bookDB) {
-		Book selected = null;//µµ¼­´ëÃâ¿¡ ÇÊ¿äÇÑ ´ëÃâÄ«Æ® ÂüÁ¶º¯¼ö
+		Book selected = null;//ë„ì„œëŒ€ì¶œì— í•„ìš”í•œ ëŒ€ì¶œì¹´íŠ¸ ì°¸ì¡°ë³€ìˆ˜
 		check: while (true) {
 			String rent = scan.nextLine();
-			if (rent.length() != 7) {//7ÀÚ¸® ¾Æ´Ò°æ¿ì ¿¹¿ÜÃ³¸®
-				System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
+			if (rent.length() != 7) {//7ìë¦¬ ì•„ë‹ê²½ìš° ì˜ˆì™¸ì²˜ë¦¬
+				System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤.");
 				break;
 			}
-			else if(rent.equals("0")){//ÀÌÀüÈ­¸é ¿¹¿ÜÃ³¸®
-				System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+			else if(rent.equals("0")){//ì´ì „í™”ë©´ ì˜ˆì™¸ì²˜ë¦¬
+				System.out.println("ì´ì „í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 				break check;
 			}
-			else {//Á¤»óÀÔ·ÂÀÏ°æ¿ì
-				String index = rent.substring(2, 7);//ÀÎµ¦½º ÃßÃâ
+			else {//ì •ìƒì…ë ¥ì¼ê²½ìš°
+				String index = rent.substring(2, 7);//ì¸ë±ìŠ¤ ì¶”ì¶œ
 				System.out.println(index);
 				for(Book b:bookDB.bookList) {
-					if(b.isbn.equals(index)&&b.status==true) {//°Ë»ö°á°ú È®ÀÎ,Àç°íÈ®ÀÎ
-						System.out.println("¼±ÅÃÇÏ½Å µµ¼­´Â "+b.title+"ÀÔ´Ï´Ù.");
-						selected = b;//¼±ÅÃÇÑ µµ¼­ »ùÇÃ¿¡ µî·Ï
+					if(b.isbn.equals(index)&&b.status==true) {//ê²€ìƒ‰ê²°ê³¼ í™•ì¸,ì¬ê³ í™•ì¸
+						System.out.println("ì„ íƒí•˜ì‹  ë„ì„œëŠ” "+b.title+"ì…ë‹ˆë‹¤.");
+						selected = b;//ì„ íƒí•œ ë„ì„œ ìƒ˜í”Œì— ë“±ë¡
 						return selected;
 					}
-					else {//Àç°í°¡ ¾ø°Å³ª, Àß¸øµÈ ÀÔ·ÂÀÏ °æ¿ì
-						System.out.println("¼±ÅÃ°¡´ÉÇÑ µµ¼­°¡ ¾ø½À´Ï´Ù.");
+					else {//ì¬ê³ ê°€ ì—†ê±°ë‚˜, ì˜ëª»ëœ ì…ë ¥ì¼ ê²½ìš°
+						System.out.println("ì„ íƒê°€ëŠ¥í•œ ë„ì„œê°€ ì—†ìŠµë‹ˆë‹¤.");
 						break;
 					}
 				}
 				
-			}//ÀÎµ¦½º °Ë»ö ³¡
+			}//ì¸ë±ìŠ¤ ê²€ìƒ‰ ë
 		}
 		return selected;
 	}
 	
-	void rentBooks(BookDB bookDB,Member loginMem){//Ã¥´ëÃâ
-		Book rentcart = null;//µµ¼­´ëÃâ¿¡ ÇÊ¿äÇÑ ´ëÃâÄ«Æ® ÂüÁ¶º¯¼ö
+	void rentBooks(BookDB bookDB,Member loginMem){//ì±…ëŒ€ì¶œ
+		Book rentcart = null;//ë„ì„œëŒ€ì¶œì— í•„ìš”í•œ ëŒ€ì¶œì¹´íŠ¸ ì°¸ì¡°ë³€ìˆ˜
 		rentcheck: while (true) {
-			System.out.println("´ëÃâÀ» ¿øÇÏ´Â µµ¼­ÀÇ ÀÎµ¦½º¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.(7ÀÚ¸®)(0.ÀÌÀüÈ­¸é)");
+			System.out.println("ëŒ€ì¶œì„ ì›í•˜ëŠ” ë„ì„œì˜ ì¸ë±ìŠ¤ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.(7ìë¦¬)(0.ì´ì „í™”ë©´)");
 			String rent = scan.nextLine();
-			if (rent.length() != 7) {//7ÀÚ¸® ¾Æ´Ò°æ¿ì ¿¹¿ÜÃ³¸®
-				System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
+			if (rent.length() != 7) {//7ìë¦¬ ì•„ë‹ê²½ìš° ì˜ˆì™¸ì²˜ë¦¬
+				System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤.");
 				break;
 			}
-			else if(rent.equals("0")){//ÀÌÀüÈ­¸é ¿¹¿ÜÃ³¸®
-				System.out.println("ÀÌÀüÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+			else if(rent.equals("0")){//ì´ì „í™”ë©´ ì˜ˆì™¸ì²˜ë¦¬
+				System.out.println("ì´ì „í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 				break rentcheck;
 			}
-			else {//Á¤»óÀÔ·ÂÀÏ°æ¿ì
-				String index = rent.substring(2, 7);//ÀÎµ¦½º ÃßÃâ
+			else {//ì •ìƒì…ë ¥ì¼ê²½ìš°
+				String index = rent.substring(2, 7);//ì¸ë±ìŠ¤ ì¶”ì¶œ
 				for(Book b:bookDB.bookList) {
-					if(b.isbn.equals(index)&&b.status==true) {//°Ë»ö°á°ú È®ÀÎ,Àç°íÈ®ÀÎ
-						System.out.println("¼±ÅÃÇÏ½Å µµ¼­´Â "+b.title+"ÀÔ´Ï´Ù.");
-						rentcart = b;//¼±ÅÃÇÑ µµ¼­ ´ëÃâÄ«Æ®¿¡ µî·Ï
+					if(b.isbn.equals(index)&&b.status==true) {//ê²€ìƒ‰ê²°ê³¼ í™•ì¸,ì¬ê³ í™•ì¸
+						System.out.println("ì„ íƒí•˜ì‹  ë„ì„œëŠ” "+b.title+"ì…ë‹ˆë‹¤.");
+						LocalDate date = LocalDate.now();	//í˜„ì¬ ë‚ ì§œ ì •ë³´ë¥¼ LocalDate ê°ì²´ë¡œ ìƒì„±
+						LocalDate returnDate = date.with(TemporalAdjusters.next(date.getDayOfWeek()));	//ë°˜ë‚© ë‚ ì§œë¥¼ ìƒì„±
+						b.setReturnDate(returnDate); //ë°˜ë‚© ì¼ìë¥¼ ë¹Œë¦¬ëŠ” ì±… ê°ì²´ì— ì „ë‹¬
+						rentcart = b;//ì„ íƒí•œ ë„ì„œ ëŒ€ì¶œì¹´íŠ¸ì— ë“±ë¡
 						break;
 					}
-					else {//Àç°í°¡ ¾ø°Å³ª, Àß¸øµÈ ÀÔ·ÂÀÏ °æ¿ì
-						System.out.println("´ëÃâ°¡´É µµ¼­°¡ ¾ø½À´Ï´Ù.");
-						return;
-					}
 				}
-				
-			}//ÀÎµ¦½º °Ë»ö ³¡
+				if(rentcart == null) {
+				System.out.println("ëŒ€ì¶œê°€ëŠ¥ ë„ì„œê°€ ì—†ìŠµë‹ˆë‹¤.");
+				return;
+				}
+			}//ì¸ë±ìŠ¤ ê²€ìƒ‰ ë
 			break;
 		} // end while_rentcheck
-			// ´ëÃâÈ®ÀÎ----------------------------------------------------
-		System.out.println("Ã¥À» ´ëÃâÇÏ½Ã°Ú½À´Ï±î? Y/N");
+			// ëŒ€ì¶œí™•ì¸----------------------------------------------------
+		System.out.println("ì±…ì„ ëŒ€ì¶œí•˜ì‹œê² ìŠµë‹ˆê¹Œ? Y/N");
 		String menu2 = scan.nextLine();
 		rentbook: while (true) {
 			if (menu2.equalsIgnoreCase("y")) {
-				rentcart.setStatus(false);//´ëÃâµµ¼­ »óÅÂ ´ëÃâÁß
-				rentcart.setRenter(loginMem);//´ëÃâµµ¼­¿¡ ´ëÃâÀÚ µî·Ï
-				rentcart.setRentCount(rentcart.getRentCount()+1);//´ëÃâÈ½¼ö Áõ°¡
-				loginMem.rentList.add(rentcart);//´ëÃâÀÚ ´ëÃâÄ«Æ®¿¡ ´ëÃâÇÑ Ã¥ Ãß°¡
-				System.out.println("Á¤»óÀûÀ¸·Î ´ëÃâµÇ¾ú½À´Ï´Ù.");
+				rentcart.setStatus(false);//ëŒ€ì¶œë„ì„œ ìƒíƒœ ëŒ€ì¶œì¤‘
+				rentcart.setRenter(loginMem);//ëŒ€ì¶œë„ì„œì— ëŒ€ì¶œì ë“±ë¡
+				rentcart.setRentCount(rentcart.getRentCount()+1);//ëŒ€ì¶œíšŸìˆ˜ ì¦ê°€
+				loginMem.rentList.add(rentcart);//ëŒ€ì¶œì ëŒ€ì¶œì¹´íŠ¸ì— ëŒ€ì¶œí•œ ì±… ì¶”ê°€
+				System.out.println("ì •ìƒì ìœ¼ë¡œ ëŒ€ì¶œë˜ì—ˆìŠµë‹ˆë‹¤.");
 				break rentbook;
 			} else if (menu2.equalsIgnoreCase("n")) {
-				System.out.println("µµ¼­°Ë»öÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+				System.out.println("ë„ì„œê²€ìƒ‰í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 				break rentbook;
 			} else {
-				System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
+				System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤.");
 				break;
 			}
 		} // end while_rentbook;
-			// ´ëÃâÈ®ÀÎ³¡---------------------------------------------------
+			// ëŒ€ì¶œí™•ì¸ë---------------------------------------------------
 	}
 	
-	void returnBooks(List<Book> rentList){//Ã¥¹İ³³ ¸Ş¼­µå
-		if(rentList==null || rentList.size()==0) {	//´ëÃâÇÑ Ã¥ÀÌ ¾øÀ» °æ¿ì(´ëÃâ¸®½ºÆ®°¡ nullÀÌ°Å³ª ±æÀÌ°¡ 0)
-			System.out.println("´ëÃâÇÏ½Å Ã¥ÀÌ ¾ø½À´Ï´Ù.");
-			return;	//¸Ş¼­µå Á¾·á
+	void returnBooks(List<Book> rentList){//ì±…ë°˜ë‚© ë©”ì„œë“œ
+		if(rentList==null || rentList.size()==0) {	//ëŒ€ì¶œí•œ ì±…ì´ ì—†ì„ ê²½ìš°(ëŒ€ì¶œë¦¬ìŠ¤íŠ¸ê°€ nullì´ê±°ë‚˜ ê¸¸ì´ê°€ 0)
+			System.out.println("ëŒ€ì¶œí•˜ì‹  ì±…ì´ ì—†ìŠµë‹ˆë‹¤.");
+			return;	//ë©”ì„œë“œ ì¢…ë£Œ
 		}
 		
-		while(true) {
-			if(rentList==null || rentList.size()==0) {
-				System.out.println("Ã¥À» ¸ğµÎ ¹İ³³ÇÏ¼Ì½À´Ï´Ù!");
-				break;
-			}
-			
+		returnB:while(true) {
+
 			Scanner scan = new Scanner(System.in);
-			System.out.println("¹İ³³ÇÏ½Ç Ã¥ÀÇ ÀÎµ¦½º¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.(0Àº ÀÌÀü È­¸é)");
-			System.out.print("ÀÎµ¦½º: ");
-			String returnI = scan.nextLine();	//ÀÎµ¦½º ÀÔ·ÂÀ» ¹ŞÀ½
+			System.out.println("ë°˜ë‚©í•˜ì‹¤ ì±…ì˜ ì¸ë±ìŠ¤ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.(0ì€ ì´ì „ í™”ë©´)");
+			System.out.print("ì¸ë±ìŠ¤: ");
+			String returnI = scan.nextLine();	//ì¸ë±ìŠ¤ ì…ë ¥ì„ ë°›ìŒ
 			
-			if(returnI.equals("0")) break;	//0Àº ¸Ş¼­µå Á¾·á
+			if(returnI.equals("0")) break;	//0ì€ ë©”ì„œë“œ ì¢…ë£Œ
 			
-			for(Book b:rentList) {	//ÀÔ·Â ÀÎµ¦½º¿Í ÀÏÄ¡ÇÏ´Â ´ëÃâ µµ¼­ °Ë»ö
-				if(b.getIndex().equals(returnI)) {	//ÀÔ·Â ÀÎµ¦½º¿Í ÀÏÄ¡ÇÏ´Â µµ¼­¸¦ Ã£¾ÒÀ» °æ¿ì
-					if(rentList.remove(b)) {	//´ëÃâ ¸®½ºÆ®¿¡¼­ ÇØ´ç Ã¥ Á¦°Å
-						b.setStatus(true);		//Á¦°Å ¼º°ø½Ã ÇØ´ç µµ¼­ÀÇ »óÅÂ¸¦ "´ëÃâ°¡´É"À¸·Î ¹Ù²Ù°í
-						System.out.println(b.getTitle()+"(À»)¸¦ ¹İ³³Çß½À´Ï´Ù.");	//¼º°ø ¸Ş½ÃÁö ¶ç¿ò
-						continue;	//´Ù½Ã ÀÎµ¦½º ÀÔ·Â Ã¢À¸·Î µ¹¾Æ°¨
-					} else {	//´ëÃâ ¸®½ºÆ®¿¡¼­ Ã¥ÀÌ Á¦°ÅµÇÁö ¾ÊÀ» ¶§ ¸í·É¾î
-						System.out.println("¹İ³³¿À·ù! ÀÌÀü È­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
-						continue;
+			for(Book b:rentList) {	//ì…ë ¥ ì¸ë±ìŠ¤ì™€ ì¼ì¹˜í•˜ëŠ” ëŒ€ì¶œ ë„ì„œ ê²€ìƒ‰
+				if(rentList==null || rentList.size()==0) {
+					System.out.println("ë°˜ë‚©ì™„ë£Œ!");
+					return;
+				}
+				
+				if(b.getIndex().equals(returnI)) {	//ì…ë ¥ ì¸ë±ìŠ¤ì™€ ì¼ì¹˜í•˜ëŠ” ë„ì„œë¥¼ ì°¾ì•˜ì„ ê²½ìš°
+					if(rentList.remove(b)) {	//ëŒ€ì¶œ ë¦¬ìŠ¤íŠ¸ì—ì„œ í•´ë‹¹ ì±… ì œê±°
+						b.setStatus(true);		//ì œê±° ì„±ê³µì‹œ í•´ë‹¹ ë„ì„œì˜ ìƒíƒœë¥¼ "ëŒ€ì¶œê°€ëŠ¥"ìœ¼ë¡œ ë°”ê¾¸ê³ 
+						System.out.println(b.getTitle()+"(ì„)ë¥¼ ë°˜ë‚©í–ˆìŠµë‹ˆë‹¤.");	//ì„±ê³µ ë©”ì‹œì§€ ë„ì›€
+						continue returnB;	//ë‹¤ì‹œ ì¸ë±ìŠ¤ ì…ë ¥ ì°½ìœ¼ë¡œ ëŒì•„ê°
+					} else {	//ëŒ€ì¶œ ë¦¬ìŠ¤íŠ¸ì—ì„œ ì±…ì´ ì œê±°ë˜ì§€ ì•Šì„ ë•Œ ëª…ë ¹ì–´
+						System.out.println("ë°˜ë‚©ì˜¤ë¥˜! ì´ì „ í™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
+						continue returnB;
 					}
 				}
 			}
-			System.out.println("´ëÃâ µµ¼­ Áß ÇØ´ç ÀÎµ¦½ºÀÇ µµ¼­°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");	//if¹®¿¡ °É¸®Áö ¾ÊÀ» °æ¿ì, ÇØ´çµµ¼­°¡ ¾øÀ½.
+			System.out.println("ëŒ€ì¶œ ë„ì„œ ì¤‘ í•´ë‹¹ ì¸ë±ìŠ¤ì˜ ë„ì„œê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");	//ifë¬¸ì— ê±¸ë¦¬ì§€ ì•Šì„ ê²½ìš°, í•´ë‹¹ë„ì„œê°€ ì—†ìŒ.
 		}
-		//ÀÎµ¦½º¸¦ ¹Ş¾Æ¼­ Ã¥ ¹İ³³
-		//ÀÖÀ¸¸é true, ¾øÀ¸¸é false.
+		//ì¸ë±ìŠ¤ë¥¼ ë°›ì•„ì„œ ì±… ë°˜ë‚©
+		//ìˆìœ¼ë©´ true, ì—†ìœ¼ë©´ false.
 	}
 	
-	public void showPages(int page) {//ÀüÃ¼ °ü¸®ÀÚ ¸ñ·Ï ÆäÀÌÁöº°·Î º¸¿©ÁÖ±â(¸Å°³º¯¼ö´Â °Ë»öÇÏ°íÀÚ ÇÏ´Â ÆäÀÌÁö)
+	public int showPages(int page) {//ì „ì²´ ì±… ëª©ë¡ í˜ì´ì§€ë³„ë¡œ ë³´ì—¬ì£¼ê¸°(ë§¤ê°œë³€ìˆ˜ëŠ” ê²€ìƒ‰í•˜ê³ ì í•˜ëŠ” í˜ì´ì§€)
 		int totalPages = (int)Math.ceil(bookList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
-			System.out.println("ÆäÀÌÁö ¾øÀ½!");
-			if(page<1) page=1;
-			else page = totalPages;
-			return;
+			System.out.println("í˜ì´ì§€ ì—†ìŒ!");
+			if(page<1) return 0;
+			else return totalPages+1;
 		}
 		
-		for(int i=(page-1)*10; i<page*10; i++) {
+		int limit = (page != totalPages) ? page*10:bookList.size();
+		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(bookList.get(i));
 		}
-		System.out.println("ÇöÀç "+page+"ÆäÀÌÁö/"+totalPages+"ÆäÀÌÁö");
+		System.out.println("í˜„ì¬ "+page+"í˜ì´ì§€/"+totalPages+"í˜ì´ì§€");
+		return page;
 	}
 	
-	public void showPages(int page, List<Book> searchList) {//°Ë»öÇÑ °ü¸®ÀÚ ¸ñ·Ï ÆäÀÌÁöº°·Î º¸¿©ÁÖ±â(¸Å°³ ¸®½ºÆ®´Â °Ë»ö ¸®½ºÆ®)
+	public int showPages(int page, List<Book> searchList) {//ê²€ìƒ‰í•œ ì±… ëª©ë¡ í˜ì´ì§€ë³„ë¡œ ë³´ì—¬ì£¼ê¸°(ë§¤ê°œ ë¦¬ìŠ¤íŠ¸ëŠ” ê²€ìƒ‰ ë¦¬ìŠ¤íŠ¸)
 		int totalPages = (int)Math.ceil(searchList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
-			System.out.println("ÆäÀÌÁö ¾øÀ½!");
-			if(page<1) page=1;
-			else page = totalPages;
-			return;
+			System.out.println("í˜ì´ì§€ ì—†ìŒ!");
+			if(page<1) return 0;
+			else return totalPages+1;
 		}
 		
-		for(int i=(page-1)*10; i<page*10; i++) {
+		int limit = (page != totalPages) ? page*10:searchList.size();
+		for(int i=(page-1)*10; i<limit; i++) {
 			System.out.println(searchList.get(i));
 		}
-		System.out.println("ÇöÀç "+page+"ÆäÀÌÁö/"+totalPages+"ÆäÀÌÁö");
+		System.out.println("í˜„ì¬ "+page+"í˜ì´ì§€/"+totalPages+"í˜ì´ì§€");
+		return page;
 	}
 }
