@@ -412,6 +412,7 @@ public class Controller {
 								bookDB.input();
 								break;
 							case "3":// 도서수정
+
 								osys.history(loginAdm.getId(), "도서관리", "도서수정");
 								osys.admin_modifybook();
 								selected = bookDB.adminsearch(bookDB);
@@ -419,8 +420,10 @@ public class Controller {
 								} else {
 									bookDB.update(selected);
 								}
+
 								break;
 							case "4":// 도서삭제
+
 								osys.history(loginAdm.getId(), "도서관리", "도서삭제");
 								osys.admin_delbook();
 								selected = bookDB.adminsearch(bookDB);
@@ -428,6 +431,7 @@ public class Controller {
 								} else {
 									bookDB.delete(selected);
 								}
+
 								break;
 							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
@@ -435,12 +439,14 @@ public class Controller {
 							default:
 								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
 								continue;
+
 							}
 						} // end while_bookmng
 					case "2":// 회원관리
 						osys.history(loginAdm.getId(), "회원관리");
 						membermng: while (true) {// 회원관리메뉴 while
 							osys.admin_membermng();
+
 							menu = scan.nextLine();
 							switch (menu) {// 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면
 							case "1":// 회원검색
@@ -492,8 +498,7 @@ public class Controller {
 								System.out.println("검색하시고자 하는 건의사항의 아이디를 입력해주세요.(0은 이전 화면)");
 								System.out.print("아이디: ");
 								String searchId = scan.nextLine();
-								if (searchId.equals("0"))
-									continue admin;
+								if (searchId.equals("0")) continue request;
 
 								ArrayList<Comment> searchList = commentDB.searchComments(searchId);
 
@@ -521,21 +526,23 @@ public class Controller {
 								osys.history(loginAdm.getId(), "건의사항", "답변");
 								System.out.println("답변하시고자 하는 건의사항의 아이디를 입력해주세요. (0은 이전 화면)");
 								searchId = scan.nextLine();
-								if (searchId.equals("0"))
-									continue admin;
+								if (searchId.equals("0")) continue request;
 
 								searchList = commentDB.searchComments(searchId);
 
 								if (searchList != null) {
-									commentDB.showCommentList(searchList);
-
-									System.out.println("답변하시고자 하는 건의사항의 번호를 입력해주세요.");
-									System.out.print("번호: ");
-
-									int searchNo = scan.nextInt();
-									scan.nextLine();
-									commentDB.replyComment(searchNo, searchList, loginAdm);
-									continue request;
+									searchC: while(true) {
+										commentDB.showCommentList(searchList);
+										
+										System.out.println("답변하시고자 하는 건의사항의 번호를 입력해주세요. (0은 이전 화면)");
+										System.out.print("번호: ");
+										int searchNo = scan.nextInt();
+										scan.nextLine();
+										
+										if(searchNo==0) continue request;
+										commentDB.replyComment(searchNo, searchList, loginAdm);
+										continue searchC;
+									}
 								} else {
 									System.out.println("등록된 건의사항이 없습니다.");
 									continue request;
@@ -568,15 +575,16 @@ public class Controller {
 								osys.history(loginAdm.getId(), "관리자 관리", "새 관리자 등록");
 								osys.admin_newad();// y or n
 								String menu2 = scan.nextLine();
-								newadm: while (true) {
+								while (true) {
 									if (menu2.equalsIgnoreCase("y")) {
 										adminDB.input();// 관리자 추가 메서드
-										break newadm;
+										continue admng;
 									} else {
 										System.out.println("관리자 관리화면으로 돌아갑니다.");
-										continue admin;
+										continue admng;
 									}
 								} // end while_newadm
+
 								continue admin;
 							case "4":
 								osys.history(loginAdm.getId(), "관리자 관리", "관리자 정보수정");
@@ -594,6 +602,7 @@ public class Controller {
 							}// end switch
 						} // end while_request
 					case "5":// 로그아웃
+
 						while (true) {// 로그아웃 메서드
 							osys.history(loginAdm.getId(), "로그아웃");
 							System.out.println("로그아웃을 하시겠습니까? y/n");

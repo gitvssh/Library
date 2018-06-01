@@ -12,7 +12,7 @@ public class AdminDB extends DB {
 
 	AdminDB() {
 		adminList = new ArrayList<>();
-		//dummy admin
+		// dummy admin
 		Admin a = new Admin("admin1", "1234", "관리자", "921002", "01012341234");
 		adminList.add(a);
 	}
@@ -69,29 +69,11 @@ public class AdminDB extends DB {
 		for (int i = 0; i < adminList.size(); i++) {
 			if (adminList.get(i).getId().contains(search) || adminList.get(i).getName().contains(search)) {
 				System.out.printf("아이디: %-10s 이름: %-4s  전화번호: %11s %n", adminList.get(i).getId(),
-						adminList.get(i).getName(),  adminList.get(i).getTel());
+						adminList.get(i).getName(), adminList.get(i).getTel());
 				System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-				Scanner sc= new Scanner(System.in);
-				System.out.println("비밀번호를 새로 설정하시겠습니까?(Y/N)");
-				String yes = sc.nextLine().toUpperCase().trim();
-				if(yes.equals("Y")) {
-					System.out.println("생년월일을 입력해주세요.");
-					String birth = sc.nextLine();
-					if(birth.equals(adminList.get(i).getSsn())){
-						System.out.println("확인되었습니다. 새로운 비밀번호를 설정해주세요.");
-						String newpw = sc.nextLine();
-							System.out.println("비밀번호 설정이 완료되었습니다.");
-							adminList.get(i).setPassword(newpw);
-							break;
-					} else {
-						System.out.println("생년월일이 다릅니다.");
-						break;
-					}
-				} else { System.out.println("메뉴선택화면으로 돌아갑니다.");
-					break;}
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -102,7 +84,7 @@ public class AdminDB extends DB {
 		for (int i = 0; i < adminList.size(); i++) {
 			if (adminList.get(i).getId().equals(id)) {
 				System.out.printf("[%s]님의 정보를 불러왔습니다.%n", adminList.get(i).getId());
-				
+
 				while (true) {
 					Osystem osys = new Osystem();
 					osys.member_modify();
@@ -170,11 +152,11 @@ public class AdminDB extends DB {
 		}
 
 	}// void modify end
+
 	void repassword(String ssn) {
-		
-	
+
 	}
-	
+
 	@Override
 	void delete(Data data) {
 		// TODO Auto-generated method stub
@@ -204,40 +186,44 @@ public class AdminDB extends DB {
 		// TODO Auto-generated method stub
 		return;
 	}
-	
-	public void showPages(int page) {//전체 관리자 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
-		int totalPages = (int)Math.ceil(adminList.size()/10.);
-		
-		if(page<1 || page>totalPages) {
+
+	public void showPages(int page) {// 전체 관리자 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
+		int totalPages = (int) Math.ceil(adminList.size() / 10.);
+
+		if (page < 1 || page > totalPages) {
 			System.out.println("페이지 없음!");
 
-			if(page<1) page=0;
-			else page = totalPages+1;
+			if (page < 1)
+				page = 0;
+			else
+				page = totalPages + 1;
 
 			return;
 		}
-		
-		for(int i=(page-1)*10; i<page*10; i++) {
+
+		for (int i = (page - 1) * 10; i < page * 10; i++) {
 			System.out.println(adminList.get(i));
 		}
-		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
+		System.out.println("현재 " + page + "페이지/" + totalPages + "페이지");
 	}
-	
-	public void showPages(int page, List<Admin> searchList) {//검색한 관리자 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
-		int totalPages = (int)Math.ceil(searchList.size()/10.);
-		
-		if(page<1 || page>totalPages) {
+
+	public void showPages(int page, List<Admin> searchList) {// 검색한 관리자 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
+		int totalPages = (int) Math.ceil(searchList.size() / 10.);
+
+		if (page < 1 || page > totalPages) {
 			System.out.println("페이지 없음!");
 
-			if(page<1) page=0;
-			else page = totalPages+1;
+			if (page < 1)
+				page = 0;
+			else
+				page = totalPages + 1;
 
 			return;
 		}
-		
-		for(int i=(page-1)*10; i<page*10; i++) {
+
+		for (int i = (page - 1) * 10; i < page * 10; i++) {
 			System.out.println(searchList.get(i));
 		}
-		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
+		System.out.println("현재 " + page + "페이지/" + totalPages + "페이지");
 	}
 }

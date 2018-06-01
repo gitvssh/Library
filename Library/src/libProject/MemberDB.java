@@ -229,6 +229,7 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 //	}
 	void alignBlack() {											// 블랙리스트인 회원을 정렬하고 "계정정지", "계정복구" 부여
 
+
 		Osystem osys = new Osystem();
 		System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
 		System.out.println("메뉴를 선택해주세요.");
@@ -283,30 +284,31 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 				System.out.println("이전화면으로 이동합니다");
 				break;
 			} else {
-
 				for (int i = 0; i < memberList.size(); i++) {
 					if (memberList.get(i).id.equals(id)) {
-						memberList.get(i).setBlackstatus(true);
+						memberList.get(i).setBlackstatus(false);
 						if (memberList.get(i).status == false) {
 							memberList.get(i).idstatus = "정상";
 						} else if (memberList.get(i).status == true) {
-
+							
 							if (memberList.get(i).blackstatus == false) {
-
+								
 								memberList.get(i).idstatus = "연체중";
 							} else {
 								memberList.get(i).idstatus = "계정정지";
 							}
 						}
 						System.out.println("┌────────────────────────────────────────────────────────────┐");
-						System.out
-								.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
+						System.out.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
 						System.out.println("└────────────────────────────────────────────────────────────┘");
 					}
 				}
-
 				break;
+			case 0:
+				System.out.println("이전화면으로 이동합니다.");
+				return;
 			}
+
 
 		case "3":
 			System.out.println("복구하려는 계정의 아이디를 입력해주세요. 0.이전화면");
