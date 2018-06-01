@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 import Comments.Comment;
+import Comments.CommentDB;
 import Comparators.*;
 
 public class MemberDB extends DB {
@@ -154,6 +155,7 @@ public MemberDB() {
 			System.out.println("수정하실 아이디를 입력해주세요.");
 			System.out.println("현재 아이디 : " + m.getId());
 			m.setId(scanner.nextLine());
+			ArrayList<Comment> updateC = new CommentDB().getCommentList();	//아이디 수정과 동시에 건의사항 DB의 아이디도 모두 수정
 			System.out.println("수정되셨습니다. 수정된 아이디 : " + "[" + m.getId() + "]");
 			break;
 		case 2:
