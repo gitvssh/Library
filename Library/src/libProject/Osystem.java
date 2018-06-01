@@ -190,7 +190,7 @@ public class Osystem {
 		System.out.print(">>");
 
 	}
-
+ 
 	void comment_main() {
 		System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 		System.out.println("                     1.검색	2.답변	0.이전화면  ");
