@@ -304,9 +304,6 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 					}
 				}
 				break;
-			case 0:
-				System.out.println("이전화면으로 이동합니다.");
-				return;
 			}
 
 
