@@ -15,24 +15,25 @@ import Comparators.*;
 public class BookDB extends DB{
 	List<Book> bookList;
 	Scanner scan = new Scanner(System.in);
-	//검색, 전체검색, 정렬 미완성, toString 규격에 맞게 수정
 	
 	public BookDB() {
-		//더미 데이터로 대출 횟수 임의로 입력해둘 것.
 		this.bookList = new ArrayList();
+		//dummy books
 		this.bookList.add(new Book("소피의 세계","요슈타인가아더 ",1,"현암사"));
 		this.bookList.add(new Book("간다, 봐라","법정",2,"김영사"));
 		this.bookList.add(new Book("프로테스탄트 윤리","막스 베버",3,"현대지성"));
 		this.bookList.add(new Book("별, 빛의과학","지웅배",4,"위즈덤하우스"));
+		bookList.get(3).setRentCount(100);
 		this.bookList.add(new Book("신소재공학","오세동",5,"복두출판사"));
 		this.bookList.add(new Book("공공미술, 도시를그리다","홍경표",6,"재승출판"));
 		this.bookList.add(new Book("쓸어담는 한자","권작가",7,"쓸어담는 한자"));
+		bookList.get(6).setRentCount(50);
 		this.bookList.add(new Book("전쟁과 평화","레프 톨스토이",8,"홍진미디어"));
 		this.bookList.add(new Book("블랙어스","티머시 스나이더",9,"열린책들"));
 		this.bookList.add(new Book("온돌, 기원과 역사","손진태",9,"온이퍼브"));
+		bookList.get(9).setRentCount(10);
 	}
 
-	//검색
 		@Override
 		List search(String title) {
 			List<Book> searchList = new ArrayList<Book>();
@@ -81,19 +82,19 @@ public class BookDB extends DB{
 
 	//도서 자료 입력받고 가공, 데이터반환
 	void input() {
-		//변수 선언
 		String title="";
 		String author="";
 		int subject=0;
 		String publisher="";
-		//입력시작
+
 		System.out.print("제목 :");
 		title = scan.nextLine();
 		System.out.println();
+		
 		System.out.print("저자 :");
 		author = scan.nextLine();
 		System.out.println();
-		//철학 종교 사회학 자연과학 기술과학 예술 언어 문학 역사
+
 		System.out.println("분야 리스트");
 		System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
 		System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
@@ -101,29 +102,29 @@ public class BookDB extends DB{
 		subject = scan.nextInt();
 		scan.nextLine();
 		System.out.println();
+		
 		System.out.print("출판사 :");
 		publisher = scan.nextLine();
 		System.out.println();
+		
 		Book b = new Book(title,author,subject,publisher); 
-		Book.isbn_count++;//책 일련번호(카운트)+1
-		b.setIndex(b.change_subject(subject)+b.isbn);//분야 + isbn -> 인덱스
+		Book.isbn_count++;
+		b.setIndex(b.change_subject(subject)+b.isbn);
 		bookList.add(b);
 		System.out.println("도서등록이 완료되었습니다.");
 	}
 
-	//삭제
 	@Override
 	void delete(Data data) {
-		Book b = (Book)data;//get,set이용을 위한 형변환
+		Book b = (Book)data;
 		System.out.println(b.getTitle()+"이/가 삭제됩니다.");
 		bookList.remove(b);
-		
 	}
 
 	@Override
 	void update(Data data) {
-		Book b = (Book)data;//get,set이용을 위한 형변환
-		//수정시작
+		Book b = (Book)data;
+
 		System.out.printf("현재 입력된 제목 : %s%n",b.getTitle());
 		System.out.print("수정하실 제목 :");
 		b.setTitle(scan.nextLine());
@@ -133,7 +134,7 @@ public class BookDB extends DB{
 		System.out.print("수정하실 저자 :");
 		b.setAuthor(scan.nextLine());
 		System.out.println();
-		//철학 종교 사회학 자연과학 기술과학 예술 언어 문학 역사
+
 		System.out.println("분야 리스트");
 		System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
 		System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
@@ -142,27 +143,26 @@ public class BookDB extends DB{
 		b.setSubject(scan.nextInt());
 		scan.nextLine();
 		System.out.println();
+		
 		System.out.printf("현재 입력된 출판사 : %s%n",b.getPublisher());
 		System.out.print("수정하실 출판사 :");
 		b.setPublisher(scan.nextLine());
 		System.out.println();
 	}
 
-	//전체검색
 	@Override
-	List searchAll() {	//책 전체 리스트 출력 메서드
+	List searchAll() {
 		Osystem osys = new Osystem();
-		osys.showBookList(bookList);	//전체 리스트 콘솔출력
-		align();	//책 정렬 메서드 호출 -> align()에서 std에 0을 입력하지 않는 한 계속해서 호출되는 것에 주목.
+		osys.showBookList(bookList);
+		align();
 		return null;
 	}
 
-	//정렬
 	@Override
-	void align() {	//책 정렬 메서드(책 정렬 디폴트 기준은 인덱스 순.)
+	void align() {
 		Osystem osys = new Osystem();	
 		
-		while(true) {	//반복문 while - 잘못된 입력발생시 다시 입력가능하게 루프함.
+		while(true) {
 			osys.observer_align();	//정렬메뉴 콘솔 출력(0은 이전화면)
 			int std = scan.nextInt();	//정렬기준(std) 입력 받기.
 			scan.nextLine();
@@ -221,8 +221,8 @@ public class BookDB extends DB{
 		}
 	}
 	
-	Book adminsearch(BookDB bookDB) {
-		Book selected = null;//도서대출에 필요한 대출카트 참조변수
+	Book adminsearch(BookDB bookDB) {//관리자 도서관리,수정에 씀, 선택도서 리턴
+		Book selected = null;
 		check: while (true) {
 			String rent = scan.nextLine();
 			if (rent.length() != 7) {//7자리 아닐경우 예외처리
@@ -253,8 +253,8 @@ public class BookDB extends DB{
 		return selected;
 	}
 	
-	void rentBooks(Member loginMem){//책대출
-		Book rentcart = null;//도서대출에 필요한 대출카트 참조변수
+	void rentBooks(Member loginMem){
+		Book rentcart = null;
 		rentcheck: while (true) {
 			System.out.println("대출을 원하는 도서의 인덱스를 입력해주세요.(7자리)(0.이전화면)");
 			String rent = scan.nextLine();
@@ -267,14 +267,14 @@ public class BookDB extends DB{
 				continue rentcheck;
 			}
 			else {//정상입력일경우
-				String index = rent.substring(2, 7);//인덱스 추출
+				String index = rent.substring(2, 7);
 				for(Book b:bookList) {
 					if(b.isbn.equals(index)&&b.status==true) {//검색결과 확인,재고확인
 						System.out.println("선택하신 도서는 "+b.title+"입니다.");
-						LocalDate date = LocalDate.now();	//현재 날짜 정보를 LocalDate 객체로 생성
-						LocalDate returnDate = date.with(TemporalAdjusters.next(date.getDayOfWeek()));	//반납 날짜를 생성
-						b.setReturnDate(returnDate); //반납 일자를 빌리는 책 객체에 전달
-						rentcart = b;//선택한 도서 대출카트에 등록
+						LocalDate date = LocalDate.now();//현재 날짜 정보를 LocalDate 객체로 생성
+						LocalDate returnDate = date.with(TemporalAdjusters.next(date.getDayOfWeek()));
+						b.setReturnDate(returnDate);
+						rentcart = b;
 						break;
 					}
 				}
@@ -290,27 +290,26 @@ public class BookDB extends DB{
 			System.out.println("책을 대출하시겠습니까? Y/N");
 			String menu2 = scan.nextLine().toLowerCase().trim();
 			if (menu2.equalsIgnoreCase("y")) {
-					rentcart.setStatus(false);//대출도서 상태 대출중
-					rentcart.setRenter(loginMem);//대출도서에 대출자 등록
-					rentcart.setRentCount(rentcart.getRentCount()+1);//대출횟수 증가
-					loginMem.rentList.add(rentcart);//대출자 대출카트에 대출한 책 추가
-					System.out.println("정상적으로 대출되었습니다.");
-					break confirm;
-				} else if (menu2.equalsIgnoreCase("n")) {
-					System.out.println("도서검색화면으로 돌아갑니다.");
-					break confirm;
-				} else {
-					System.out.println("잘못된 입력입니다.");
-					continue confirm;
-				}
-		} // end while_confirm;
-			// 대출확인끝---------------------------------------------------
-	}
+				rentcart.setStatus(false);
+				rentcart.setRenter(loginMem);
+				rentcart.setRentCount(rentcart.getRentCount()+1);
+				loginMem.rentList.add(rentcart);
+				System.out.println("정상적으로 대출되었습니다.");
+				break confirm;
+			} else if (menu2.equalsIgnoreCase("n")) {
+				System.out.println("도서검색화면으로 돌아갑니다.");
+				break confirm;
+			} else {
+				System.out.println("잘못된 입력입니다.");
+				continue confirm;
+			}
+		} // end while_rentbook;
+	}// 대출확인끝---------------------------------------------------
 	
-	void returnBooks(List<Book> rentList){//책반납 메서드
-		if(rentList==null || rentList.size()==0) {	//대출한 책이 없을 경우(대출리스트가 null이거나 길이가 0)
+	void returnBooks(List<Book> rentList){
+		if(rentList==null || rentList.size()==0) {
 			System.out.println("대출하신 책이 없습니다.");
-			return;	//메서드 종료
+			return;
 		}
 		
 		returnB:while(true) {
@@ -325,9 +324,9 @@ public class BookDB extends DB{
 			Scanner scan = new Scanner(System.in);
 			System.out.println("반납하실 책의 인덱스를 입력해주세요.(0은 이전 화면)");
 			System.out.print("인덱스: ");
-			String returnI = scan.nextLine();	//인덱스 입력을 받음
+			String returnI = scan.nextLine();
 			
-			if(returnI.equals("0")) break;	//0은 메서드 종료
+			if(returnI.equals("0")) break;
 			
 			for(Book b:rentList) {	//입력 인덱스와 일치하는 대출 도서 검색
 				

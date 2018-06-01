@@ -12,6 +12,7 @@ public class AdminDB extends DB {
 
 	AdminDB() {
 		adminList = new ArrayList<>();
+		//dummy admin
 		Admin a = new Admin("admin1", "1234", "관리자", "921002", "01012341234");
 		adminList.add(a);
 	}
@@ -48,8 +49,6 @@ public class AdminDB extends DB {
 	}
 
 	Admin login(String id, String password) {
-		// adminList.get(int i).g
-
 		Admin loginAdm = null;
 
 		for (int i = 0; i < adminList.size(); i++) {
