@@ -253,22 +253,22 @@ public class BookDB extends DB{
 		return selected;
 	}
 	
-	void rentBooks(BookDB bookDB,Member loginMem){
+	void rentBooks(Member loginMem){
 		Book rentcart = null;
 		rentcheck: while (true) {
 			System.out.println("대출을 원하는 도서의 인덱스를 입력해주세요.(7자리)(0.이전화면)");
 			String rent = scan.nextLine();
-			if (rent.length() != 7) {//7자리 아닐경우 예외처리
-				System.out.println("잘못된 입력입니다.");
-				break;
-			}
-			else if(rent.equals("0")){//이전화면 예외처리
+			if(rent.equals("0")){//이전화면 예외처리
 				System.out.println("이전화면으로 돌아갑니다.");
-				break rentcheck;
+				return;
+			}
+			else if (rent.length() != 7) {//7자리 아닐경우 예외처리
+				System.out.println("잘못된 입력입니다.");
+				continue rentcheck;
 			}
 			else {//정상입력일경우
 				String index = rent.substring(2, 7);
-				for(Book b:bookDB.bookList) {
+				for(Book b:bookList) {
 					if(b.isbn.equals(index)&&b.status==true) {//검색결과 확인,재고확인
 						System.out.println("선택하신 도서는 "+b.title+"입니다.");
 						LocalDate date = LocalDate.now();//현재 날짜 정보를 LocalDate 객체로 생성
@@ -286,22 +286,22 @@ public class BookDB extends DB{
 			break;
 		} // end while_rentcheck
 			// 대출확인----------------------------------------------------
-		System.out.println("책을 대출하시겠습니까? Y/N");
-		String menu2 = scan.nextLine();
-		rentbook: while (true) {
+		confirm:while(true) {
+			System.out.println("책을 대출하시겠습니까? Y/N");
+			String menu2 = scan.nextLine().toLowerCase().trim();
 			if (menu2.equalsIgnoreCase("y")) {
 				rentcart.setStatus(false);
 				rentcart.setRenter(loginMem);
 				rentcart.setRentCount(rentcart.getRentCount()+1);
 				loginMem.rentList.add(rentcart);
 				System.out.println("정상적으로 대출되었습니다.");
-				break rentbook;
+				break confirm;
 			} else if (menu2.equalsIgnoreCase("n")) {
 				System.out.println("도서검색화면으로 돌아갑니다.");
-				break rentbook;
+				break confirm;
 			} else {
 				System.out.println("잘못된 입력입니다.");
-				break;
+				continue confirm;
 			}
 		} // end while_rentbook;
 	}// 대출확인끝---------------------------------------------------
@@ -313,6 +313,15 @@ public class BookDB extends DB{
 		}
 		
 		returnB:while(true) {
+			if(rentList==null || rentList.size()==0) {//더 이상 반납할 책이 없으면 메서드 종료
+				System.out.println("반납완료!");
+				return;
+			}
+			
+			System.out.println("[대출 도서]");
+			for(Book b:rentList) System.out.println(b);
+
+			Scanner scan = new Scanner(System.in);
 			System.out.println("반납하실 책의 인덱스를 입력해주세요.(0은 이전 화면)");
 			System.out.print("인덱스: ");
 			String returnI = scan.nextLine();
@@ -320,10 +329,6 @@ public class BookDB extends DB{
 			if(returnI.equals("0")) break;
 			
 			for(Book b:rentList) {	//입력 인덱스와 일치하는 대출 도서 검색
-				if(rentList==null || rentList.size()==0) {
-					System.out.println("반납완료!");
-					return;
-				}
 				
 				if(b.getIndex().equals(returnI)) {	//입력 인덱스와 일치하는 도서를 찾았을 경우
 					if(rentList.remove(b)) {	//대출 리스트에서 해당 책 제거
