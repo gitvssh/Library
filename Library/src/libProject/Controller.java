@@ -13,19 +13,18 @@ import Comments.*;
 public class Controller {
 
 	public static void main(String[] args) {
-		//Db 객체 선언절
-		BookDB bookDB = new BookDB(); //Book Db object definition
-		MemberDB memberDB = new MemberDB(); //Membeb Db object definition
-		AdminDB adminDB = new AdminDB(); // Admin Db object definition
-		CommentDB commentDB = new CommentDB();	//Comment Db object definition
-		//기타 객체 선언절
-		Osystem osys = new Osystem(); //Outprint object definition
-		Scanner scan = new Scanner(System.in);// 메뉴 입력시 사용할 스캐너
-		//클래스변수 선언절
-		Member loginMem = null; // 로그인한 회원의 정보가 저장되는 변수
-		Admin loginAdm = null; // 로그인한 관리자의 정보가 저장되는 변수
-		//멤버변수 선언절
-		int menu;// 화면 메뉴선택에 활용할 메뉴
+		BookDB bookDB = new BookDB();
+		MemberDB memberDB = new MemberDB();
+		AdminDB adminDB = new AdminDB();
+		CommentDB commentDB = new CommentDB();
+
+		Osystem osys = new Osystem();
+		Scanner scan = new Scanner(System.in);
+
+		Member loginMem = null; // 로그인한 회원 변수
+		Admin loginAdm = null; // 로그인한 관리자 변수
+
+		int menu;// 화면 메뉴선택
 		int login = 0;// 로그인 검사
 		
 		detectBlackList(memberDB.memberList); //부팅시 반납일자 연체 중인 회원 자동 탐지
@@ -95,8 +94,8 @@ public class Controller {
 
 					case 2:// 회원가입
 						osys.history("비회원","회원가입");
-						osys.observer_signin();// 회원가입 화면
-						memberDB.input();// 회원가입 메서드
+						osys.observer_signin();
+						memberDB.input();
 						continue observer;
 					case 3:// 로그인
 						osys.history("비회원","로그인");
@@ -108,7 +107,7 @@ public class Controller {
 						}
 						System.out.println("비밀번호를 입력하세요.");
 						String password = scan.nextLine();
-						loginMem = memberDB.Login(id, password);// 로그인 메서드
+						loginMem = memberDB.Login(id, password);
 						if (loginMem == null) {
 							System.out.println("로그인에 실패하였습니다. 아이디 비밀번호를 다시 확인해주세요.");
 							break;
@@ -122,7 +121,7 @@ public class Controller {
 						id = scan.nextLine();
 						System.out.println("비밀번호를 입력하세요.");
 						password = scan.nextLine();
-						loginAdm = adminDB.login(id, password); // 로그인 메서드
+						loginAdm = adminDB.login(id, password);
 						if (loginAdm == null) {
 							System.out.println("로그인에 실패하였습니다. 아이디 비밀번호를 다시 확인해주세요.");
 							break;
@@ -132,28 +131,29 @@ public class Controller {
 						}
 
 					case 5:// 아이디 비밀번호찾기
+
 						findInfo: while(true) {	//아이디/비밀번호 찾기창 반복해서 띄움.
 							osys.history("비회원","아이디/비밀번호 찾기");
-							osys.observer_findMember();// 정보찾기 화면
+							osys.observer_findMember();
 							menu = scan.nextInt();
 							scan.nextLine();
 							switch (menu) {// 1. 아이디 찾기 2.비밀번호 찾기 0. 이전화면
 							case 1:// 아이디 찾기
 								osys.history("비회원","아이디/비밀번호 찾기","아이디 찾기");
-								osys.observer_findId();// 아이디찾기 화면
-								memberDB.FindId();// 아이디 찾기 메서드
+								osys.observer_findId();
+								memberDB.FindId();
 								continue findInfo;
 							case 2:// 비밀번호 찾기
 								osys.history("비회원","아이디/비밀번호 찾기","비밀번호 찾기");
-								osys.observer_findPass();// 비밀번호찾기 화면
-								memberDB.FindPw();// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
+								osys.observer_findPass();
+								memberDB.FindPw();
 								continue findInfo;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue observer;
-							}
+							}//end switch
 							break;
-						}
+						}//end findInfo
 					case 0:// 프로그램 종료
 						System.out.println("프로그램을 종료합니다...");
 						break main;
@@ -176,8 +176,8 @@ public class Controller {
 						case 1:// 제목
 							osys.history(loginMem.getId(),"도서대출","제목");
 							System.out.println("검색하실 제목을 입력하세요");
-							osys.showBookList(bookDB.search(scan.nextLine(), 1));//검색메서드
-							bookDB.rentBooks(bookDB, loginMem);//대출메서드
+							osys.showBookList(bookDB.search(scan.nextLine(), 1));
+							bookDB.rentBooks(bookDB, loginMem);
 							break;
 						case 2:// 저자
 							osys.history(loginMem.getId(),"도서대출","저자");
@@ -224,16 +224,16 @@ public class Controller {
 						continue member;
 					case 2:// 빌린도서
 						osys.history(loginMem.getId(),"빌린 도서");
-						osys.showBookList(loginMem.getRentList());	// 빌린도서 출력 메서드
+						osys.showBookList(loginMem.getRentList());
 						while(true) {
 							System.out.println("0.이전 화면");
 							if (scan.nextInt()==0) continue member;
-							else continue;	//빌린 도서 조회 끝나면 회원 메뉴로.
+							else continue;
 						}
 					case 3:// 도서반납
 						osys.history(loginMem.getId(),"도서 반납");
-						bookDB.returnBooks(loginMem.getRentList());	// 도서반납 메서드
-						continue member;	//반납 끝나면 회원 메뉴로.
+						bookDB.returnBooks(loginMem.getRentList());
+						continue member;
 					case 4:// 회원정보
 						osys.history(loginMem.getId(),"회원정보");
 						osys.member_inform();
@@ -242,12 +242,12 @@ public class Controller {
 						switch (menu) {// 1.회원정보 조회 2.회원정보 수정 0. 이전화면
 						case 1:// 회원정보 조회
 							osys.history(loginMem.getId(),"회원정보","회원정보조회");
-							osys.member_myinform();// 회원정보 조회 화면
+							osys.member_myinform();
 							memberDB.MemInform(loginMem);
 							continue member;
 						case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.history(loginMem.getId(),"회원정보","회원정보 수정");
-							osys.member_modify();// 회원정보 수정 화면
+							osys.member_modify();
 							memberDB.update(loginMem);
 							continue member;
 							 // end while modify;
@@ -259,7 +259,7 @@ public class Controller {
 						comment:while(true) {
 							osys.history(loginMem.getId(),"건의사항");
 							osys.member_request();
-							menu = scan.nextInt(); // 건의사항 메서드
+							menu = scan.nextInt();
 							switch(menu) {
 							case 1: //1.새 건의사항 입력
 								osys.history(loginMem.getId(),"건의사항","1.새 건의사항 입력");
@@ -441,7 +441,6 @@ public class Controller {
 							}// end switch_membermng
 						}
 					case 3:// 건의사항
-							// 건의사항 출력 메서드(db)
 						osys.history(loginAdm.getId(),"건의사항");
 						
 						ArrayList<Comment> cList = commentDB.getCommentList();
@@ -573,9 +572,7 @@ public class Controller {
 				} // --------------------------------관리자 while end-------------------------
 			}// end switch_login
 		} // end while_main
-
 	}// end main
-
 	static void detectBlackList(List<Member> list) {	//전체 회원의 도서 연체 여부 검사
 		if(list == null || list.size()==0) return;	//가입된 회원이 없을 경우 메서드 종료.
 		for(Member m:list) {	//for문으로 회원정보 하나씩 검색

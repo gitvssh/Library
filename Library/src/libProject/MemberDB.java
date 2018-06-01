@@ -8,10 +8,10 @@ import Comparators.*;
 
 public class MemberDB extends DB {
 	List<Member> memberList;
-	// ...
-	Osystem osys = new Osystem();
 
+	Osystem osys = new Osystem();
 	Scanner scanner = new Scanner(System.in);
+
 	String id = "";
 	String password = "";
 	String name = "";
@@ -19,11 +19,15 @@ public class MemberDB extends DB {
 	String tel = "";
 	boolean status;
 	boolean blackstatus;
-	// ....
+
 public MemberDB() {
 	memberList = new ArrayList<>();
-	
-	//더미 데이터(연체자 체크용)
+	//dummy member
+  this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814", false));
+	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
+	this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214", true));
+	this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819", false));
+  //dummy blacklist
 	ArrayList<Book> dumRentList = new ArrayList<>();
 	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
 	LocalDate returnDate = LocalDate.of(2018,5,18);	//기간이 지난 반납일
@@ -33,12 +37,6 @@ public MemberDB() {
 	dumMember.setRentList(dumRentList);
 	this.memberList.add(dumMember);
 	
-	this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814", false));
-	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
-	this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214", true));
-	this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819", false));
-
-
 	for(int i=0;i<memberList.size();i++) {
 		
 		if(memberList.get(i).isStatus()==false) {
@@ -51,7 +49,8 @@ public MemberDB() {
 			}
 		}
 	}
-}
+}//end generator
+
 
 	@Override
 	List search(String search) {
@@ -263,25 +262,25 @@ public MemberDB() {
 		case 2:
 			System.out.println("정지하려는 계정의 아이디를 입력해주세요. 0.이전화면");
 
-			id=scanner.nextLine();
-			if(id.equals("0")) {
+			id = scanner.nextLine();
+			if (id.equals("0")) {
 				System.out.println("이전화면으로 이동합니다");
 				break;
-			}else {
-			
-				
-			for(int i=0;i<memberList.size();i++) {
-				if(memberList.get(i).id.equals(id)) {
-					memberList.get(i).setBlackstatus(true);
-					memberList.get(i).setIdstatus("계정정지");
-						
-					System.out.println(memberList.get(i).id+"님이 "+memberList.get(i).getIdstatus()+"상태가 되었습니다.");
+			} else {
+
+				for (int i = 0; i < memberList.size(); i++) {
+					if (memberList.get(i).id.equals(id)) {
+						memberList.get(i).setBlackstatus(true);
+						memberList.get(i).setIdstatus("계정정지");
+
+						System.out
+								.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
 					}
 				}
-			
-			break;
+
+				break;
 			}
-			
+
 		case 3:
 			System.out.println("복구하려는 계정의 아이디를 입력해주세요. 0.이전화면");
 			id = scanner.nextLine();
@@ -289,14 +288,14 @@ public MemberDB() {
 				System.out.println("이전화면으로 이동합니다");
 				break;
 
-				}
-			for(int i=0;i<memberList.size();i++) {
-				if(memberList.get(i).id.equals(id)) {
+			}
+			for (int i = 0; i < memberList.size(); i++) {
+				if (memberList.get(i).id.equals(id)) {
 					memberList.get(i).setBlackstatus(false);
 					memberList.get(i).setIdstatus("연체중");
-					System.out.println(memberList.get(i).id+"님이 "+memberList.get(i).getIdstatus()+"상태가 되었습니다.");
+					System.out.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
 				}
-					
+
 			}
 			break;
 		case 0:
@@ -393,38 +392,42 @@ public MemberDB() {
 		System.out.println("");
 		return;
 	}
-	
-	public int showPages(int page) {//전체 회원 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
-		int totalPages = (int)Math.ceil(memberList.size()/10.);
-		
-		if(page<1 || page>totalPages) {
+
+	public int showPages(int page) {// 전체 회원 목록 페이지별로 보여주기(매개변수는 검색하고자 하는 페이지)
+		int totalPages = (int) Math.ceil(memberList.size() / 10.);
+
+		if (page < 1 || page > totalPages) {
 			System.out.println("페이지 없음!");
-			if(page<1) return 0;
-			else return totalPages+1;
+			if (page < 1)
+				return 0;
+			else
+				return totalPages + 1;
 		}
-		
-		int limit = (page != totalPages) ? page*10:memberList.size();
-		for(int i=(page-1)*10; i<limit; i++) {
+
+		int limit = (page != totalPages) ? page * 10 : memberList.size();
+		for (int i = (page - 1) * 10; i < limit; i++) {
 			System.out.println(memberList.get(i));
 		}
-		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
+		System.out.println("현재 " + page + "페이지/" + totalPages + "페이지");
 		return page;
 	}
-	
-	public int showPages(int page, List<Member> searchList) {//검색한 회원 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
-		int totalPages = (int)Math.ceil(searchList.size()/10.);
-		
-		if(page<1 || page>totalPages) {
+
+	public int showPages(int page, List<Member> searchList) {// 검색한 회원 목록 페이지별로 보여주기(매개 리스트는 검색 리스트)
+		int totalPages = (int) Math.ceil(searchList.size() / 10.);
+
+		if (page < 1 || page > totalPages) {
 			System.out.println("페이지 없음!");
-			if(page<1) return 0;
-			else return totalPages+1;
+			if (page < 1)
+				return 0;
+			else
+				return totalPages + 1;
 		}
-		
-		int limit = (page != totalPages) ? page*10:searchList.size();
-		for(int i=(page-1)*10; i<limit; i++) {
+
+		int limit = (page != totalPages) ? page * 10 : searchList.size();
+		for (int i = (page - 1) * 10; i < limit; i++) {
 			System.out.println(searchList.get(i));
 		}
-		System.out.println("현재 "+page+"페이지/"+totalPages+"페이지");
+		System.out.println("현재 " + page + "페이지/" + totalPages + "페이지");
 		return page;
 	}
 }
