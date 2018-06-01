@@ -26,9 +26,8 @@ public MemberDB() {
 	//더미 데이터(연체자 체크용)
 	ArrayList<Book> dumRentList = new ArrayList<>();
 	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
-	LocalDate date = LocalDate.now();
-	LocalDate returnDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()-7);
-	dumBook.setReturnDate(returnDate);
+	LocalDate returnDate = LocalDate.of(2018,5,18);	//기간이 지난 반납일
+	dumBook.setReturnDate(returnDate); //기간이 지난 반납일을 책 객체에 삽입
 	dumRentList.add(dumBook);
 	Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814", false);
 	dumMember.setRentList(dumRentList);
