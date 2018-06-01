@@ -26,8 +26,8 @@ public class Controller {
 
 		int menu;// 화면 메뉴선택
 		int login = 0;// 로그인 검사
-		
-		detectBlackList(bookDB.bookList); //부팅시 반납일자 연체 중인 회원 자동 탐지
+
+		detectBlackList(bookDB.bookList); // 부팅시 반납일자 연체 중인 회원 자동 탐지
 
 		// -----------------메인시작-----------------------
 		main: while (true) {
@@ -170,33 +170,33 @@ public class Controller {
 					scan.nextLine();
 					switch (menu) {// 1.도서검색대출 2.빌린도서 3.도서반납 4.회원정보 5.건의사항 9.로그아웃 0.종료");
 					case 1:// 도서검색대출
-						rentBook: while(true) {
-							osys.history(loginMem.getId(),"도서대출");
+						rentBook: while (true) {
+							osys.history(loginMem.getId(), "도서대출");
 							osys.member_search();// 회원 도서검색화면
 							menu = scan.nextInt();
 							scan.nextLine();
 							switch (menu) {// 1.제목 2.저자 3.출판사 4.분류 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
 							// 아래에 대출기능도 추가
 							case 1:// 제목
-								osys.history(loginMem.getId(),"도서대출","제목");
+								osys.history(loginMem.getId(), "도서대출", "제목");
 								System.out.println("검색하실 제목을 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 1));//검색메서드
-								bookDB.rentBooks(loginMem);//대출메서드
+								osys.showBookList(bookDB.search(scan.nextLine(), 1));// 검색메서드
+								bookDB.rentBooks(loginMem);// 대출메서드
 								continue rentBook;
 							case 2:// 저자
-								osys.history(loginMem.getId(),"도서대출","저자");
+								osys.history(loginMem.getId(), "도서대출", "저자");
 								System.out.println("검색하실 저자를 입력하세요");
 								osys.showBookList(bookDB.search(scan.nextLine(), 2));
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
 							case 3:// 출판사
-								osys.history(loginMem.getId(),"도서대출","출판사");
+								osys.history(loginMem.getId(), "도서대출", "출판사");
 								System.out.println("검색하실 출판사를 입력하세요");
 								osys.showBookList(bookDB.search(scan.nextLine(), 3));
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
 							case 4:// 분야
-								osys.history(loginMem.getId(),"도서대출","분야");
+								osys.history(loginMem.getId(), "도서대출", "분야");
 								System.out.println("검색하실 분야를 입력하세요");
 								System.out.println("분야 리스트");
 								System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
@@ -205,19 +205,19 @@ public class Controller {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
 							case 5:// 인덱스
-								osys.history(loginMem.getId(),"도서대출","인덱스");
+								osys.history(loginMem.getId(), "도서대출", "인덱스");
 								System.out.println("검색하실 인덱스를 입력하세요");
 								osys.showBookList(bookDB.search(scan.nextLine(), 5));
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
 							case 6:// ISBN
-								osys.history(loginMem.getId(),"도서대출","ISBN");
+								osys.history(loginMem.getId(), "도서대출", "ISBN");
 								System.out.println("검색하실 ISBN을 입력하세요");
 								osys.showBookList(bookDB.search(scan.nextLine(), 6));
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
 							case 7:// 전체 도서목록
-								osys.history(loginMem.getId(),"도서대출","전체 도서목록");
+								osys.history(loginMem.getId(), "도서대출", "전체 도서목록");
 								System.out.println("전체 도서목록입니다.");
 								bookDB.searchAll();
 								continue rentBook;
@@ -330,47 +330,36 @@ public class Controller {
 					memberDB.checkStatus();
 					osys.history(loginAdm.getId());
 					osys.admin_main();// 관리자 메인화면
-					menu = scan.nextInt();
-					scan.nextLine();
-					switch (menu) {// 1.도서관리 2. 회원관리 3.건의사항 4.관리자 관리 5.로그아웃 0.시스템 종료
-					case 1:// 도서관리
+					String adminmenu = scan.nextLine();
+					switch (adminmenu) {// 1.도서관리 2. 회원관리 3.건의사항 4.관리자 관리 5.로그아웃 0.시스템 종료
+					case "1":// 도서관리
 						bookmng: while (true) {// 도서관리메뉴 while
 							Book selected = null;// 도서 수정,삭제를 위한 참조변수
 							osys.history(loginAdm.getId(), "도서관리");
 							osys.admin_bookmng();
-							menu = scan.nextInt();
-							scan.nextLine();
-							if (!(0 <= menu && menu < 5)) {
-								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-								continue;
-							}
-							switch (menu) {// 1.도서검색 2.도서추가 3.도서수정 4.도서삭제 0.이전 화면으로
-							case 1:// 도서검색
+							String bookmngmenu = scan.nextLine();
+							switch (bookmngmenu) {// 1.도서검색 2.도서추가 3.도서수정 4.도서삭제 0.이전 화면으로
+							case "1":// 도서검색
 								osys.history(loginAdm.getId(), "도서관리", "도서검색");
 								osys.admin_search();
-								menu = scan.nextInt();
-								scan.nextLine();
-								if (!(0 <= menu && menu < 8)) {
-									System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-									continue;
-								}
-								switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
-								case 1:// 제목
+								String bookmngmenumenu = scan.nextLine();
+								switch (bookmngmenumenu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
+								case "1":// 제목
 									osys.history(loginAdm.getId(), "도서관리", "도서검색", "제목");
 									System.out.println("검색하실 제목을 입력하세요");
 									osys.showBookList(bookDB.search(scan.nextLine(), 1));
 									break;
-								case 2:// 저자
+								case "2":// 저자
 									osys.history(loginAdm.getId(), "도서관리", "도서검색", "저자");
 									System.out.println("검색하실 저자를 입력하세요");
 									osys.showBookList(bookDB.search(scan.nextLine(), 2));
 									break;
-								case 3:// 출판사
+								case "3":// 출판사
 									osys.history(loginAdm.getId(), "도서관리", "도서검색", "출판사");
 									System.out.println("검색하실 출판사를 입력하세요");
 									osys.showBookList(bookDB.search(scan.nextLine(), 3));
 									break;
-								case 4:// 분야
+								case "4":// 분야
 									osys.history(loginAdm.getId(), "도서관리", "도서검색", "분야");
 									System.out.println("검색하실 분야를 입력하세요");
 									System.out.println("분야 리스트");
@@ -378,32 +367,35 @@ public class Controller {
 									System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
 									osys.showBookList(bookDB.search(scan.nextLine(), 4));
 									break;
-								case 5:// 인덱스
+								case "5":// 인덱스
 									osys.history(loginAdm.getId(), "도서관리", "도서검색", "인덱스");
 									System.out.println("검색하실 인덱스를 입력하세요");
 									osys.showBookList(bookDB.search(scan.nextLine(), 5));
 									break;
-								case 6:// ISBN
+								case "6":// ISBN
 									osys.history(loginAdm.getId(), "도서관리", "도서검색", "ISBN");
 									osys.showBookList(bookDB.search(scan.nextLine(), 6));
 									System.out.println("검색하실 ISBN을 입력하세요");
 									break;
-								case 7:// 전체 도서목록
+								case "7":// 전체 도서목록
 									osys.history(loginAdm.getId(), "도서관리", "도서검색", "전체 도서목록");
 									System.out.println("전체 도서 목록입니다.");
 									bookDB.searchAll();
 									continue admin;
-								case 0:// 이전화면으로
+								case "0":// 이전화면으로
 									System.out.println("이전화면으로 돌아갑니다.");
 									continue admin;
+								default:
+									System.out.println("잘못된 입력입니다.");
+									continue; 
 								}
 								break;
-							case 2:// 도서추가
+							case "2":// 도서추가
 								osys.history(loginAdm.getId(), "도서관리", "도서추가");
 								osys.admin_addbook();
 								bookDB.input();
 								break;
-							case 3:// 도서수정
+							case "3":// 도서수정
 								osys.history(loginAdm.getId(), "도서관리", "도서수정");
 								osys.admin_modifybook();
 								selected = bookDB.adminsearch(bookDB);
@@ -412,7 +404,7 @@ public class Controller {
 									bookDB.update(selected);
 								}
 								break;
-							case 4:// 도서삭제
+							case "4":// 도서삭제
 								osys.history(loginAdm.getId(), "도서관리", "도서삭제");
 								osys.admin_delbook();
 								selected = bookDB.adminsearch(bookDB);
@@ -421,23 +413,21 @@ public class Controller {
 									bookDB.delete(selected);
 								}
 								break;
-							case 0:// 이전화면
+							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
-								break bookmng;
+								continue admin;
+							default:
+								System.out.println("잘못된 입력입니다.");
+								continue; 
 							}
 						} // end while_bookmng
-					case 2:// 회원관리
+					case "2":// 회원관리
 						osys.history(loginAdm.getId(), "회원관리");
 						membermng: while (true) {// 회원관리메뉴 while
 							osys.admin_membermng();
-							menu = scan.nextInt();
-							scan.nextLine();
-							if (!(0 <= menu && menu < 4)) {
-								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-								continue;
-							}
-							switch (menu) {// 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면
-							case 1:// 회원검색
+							String membermngmenu = scan.nextLine();
+							switch (membermngmenu) {// 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면
+							case "1":// 회원검색
 								osys.history(loginAdm.getId(), "회원관리", "회원검색");
 								osys.admin_findmem();
 								String id = scan.nextLine();
@@ -445,24 +435,27 @@ public class Controller {
 									continue admin;
 								memberDB.search(id);
 								continue membermng;
-							case 2:// 전체회원목록
+							case "2":// 전체회원목록
 								osys.history(loginAdm.getId(), "회원관리", "전체 회원목록");
 								memberDB.searchAll();// 전체회원 출력 메서드
 								if (scan.nextLine().equals("0"))
 									continue admin;
 								continue membermng;
-							case 3:// 블랙리스트
+							case "3":// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
 								System.out.println("블랙리스트 회원목록입니다.");
 								osys.showBlackList(memberDB.memberList);// 블랙리스트 출력 메서드
 								memberDB.alignBlack();
 								break;
-							case 0:// 이전화면
+							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue admin;
+							default:
+								System.out.println("잘못된 입력입니다.");
+								continue; 
 							}// end switch_membermng
 						}
-					case 3:// 건의사항
+					case "3":// 건의사항
 						ArrayList<Comment> cList = commentDB.getCommentList();
 						if (cList == null || cList.size() == 0) {
 							System.out.println("새로 등록된 건의사항이 없습니다.");
@@ -477,14 +470,9 @@ public class Controller {
 						request: while (true) {// 회원관리메뉴 while
 							osys.history(loginAdm.getId(), "건의사항");
 							osys.comment_main();
-							menu = scan.nextInt();
-							scan.nextLine();
-							if (!(0 <= menu && menu < 3)) {
-								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-								continue;
-							}
-							switch (menu) {
-							case 1:// 검색
+							String requestmenu = scan.nextLine();
+							switch (requestmenu) {
+							case "1":// 검색
 								osys.history(loginAdm.getId(), "건의사항", "검색");
 								System.out.println("검색하시고자 하는 건의사항의 아이디를 입력해주세요.(0은 이전 화면)");
 								System.out.print("아이디: ");
@@ -514,7 +502,7 @@ public class Controller {
 									System.out.println("등록된 건의사항이 없습니다.");
 									continue request;
 								}
-							case 2:// 답변
+							case "2":// 답변
 								osys.history(loginAdm.getId(), "건의사항", "답변");
 								System.out.println("답변하시고자 하는 건의사항의 아이디를 입력해주세요. (0은 이전 화면)");
 								searchId = scan.nextLine();
@@ -537,33 +525,31 @@ public class Controller {
 									System.out.println("등록된 건의사항이 없습니다.");
 									continue request;
 								}
-							case 0:// 이전화면
+							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue admin;
+							default:
+								System.out.println("잘못된 입력입니다.");
+								continue; 
 							}// end switch
 						} // end while_request
-					case 4:// 관리자 관리
+					case "4":// 관리자 관리
 						admng: while (true) {// 관리자관리메뉴 while
 							osys.history(loginAdm.getId(), "관리자 관리");
 							osys.admin_admng();
-							menu = scan.nextInt();
-							scan.nextLine();
-							if (!(0 <= menu && menu < 5)) {
-								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-								continue admng;
-							}
-							switch (menu) {// 1.관리자 검색 2.전체 관리자 목록 3.새 관리자 등록 4.관리자정보수정 0.이전화면
-							case 1:// 관리자 검색
+							String admngmenu = scan.nextLine();
+							switch (admngmenu) {// 1.관리자 검색 2.전체 관리자 목록 3.새 관리자 등록 4.관리자정보수정 0.이전화면
+							case "1":// 관리자 검색
 								osys.history(loginAdm.getId(), "관리자 관리", "관리자 검색");
 								System.out.println("검색할 관리자 아이디 혹은 이름을 입력해주세요.");
 								String searchAdminId = scan.nextLine();
 								adminDB.search(searchAdminId);// 관리자 검색 메서드
 								continue admng;
-							case 2:// 전체 관리자 목록
+							case "2":// 전체 관리자 목록
 								osys.history(loginAdm.getId(), "관리자 관리", "전체 관리자 목록");
 								adminDB.searchAll();// 전체 관리자 목록 출력 메서드
 								continue admng;
-							case 3:// 새 관리자 등록
+							case "3":// 새 관리자 등록
 								osys.history(loginAdm.getId(), "관리자 관리", "새 관리자 등록");
 								osys.admin_newad();// y or n
 								String menu2 = scan.nextLine();
@@ -576,20 +562,23 @@ public class Controller {
 										continue admin;
 									}
 								} // end while_newadm
-								continue admin;
-							case 4:
+							case "4":
 								osys.history(loginAdm.getId(), "관리자 관리", "관리자 정보수정");
 								System.out.println("검색할 관리자 아이디를 정확하게 입력해주세요.");
 								String searchAdminId2 = scan.nextLine();
 								adminDB.admin_modify(searchAdminId2);
 
 								continue admin;
-							case 0:// 이전화면
+							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue admin;
-							}// end switch
+							default:
+								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+								continue admin;
+
+							}
 						} // end while_request
-					case 5:// 로그아웃
+					case "5":// 로그아웃
 						while (true) {// 로그아웃 메서드
 							osys.history(loginMem.getId(), "로그아웃");
 							System.out.println("로그아웃을 하시겠습니까? y/n");
@@ -608,21 +597,27 @@ public class Controller {
 							}
 						}
 						continue main;// 메인으로 보내서 판별
-					case 0:// 종료
+					case "0":// 종료
 						System.out.println("프로그램을 종료합니다...");
 						break main;
+					default:
+						System.out.println("잘못된 입력입니다.");
+						continue; 
 					}
 				} // --------------------------------관리자 while end-------------------------
 			}// end switch_login
 		} // end while_main
+
 	}// end main
 
-	static void detectBlackList(List<Book> list) {	//전체 도서의 연체 여부 검사
-		if(list == null || list.size()==0) return;	//등록된 도서가 없을 경우 메서드 종료.
-		for(Book b:list) {	//for문으로 도서 정보 하나씩 검색
-			if(b.getReturnDate()==null) continue;
-			if(LocalDate.now().isAfter(b.getReturnDate())) {	//도서반납일이 경과한 책이 하나라도 있을 경우
-						b.getRenter().setStatus(true);	//해당 도서를 빌린 회원을 연체 중(블랙리스트에 표시) 상태로 바꿈.
+	static void detectBlackList(List<Book> list) { // 전체 도서의 연체 여부 검사
+		if (list == null || list.size() == 0)
+			return; // 등록된 도서가 없을 경우 메서드 종료.
+		for (Book b : list) { // for문으로 도서 정보 하나씩 검색
+			if (b.getReturnDate() == null)
+				continue;
+			if (LocalDate.now().isAfter(b.getReturnDate())) { // 도서반납일이 경과한 책이 하나라도 있을 경우
+				b.getRenter().setStatus(true); // 해당 도서를 빌린 회원을 연체 중(블랙리스트에 표시) 상태로 바꿈.
 			}
 		}
 	}
