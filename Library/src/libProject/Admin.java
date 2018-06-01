@@ -2,7 +2,7 @@ package libProject;
 
 public class Admin implements Data {
 //1
-	int test;//테스트용
+	int test;
 	private String id;
 	private String password;
 	private String name;
@@ -66,6 +66,5 @@ public class Admin implements Data {
 	public String toString() {
 		return "Admin [test=" + test + ", id=" + id + ", password=" + password + ", name=" + name + ", ssn=" + ssn
 				+ ", tel=" + tel + "]";
-	}	//관리자 정보를 문자열로 리턴하게 toString 메서드 오버라이딩.
-	//
+	}	
 }
