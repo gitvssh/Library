@@ -37,10 +37,10 @@ public class Osystem {
 	void observer_findMember() {
 		System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 		System.out.println("                  1. 아이디 찾기 2.비밀번호 찾기 0. 이전화면");
-		System.out.println("└──────────────────────────────────────────────────────────────────┘");	
+		System.out.println("└──────────────────────────────────────────────────────────────────┘");
 		System.out.print(">>");
 
-		}
+	}
 
 	void observer_findId() {
 		System.out.println("┌──────────────────────────────────────────────────────────────────┐");
@@ -192,12 +192,18 @@ public class Osystem {
 		System.out.println("                     1.검색	2.답변	0.이전화면  ");
 		System.out.println("└──────────────────────────────────────────────────────────────────┘");
 		System.out.print(">>");
+
+
 				
 			}
 	//-----------------------------------관리자 끝 ----------------------------------------
 	
-	void showBookList(List<Book> list) {	//검색한 책 리스트를 출력하는 메서드
-		if(list == null || list.size()==0) System.out.println("조회할 도서가 없습니다.");	//매개변수인 리스트가 null이거나 길이가 0일 때
+	boolean showBookList(List<Book> list) {	//검색한 책 리스트를 출력하는 메서드
+		if(list == null || list.size()==0) 
+			{System.out.println("조회할 도서가 없습니다.");	//매개변수인 리스트가 null이거나 길이가 0일 때}
+			return false;
+			}
+
 		else {
 			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 			System.out.printf("    %-7s | %-30s | %-8s | %-8s | %-5s | %-5s | %-5s   %n", "인덱스", "제목", "저자", "출판사",
@@ -210,6 +216,8 @@ public class Osystem {
 			System.out.printf("                                            총 %2d개의 도서를 관리중입니다.%n", list.size());
 			System.out.println("└──────────────────────────────────────────────────────────────────┘");
 			System.out.println();
+			return true;
+
 		}
 	}
 

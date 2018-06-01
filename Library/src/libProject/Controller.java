@@ -183,42 +183,48 @@ public class Controller {
 							case "1":// 제목
 								osys.history(loginMem.getId(), "도서대출", "제목");
 								System.out.println("검색하실 제목을 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 1));// 검색메서드
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 1))) {// 검색메서드
 								bookDB.rentBooks(loginMem);// 대출메서드
 								continue rentBook;
+								}
 							case "2":// 저자
 								osys.history(loginMem.getId(), "도서대출", "저자");
 								System.out.println("검색하실 저자를 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 2));
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 2))) {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
+								}
 							case "3":// 출판사
 								osys.history(loginMem.getId(), "도서대출", "출판사");
 								System.out.println("검색하실 출판사를 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 3));
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 3))) {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
+								}
 							case "4":// 분야
 								osys.history(loginMem.getId(), "도서대출", "분야");
 								System.out.println("검색하실 분야를 입력하세요");
 								System.out.println("분야 리스트");
 								System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
 								System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
-								osys.showBookList(bookDB.search(scan.nextLine(), 4));
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 4))) {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
+								}
 							case "5":// 인덱스
 								osys.history(loginMem.getId(), "도서대출", "인덱스");
 								System.out.println("검색하실 인덱스를 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 5));
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 5))) {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
+								}
 							case "6":// ISBN
 								osys.history(loginMem.getId(), "도서대출", "ISBN");
 								System.out.println("검색하실 ISBN을 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 6));
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 6))) {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
+								}
 							case "7":// 전체 도서목록
 								osys.history(loginMem.getId(), "도서대출", "전체 도서목록");
 								System.out.println("전체 도서목록입니다.");
@@ -248,29 +254,29 @@ public class Controller {
 						bookDB.returnBooks(loginMem.getRentList());
 						continue member;
 					case "4":// 회원정보
-						while(true) {
+						while (true) {
 							osys.history(loginMem.getId(), "회원정보");
-						osys.member_inform();
-						menu = scan.nextLine();
-						switch (menu) {// 1.회원정보 조회 2.회원정보 수정 0. 이전화면
-						case "1":// 회원정보 조회
-							osys.history(loginMem.getId(), "회원정보", "회원정보조회");
-							osys.member_myinform();
-							memberDB.printMemInform(loginMem);
-							break;
-						case "2":// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
-							osys.history(loginMem.getId(), "회원정보", "회원정보 수정");
-							osys.member_modify();
-							memberDB.update(loginMem);
-							break;
-						// end while modify;
-						case "0":// 이전화면
-							System.out.println("이전화면으로 돌아갑니다.");
-							continue member;
-						default:
-							System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-							continue;
-						}// end switch 회원정보메뉴
+							osys.member_inform();
+							menu = scan.nextLine();
+							switch (menu) {// 1.회원정보 조회 2.회원정보 수정 0. 이전화면
+							case "1":// 회원정보 조회
+								osys.history(loginMem.getId(), "회원정보", "회원정보조회");
+								osys.member_myinform();
+								memberDB.printMemInform(loginMem);
+								break;
+							case "2":// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
+								osys.history(loginMem.getId(), "회원정보", "회원정보 수정");
+								osys.member_modify();
+								memberDB.update(loginMem);
+								break;
+							// end while modify;
+							case "0":// 이전화면
+								System.out.println("이전화면으로 돌아갑니다.");
+								continue member;
+							default:
+								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+								continue;
+							}// end switch 회원정보메뉴
 						}
 					case "5":// 건의사항
 						comment: while (true) {
@@ -501,7 +507,8 @@ public class Controller {
 								System.out.println("검색하시고자 하는 건의사항의 아이디를 입력해주세요.(0은 이전 화면)");
 								System.out.print("아이디: ");
 								String searchId = scan.nextLine();
-								if (searchId.equals("0")) continue request;
+								if (searchId.equals("0"))
+									continue request;
 
 								ArrayList<Comment> searchList = commentDB.searchComments(searchId);
 
@@ -525,31 +532,50 @@ public class Controller {
 									System.out.println("등록된 건의사항이 없습니다.");
 									continue request;
 								}
+
 							case "2":// 답변
-								osys.history(loginAdm.getId(), "건의사항", "답변");
-								System.out.println("답변하시고자 하는 건의사항의 아이디를 입력해주세요. (0은 이전 화면)");
-								searchId = scan.nextLine();
-								if (searchId.equals("0")) continue request;
+								searchId: while(true) {
+									  osys.history(loginAdm.getId(), "건의사항", "답변");
+									  System.out.println("답변하시고자 하는 건의사항의 아이디를 입력해주세요. (0은 이전 화면)");
+									  searchId = scan.nextLine();
+									  if (searchId.equals("0")) continue request;
+									
+									  searchList = commentDB.searchComments(searchId);
+									
+									  if (searchList != null) {
+										  searchC: while(true) {
+											int page = 1;
+											commentDB.showPages(page, searchList);
+											while (true) {
+												System.out.println("1.이전 페이지  2.다음 페이지  3.답변 0.이전 화면");
+												int subMenu = scan.nextInt();
+												scan.nextLine();
+												if (subMenu == 0)
+													continue searchId; 
+												if (subMenu == 1)
+													page = commentDB.showPages(--page, searchList);
+												else if (subMenu == 2)
+													page = commentDB.showPages(++page, searchList);
+												else if (subMenu == 3) break; // 3을 입력받으면 답변 입력창으로.
+												else
+													System.out.println("잘못된 입력!");
+											}
+											
+											System.out.println("답변하시고자 하는 건의사항의 번호를 입력해주세요. (0은 이전 화면)");
+											System.out.print("번호: ");
+											int searchNo = scan.nextInt();
+											scan.nextLine();
+											
+											if(searchNo==0) continue request;
+											commentDB.replyComment(searchNo, searchList, loginAdm);
+											continue searchC;
+										  }//searchC while문
+									} else {
+										System.out.println("등록된 건의사항이 없습니다.");
+										continue request;
 
-								searchList = commentDB.searchComments(searchId);
-
-								if (searchList != null) {
-									searchC: while(true) {
-										commentDB.showCommentList(searchList);
-										
-										System.out.println("답변하시고자 하는 건의사항의 번호를 입력해주세요. (0은 이전 화면)");
-										System.out.print("번호: ");
-										int searchNo = scan.nextInt();
-										scan.nextLine();
-										
-										if(searchNo==0) continue request;
-										commentDB.replyComment(searchNo, searchList, loginAdm);
-										continue searchC;
 									}
-								} else {
-									System.out.println("등록된 건의사항이 없습니다.");
-									continue request;
-								}
+								}//searchId while문
 							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue admin;
