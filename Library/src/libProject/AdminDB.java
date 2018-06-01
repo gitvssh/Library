@@ -106,24 +106,20 @@ public class AdminDB extends DB {
 				while (true) {
 					Osystem osys = new Osystem();
 					osys.member_modify();
-					int menu = sc.nextInt();
-					sc.nextLine();
+					String menu = sc.nextLine();
 
-					if (!(0 <= menu && menu < 6)) {
-						System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-						continue;
-					} else if (menu == 0) {
+					if (menu.equals("0") ) {
 						System.out.println("이전화면으로 돌아갑니다.");
 						break;
 					} else {
 						switch (menu) {
-						case 1:
+						case "1":
 							System.out.println("수정하실 아이디를 입력해주세요.");
 							System.out.println("현재 아이디 : " + adminList.get(i).getId());
 							adminList.get(i).setId(sc.nextLine());
 							System.out.println("수정되셨습니다. 수정된 아이디 : " + "[" + adminList.get(i).getId() + "]");
 							continue;
-						case 2:
+						case "2":
 							while (true) {
 								System.out.println("수정하실 비밀번호를 입력해주세요.");
 								String passright1 = sc.nextLine();
@@ -139,25 +135,28 @@ public class AdminDB extends DB {
 								}
 							}
 							continue;
-						case 3:
+						case "3":
 							System.out.println("수정하실 이름을 입력해주세요.");
 							System.out.println("현재 이름 : " + adminList.get(i).getName());
 							adminList.get(i).setName(sc.nextLine());
 							System.out.println("수정되셨습니다. 수정된 이름 : " + "[" + adminList.get(i).getName() + "]");
 							continue;
 
-						case 4:
+						case "4":
 							System.out.println("수정하실 생년월일를 입력해주세요.");
 							System.out.println("현재 생년월일 : " + adminList.get(i).getSsn());
 							adminList.get(i).setSsn(sc.nextLine());
 							System.out.println("수정되셨습니다. 수정된 생년월일 : " + "[" + adminList.get(i).getSsn() + "]");
 							continue;
-						case 5:
+						case "5":
 							System.out.println("수정하실 전화번호를 입력해주세요.");
 							System.out.println("현재 전화번호 : " + adminList.get(i).getTel());
 							adminList.get(i).setTel(sc.nextLine());
 							System.out.println("수정되셨습니다. 수정된 전화번호 : " + "[" + adminList.get(i).getTel() + "]");
 							continue;
+							default:
+								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+								continue;
 						}
 
 					}
