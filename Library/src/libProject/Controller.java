@@ -443,8 +443,8 @@ public class Controller {
 							}
 						} // end while_bookmng
 					case "2":// 회원관리
-						osys.history(loginAdm.getId(), "회원관리");
 						membermng: while (true) {// 회원관리메뉴 while
+							osys.history(loginAdm.getId(), "회원관리");
 							osys.admin_membermng();
 
 							menu = scan.nextLine();
@@ -453,13 +453,16 @@ public class Controller {
 								osys.history(loginAdm.getId(), "회원관리", "회원검색");
 								osys.admin_findmem();
 								String id = scan.nextLine();
-								if (id.equals("0"))
-									continue admin;
 								memberDB.search(id);
+								System.out.print(">>");
+								if (id.equals("0")) {
+									continue admin;
+									}
 								continue membermng;
 							case "2":// 전체회원목록
 								osys.history(loginAdm.getId(), "회원관리", "전체 회원목록");
 								memberDB.searchAll();// 전체회원 출력 메서드
+								System.out.print(">>");
 								if (scan.nextLine().equals("0"))
 									continue membermng;
 							case "3":// 블랙리스트
