@@ -525,30 +525,48 @@ public class Controller {
 									System.out.println("등록된 건의사항이 없습니다.");
 									continue request;
 								}
+
 							case "2":// 답변
-								osys.history(loginAdm.getId(), "건의사항", "답변");
-								System.out.println("답변하시고자 하는 건의사항의 아이디를 입력해주세요. (0은 이전 화면)");
-								searchId = scan.nextLine();
-								if (searchId.equals("0")) continue request;
-
-								searchList = commentDB.searchComments(searchId);
-
-								if (searchList != null) {
-									searchC: while(true) {
-										commentDB.showCommentList(searchList);
-										
-										System.out.println("답변하시고자 하는 건의사항의 번호를 입력해주세요. (0은 이전 화면)");
-										System.out.print("번호: ");
-										int searchNo = scan.nextInt();
-										scan.nextLine();
-										
-										if(searchNo==0) continue request;
-										commentDB.replyComment(searchNo, searchList, loginAdm);
-										continue searchC;
+									searchId: while(true) {
+									  osys.history(loginAdm.getId(), "건의사항", "답변");
+									  System.out.println("답변하시고자 하는 건의사항의 아이디를 입력해주세요. (0은 이전 화면)");
+									  searchId = scan.nextLine();
+									  if (searchId.equals("0")) continue request;
+									
+									  searchList = commentDB.searchComments(searchId);
+									
+									if (searchList != null) {
+									  searchC: while(true) {
+											int page = 1;
+											commentDB.showPages(page, searchList);
+											while (true) {
+												System.out.println("1.이전 페이지  2.다음 페이지  3.답변 0.이전 화면");
+												int subMenu = scan.nextInt();
+												scan.nextLine();
+												if (subMenu == 0)
+													continue searchId; 
+												if (subMenu == 1)
+													page = commentDB.showPages(--page, searchList);
+												else if (subMenu == 2)
+													page = commentDB.showPages(++page, searchList);
+												else if (subMenu == 3) break; // 3을 입력받으면 답변 입력창으로.
+												else
+													System.out.println("잘못된 입력!");
+											}
+											
+											System.out.println("답변하시고자 하는 건의사항의 번호를 입력해주세요. (0은 이전 화면)");
+											System.out.print("번호: ");
+											int searchNo = scan.nextInt();
+											scan.nextLine();
+											
+											if(searchNo==0) continue request;
+											commentDB.replyComment(searchNo, searchList, loginAdm);
+											continue searchC;
+										}
+									} else {
+										System.out.println("등록된 건의사항이 없습니다.");
+										continue request;
 									}
-								} else {
-									System.out.println("등록된 건의사항이 없습니다.");
-									continue request;
 								}
 							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
