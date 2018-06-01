@@ -23,10 +23,10 @@ public class MemberDB extends DB {
 public MemberDB() {
 	memberList = new ArrayList<>();
 	//dummy member
-  this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814", false));
-	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
-	this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214", true));
-	this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819", false));
+  this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814"));
+	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891"));
+	this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214"));
+	this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819"));
   //dummy blacklist
 	ArrayList<Book> dumRentList = new ArrayList<>();
 	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
@@ -98,22 +98,6 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 			}
 		}
 
-		return null;
-	}
-
-	@Override
-	List searchAll() {
-		System.out.println("┌────────────────────────────────────────────────────────────┐");
-		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
-		System.out.println("└────────────────────────────────────────────────────────────┘");
-		System.out.println("┌────────────────────────────────────────────────────────────┐");
-
-		for (int i = 0; i < memberList.size(); i++) {
-			System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4b  %n", memberList.get(i).id, memberList.get(i).name,
-					memberList.get(i).ssn, memberList.get(i).tel, memberList.get(i).idstatus);
-			System.out.println("└────────────────────────────────────────────────────────────┘");
-		}
-		System.out.printf("  회원은 총 %s 명 입니다. (0은 이전 화면)%n", memberList.size());
 		return null;
 	}
 
@@ -445,6 +429,25 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 		System.out.printf("  회원은 총 %s 명 입니다. (0은 이전 화면)%n", memberList.size());
 		return null;
 	}
+	
+//TODO:중복메서드, 비교후 정리
+//	List searchAll() {
+//		System.out.println("┌────────────────────────────────────────────────────────────┐");
+//		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
+//		System.out.println("└────────────────────────────────────────────────────────────┘");
+//		System.out.println("┌────────────────────────────────────────────────────────────┐");
+//
+//		for (int i = 0; i < memberList.size(); i++) {
+//			System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4b  %n", memberList.get(i).id, memberList.get(i).name,
+//					memberList.get(i).ssn, memberList.get(i).tel, memberList.get(i).idstatus);
+//			System.out.println("└────────────────────────────────────────────────────────────┘");
+//		}
+//		System.out.printf("  회원은 총 %s 명 입니다. (0은 이전 화면)%n", memberList.size());
+//		return null;
+//	}
+	
+	
+	
 	@Override
 	void align() {
 		System.out.println("");

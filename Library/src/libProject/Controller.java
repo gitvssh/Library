@@ -108,7 +108,7 @@ public class Controller {
 						System.out.println("비밀번호를 입력하세요.");
 						String password = scan.nextLine();
 
-						loginMem = memberDB.Login(id, password);
+						loginMem = memberDB.loginMem(id, password);
 
 						if (loginMem == null) {
 							System.out.println("로그인에 실패하였습니다. 아이디 비밀번호를 다시 확인해주세요.");
@@ -248,7 +248,7 @@ public class Controller {
 						case 1:// 회원정보 조회
 							osys.history(loginMem.getId(), "회원정보", "회원정보조회");
 							osys.member_myinform();
-							memberDB.MemInform(loginMem);
+							memberDB.printMemInform(loginMem);
 							continue member;
 						case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.history(loginMem.getId(), "회원정보", "회원정보 수정");
