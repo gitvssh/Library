@@ -423,7 +423,7 @@ public class Controller {
 								break;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
-								break bookmng;
+								continue admin;
 							}
 						} // end while_bookmng
 					case 2:// 회원관리

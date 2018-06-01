@@ -89,6 +89,9 @@ public class BookDB extends DB{
 
 		System.out.print("제목 :");
 		title = scan.nextLine();
+		if(title.equals("0")) {
+			return;
+		}
 		System.out.println();
 		
 		System.out.print("저자 :");
