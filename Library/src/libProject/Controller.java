@@ -527,7 +527,7 @@ public class Controller {
 								}
 
 							case "2":// 답변
-									searchId: while(true) {
+								searchId: while(true) {
 									  osys.history(loginAdm.getId(), "건의사항", "답변");
 									  System.out.println("답변하시고자 하는 건의사항의 아이디를 입력해주세요. (0은 이전 화면)");
 									  searchId = scan.nextLine();
@@ -535,8 +535,8 @@ public class Controller {
 									
 									  searchList = commentDB.searchComments(searchId);
 									
-									if (searchList != null) {
-									  searchC: while(true) {
+									  if (searchList != null) {
+										  searchC: while(true) {
 											int page = 1;
 											commentDB.showPages(page, searchList);
 											while (true) {
@@ -562,12 +562,12 @@ public class Controller {
 											if(searchNo==0) continue request;
 											commentDB.replyComment(searchNo, searchList, loginAdm);
 											continue searchC;
-										}
+										  }//searchC while문
 									} else {
 										System.out.println("등록된 건의사항이 없습니다.");
 										continue request;
 									}
-								}
+								}//searchId while문
 							case "0":// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue admin;
