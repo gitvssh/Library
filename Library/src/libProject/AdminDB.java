@@ -14,7 +14,7 @@ public class AdminDB extends DB {
 		adminList = new ArrayList<>();
 		// dummy admin
 		Admin a = new Admin("admin1", "1234", "관리자", "921002", "01012341234");
-		adminList.add(a);
+		adminList.add(a); 
 	}
 
 	void input() {
