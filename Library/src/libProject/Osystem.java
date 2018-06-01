@@ -20,8 +20,8 @@ public class Osystem {
 		System.out.println("└─────────────────────────────────────────────────────────────┘");
 		System.out.println("메뉴를 선택하세요>");
 	}
-	
-	void observer_align() {	//정렬 메뉴
+
+	void observer_align() { // 정렬 메뉴
 		System.out.println("┌─────────────────────────────────────────────────────────────┐");
 		System.out.println("        1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.최다대출도서 0.이전화면으로 	   ");
 		System.out.println("└─────────────────────────────────────────────────────────────┘");
@@ -89,7 +89,6 @@ public class Osystem {
 		System.out.println("└───────────────────────────────────────────────────┘");
 		System.out.println("수정을 원하시는 항목을 선택해주세요.");
 	}
-	
 
 	void member_request() {
 		System.out.println("┌───────────────────────────────────────────┐");
@@ -97,15 +96,17 @@ public class Osystem {
 		System.out.println("└───────────────────────────────────────────┘");
 		System.out.println("메뉴를 선택하세요.");
 	}
+
 	// --------------------------------------회원
 	// 끝---------------------------------------------------
 	void admin_main() {
-	    System.out.println("원하시는 기능의 번호를 입력해주세요.");
+		System.out.println("원하시는 기능의 번호를 입력해주세요.");
 		System.out.println("┌────────────────────────────────────────────────────────┐");
-	    System.out.println(" 1.도서관리 2.회원관리 3.건의사항 4.관리자 관리 5.로그아웃 0.시스템 종료 ");
+		System.out.println(" 1.도서관리 2.회원관리 3.건의사항 4.관리자 관리 5.로그아웃 0.시스템 종료 ");
 		System.out.println("└────────────────────────────────────────────────────────┘");
-	    System.out.println("메뉴를 선택하세요>");
+		System.out.println("메뉴를 선택하세요>");
 	}
+
 	void admin_bookmng() {
 		System.out.println("원하시는 기능의 번호를 입력해주세요.");
 		System.out.println("┌──────────────────────────────────────────────┐");
@@ -113,47 +114,55 @@ public class Osystem {
 		System.out.println("└──────────────────────────────────────────────┘");
 		System.out.println("메뉴를 선택하세요>");
 	}
+
 	void admin_search() {
 		System.out.println("┌─────────────────────────────────────────────────────────────┐");
 		System.out.println(" 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로");
 		System.out.println("└─────────────────────────────────────────────────────────────┘");
 		System.out.println("메뉴를 선택하세요>");
 	}
+
 	void admin_addbook() {
 		System.out.println("┌───────────────────────────────────────┐");
 		System.out.println(" 추가하실 도서의 정보를 입력해주세요. (0은 이전화면)");
 		System.out.println("└───────────────────────────────────────┘");
 
 	}
+
 	void admin_modifybook() {
 		System.out.println("┌────────────────────────────────────────┐");
 		System.out.println(" 수정하실 도서의 인덱스를 입력해주세요. (0은 이전화면)");
 		System.out.println("└────────────────────────────────────────┘");
 	}
+
 	void admin_delbook() {
 		System.out.println("┌────────────────────────────────────────┐");
 		System.out.println(" 삭제하실 도서의 인덱스를 입력해주세요. (0은 이전화면)");
 		System.out.println("└────────────────────────────────────────┘");
 	}
+
 	void admin_membermng() {
 		System.out.println("회원관리 메뉴입니다. 원하시는 기능의 번호를 입력해주세요.");
 		System.out.println("┌──────────────────────────────────────────────────┐");
-		System.out.println(" 1.회원검색 2.회원정보수정 3.전체회원목록 4.블랙리스트 0.이전화면");
+		System.out.println(" 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면");
 		System.out.println("└──────────────────────────────────────────────────┘");
 
 	}
+
 	void admin_findmem() {
 		System.out.println("┌─────────────────────────────────────────────┐");
 		System.out.println(" 찾으시는 회원의 아이디 혹은 이름를 입력하세요. (0은 이전화면)");
 		System.out.println("└─────────────────────────────────────────────┘");
 
 	}
+
 	void admin_findmem2() {
 		System.out.println("┌────────────────────────────────────────────┐");
 		System.out.println(" 정보를 수정하려는 회원의 아이디를  입력하세요 (0은 이전화면)");
 		System.out.println("└────────────────────────────────────────────┘");
-		
+
 	}
+
 	void admin_admng() {
 		System.out.println(" ━━━━━━━━━━━━━");
 		System.out.println("  관리자 관리 메뉴입니다.  ");
@@ -163,82 +172,88 @@ public class Osystem {
 		System.out.println(" 1.관리자 검색 2.전체 관리자 목록 3.새 관리자 등록 0.이전화면 ");
 		System.out.println("└─────────────────────────────────────────────┘");
 	}
+
 	void admin_newad() {
 		System.out.println("┌─────────────────────────────────────┐");
 		System.out.println(" 새로운 관리자를 등록하시겠습니까? (Y/N) >>  ");
 		System.out.println("└─────────────────────────────────────┘");
 
 	}
-	
-	void showBookList(List<Book> list) {	//검색한 책 리스트를 출력하는 메서드
-		if(list == null || list.size()==0) System.out.println("조회할 도서가 없습니다.");	//매개변수인 리스트가 null이거나 길이가 0일 때
+
+	void showBookList(List<Book> list) { // 검색한 책 리스트를 출력하는 메서드
+		if (list == null || list.size() == 0)
+			System.out.println("조회할 도서가 없습니다."); // 매개변수인 리스트가 null이거나 길이가 0일 때
 		else {
 			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
-			System.out.printf("    %-7s | %-38s | %-8s | %-8s | %-5s | %-5s | %-5s   %n", "인덱스","제목","저자","출판사","ISBN","주제","상태");
+			System.out.printf("    %-7s | %-38s | %-8s | %-8s | %-5s | %-5s | %-5s   %n", "인덱스", "제목", "저자", "출판사",
+					"ISBN", "주제", "상태");
 			System.out.println("└──────────────────────────────────────────────────────────────────┘");
-			for(Book b:list) {//인덱스(7), 제목(20), 저자(8), 출판사(8), ISBN(5), 주제(5)
+			for (Book b : list) {// 인덱스(7), 제목(20), 저자(8), 출판사(8), ISBN(5), 주제(5)
 				System.out.println(b);
 			}
 			System.out.println("┌──────────────────────────────────┐");
-			System.out.printf("  총 %2d개의 검색결과가 있습니다.              %n",list.size());
+			System.out.printf("  총 %2d개의 검색결과가 있습니다.              %n", list.size());
 			System.out.println("└──────────────────────────────────┘");
 		}
 	}
-	
-	void showMemberList(List<Member> list) {	//검색한 회원 리스트 출력 양식
-		if(list == null || list.size()==0) System.out.println("조회할 회원이 없습니다.");
+
+	void showMemberList(List<Member> list) { // 검색한 회원 리스트 출력 양식
+		if (list == null || list.size() == 0)
+			System.out.println("조회할 회원이 없습니다.");
 		else {
 			System.out.println("┌────────────────────────────────────────────────────────────┐");
 			System.out.printf("    %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
 			System.out.println("└────────────────────────────────────────────────────────────┘");
-			for(Member m:list) {
+			for (Member m : list) {
 				System.out.println(m);
 			}
 			System.out.println("┌──────────────────────────────────┐");
-			System.out.printf("  총 %2d개의 검색결과가 있습니다.              %n",list.size());
+			System.out.printf("  총 %2d개의 검색결과가 있습니다.              %n", list.size());
 			System.out.println("└──────────────────────────────────┘");
 		}
-	
+
 	}
-	void showBlackList(List<Member> list) {	
-		if(list == null || list.size()==0) System.out.println("조회할 회원이 없습니다.");
+
+	void showBlackList(List<Member> list) {
+		if (list == null || list.size() == 0)
+			System.out.println("조회할 회원이 없습니다.");
 		else {
 			System.out.println("┌────────────────────────────────────────────────────────────┐");
-			System.out.printf("  %-8s | %-12s | %-15s | %-25s | %-9s   %n", "회원ID","이름","생년월일","전화번호","상태");
+			System.out.printf("  %-8s | %-12s | %-15s | %-25s | %-9s   %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
 			System.out.println("└────────────────────────────────────────────────────────────┘");
 			int count = 0;
 			System.out.println("┌────────────────────────────────────────────────────────────┐");
-			for(int i=0;i<list.size();i++) {
-				if(list.get(i).isStatus()==true) {
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).isStatus() == true) {
 					count++;
-					System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", list.get(i).getId(), list.get(i).getName(),
-							list.get(i).getSsn(), list.get(i).getTel(), list.get(i).getIdstatus());
+					System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", list.get(i).getId(),
+							list.get(i).getName(), list.get(i).getSsn(), list.get(i).getTel(),
+							list.get(i).getIdstatus());
 					System.out.println("└────────────────────────────────────────────────────────────┘");
 				}
 			}
 			System.out.println("┌──────────────────────────────────┐");
-			System.out.printf("  총 %2d개의 검색결과가 있습니다.              %n",count);
+			System.out.printf("  총 %2d개의 검색결과가 있습니다.              %n", count);
 			System.out.println("└──────────────────────────────────┘");
 		}
 	}
-	
-	//리스트 추가 
 
-	//히스토리 메서드(오버로딩)
+	// 리스트 추가
+
+	// 히스토리 메서드(오버로딩)
 	void history(String menu) {
-		System.out.println("["+menu+"]");
-	} //회원이나 관리자 아이디를 메뉴창에 표시할 때도 사용.
-	
-	
+		System.out.println("[" + menu + "]");
+	} // 회원이나 관리자 아이디를 메뉴창에 표시할 때도 사용.
+
 	void history(String menu, String subMenu1) {
-		System.out.println("["+menu + " >> "+ subMenu1+"]");
+		System.out.println("[" + menu + " >> " + subMenu1 + "]");
 	}
-	
+
 	void history(String menu, String subMenu1, String subMenu2) {
-		System.out.println("["+menu + " >> " + subMenu1 + " >> " + subMenu2+"]");
+		System.out.println("[" + menu + " >> " + subMenu1 + " >> " + subMenu2 + "]");
 	}
-	
+
 	void history(String menu, String subMenu1, String subMenu2, String subMenu3) {
-		System.out.println("["+menu + " >> " + subMenu1 + " >> " + subMenu2 + " >> " + subMenu3+"]");
+		System.out.println("[" + menu + " >> " + subMenu1 + " >> " + subMenu2 + " >> " + subMenu3 + "]");
 	}
 }

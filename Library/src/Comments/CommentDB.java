@@ -11,12 +11,20 @@ import libProject.Member;
 
 public class CommentDB {	//건의사항 DB클래스
 	static int commentNo = 0;
-	ArrayList<Comment> commentList;	//건의사항이 저장되는 리스트
+	private ArrayList<Comment> commentList;	//건의사항이 저장되는 리스트
 	
 	public CommentDB() {	//DB객체 생성시 리스트도 객체생성.
 		commentList = new ArrayList<>();
 		for(int i=0; i<31; i++)	//더미 건의사항 생성
-		commentList.add(new Comment(i+1, "java111", new Date(), i+1+"", i+1+""));
+			commentList.add(new Comment(i+1, "java111", new Date(), i+1+"", i+1+""));
+	}
+	
+	public ArrayList<Comment> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(ArrayList<Comment> commentList) {
+		this.commentList = commentList;
 	}
 	
 	public ArrayList<Comment> searchComments(String id) {	//입력 키워드로 해당 아이디의 건의사항을 검색하는 메서드

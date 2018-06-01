@@ -2,8 +2,11 @@ package libProject;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import Comments.*;
 
@@ -134,12 +137,12 @@ public class Controller {
 						case 1:// 아이디 찾기
 							osys.history("비회원","아이디/비밀번호 찾기","아이디 찾기");
 							osys.observer_findId();// 아이디찾기 화면
-							memberDB.findId();// 아이디 찾기 메서드
+							memberDB.FindId();// 아이디 찾기 메서드
 							break;
 						case 2:// 비밀번호 찾기
 							osys.history("비회원","아이디/비밀번호 찾기","비밀번호 찾기");
 							osys.observer_findPass();// 비밀번호찾기 화면
-							memberDB.findPw();// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
+							memberDB.FindPw();// 비밀번호 찾기 메서드 -> 비밀번호를 번호로 보내드렸습니다!
 							break;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
@@ -236,16 +239,14 @@ public class Controller {
 						case 1:// 회원정보 조회
 							osys.history(loginMem.getId(),"회원정보","회원정보조회");
 							osys.member_myinform();// 회원정보 조회 화면
-              memberDB.printMemInform(loginMem);
+							memberDB.printMemInform(loginMem);
 							continue member;
-							case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
+						case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 							osys.history(loginMem.getId(),"회원정보","회원정보 수정");
 							osys.member_modify();// 회원정보 수정 화면
-							modify: while (true) {
-								memberDB.update(loginMem);
-								break;
-								}// end switch_modify
-							 continue member;// end while modify;
+							memberDB.update(loginMem);
+							continue member;
+							 // end while modify;
 						case 0:// 이전화면
 							System.out.println("이전화면으로 돌아갑니다.");
 							continue member;
@@ -417,11 +418,13 @@ public class Controller {
 								osys.history(loginAdm.getId(),"회원관리","회원검색");
 								osys.admin_findmem();
 								String id=scan.nextLine();
+								if(id.equals("0")) continue admin;
 								memberDB.search(id);
 								continue admin;
 							case 2:// 전체회원목록
 								osys.history(loginAdm.getId(),"회원관리","전체 회원목록");
-									memberDB.searchAll();// 전체회원 출력 메서드
+								memberDB.searchAll();// 전체회원 출력 메서드
+								if(scan.nextLine().equals("0")) continue admin;
 								continue admin;
 							case 3:// 블랙리스트
 								osys.history(loginAdm.getId(), "회원관리", "블랙리스트");
@@ -433,11 +436,22 @@ public class Controller {
 								System.out.println("이전화면으로 돌아갑니다.");
 								continue admin;
 							}// end switch_membermng
-							break;
 						}
 					case 3:// 건의사항
 							// 건의사항 출력 메서드(db)
 						osys.history(loginAdm.getId(),"건의사항");
+						
+						ArrayList<Comment> cList = commentDB.getCommentList();
+						if(cList == null || cList.size()==0) {
+							System.out.println("새로 등록된 건의사항이 없습니다.");
+						} else {
+							HashSet<String> idSet = new HashSet<>();
+							for(Comment c:cList) {
+								if(c.getReply()==null) idSet.add(c.getId());
+							}
+							System.out.println("미답변 건의사항: " + idSet);
+						}
+						
 						System.out.println("1.검색	2.답변	0.이전화면");
 						menu = scan.nextInt();
 						scan.nextLine();
@@ -492,7 +506,7 @@ public class Controller {
 								}
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
-								continue admin;
+								break request;
 							}// end switch
 						} // end while_request
 					case 4:// 관리자 관리
@@ -507,11 +521,11 @@ public class Controller {
 								System.out.println("검색할 관리자 아이디 혹은 이름을 입력해주세요.");
 								String searchAdminId = scan.nextLine();
 								adminDB.search(searchAdminId);// 관리자 검색 메서드
-								break admng;
+								continue admin;
 							case 2:// 전체 관리자 목록
 								osys.history(loginAdm.getId(),"관리자 관리","전체 관리자 목록");
 								adminDB.searchAll();// 전체 관리자 목록 출력 메서드
-								break admng;
+								continue admin;
 							case 3:// 새 관리자 등록
 								osys.history(loginAdm.getId(),"관리자 관리","새 관리자 등록");
 								osys.admin_newad();// y or n
@@ -522,19 +536,19 @@ public class Controller {
 										break newadm;
 									} else  {
 										System.out.println("관리자 관리화면으로 돌아갑니다.");
-										break admng;
+										continue admin;
 									} 
 								} // end while_newadm
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
-								break admng;
+								continue admin;
 							}// end switch
 						} // end while_request
 					case 5:// 로그아웃
 						while(true) {// 로그아웃 메서드
 							osys.history(loginMem.getId(),"로그아웃");
 							System.out.println("로그아웃을 하시겠습니까? y/n");
-							String out = scan.nextLine();
+							String out = scan.nextLine().toLowerCase();
 							if(out.equals("y")) {
 								System.out.println("로그아웃 되었습니다.");
 								login = 0;
