@@ -20,40 +20,37 @@ public class MemberDB extends DB {
 	boolean status;
 	boolean blackstatus;
 
-	public MemberDB() {
-		memberList = new ArrayList<>();
-		//dummy member
-		this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814", false));
-		this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
-		this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214", true));
-		this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819", false));
-		//dummy blacklist
-		ArrayList<Book> dumRentList = new ArrayList<>();
-		Book dumBook = new Book("소피의 세계", "요슈타인가아더 ", 1, "현암사");
-		LocalDate date = LocalDate.now();
-		LocalDate returnDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth() - 7);
-		dumBook.setReturnDate(returnDate);
-		dumRentList.add(dumBook);
-		Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814", false);
-		dumMember.setRentList(dumRentList);
-		this.memberList.add(dumMember);
-
-
-		for (int i = 0; i < memberList.size(); i++) {
-
-			if (memberList.get(i).isStatus() == false) {
-				memberList.get(i).setIdstatus("정상");
-			} else if (memberList.get(i).isStatus() == true) {
-
-				if (memberList.get(i).isBlackstatus() == false) {
-
-					memberList.get(i).setIdstatus("연체중");
-				} else {
-					memberList.get(i).setIdstatus("계정정지");
-				}
+public MemberDB() {
+	memberList = new ArrayList<>();
+	//dummy member
+  this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814", false));
+	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891", true));
+	this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214", true));
+	this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819", false));
+  //dummy blacklist
+	ArrayList<Book> dumRentList = new ArrayList<>();
+	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
+	LocalDate returnDate = LocalDate.of(2018,5,18);	//기간이 지난 반납일
+	dumBook.setReturnDate(returnDate); //기간이 지난 반납일을 책 객체에 삽입
+	dumRentList.add(dumBook);	//더미 대출 리스트에 반납일이 지난 책 삽입
+	Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814", false);
+	dumMember.setRentList(dumRentList);
+	this.memberList.add(dumMember);
+	
+	for(int i=0;i<memberList.size();i++) {
+		
+		if(memberList.get(i).isStatus()==false) {
+			memberList.get(i).setIdstatus("정상");
+		}else if(memberList.get(i).isStatus()==true){
+			if(memberList.get(i).isBlackstatus()==false) {
+				memberList.get(i).setIdstatus("연체중");
+			}else {
+			memberList.get(i).setIdstatus("계정정지");
 			}
 		}
-	}// end generator
+	}
+}//end generator
+
 
 	@Override
 	List search(String search) {
@@ -108,13 +105,14 @@ public class MemberDB extends DB {
 					memberList.get(i).ssn, memberList.get(i).tel, memberList.get(i).idstatus);
 			System.out.println("└────────────────────────────────────────────────────────────┘");
 		}
-		System.out.printf("  회원은 총 %s 명 입니다.%n", memberList.size());
+		System.out.printf("  회원은 총 %s 명 입니다. (0은 이전 화면)%n", memberList.size());
 		return null;
 	}
 
 	void input() { // 회원가입 메서드
 		System.out.println("아이디를 입력해주세요. 0:이전메뉴로 이동");
 		String id = scanner.nextLine();
+		if(id.equals("0")) return;
 		while (true) {
 			System.out.println("비밀번호를 입력해주세요.");
 			password = scanner.nextLine();
@@ -160,11 +158,12 @@ public class MemberDB extends DB {
 		case 2:
 			while (true) {
 				System.out.println("수정하실 비밀번호를 입력해주세요.");
-				m.setPassword(m.getPassword());
+				String passright1 = scanner.nextLine();
 				System.out.println("비밀번호를 한번 더 입력해주세요");
-				String passright = scanner.nextLine();
-				if (passright.equals(m.getPassword())) {
-					System.out.println("비밀번호를 확인하였습니다.");
+				String passright2 = scanner.nextLine();
+				if (passright1.equals(passright2)) {
+					m.setPassword(passright2);
+					System.out.println("비밀번호를 수정하였습니다.");
 					break;
 				} else {
 					System.out.println("비밀번호가 틀렸습니다. 다시 입력해주세요.");
@@ -347,18 +346,18 @@ public class MemberDB extends DB {
 		name = scanner.nextLine();
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).getName().equals(name)) {
-
 				System.out.println("전화번호를 입력해주세요");
 				tel = scanner.nextLine();
 				if (memberList.get(i).getTel().equals(tel)) {
 					System.out.println("귀하의 아이디는 :" + memberList.get(i).getId() + "입니다.");
-					break;
+					return;
 				} else {
 					System.out.println("잘못된 전화번호 입니다.");
-					break;
+					return;
 				}
 			}
 		}
+		System.out.println("존재하지 않는 이름입니다!");
 	}
 
 	void FindPw() { // 비밀번호 찾기
@@ -373,16 +372,19 @@ public class MemberDB extends DB {
 					tel = scanner.nextLine();
 					if (memberList.get(i).getTel().equals(tel)) {
 						System.out.println("해당 번호로 비밀번호를 전송하였습니다.");
+						System.out.println("[비밀번호:"+memberList.get(i).getPassword()+"]");
+						return;
 					} else {
 						System.out.println("잘못된 전화번호 입니다.");
 						break;
 					}
 				} else {
-					System.out.println("잘못된 이름 입니다.");
-					break;
+					System.out.println("잘못된 아이디입니다!");
+					return;
 				}
-			}
+			} 
 		}
+		System.out.println("존재하지 않는 이름입니다!");
 	}
 
 	@Override
