@@ -68,10 +68,13 @@ public class AdminDB extends DB {
 	@Override
 	List search(String search) {
 		System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.printf("   %-8s | %-12s | %-13s | %-21s %n", "관리자ID", "이름", "생년월일", "전화번호");
+		System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
 		for (int i = 0; i < adminList.size(); i++) {
 			if (adminList.get(i).getId().contains(search) || adminList.get(i).getName().contains(search)) {
-				System.out.printf("아이디: %-10s 이름: %-4s  전화번호: %11s %n", adminList.get(i).getId(),
-						adminList.get(i).getName(), adminList.get(i).getTel());
+				System.out.printf(" %-10s | %-10s | %-10s | %-14s %n", adminList.get(i).getId(),
+						adminList.get(i).getName(), adminList.get(i).getSsn(), adminList.get(i).getTel());
 				System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
 			}
@@ -174,13 +177,15 @@ public class AdminDB extends DB {
 
 	@Override
 	List searchAll() {
-		System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("관리자를 전체 조회합니다.	                                   ");
+		System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.printf("   %-8s | %-12s | %-13s | %-21s %n", "관리자ID", "이름", "생년월일", "전화번호");
+		System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
 		for (int i = 0; i < adminList.size(); i++) {
-			System.out.printf("아이디: %-10s 이름: %-4s  전화번호: %11s %n", adminList.get(i).getId(),
-					adminList.get(i).getName(), adminList.get(i).getTel());
+			System.out.printf(" %-10s | %-10s | %-10s | %-14s %n", adminList.get(i).getId(), adminList.get(i).getName(),
+					adminList.get(i).getSsn(), adminList.get(i).getTel());
 		}
-		System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		return null;
 	}
 
