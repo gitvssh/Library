@@ -344,65 +344,82 @@ public class Controller {
 								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
 								continue;
 							}
+							
 							switch (menu) {// 1.도서검색 2.도서추가 3.도서수정 4.도서삭제 0.이전 화면으로
 							case 1:// 도서검색
-								osys.history(loginAdm.getId(), "도서관리", "도서검색");
-								osys.admin_search();
-								menu = scan.nextInt();
-								scan.nextLine();
-								if (!(0 <= menu && menu < 8)) {
-									System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-									continue;
+								bookmng2: while(true) {
+									osys.history(loginAdm.getId(), "도서관리", "도서검색");
+									osys.admin_search();
+									menu = scan.nextInt();
+									scan.nextLine();
+									if (!(0 <= menu && menu < 8)) {
+										System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+										continue;
+									}
+								
+									bookSearch: while(true) {	//도서 검색창을 반복해서 띄움
+										switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
+											case 1:// 제목
+												osys.history(loginAdm.getId(), "도서관리", "도서검색", "제목");
+												System.out.println("검색하실 제목을 입력하세요 (0은 이전 화면)");
+												String title = scan.nextLine();
+												if(title.equals("0")) continue bookmng2;
+												osys.showBookList(bookDB.search(title, 1));
+												continue bookSearch;
+											case 2:// 저자
+												osys.history(loginAdm.getId(), "도서관리", "도서검색", "저자");
+												System.out.println("검색하실 저자를 입력하세요 (0은 이전 화면)");
+												String author = scan.nextLine();
+												if(author.equals("0")) continue bookmng2;
+												osys.showBookList(bookDB.search(author, 2));
+												continue bookSearch;
+											case 3:// 출판사
+												osys.history(loginAdm.getId(), "도서관리", "도서검색", "출판사");
+												System.out.println("검색하실 출판사를 입력하세요 (0은 이전 화면)");
+												String publisher = scan.nextLine();
+												if(publisher.equals("0")) continue bookmng2;
+												osys.showBookList(bookDB.search(publisher, 3));
+												continue bookSearch;
+											case 4:// 분야
+												osys.history(loginAdm.getId(), "도서관리", "도서검색", "분야");
+												System.out.println("검색하실 분야를 입력하세요 (0은 이전 화면)");
+												System.out.println("분야 리스트");
+												System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
+												System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
+												String subject = scan.nextLine();
+												if(subject.equals("0")) continue bookmng2;
+												osys.showBookList(bookDB.search(subject, 4));
+												continue bookSearch;
+											case 5:// 인덱스
+												osys.history(loginAdm.getId(), "도서관리", "도서검색", "인덱스");
+												System.out.println("검색하실 인덱스를 입력하세요 (0은 이전 화면)");
+												String index = scan.nextLine();
+												if(index.equals("0")) continue bookmng2;
+												osys.showBookList(bookDB.search(index, 5));
+												continue bookSearch;
+											case 6:// ISBN
+												osys.history(loginAdm.getId(), "도서관리", "도서검색", "ISBN");
+												System.out.println("검색하실 ISBN을 입력하세요");
+												String isbn = scan.nextLine();
+												if(isbn.equals("0")) continue bookmng2;
+												osys.showBookList(bookDB.search(isbn, 6));
+												continue bookSearch;
+											case 7:// 전체 도서목록
+												osys.history(loginAdm.getId(), "도서관리", "도서검색", "전체 도서목록");
+												System.out.println("전체 도서 목록입니다.");
+												bookDB.searchAll();
+												continue bookmng2;
+											case 0:// 이전화면으로
+												System.out.println("이전화면으로 돌아갑니다.");
+												continue bookmng;
+										}
+									}
 								}
-								switch (menu) {// 1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.전체 도서목록 0.이전화면으로
-								case 1:// 제목
-									osys.history(loginAdm.getId(), "도서관리", "도서검색", "제목");
-									System.out.println("검색하실 제목을 입력하세요");
-									osys.showBookList(bookDB.search(scan.nextLine(), 1));
-									break;
-								case 2:// 저자
-									osys.history(loginAdm.getId(), "도서관리", "도서검색", "저자");
-									System.out.println("검색하실 저자를 입력하세요");
-									osys.showBookList(bookDB.search(scan.nextLine(), 2));
-									break;
-								case 3:// 출판사
-									osys.history(loginAdm.getId(), "도서관리", "도서검색", "출판사");
-									System.out.println("검색하실 출판사를 입력하세요");
-									osys.showBookList(bookDB.search(scan.nextLine(), 3));
-									break;
-								case 4:// 분야
-									osys.history(loginAdm.getId(), "도서관리", "도서검색", "분야");
-									System.out.println("검색하실 분야를 입력하세요");
-									System.out.println("분야 리스트");
-									System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
-									System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
-									osys.showBookList(bookDB.search(scan.nextLine(), 4));
-									break;
-								case 5:// 인덱스
-									osys.history(loginAdm.getId(), "도서관리", "도서검색", "인덱스");
-									System.out.println("검색하실 인덱스를 입력하세요");
-									osys.showBookList(bookDB.search(scan.nextLine(), 5));
-									break;
-								case 6:// ISBN
-									osys.history(loginAdm.getId(), "도서관리", "도서검색", "ISBN");
-									osys.showBookList(bookDB.search(scan.nextLine(), 6));
-									System.out.println("검색하실 ISBN을 입력하세요");
-									break;
-								case 7:// 전체 도서목록
-									osys.history(loginAdm.getId(), "도서관리", "도서검색", "전체 도서목록");
-									System.out.println("전체 도서 목록입니다.");
-									bookDB.searchAll();
-									continue admin;
-								case 0:// 이전화면으로
-									System.out.println("이전화면으로 돌아갑니다.");
-									continue admin;
-								}
-								break;
 							case 2:// 도서추가
 								osys.history(loginAdm.getId(), "도서관리", "도서추가");
 								osys.admin_addbook();
 								bookDB.input();
-								break;
+								continue bookmng;
 							case 3:// 도서수정
 								osys.history(loginAdm.getId(), "도서관리", "도서수정");
 								osys.admin_modifybook();
@@ -411,7 +428,7 @@ public class Controller {
 								} else {
 									bookDB.update(selected);
 								}
-								break;
+								continue bookmng;
 							case 4:// 도서삭제
 								osys.history(loginAdm.getId(), "도서관리", "도서삭제");
 								osys.admin_delbook();
@@ -420,10 +437,10 @@ public class Controller {
 								} else {
 									bookDB.delete(selected);
 								}
-								break;
+								continue bookmng;
 							case 0:// 이전화면
 								System.out.println("이전화면으로 돌아갑니다.");
-								break bookmng;
+								continue admin;
 							}
 						} // end while_bookmng
 					case 2:// 회원관리
