@@ -62,7 +62,6 @@ public class Admin implements Data {
 
 	@Override
 	public String toString() {
-		return "Admin [id=" + id + ", password=" + password + ", name=" + name + ", ssn=" + ssn
-				+ ", tel=" + tel + "]";
-	}	
+		return "Admin [id=" + id + ", password=" + password + ", name=" + name + ", ssn=" + ssn + ", tel=" + tel + "]";
+	}
 }
