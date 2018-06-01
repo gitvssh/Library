@@ -28,7 +28,7 @@ public MemberDB() {
 	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
 	LocalDate returnDate = LocalDate.of(2018,5,18);	//기간이 지난 반납일
 	dumBook.setReturnDate(returnDate); //기간이 지난 반납일을 책 객체에 삽입
-	dumRentList.add(dumBook);
+	dumRentList.add(dumBook);	//더미 대출 리스트에 반납일이 지난 책 삽입
 	Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814", false);
 	dumMember.setRentList(dumRentList);
 	this.memberList.add(dumMember);
