@@ -12,39 +12,39 @@ public class AdminDB extends DB {
 
 	AdminDB() {
 		adminList = new ArrayList<>();
-		Admin a = new Admin("admin1", "1234", "°ü¸®ÀÚ", "921002", "01012341234");
+		Admin a = new Admin("admin1", "1234", "ê´€ë¦¬ì", "921002", "01012341234");
 		adminList.add(a);
 	}
 
 	void input() {
 
 		Scanner sc = new Scanner(System.in);
-		System.out.println("»õ·Î¿î °ü¸®ÀÚ¸¦ µî·ÏÇÕ´Ï´Ù.");
+		System.out.println("ìƒˆë¡œìš´ ê´€ë¦¬ìë¥¼ ë“±ë¡í•©ë‹ˆë‹¤.");
 		System.out.println();
-		System.out.println("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		System.out.println("ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		String id = sc.nextLine();
-		System.out.println("ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		System.out.println("íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		String password = sc.nextLine();
-		while (true) { // ÆĞ½º¿öµå È®ÀÎÇÏ´Â ±¸¹®
-			System.out.println("ÆĞ½º¿öµå¸¦ ´Ù½Ã ÇÑ¹ø ÀÔ·ÂÇÏ¼¼¿ä.");
+		while (true) { // íŒ¨ìŠ¤ì›Œë“œ í™•ì¸í•˜ëŠ” êµ¬ë¬¸
+			System.out.println("íŒ¨ìŠ¤ì›Œë“œë¥¼ ë‹¤ì‹œ í•œë²ˆ ì…ë ¥í•˜ì„¸ìš”.");
 			String password2 = sc.nextLine();
 			if (!(password.equals(password2))) {
-				System.out.println("ÆĞ½º¿öµå°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+				System.out.println("íŒ¨ìŠ¤ì›Œë“œê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				continue;
 			} else {
 				break;
 			}
 		}
-		System.out.println("ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		System.out.println("ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		String name = sc.nextLine();
-		System.out.println("»ı³â¿ùÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä. ex)92³â10¿ù2ÀÏ»ıÀÏ½Ã -> '921002'");
+		System.out.println("ìƒë…„ì›”ì¼ì„ ì…ë ¥í•˜ì„¸ìš”. ex)92ë…„10ì›”2ì¼ìƒì¼ì‹œ -> '921002'");
 		String ssn = sc.nextLine();
-		System.out.println("ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇÏ½Ã¿À. ÇÏÀÌÇÂ(-)Àº »ı·«ÇÏ¿© ÀÔ·ÂÇÏ¼¼¿ä. ");
+		System.out.println("ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì‹œì˜¤. í•˜ì´í”ˆ(-)ì€ ìƒëµí•˜ì—¬ ì…ë ¥í•˜ì„¸ìš”. ");
 		String tel = sc.nextLine();
 		Admin a = new Admin(id, password, name, ssn, tel);
 		adminList.add(a);
 
-		System.out.println("¼º°øÀûÀ¸·Î °ü¸®ÀÚ°¡ ¸¸µé¾îÁ³½À´Ï´Ù.");
+		System.out.println("ì„±ê³µì ìœ¼ë¡œ ê´€ë¦¬ìê°€ ë§Œë“¤ì–´ì¡ŒìŠµë‹ˆë‹¤.");
 	}
 
 	Admin login(String id, String password) {
@@ -54,7 +54,7 @@ public class AdminDB extends DB {
 
 		for (int i = 0; i < adminList.size(); i++) {
 			if (adminList.get(i).getId().equals(id) && adminList.get(i).getPassword().equals(password)) {
-				System.out.printf("[%s] °èÁ¤À¸·Î ·Î±×ÀÎ ÇÕ´Ï´Ù.%n[%s]´Ô È¯¿µÇÕ´Ï´Ù.", adminList.get(i).getId(),
+				System.out.printf("[%s] ê³„ì •ìœ¼ë¡œ ë¡œê·¸ì¸ í•©ë‹ˆë‹¤.%n[%s]ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤.", adminList.get(i).getId(),
 						adminList.get(i).getName());
 				loginAdm = adminList.get(i);
 				break;
@@ -66,29 +66,29 @@ public class AdminDB extends DB {
 
 	@Override
 	List search(String search) {
-		System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+		System.out.println("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“");
 		for (int i = 0; i < adminList.size(); i++) {
 			if (adminList.get(i).getId().contains(search) || adminList.get(i).getName().contains(search)) {
-				System.out.printf("¾ÆÀÌµğ: %-10s ÀÌ¸§: %-4s  ÀüÈ­¹øÈ£: %11s %n", adminList.get(i).getId(),
+				System.out.printf("ì•„ì´ë””: %-10s ì´ë¦„: %-4s  ì „í™”ë²ˆí˜¸: %11s %n", adminList.get(i).getId(),
 						adminList.get(i).getName(),  adminList.get(i).getTel());
-				System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+				System.out.println("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 				Scanner sc= new Scanner(System.in);
-				System.out.println("ºñ¹Ğ¹øÈ£¸¦ »õ·Î ¼³Á¤ÇÏ½Ã°Ú½À´Ï±î?(Y/N)");
-				String yes = sc.nextLine();
-				if(yes.equals("y")) {
-					System.out.println("»ı³â¿ùÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+				System.out.println("ë¹„ë°€ë²ˆí˜¸ë¥¼ ìƒˆë¡œ ì„¤ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ?(Y/N)");
+				String yes = sc.nextLine().toUpperCase().trim();
+				if(yes.equals("Y")) {
+					System.out.println("ìƒë…„ì›”ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 					String birth = sc.nextLine();
 					if(birth.equals(adminList.get(i).getSsn())){
-						System.out.println("È®ÀÎµÇ¾ú½À´Ï´Ù. »õ·Î¿î ºñ¹Ğ¹øÈ£¸¦ ¼³Á¤ÇØÁÖ¼¼¿ä.");
+						System.out.println("í™•ì¸ë˜ì—ˆìŠµë‹ˆë‹¤. ìƒˆë¡œìš´ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì„¤ì •í•´ì£¼ì„¸ìš”.");
 						String newpw = sc.nextLine();
-							System.out.println("ºñ¹Ğ¹øÈ£ ¼³Á¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+							System.out.println("ë¹„ë°€ë²ˆí˜¸ ì„¤ì •ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 							adminList.get(i).setPassword(newpw);
 							break;
 					} else {
-						System.out.println("»ı³â¿ùÀÏÀÌ ´Ù¸¨´Ï´Ù.");
+						System.out.println("ìƒë…„ì›”ì¼ì´ ë‹¤ë¦…ë‹ˆë‹¤.");
 						break;
 					}
-				} else { System.out.println("¸Ş´º¼±ÅÃÈ­¸éÀ¸·Î µ¹¾Æ°©´Ï´Ù.");
+				} else { System.out.println("ë©”ë‰´ì„ íƒí™”ë©´ìœ¼ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
 					break;}
 			}
 		}
@@ -115,13 +115,13 @@ public class AdminDB extends DB {
 
 	@Override
 	List searchAll() {
-		System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-		System.out.println("°ü¸®ÀÚ¸¦ ÀüÃ¼ Á¶È¸ÇÕ´Ï´Ù.	                                   ");
+		System.out.println("â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“");
+		System.out.println("ê´€ë¦¬ìë¥¼ ì „ì²´ ì¡°íšŒí•©ë‹ˆë‹¤.	                                   ");
 		for (int i = 0; i < adminList.size(); i++) {
-			System.out.printf("¾ÆÀÌµğ: %-10s ÀÌ¸§: %-4s  ÀüÈ­¹øÈ£: %11s %n", adminList.get(i).getId(),
+			System.out.printf("ì•„ì´ë””: %-10s ì´ë¦„: %-4s  ì „í™”ë²ˆí˜¸: %11s %n", adminList.get(i).getId(),
 					adminList.get(i).getName(), adminList.get(i).getTel());
 		}
-		System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+		System.out.println("â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›");
 		return null;
 	}
 
@@ -131,35 +131,39 @@ public class AdminDB extends DB {
 		return;
 	}
 	
-	public void showPages(int page) {//ÀüÃ¼ °ü¸®ÀÚ ¸ñ·Ï ÆäÀÌÁöº°·Î º¸¿©ÁÖ±â(¸Å°³º¯¼ö´Â °Ë»öÇÏ°íÀÚ ÇÏ´Â ÆäÀÌÁö)
+	public void showPages(int page) {//ì „ì²´ ê´€ë¦¬ì ëª©ë¡ í˜ì´ì§€ë³„ë¡œ ë³´ì—¬ì£¼ê¸°(ë§¤ê°œë³€ìˆ˜ëŠ” ê²€ìƒ‰í•˜ê³ ì í•˜ëŠ” í˜ì´ì§€)
 		int totalPages = (int)Math.ceil(adminList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
-			System.out.println("ÆäÀÌÁö ¾øÀ½!");
-			if(page<1) page=1;
-			else page = totalPages;
+			System.out.println("í˜ì´ì§€ ì—†ìŒ!");
+
+			if(page<1) page=0;
+			else page = totalPages+1;
+
 			return;
 		}
 		
 		for(int i=(page-1)*10; i<page*10; i++) {
 			System.out.println(adminList.get(i));
 		}
-		System.out.println("ÇöÀç "+page+"ÆäÀÌÁö/"+totalPages+"ÆäÀÌÁö");
+		System.out.println("í˜„ì¬ "+page+"í˜ì´ì§€/"+totalPages+"í˜ì´ì§€");
 	}
 	
-	public void showPages(int page, List<Admin> searchList) {//°Ë»öÇÑ °ü¸®ÀÚ ¸ñ·Ï ÆäÀÌÁöº°·Î º¸¿©ÁÖ±â(¸Å°³ ¸®½ºÆ®´Â °Ë»ö ¸®½ºÆ®)
+	public void showPages(int page, List<Admin> searchList) {//ê²€ìƒ‰í•œ ê´€ë¦¬ì ëª©ë¡ í˜ì´ì§€ë³„ë¡œ ë³´ì—¬ì£¼ê¸°(ë§¤ê°œ ë¦¬ìŠ¤íŠ¸ëŠ” ê²€ìƒ‰ ë¦¬ìŠ¤íŠ¸)
 		int totalPages = (int)Math.ceil(searchList.size()/10.);
 		
 		if(page<1 || page>totalPages) {
-			System.out.println("ÆäÀÌÁö ¾øÀ½!");
-			if(page<1) page=1;
-			else page = totalPages;
+			System.out.println("í˜ì´ì§€ ì—†ìŒ!");
+
+			if(page<1) page=0;
+			else page = totalPages+1;
+
 			return;
 		}
 		
 		for(int i=(page-1)*10; i<page*10; i++) {
 			System.out.println(searchList.get(i));
 		}
-		System.out.println("ÇöÀç "+page+"ÆäÀÌÁö/"+totalPages+"ÆäÀÌÁö");
+		System.out.println("í˜„ì¬ "+page+"í˜ì´ì§€/"+totalPages+"í˜ì´ì§€");
 	}
 }
