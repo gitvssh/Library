@@ -21,45 +21,47 @@ public class MemberDB extends DB {
 	boolean status;
 	boolean blackstatus;
 
-public MemberDB() {
-	memberList = new ArrayList<>();
-	//dummy member
-  this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814"));
-	this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891"));
-	this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214"));
-	this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819"));
-  //dummy blacklist
-	ArrayList<Book> dumRentList = new ArrayList<>();
-	Book dumBook = new Book("소피의 세계","요슈타인가아더 ",1,"현암사");
+	public MemberDB() {
+		memberList = new ArrayList<>();
+		// dummy member
+		this.memberList.add(new Member("java111", "1234", "박자바", "991120", "01042326814"));
+		this.memberList.add(new Member("java222", "1234", "김자바", "900110", "01063127891"));
+		this.memberList.add(new Member("java333", "1234", "최자바", "880106", "01023268214"));
+		this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819"));
+		// dummy blacklist
+		ArrayList<Book> dumRentList = new ArrayList<>();
+		Book dumBook = new Book("소피의 세계", "요슈타인가아더 ", 1, "현암사");
 
-	LocalDate returnDate = LocalDate.of(2018,5,18);
-	dumBook.setReturnDate(returnDate);
-	dumRentList.add(dumBook);
-	Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814");
-	dumMember.setRentList(dumRentList);
-	this.memberList.add(dumMember);
-	
-	memberList.get(0).setStatus(true);// 더미 데이터에게 연체중 상태 부여
-	memberList.get(2).setStatus(true);
-	memberList.get(3).setStatus(true);
+		LocalDate returnDate = LocalDate.of(2018, 5, 18);
+		dumBook.setReturnDate(returnDate);
+		dumRentList.add(dumBook);
+		Member dumMember = new Member("blacKim", "1234", "김블랙", "991120", "01042326814");
+		dumMember.setRentList(dumRentList);
+		this.memberList.add(dumMember);
+
+		memberList.get(0).setStatus(true);// 더미 데이터에게 연체중 상태 부여
+		memberList.get(2).setStatus(true);
+		memberList.get(3).setStatus(true);
 	}
-void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하는 메서드 - 회원메뉴, 관리자메뉴에서 사용
 
-	for (int i = 0; i < memberList.size(); i++) {
+	void checkStatus() { // 계정의 정상 연체 계정정지 상태를 체크하는 메서드 - 회원메뉴, 관리자메뉴에서 사용
 
-		if (memberList.get(i).status == false) {	// boolean status의 값이 false면 "정상"상태
-			memberList.get(i).idstatus = "정상";
-		} else if (memberList.get(i).status == true) {	// boolean status의 값이 true면서 boolean blackstatus의 값이 false이면 "연체중"상태
+		for (int i = 0; i < memberList.size(); i++) {
 
-			if (memberList.get(i).blackstatus == false) {
+			if (memberList.get(i).status == false) { // boolean status의 값이 false면 "정상"상태
+				memberList.get(i).idstatus = "정상";
+			} else if (memberList.get(i).status == true) { // boolean status의 값이 true면서 boolean blackstatus의 값이 false이면
+															// "연체중"상태
 
-				memberList.get(i).idstatus = "연체중";
-			} else {									// boolean status의 값이 true면서 boolean blackstatus의 값이 true이면 "계정 정지"상태
-				memberList.get(i).idstatus = "계정정지";
+				if (memberList.get(i).blackstatus == false) {
+
+					memberList.get(i).idstatus = "연체중";
+				} else { // boolean status의 값이 true면서 boolean blackstatus의 값이 true이면 "계정 정지"상태
+					memberList.get(i).idstatus = "계정정지";
+				}
 			}
 		}
 	}
-}
 
 	@Override
 	List search(String search) {
@@ -68,7 +70,7 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 		System.out.println("└────────────────────────────────────────────────────────────┘");
 		System.out.println("┌────────────────────────────────────────────────────────────┐");
 		for (int i = 0; i < memberList.size(); i++) {
-			if (memberList.get(i).getId().contains(search) || memberList.get(i).getName().contains(search)) {
+			if (memberList.get(i).id.contains(search) || memberList.get(i).name.contains(search)) {
 				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", memberList.get(i).id,
 						memberList.get(i).name, memberList.get(i).ssn, memberList.get(i).tel,
 						memberList.get(i).idstatus);
@@ -83,13 +85,13 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 		int count = 0;
 
 		for (int i = 0; i < memberList.size(); i++) {
-			if (memberList.get(i).getId().equals(id)) {
-				System.out.printf("[%s]님의 정보를 불러왔습니다. 수정하실 항목을 선택해주세요. %n", memberList.get(i).getId());
+			if (memberList.get(i).id.equals(id)) {
+				System.out.printf("[%s]님의 정보를 불러왔습니다. 수정하실 항목을 선택해주세요. %n", memberList.get(i).id);
 				osys.member_modify();
 				update(memberList.get(i));
 				count++;
 				if (!(count == 0)) {
-					System.out.printf("[%s]님의 정보수정이 완료되었습니다.%n", memberList.get(i).getId());
+					System.out.printf("[%s]님의 정보수정이 완료되었습니다.%n", memberList.get(i).id);
 				} else {
 					break;
 				}
@@ -102,11 +104,11 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 		return null;
 	}
 
-
 	void input() { // 회원가입 메서드
 		System.out.println("아이디를 입력해주세요. 0:이전메뉴로 이동");
 		String id = scanner.nextLine();
-		if(id.equals("0")) return;
+		if (id.equals("0"))
+			return;
 		while (true) {
 			System.out.println("비밀번호를 입력해주세요.");
 			password = scanner.nextLine();
@@ -138,8 +140,9 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 		memberList.remove(m);
 	}
 
-	void update(Data data) {}
-	
+	void update(Data data) {
+	}
+
 	void update(Data data, CommentDB commentDB) { // 회원 정보 수정 메서드
 		Member m = (Member) data;
 		int menu = scanner.nextInt();
@@ -151,22 +154,23 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 			String formerId = m.getId();
 			m.setId(scanner.nextLine());
 			System.out.println("수정되셨습니다. 수정된 아이디 : " + "[" + m.getId() + "]");
-			
-			//아이디 수정과 동시에 건의사항 DB의 아이디도 모두 수정
-			ArrayList<Comment> cList = commentDB.getCommentList();	//건의사항 리스트를 받는다
-			if(cList==null||cList.size()==0) System.out.println("아이디가 수정될 건의사항이 없습니다.");
+
+			// 아이디 수정과 동시에 건의사항 DB의 아이디도 모두 수정
+			ArrayList<Comment> cList = commentDB.getCommentList(); // 건의사항 리스트를 받는다
+			if (cList == null || cList.size() == 0)
+				System.out.println("아이디가 수정될 건의사항이 없습니다.");
 			else {
-				int cnt=0;	//아이디가 수정될 건의사항의 개수
-				for(int i=0; i<cList.size(); i++) {
-					if(cList.get(i).getId().equals(formerId)) {	//이전 아이디와 동일한 아이디의 건의사항이 있으면
-						cList.get(i).setId(m.getId());		//수정된 아이디로 수정. 
-						cnt++;	//수정된 건의사항 개수+1
+				int cnt = 0; // 아이디가 수정될 건의사항의 개수
+				for (int i = 0; i < cList.size(); i++) {
+					if (cList.get(i).getId().equals(formerId)) { // 이전 아이디와 동일한 아이디의 건의사항이 있으면
+						cList.get(i).setId(m.getId()); // 수정된 아이디로 수정.
+						cnt++; // 수정된 건의사항 개수+1
 					}
 				}
 				commentDB.setCommentList(cList);
-				System.out.println("총 "+cnt+"개의 건의사항이 새로운 아이디로 수정됐습니다.");
+				System.out.println("총 " + cnt + "개의 건의사항이 새로운 아이디로 수정됐습니다.");
 			}
-			
+
 			break;
 		case 2:
 			while (true) {
@@ -209,142 +213,144 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 		}
 	}
 
-//	void printBlack() {							// 블랙리스트 회원 출력용 메서드 - 관리자메뉴에서 사용
-//		int count = 0;
-//		System.out.println("┌────────────────────────────────────────────────────────────┐");
-//		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
-//		System.out.println("└────────────────────────────────────────────────────────────┘");
-//		System.out.println("┌────────────────────────────────────────────────────────────┐");
-//		for (int i = 0; i < memberList.size(); i++) {
-//			if (memberList.get(i).status == true) {
-//				count++;
-//				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", memberList.get(i).id,
-//						memberList.get(i).name, memberList.get(i).ssn, memberList.get(i).tel,
-//						memberList.get(i).idstatus);
-//				System.out.println("└────────────────────────────────────────────────────────────┘");
-//			}
-//		}
-//		System.out.println("총 " + count + "명의 회원이 블랙리스트에 있습니다.");		// status가 true인 사람이 있을때마다 count + 1
-//
-//	}
-	void alignBlack() {											// 블랙리스트인 회원을 정렬하고 "계정정지", "계정복구" 부여
-black : while(true){
-	
+	// void printBlack() { // 블랙리스트 회원 출력용 메서드 - 관리자메뉴에서 사용
+	// int count = 0;
+	// System.out.println("┌────────────────────────────────────────────────────────────┐");
+	// System.out.printf(" %-8s | %-12s | %-13s | %-21s | %-10s %n", "회원ID", "이름",
+	// "생년월일", "전화번호", "상태");
+	// System.out.println("└────────────────────────────────────────────────────────────┘");
+	// System.out.println("┌────────────────────────────────────────────────────────────┐");
+	// for (int i = 0; i < memberList.size(); i++) {
+	// if (memberList.get(i).status == true) {
+	// count++;
+	// System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s %n",
+	// memberList.get(i).id,
+	// memberList.get(i).name, memberList.get(i).ssn, memberList.get(i).tel,
+	// memberList.get(i).idstatus);
+	// System.out.println("└────────────────────────────────────────────────────────────┘");
+	// }
+	// }
+	// System.out.println("총 " + count + "명의 회원이 블랙리스트에 있습니다."); // status가 true인
+	// 사람이 있을때마다 count + 1
+	//
+	// }
+	void alignBlack() { // 블랙리스트인 회원을 정렬하고 "계정정지", "계정복구" 부여
+		black: while (true) {
 
-		Osystem osys = new Osystem();
-		System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
-		System.out.println("메뉴를 선택해주세요.");
-		String menu = scanner.nextLine();
-		switch (menu) {
-		case "1":
-			inblack : while (true) {
-				System.out.println("1.아이디 2.이름 3.생년월일 4.전화번호 5.상태 0.이전화면");
-				System.out.println("정렬을 원하는 항목을 선택해주세요.");
-				String input = scanner.nextLine();
-				switch (input) {
-				case "1": // 아이디
-					MemberIdComparator cId = new MemberIdComparator();
-					Collections.sort(memberList, cId);
-					osys.showBlackList(memberList);
-					continue;
-				case "2": // 이름
-					MemberNameComparator cName = new MemberNameComparator();
-					Collections.sort(memberList, cName);
-					osys.showBlackList(memberList);
-					continue;
-				case "3": // 생년월일
-					MemberSsnComparator cSsn = new MemberSsnComparator();
-					Collections.sort(memberList, cSsn);
-					osys.showBlackList(memberList);
-					continue;
-				case "4": // 전화번호
-					MemberTelComparator cTel = new MemberTelComparator();
-					Collections.sort(memberList, cTel);
-					osys.showBlackList(memberList);
-					continue;
-				case "5": // 상태
-					MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
-					Collections.sort(memberList, cIdStatus);
-					osys.showBlackList(memberList);
-					continue;
-				case "0":
-					MemberIdComparator c = new MemberIdComparator();
-					Collections.sort(memberList, c);
-					continue black;
-				default:
-					System.out.println("잘못된 입력입니다. 다시 입력해주세요");
-					continue;
+			Osystem osys = new Osystem();
+			System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
+			System.out.println("메뉴를 선택해주세요.");
+			String menu = scanner.nextLine();
+			switch (menu) {
+			case "1":
+				inblack: while (true) {
+					System.out.println("1.아이디 2.이름 3.생년월일 4.전화번호 5.상태 0.이전화면");
+					System.out.println("정렬을 원하는 항목을 선택해주세요.");
+					String input = scanner.nextLine();
+					switch (input) {
+					case "1": // 아이디
+						MemberIdComparator cId = new MemberIdComparator();
+						Collections.sort(memberList, cId);
+						osys.showBlackList(memberList);
+						continue;
+					case "2": // 이름
+						MemberNameComparator cName = new MemberNameComparator();
+						Collections.sort(memberList, cName);
+						osys.showBlackList(memberList);
+						continue;
+					case "3": // 생년월일
+						MemberSsnComparator cSsn = new MemberSsnComparator();
+						Collections.sort(memberList, cSsn);
+						osys.showBlackList(memberList);
+						continue;
+					case "4": // 전화번호
+						MemberTelComparator cTel = new MemberTelComparator();
+						Collections.sort(memberList, cTel);
+						osys.showBlackList(memberList);
+						continue;
+					case "5": // 상태
+						MemberIdStatusComparator cIdStatus = new MemberIdStatusComparator();
+						Collections.sort(memberList, cIdStatus);
+						osys.showBlackList(memberList);
+						continue;
+					case "0":
+						MemberIdComparator c = new MemberIdComparator();
+						Collections.sort(memberList, c);
+						continue black;
+					default:
+						System.out.println("잘못된 입력입니다. 다시 입력해주세요");
+						continue;
+					}
 				}
-			}
-		case "2":
-			System.out.println("정지하려는 계정의 아이디를 입력해주세요. 0.이전화면");
+			case "2":
+				System.out.println("정지하려는 계정의 아이디를 입력해주세요. 0.이전화면");
 
-			id = scanner.nextLine();
-			if (id.equals("0")) {
-				System.out.println("이전화면으로 이동합니다");
-				continue black;
-			} else {
+				id = scanner.nextLine();
+				if (id.equals("0")) {
+					System.out.println("이전화면으로 이동합니다");
+					continue black;
+				} else {
+					for (int i = 0; i < memberList.size(); i++) {
+						if (memberList.get(i).id.equals(id)) {
+							memberList.get(i).setBlackstatus(false);
+							if (memberList.get(i).status == false) {
+								memberList.get(i).idstatus = "정상";
+							} else if (memberList.get(i).status == true) {
+
+								if (memberList.get(i).blackstatus == false) {
+
+									memberList.get(i).idstatus = "연체중";
+								} else {
+									memberList.get(i).idstatus = "계정정지";
+								}
+							}
+							System.out.println("┌────────────────────────────────────────────────────────────┐");
+							System.out.println(
+									memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
+							System.out.println("└────────────────────────────────────────────────────────────┘");
+						}
+					}
+					break;
+				}
+
+			case "3":
+				System.out.println("복구하려는 계정의 아이디를 입력해주세요. 0.이전화면");
+				id = scanner.nextLine();
+				if (id.equals("0")) {
+					System.out.println("이전화면으로 이동합니다");
+					continue black;
+
+				}
 				for (int i = 0; i < memberList.size(); i++) {
 					if (memberList.get(i).id.equals(id)) {
 						memberList.get(i).setBlackstatus(false);
 						if (memberList.get(i).status == false) {
 							memberList.get(i).idstatus = "정상";
 						} else if (memberList.get(i).status == true) {
-							
+
 							if (memberList.get(i).blackstatus == false) {
-								
+
 								memberList.get(i).idstatus = "연체중";
 							} else {
 								memberList.get(i).idstatus = "계정정지";
 							}
 						}
 						System.out.println("┌────────────────────────────────────────────────────────────┐");
-						System.out.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
+						System.out
+								.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
 						System.out.println("└────────────────────────────────────────────────────────────┘");
 					}
 				}
 				break;
-			}
-			
-
-
-		case "3":
-			System.out.println("복구하려는 계정의 아이디를 입력해주세요. 0.이전화면");
-			id = scanner.nextLine();
-			if (id.equals("0")) {
-				System.out.println("이전화면으로 이동합니다");
-				continue black;
-
-			}
-			for (int i = 0; i < memberList.size(); i++) {
-				if (memberList.get(i).id.equals(id)) {
-					memberList.get(i).setBlackstatus(false);
-					if (memberList.get(i).status == false) {
-						memberList.get(i).idstatus = "정상";
-					} else if (memberList.get(i).status == true) {
-
-						if (memberList.get(i).blackstatus == false) {
-
-							memberList.get(i).idstatus = "연체중";
-						} else {
-							memberList.get(i).idstatus = "계정정지";
-						}
-					}
-					System.out.println("┌────────────────────────────────────────────────────────────┐");
-					System.out.println(memberList.get(i).id + "님이 " + memberList.get(i).getIdstatus() + "상태가 되었습니다.");
-					System.out.println("└────────────────────────────────────────────────────────────┘");
-				}
-			}
-			break;
-		case "0":
-			System.out.println("이전화면으로 이동합니다.");
-			break;
+			case "0":
+				System.out.println("이전화면으로 이동합니다.");
+				break;
 			default:
 				System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
 				continue;
+			}
+			break;
 		}
-		break;	
-	}
 	}
 
 	// ..
@@ -353,10 +359,10 @@ black : while(true){
 		Member loginMem = null;
 
 		for (int i = 0; i < memberList.size(); i++) {
-			if (memberList.get(i).getId().equals(id)) {
-				if (memberList.get(i).getPassword().equals(password)) {
+			if (memberList.get(i).id.equals(id)) {
+				if (memberList.get(i).password.equals(password)) {
 					System.out.println("┌────────────────────────────────────────────────────────────┐");
-					System.out.println(memberList.get(i).getId() + "님이 로그인 하셨습니다.");
+					System.out.println(memberList.get(i).id + "님이 로그인 하셨습니다.");
 					System.out.println("└────────────────────────────────────────────────────────────┘");
 					System.out.println("회원 메뉴로 이동합니다.");
 					loginMem = memberList.get(i);
@@ -391,12 +397,12 @@ black : while(true){
 		System.out.println("이름을 입력해주세요");
 		name = scanner.nextLine();
 		for (int i = 0; i < memberList.size(); i++) {
-			if (memberList.get(i).getName().equals(name)) {
+			if (memberList.get(i).name.equals(name)) {
 				System.out.println("전화번호를 입력해주세요");
 				tel = scanner.nextLine();
-				if (memberList.get(i).getTel().equals(tel)) {
+				if (memberList.get(i).tel.equals(tel)) {
 					System.out.println("┌────────────────────────────────────────────────────────────┐");
-					System.out.println("귀하의 아이디는 :" + memberList.get(i).getId() + "입니다.");
+					System.out.println("귀하의 아이디는 :" + memberList.get(i).id + "입니다.");
 					System.out.println("└────────────────────────────────────────────────────────────┘");
 					return;
 
@@ -413,17 +419,17 @@ black : while(true){
 		System.out.println("이름를 입력해주세요"); // 아이디 입력
 		name = scanner.nextLine();
 		for (int i = 0; i < memberList.size(); i++) {
-			if (memberList.get(i).getName().equals(name)) {
+			if (memberList.get(i).name.equals(name)) {
 				System.out.println("아이디를 입력해주세요"); // 이름입력
 				id = scanner.nextLine();
-				if (memberList.get(i).getId().equals(id)) {
+				if (memberList.get(i).id.equals(id)) {
 					System.out.println("전화번호를 입력해주세요"); // 전화번호 입력
 					tel = scanner.nextLine();
-					if (memberList.get(i).getTel().equals(tel)) {
+					if (memberList.get(i).tel.equals(tel)) {
 						System.out.println("┌────────────────────────────────────────────────────────────┐");
 						System.out.println("해당 번호로 비밀번호를 전송하였습니다.");
 						System.out.println("└────────────────────────────────────────────────────────────┘");
-						System.out.println("[비밀번호:"+memberList.get(i).getPassword()+"]");
+						System.out.println("[비밀번호:" + memberList.get(i).password + "]");
 						return;
 					} else {
 						System.out.println("잘못된 전화번호 입니다.");
@@ -433,10 +439,11 @@ black : while(true){
 					System.out.println("잘못된 아이디입니다!");
 					return;
 				}
-			} 
+			}
 		}
 		System.out.println("존재하지 않는 이름입니다!");
 	}
+
 	@Override
 	List searchAll() {
 		System.out.println("┌────────────────────────────────────────────────────────────┐");
