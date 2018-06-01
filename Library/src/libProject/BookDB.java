@@ -19,6 +19,7 @@ public class BookDB extends DB{
 	
 	public BookDB() {
 		this.bookList = new ArrayList();
+		//dummy books
 		this.bookList.add(new Book("소피의 세계","요슈타인가아더 ",1,"현암사"));
 		this.bookList.add(new Book("간다, 봐라","법정",2,"김영사"));
 		this.bookList.add(new Book("프로테스탄트 윤리","막스 베버",3,"현대지성"));
