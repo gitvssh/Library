@@ -250,7 +250,7 @@ public class Controller {
 							case 2:// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
 								osys.history(loginMem.getId(),"회원정보","회원정보 수정");
 								osys.member_modify();// 회원정보 수정 화면
-								memberDB.update(loginMem);
+								memberDB.update(loginMem, commentDB);
 								continue memInfo;
 								// end while modify;
 							case 0:// 이전화면
