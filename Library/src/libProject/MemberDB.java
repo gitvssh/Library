@@ -448,25 +448,7 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 		System.out.printf("  회원은 총 %s 명 입니다. (0은 이전 화면)%n", memberList.size());
 		return null;
 	}
-	
-//TODO:중복메서드, 비교후 정리
-//	List searchAll() {
-//		System.out.println("┌────────────────────────────────────────────────────────────┐");
-//		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
-//		System.out.println("└────────────────────────────────────────────────────────────┘");
-//		System.out.println("┌────────────────────────────────────────────────────────────┐");
-//
-//		for (int i = 0; i < memberList.size(); i++) {
-//			System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4b  %n", memberList.get(i).id, memberList.get(i).name,
-//					memberList.get(i).ssn, memberList.get(i).tel, memberList.get(i).idstatus);
-//			System.out.println("└────────────────────────────────────────────────────────────┘");
-//		}
-//		System.out.printf("  회원은 총 %s 명 입니다. (0은 이전 화면)%n", memberList.size());
-//		return null;
-//	}
-	
-	
-	
+
 	@Override
 	void align() {
 		System.out.println("");
