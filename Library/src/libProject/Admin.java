@@ -1,7 +1,6 @@
 package libProject;
 
 public class Admin implements Data {
-//1
 	int test;
 	private String id;
 	private String password;
@@ -64,7 +63,7 @@ public class Admin implements Data {
 
 	@Override
 	public String toString() {
-		return "Admin [test=" + test + ", id=" + id + ", password=" + password + ", name=" + name + ", ssn=" + ssn
+		return "Admin [id=" + id + ", password=" + password + ", name=" + name + ", ssn=" + ssn
 				+ ", tel=" + tel + "]";
 	}	
 }

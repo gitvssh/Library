@@ -137,9 +137,9 @@ public class Osystem {
 	}
 	void admin_membermng() {
 		System.out.println("회원관리 메뉴입니다. 원하시는 기능의 번호를 입력해주세요.");
-		System.out.println("┌──────────────────────────────────────────────────┐");
+		System.out.println("┌──────────────────────────────────────┐");
 		System.out.println(" 1.회원검색 2.전체회원목록 3.블랙리스트 0.이전화면");
-		System.out.println("└──────────────────────────────────────────────────┘");
+		System.out.println("└──────────────────────────────────────┘");
 
 	}
 	void admin_findmem() {
@@ -159,9 +159,9 @@ public class Osystem {
 		System.out.println("  관리자 관리 메뉴입니다.  ");
 		System.out.println(" ━━━━━━━━━━━━━");
 		System.out.println("원하시는 기능의 번호를 입력해주세요.");
-		System.out.println("┌─────────────────────────────────────────────┐");
-		System.out.println(" 1.관리자 검색 2.전체 관리자 목록 3.새 관리자 등록 0.이전화면 ");
-		System.out.println("└─────────────────────────────────────────────┘");
+		System.out.println("┌────────────────────────────────────────────────────────────┐");
+		System.out.println(" 1.관리자 검색 2.전체 관리자 목록 3.새 관리자 등록  4.관리자 정보수정 0.이전화면 ");
+		System.out.println("└────────────────────────────────────────────────────────────┘");
 	}
 	void admin_newad() {
 		System.out.println("┌─────────────────────────────────────┐");
@@ -169,6 +169,14 @@ public class Osystem {
 		System.out.println("└─────────────────────────────────────┘");
 
 	}
+	
+	void comment_main() {
+		System.out.println("┌───────────────────────┐");
+		System.out.println(" 1.검색	2.답변	0.이전화면  ");
+		System.out.println("└───────────────────────┘");
+		
+	}
+	
 	
 	void showBookList(List<Book> list) {	//검색한 책 리스트를 출력하는 메서드
 		if(list == null || list.size()==0) System.out.println("조회할 도서가 없습니다.");	//매개변수인 리스트가 null이거나 길이가 0일 때
