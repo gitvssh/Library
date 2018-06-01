@@ -189,21 +189,24 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 		return;
 	}
 
-	void printBlack() {							// 블랙리스트 회원 출력용 메서드 - 관리자메뉴에서 사용
-		int count = 0;
-		System.out.println("┌────────────────────────────────────────────────────────────┐");
-		for (int i = 0; i < memberList.size(); i++) {
-			if (memberList.get(i).status == true) {
-				count++;
-				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", memberList.get(i).id,
-						memberList.get(i).name, memberList.get(i).ssn, memberList.get(i).tel,
-						memberList.get(i).idstatus);
-				System.out.println("└────────────────────────────────────────────────────────────┘");
-			}
-		}
-		System.out.println("총 " + count + "명의 회원이 블랙리스트에 있습니다.");		// status가 true인 사람이 있을때마다 count + 1
-
-	}
+//	void printBlack() {							// 블랙리스트 회원 출력용 메서드 - 관리자메뉴에서 사용
+//		int count = 0;
+//		System.out.println("┌────────────────────────────────────────────────────────────┐");
+//		System.out.printf("   %-8s | %-12s | %-13s | %-21s | %-10s  %n", "회원ID", "이름", "생년월일", "전화번호", "상태");
+//		System.out.println("└────────────────────────────────────────────────────────────┘");
+//		System.out.println("┌────────────────────────────────────────────────────────────┐");
+//		for (int i = 0; i < memberList.size(); i++) {
+//			if (memberList.get(i).status == true) {
+//				count++;
+//				System.out.printf(" %-10s | %-10s | %-10s | %-14s | %-4s  %n", memberList.get(i).id,
+//						memberList.get(i).name, memberList.get(i).ssn, memberList.get(i).tel,
+//						memberList.get(i).idstatus);
+//				System.out.println("└────────────────────────────────────────────────────────────┘");
+//			}
+//		}
+//		System.out.println("총 " + count + "명의 회원이 블랙리스트에 있습니다.");		// status가 true인 사람이 있을때마다 count + 1
+//
+//	}
 	void alignBlack() {											// 블랙리스트인 회원을 정렬하고 "계정정지", "계정복구" 부여
 
 		Osystem osys = new Osystem();
