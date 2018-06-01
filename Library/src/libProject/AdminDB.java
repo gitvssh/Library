@@ -14,7 +14,7 @@ public class AdminDB extends DB {
 		adminList = new ArrayList<>();
 		// dummy admin
 		Admin a = new Admin("admin1", "1234", "관리자", "921002", "01012341234");
-		adminList.add(a); 
+		adminList.add(a);
 	}
 
 	void input() {
@@ -90,7 +90,7 @@ public class AdminDB extends DB {
 					osys.member_modify();
 					String menu = sc.nextLine();
 
-					if (menu.equals("0") ) {
+					if (menu.equals("0")) {
 						System.out.println("이전화면으로 돌아갑니다.");
 						break;
 					} else {
@@ -136,20 +136,20 @@ public class AdminDB extends DB {
 							adminList.get(i).setTel(sc.nextLine());
 							System.out.println("수정되셨습니다. 수정된 전화번호 : " + "[" + adminList.get(i).getTel() + "]");
 							continue;
-							default:
-								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-								continue;
+						default:
+							System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+							continue;
 						}
 
 					}
 
 				} // while end
-			} else {
-				System.out.println("아이디 입력이 잘못되었습니다.");
-				break;
+			} // if end
+			else {
+				continue;
 			}
 
-		}
+		} // for end
 
 	}// void modify end
 

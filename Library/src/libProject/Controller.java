@@ -254,29 +254,29 @@ public class Controller {
 						bookDB.returnBooks(loginMem.getRentList());
 						continue member;
 					case "4":// 회원정보
-						while(true) {
+						while (true) {
 							osys.history(loginMem.getId(), "회원정보");
-						osys.member_inform();
-						menu = scan.nextLine();
-						switch (menu) {// 1.회원정보 조회 2.회원정보 수정 0. 이전화면
-						case "1":// 회원정보 조회
-							osys.history(loginMem.getId(), "회원정보", "회원정보조회");
-							osys.member_myinform();
-							memberDB.printMemInform(loginMem);
-							break;
-						case "2":// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
-							osys.history(loginMem.getId(), "회원정보", "회원정보 수정");
-							osys.member_modify();
-							memberDB.update(loginMem);
-							break;
-						// end while modify;
-						case "0":// 이전화면
-							System.out.println("이전화면으로 돌아갑니다.");
-							continue member;
-						default:
-							System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-							continue;
-						}// end switch 회원정보메뉴
+							osys.member_inform();
+							menu = scan.nextLine();
+							switch (menu) {// 1.회원정보 조회 2.회원정보 수정 0. 이전화면
+							case "1":// 회원정보 조회
+								osys.history(loginMem.getId(), "회원정보", "회원정보조회");
+								osys.member_myinform();
+								memberDB.printMemInform(loginMem);
+								break;
+							case "2":// 회원정보 수정1.아이디 2.비밀번호 3.이름 4.생년월일 5.전화번호 0.회원메뉴로 이동
+								osys.history(loginMem.getId(), "회원정보", "회원정보 수정");
+								osys.member_modify();
+								memberDB.update(loginMem);
+								break;
+							// end while modify;
+							case "0":// 이전화면
+								System.out.println("이전화면으로 돌아갑니다.");
+								continue member;
+							default:
+								System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+								continue;
+							}// end switch 회원정보메뉴
 						}
 					case "5":// 건의사항
 						comment: while (true) {
@@ -507,7 +507,8 @@ public class Controller {
 								System.out.println("검색하시고자 하는 건의사항의 아이디를 입력해주세요.(0은 이전 화면)");
 								System.out.print("아이디: ");
 								String searchId = scan.nextLine();
-								if (searchId.equals("0")) continue request;
+								if (searchId.equals("0"))
+									continue request;
 
 								ArrayList<Comment> searchList = commentDB.searchComments(searchId);
 
@@ -572,6 +573,7 @@ public class Controller {
 									} else {
 										System.out.println("등록된 건의사항이 없습니다.");
 										continue request;
+
 									}
 								}//searchId while문
 							case "0":// 이전화면
