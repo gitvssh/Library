@@ -228,7 +228,8 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 //
 //	}
 	void alignBlack() {											// 블랙리스트인 회원을 정렬하고 "계정정지", "계정복구" 부여
-
+black : while(true){
+	
 
 		Osystem osys = new Osystem();
 		System.out.println("1.정렬 2.계정정지 3.계정복구 0.이전화면");
@@ -240,7 +241,6 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 				System.out.println("1.아이디 2.이름 3.생년월일 4.전화번호 5.상태 0.이전화면");
 				System.out.println("정렬을 원하는 항목을 선택해주세요.");
 				String input = scanner.nextLine();
-				scanner.nextLine();
 				switch (input) {
 				case "1": // 아이디
 					MemberIdComparator cId = new MemberIdComparator();
@@ -270,7 +270,7 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 				case "0":
 					MemberIdComparator c = new MemberIdComparator();
 					Collections.sort(memberList, c);
-					return;
+					continue black;
 				default:
 					System.out.println("잘못된 입력입니다. 다시 입력해주세요");
 					continue;
@@ -282,7 +282,7 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 			id = scanner.nextLine();
 			if (id.equals("0")) {
 				System.out.println("이전화면으로 이동합니다");
-				break;
+				continue black;
 			} else {
 				for (int i = 0; i < memberList.size(); i++) {
 					if (memberList.get(i).id.equals(id)) {
@@ -304,10 +304,8 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 					}
 				}
 				break;
-			case 0:
-				System.out.println("이전화면으로 이동합니다.");
-				return;
 			}
+			
 
 
 		case "3":
@@ -315,7 +313,7 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 			id = scanner.nextLine();
 			if (id.equals("0")) {
 				System.out.println("이전화면으로 이동합니다");
-				break;
+				continue black;
 
 			}
 			for (int i = 0; i < memberList.size(); i++) {
@@ -343,7 +341,9 @@ void checkStatus() {	// 계정의 정상 연체 계정정지 상태를 체크하
 			break;
 			default:
 				System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+				continue;
 		}
+	}
 	}
 
 	// ..

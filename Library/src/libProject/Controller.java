@@ -585,7 +585,6 @@ public class Controller {
 									}
 								} // end while_newadm
 
-								continue admin;
 							case "4":
 								osys.history(loginAdm.getId(), "관리자 관리", "관리자 정보수정");
 								System.out.println("검색할 관리자 아이디를 정확하게 입력해주세요.");
