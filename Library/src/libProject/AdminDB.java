@@ -48,8 +48,6 @@ public class AdminDB extends DB {
 	}
 
 	Admin login(String id, String password) {
-		// adminList.get(int i).g
-
 		Admin loginAdm = null;
 
 		for (int i = 0; i < adminList.size(); i++) {
