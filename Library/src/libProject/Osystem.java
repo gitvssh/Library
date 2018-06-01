@@ -23,6 +23,7 @@ public class Osystem {
 		System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 		System.out.println("    1.제목 2.저자 3.출판사 4.주제 5.인덱스 6.ISBN 7.최다대출도서 0.이전화면으로 ");
 		System.out.println("└──────────────────────────────────────────────────────────────────┘");
+		System.out.println("정렬을 원하는 항목을 선택해주세요.");
 		System.out.print(">>");
 
 	}
@@ -214,10 +215,28 @@ public class Osystem {
 			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 			System.out.printf("                                            총 %2d개의 도서를 관리중입니다.%n", list.size());
 			System.out.println("└──────────────────────────────────────────────────────────────────┘");
+			System.out.println();
 			return true;
+
 		}
 	}
 
+	void showRentList(List<Book> list) {	//검색한 책 리스트를 출력하는 메서드
+		if(list == null || list.size()==0) System.out.println("조회할 도서가 없습니다.");	//매개변수인 리스트가 null이거나 길이가 0일 때
+		else {
+			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
+			System.out.printf("    %-7s | %-30s | %-8s | %-8s | %-5s | %-5s | %-5s   %n", "인덱스", "제목", "저자", "출판사",
+					"ISBN", "주제", "상태");
+			System.out.println("└──────────────────────────────────────────────────────────────────┘");
+			for (Book b : list) {// 인덱스(7), 제목(30), 저자(8), 출판사(8), ISBN(5), 주제(5)
+				System.out.println(b);
+			}
+			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
+			System.out.printf("                                            총 %2d개의 도서를 대여중입니다.%n", list.size());
+			System.out.println("└──────────────────────────────────────────────────────────────────┘");
+		}
+	}
+	
 	void showMemberList(List<Member> list) { // 검색한 회원 리스트 출력 양식
 		if (list == null || list.size() == 0)
 			System.out.println("조회할 회원이 없습니다.");
@@ -256,7 +275,7 @@ public class Osystem {
 			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 			System.out.printf("  총 %2d개의 검색결과가 있습니다.              %n", count);
 			System.out.println("└──────────────────────────────────────────────────────────────────┘");
-			System.out.print(">>");
+			System.out.println();
 		}
 	}
 

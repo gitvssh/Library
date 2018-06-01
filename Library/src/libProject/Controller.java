@@ -240,7 +240,7 @@ public class Controller {
 						}
 					case "2":// 빌린도서
 						osys.history(loginMem.getId(), "빌린 도서");
-						osys.showBookList(loginMem.getRentList());
+						osys.showRentList(loginMem.getRentList());
 						while (true) {
 							System.out.println("0.이전 화면");
 							if (scan.nextLine().equals("0"))
