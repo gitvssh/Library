@@ -30,7 +30,7 @@ public class MemberDB extends DB {
 		this.memberList.add(new Member("java444", "1234", "이자바", "000813", "01032123819"));
 		// dummy blacklist
 		ArrayList<Book> dumRentList = new ArrayList<>();
-		Book dumBook = new Book("소피의 세계", "요슈타인가아더 ", 1, "현암사");
+		Book dumBook = new Book("소피의 세계", "요슈타인가아더 ", "1", "현암사");
 
 		LocalDate returnDate = LocalDate.of(2018, 5, 18);
 		dumBook.setReturnDate(returnDate);
