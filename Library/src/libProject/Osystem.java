@@ -1,5 +1,6 @@
 package libProject;
 
+import java.lang.Character.UnicodeBlock;
 import java.util.List;
 
 public class Osystem {
@@ -221,6 +222,29 @@ public class Osystem {
 
 		}
 	}
+	
+	boolean showRentBookList(List<Book> list) {	//검색한 책 리스트를 출력하는 메서드
+		if(list == null || list.size()==0) 
+		{System.out.println("조회할 도서가 없습니다.");	//매개변수인 리스트가 null이거나 길이가 0일 때}
+		return false;
+		}
+		
+		else {
+			System.out.println("┌─────────────────────────────────────────────────────────────────────────┐");
+			System.out.printf("    %-7s | %-38s | %-16s | %-16s | %-5s | %-5s | %-5s | %-5s   %n", "인덱스", "제목", "저자", "출판사",
+					"ISBN", "주제", "상태","대출횟수");
+			System.out.println("└─────────────────────────────────────────────────────────────────────────┘");
+			for (Book b : list) {// 인덱스(7), 제목(30), 저자(8), 출판사(8), ISBN(5), 주제(5)
+				System.out.printf(" %-7s | %-38s | %-16s | %-16s | %-5s | %-5s | %-7s | %-7s %n",b.index,this.printHangle(b.title,38),this.printHangle(b.author,16),this.printHangle(b.publisher,16),this.printHangle(b.isbn,5),this.printHangle(b.change_subject2(b.subject),5),this.printHangle(b.printStatus(b.status),5),b.getRentCount());
+			}
+			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
+			System.out.printf("                                            총 %2d개의 도서를 관리중입니다.%n", list.size());
+			System.out.println("└──────────────────────────────────────────────────────────────────┘");
+			System.out.println();
+			return true;
+			
+		}
+	}
 
 	void showRentList(List<Book> list) { // 검색한 책 리스트를 출력하는 메서드
 		if (list == null || list.size() == 0)
@@ -281,6 +305,24 @@ public class Osystem {
 		}
 	}
 
+	String printHangle(String str,int num) {
+		int hangleCount = 0;
+		for ( int i = 0 ; i < str.length( ) ; i++ )
+        {
+            char ch = str.charAt( i );
+            Character.UnicodeBlock unicodeBlock = Character.UnicodeBlock.of( ch );
+            if ( UnicodeBlock.HANGUL_SYLLABLES.equals( unicodeBlock ) || 
+                    UnicodeBlock.HANGUL_COMPATIBILITY_JAMO.equals( unicodeBlock )
+                    || UnicodeBlock.HANGUL_JAMO.equals( unicodeBlock ) )
+            {
+            hangleCount++;
+            }
+        }//end hangleCount
+		for(int i=0;i<num-str.length()-hangleCount;i++) {
+			str += " ";
+		}
+		return str;
+	}
 	// 리스트 추가
 
 	// 히스토리 메서드(오버로딩)
