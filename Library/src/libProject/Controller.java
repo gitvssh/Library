@@ -186,6 +186,8 @@ public class Controller {
 								if(osys.showBookList(bookDB.search(scan.nextLine(), 1))) {// 검색메서드
 								bookDB.rentBooks(loginMem);// 대출메서드
 								continue rentBook;
+								}else {
+								continue rentBook;
 								}
 							case "2":// 저자
 								osys.history(loginMem.getId(), "도서대출", "저자");
@@ -193,6 +195,8 @@ public class Controller {
 								if(osys.showBookList(bookDB.search(scan.nextLine(), 2))) {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
+								}else {
+									continue rentBook;
 								}
 							case "3":// 출판사
 								osys.history(loginMem.getId(), "도서대출", "출판사");
@@ -200,8 +204,10 @@ public class Controller {
 								if(osys.showBookList(bookDB.search(scan.nextLine(), 3))) {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
+								}else {
+									continue rentBook;	
 								}
-							case "4":// 분야
+															case "4":// 분야
 								osys.history(loginMem.getId(), "도서대출", "분야");
 								System.out.println("검색하실 분야를 입력하세요");
 								System.out.println("분야 리스트");
@@ -210,6 +216,8 @@ public class Controller {
 								if(osys.showBookList(bookDB.search(scan.nextLine(), 4))) {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
+								}else {
+									continue rentBook;
 								}
 							case "5":// 인덱스
 								osys.history(loginMem.getId(), "도서대출", "인덱스");
@@ -217,6 +225,8 @@ public class Controller {
 								if(osys.showBookList(bookDB.search(scan.nextLine(), 5))) {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
+								}else {
+									continue rentBook;
 								}
 							case "6":// ISBN
 								osys.history(loginMem.getId(), "도서대출", "ISBN");
@@ -224,6 +234,8 @@ public class Controller {
 								if(osys.showBookList(bookDB.search(scan.nextLine(), 6))) {
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
+								}else {
+									continue rentBook;
 								}
 							case "7":// 전체 도서목록
 								osys.history(loginMem.getId(), "도서대출", "전체 도서목록");

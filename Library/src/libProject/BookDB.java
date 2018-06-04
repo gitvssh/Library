@@ -19,18 +19,18 @@ public class BookDB extends DB{
 	public BookDB() {
 		this.bookList = new ArrayList();
 		//dummy books
-		this.bookList.add(new Book("소피의 세계","요슈타인가아더 ",1,"현암사"));
-		this.bookList.add(new Book("간다, 봐라","법정",2,"김영사"));
-		this.bookList.add(new Book("프로테스탄트 윤리","막스 베버",3,"현대지성"));
-		this.bookList.add(new Book("별, 빛의과학","지웅배",4,"위즈덤하우스"));
+		this.bookList.add(new Book("소피의 세계","요슈타인가아더 ","1","현암사"));
+		this.bookList.add(new Book("간다, 봐라","법정","2","김영사"));
+		this.bookList.add(new Book("프로테스탄트 윤리","막스 베버","3","현대지성"));
+		this.bookList.add(new Book("별, 빛의과학","지웅배","4","위즈덤하우스"));
 		bookList.get(3).setRentCount(100);
-		this.bookList.add(new Book("신소재공학","오세동",5,"복두출판사"));
-		this.bookList.add(new Book("공공미술, 도시를그리다","홍경표",6,"재승출판"));
-		this.bookList.add(new Book("쓸어담는 한자","권작가",7,"쓸어담는 한자"));
+		this.bookList.add(new Book("신소재공학","오세동","5","복두출판사"));
+		this.bookList.add(new Book("공공미술, 도시를그리다","홍경표","6","재승출판"));
+		this.bookList.add(new Book("쓸어담는 한자","권작가","7","쓸어담는 한자"));
 		bookList.get(6).setRentCount(50);
-		this.bookList.add(new Book("전쟁과 평화","레프 톨스토이",8,"홍진미디어"));
-		this.bookList.add(new Book("블랙어스","티머시 스나이더",9,"열린책들"));
-		this.bookList.add(new Book("온돌, 기원과 역사","손진태",9,"온이퍼브"));
+		this.bookList.add(new Book("전쟁과 평화","레프 톨스토이","8","홍진미디어"));
+		this.bookList.add(new Book("블랙어스","티머시 스나이더","9","열린책들"));
+		this.bookList.add(new Book("온돌, 기원과 역사","손진태","9","온이퍼브"));
 		bookList.get(9).setRentCount(10);
 	}
 
@@ -63,7 +63,7 @@ public class BookDB extends DB{
 				return searchList;
 			case 4://분야
 				for(Book b:bookList) {
-					if(b.subject==Integer.parseInt(string)) searchList.add(b);
+					if(b.subject.equals(string)) searchList.add(b);
 				}
 				return searchList;
 			case 5://인덱스
@@ -84,7 +84,7 @@ public class BookDB extends DB{
 	void input() {
 		String title="";
 		String author="";
-		int subject=0;
+		String subject="";
 		String publisher="";
 
 		System.out.print("제목 :");
@@ -102,8 +102,7 @@ public class BookDB extends DB{
 		System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
 		System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
 		System.out.print("분야 :");
-		subject = scan.nextInt();
-		scan.nextLine();
+		subject = scan.nextLine();
 		System.out.println();
 		
 		System.out.print("출판사 :");
@@ -143,8 +142,7 @@ public class BookDB extends DB{
 		System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
 		System.out.printf("현재 입력된 분야 : %s%n",b.change_subject2(b.getSubject()));
 		System.out.print("수정하실 분야 :");
-		b.setSubject(scan.nextInt());
-		scan.nextLine();
+		b.setSubject(scan.nextLine());
 		System.out.println();
 		
 		System.out.printf("현재 입력된 출판사 : %s%n",b.getPublisher());

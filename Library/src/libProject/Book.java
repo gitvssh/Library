@@ -10,7 +10,7 @@ public class Book implements Data{
 	String index;//인덱스는 분야(ex ㄱ. ㄷ. ㅂ.)+책생성카운트(1,2,...) 합쳐서 문자열로 생성
 	String title;
 	String author;
-	int subject;//분야, 분야는 숫자로 받되, 카드예제 1,2,3,4를 spade,diamond로 바꾼것처럼 ㄱ.(철학-1),ㄴ.(종교-2)등으로 변환
+	String subject;//분야, 분야는 숫자로 받되, 카드예제 1,2,3,4를 spade,diamond로 바꾼것처럼 ㄱ.(철학-1),ㄴ.(종교-2)등으로 변환
 	/*숫자로 받는 이유는, 나중에 출력시 다양한 형태로 출력(인덱스 ㄱ,ㄴ,... 도서검색장르 철학,종교...)로 되는데
 	 *어차피 출력시 다른형태로 변환해야 될 경우가 있으니, 매개변수를 int로 설정하면 검색이나 정렬, 메모리관리에서 이점을 볼 수 있다고 생각됨
 	 */
@@ -46,7 +46,7 @@ public class Book implements Data{
 
 	public Book() {}
 	
-	public Book(String title, String author, int subject,String publisher) {
+	public Book(String title, String author, String subject,String publisher) {
 		isbn_count++;
 		this.title = title;
 		this.author = author;
@@ -89,49 +89,49 @@ public class Book implements Data{
 		return "";
 	}
 
-	String change_subject(int subject) {
+	String change_subject(String subject) {
 		switch(subject) {
-		case 1:
+		case "1":
 			return "ㄱ.";
-		case 2:
+		case "2":
 			return "ㄴ.";
-		case 3:
+		case "3":
 			return "ㄷ.";
-		case 4:
+		case "4":
 			return "ㄹ.";
-		case 5:
+		case "5":
 			return "ㅁ.";
-		case 6:
+		case "6":
 			return "ㅂ.";
-		case 7:
+		case "7":
 			return "ㅅ.";
-		case 8:
+		case "8":
 			return "ㅇ.";
-		case 9:
+		case "9":
 			return "ㅈ.";
 		}
 		return "잘못된 입력입니다.";
 	}
 	
-	String change_subject2(int subject) {
+	String change_subject2(String subject) {
 		switch(subject) {
-		case 1:
+		case "1":
 			return "철학";
-		case 2:
+		case "2":
 			return "종교";
-		case 3:
+		case "3":
 			return "사회학";
-		case 4:
+		case "4":
 			return "자연과학";
-		case 5:
+		case "5":
 			return "기술과학";
-		case 6:
+		case "6":
 			return "예술";
-		case 7:
+		case "7":
 			return "언어";
-		case 8:
+		case "8":
 			return "문학";
-		case 9:
+		case "9":
 			return "역사";
 		}
 		return "잘못된 입력입니다.";
@@ -161,11 +161,11 @@ public class Book implements Data{
 		this.author = author;
 	}
 
-	public int getSubject() {
+	public String getSubject() {
 		return subject;
 	}
 
-	public void setSubject(int subject) {
+	public void setSubject(String subject) {
 		this.subject = subject;
 	}
 

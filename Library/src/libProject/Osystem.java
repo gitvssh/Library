@@ -194,6 +194,7 @@ public class Osystem {
 		System.out.print(">>");
 
 
+
 				
 			}
 	//-----------------------------------관리자 끝 ----------------------------------------
@@ -221,8 +222,9 @@ public class Osystem {
 		}
 	}
 
-	void showRentList(List<Book> list) {	//검색한 책 리스트를 출력하는 메서드
-		if(list == null || list.size()==0) System.out.println("조회할 도서가 없습니다.");	//매개변수인 리스트가 null이거나 길이가 0일 때
+	void showRentList(List<Book> list) { // 검색한 책 리스트를 출력하는 메서드
+		if (list == null || list.size() == 0)
+			System.out.println("조회할 도서가 없습니다."); // 매개변수인 리스트가 null이거나 길이가 0일 때
 		else {
 			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 			System.out.printf("    %-7s | %-30s | %-8s | %-8s | %-5s | %-5s | %-5s   %n", "인덱스", "제목", "저자", "출판사",
@@ -236,7 +238,7 @@ public class Osystem {
 			System.out.println("└──────────────────────────────────────────────────────────────────┘");
 		}
 	}
-	
+
 	void showMemberList(List<Member> list) { // 검색한 회원 리스트 출력 양식
 		if (list == null || list.size() == 0)
 			System.out.println("조회할 회원이 없습니다.");
