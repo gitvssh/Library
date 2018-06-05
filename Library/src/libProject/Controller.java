@@ -183,19 +183,19 @@ public class Controller {
 							case "1":// 제목
 								osys.history(loginMem.getId(), "도서대출", "제목");
 								System.out.println("검색하실 제목을 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 1));// 검색메서드
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 1)))// 검색메서드
 								bookDB.rentBooks(loginMem);// 대출메서드
 								continue rentBook;
 							case "2":// 저자
 								osys.history(loginMem.getId(), "도서대출", "저자");
 								System.out.println("검색하실 저자를 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 2));
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 2)))
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
 							case "3":// 출판사
 								osys.history(loginMem.getId(), "도서대출", "출판사");
 								System.out.println("검색하실 출판사를 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 3));
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 3)))
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
 							case "4":// 분야
@@ -204,19 +204,19 @@ public class Controller {
 								System.out.println("분야 리스트");
 								System.out.println("1.철학 2.종교 3.사회학 4.자연과학");
 								System.out.println("5.기술과학 6.예술 7.언어 8.문학 9.역사");
-								osys.showBookList(bookDB.search(scan.nextLine(), 4));
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 4)))
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
 							case "5":// 인덱스
 								osys.history(loginMem.getId(), "도서대출", "인덱스");
 								System.out.println("검색하실 인덱스를 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 5));
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 5)))
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
 							case "6":// ISBN
 								osys.history(loginMem.getId(), "도서대출", "ISBN");
 								System.out.println("검색하실 ISBN을 입력하세요");
-								osys.showBookList(bookDB.search(scan.nextLine(), 6));
+								if(osys.showBookList(bookDB.search(scan.nextLine(), 6)))
 								bookDB.rentBooks(loginMem);
 								continue rentBook;
 							case "7":// 전체 도서목록
