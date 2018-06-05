@@ -19,6 +19,11 @@ public class BookDB extends DB{
 	public BookDB() {
 		this.bookList = new ArrayList();
 		//dummy books
+		this.bookList.add(new Book("에바 일루즈","박형신","3","커뮤니케이션북스"));
+		this.bookList.add(new Book("신노예","최성환","3","앤길"));
+		this.bookList.add(new Book("그해 봄","박건웅","9","보리"));
+		this.bookList.add(new Book("안평","심경호","9","알마"));
+		this.bookList.add(new Book("대학의 기업화","고부응","3","한울"));
 		this.bookList.add(new Book("장 공의 체면","원팡이","8","연극과인간"));
 		this.bookList.add(new Book("그리스 비극 깊이 읽기","최혜영","9","푸른역사"));
 		this.bookList.add(new Book("외국어 전파담","로버트 파우저","9","혜화1117"));
@@ -66,7 +71,6 @@ public class BookDB extends DB{
 		bookList.get(25).setRentCount(95);
 		bookList.get(30).setRentCount(75);
 		bookList.get(36).setRentCount(55);
-		bookList.get(46).setRentCount(89);
 		this.bookList.add(new Book("신소재공학","오세동","5","복두출판사"));
 		this.bookList.add(new Book("공공미술, 도시를그리다","홍경표","6","재승출판"));
 		this.bookList.add(new Book("쓸어담는 한자","권작가","7","쓸어담는 한자"));
