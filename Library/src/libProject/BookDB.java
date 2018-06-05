@@ -20,17 +20,17 @@ public class BookDB extends DB {
 		this.bookList = new ArrayList();
 		// dummy books
 		this.bookList.add(new Book("소피의 세계", "요슈타인가아더 ", "1", "현암사"));
-		this.bookList.add(new Book("간다, 봐라", "법정", "2", "김영사"));
+		this.bookList.add(new Book("간다,봐라", "법정", "2", "김영사"));
 		this.bookList.add(new Book("프로테스탄트 윤리", "막스 베버", "3", "현대지성"));
-		this.bookList.add(new Book("별, 빛의과학", "지웅배", "4", "위즈덤하우스"));
+		this.bookList.add(new Book("별,빛의과학", "지웅배", "4", "위즈덤하우스"));
 		bookList.get(3).setRentCount(100);
 		this.bookList.add(new Book("신소재공학", "오세동", "5", "복두출판사"));
-		this.bookList.add(new Book("공공미술, 도시를그리다", "홍경표", "6", "재승출판"));
+		this.bookList.add(new Book("공공미술,도시를그리다", "홍경표", "6", "재승출판"));
 		this.bookList.add(new Book("쓸어담는 한자", "권작가", "7", "쓸어담는 한자"));
 		bookList.get(6).setRentCount(50);
 		this.bookList.add(new Book("전쟁과 평화", "레프 톨스토이", "8", "홍진미디어"));
 		this.bookList.add(new Book("블랙어스", "티머시 스나이더", "9", "열린책들"));
-		this.bookList.add(new Book("온돌, 기원과 역사", "손진태", "9", "온이퍼브"));
+		this.bookList.add(new Book("온돌,기원과 역사", "손진태", "9", "온이퍼브"));
 		bookList.get(9).setRentCount(10);
 	}
 

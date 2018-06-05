@@ -34,8 +34,6 @@ public class Controller {
 			switch (login) {
 			case 0:// 비회원 0
 				observer: while (true) {// ----------------------비회원 while-------------------
-					System.out.println("체크체크체크");
-					System.out.println(osys.printHangle("체크체크체크체크", 30));
 					osys.history("비회원");// 히스토리(지금까지 지나온 메뉴 표시)
 					osys.observer_main();// 비회원 메인화면
 					inMenu = scan.nextLine();

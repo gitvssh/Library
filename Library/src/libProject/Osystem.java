@@ -230,12 +230,12 @@ public class Osystem {
 		}
 		
 		else {
-			System.out.println("┌─────────────────────────────────────────────────────────────────────────┐");
-			System.out.printf("    %-7s | %-38s | %-16s | %-16s | %-5s | %-5s | %-5s | %-5s   %n", "인덱스", "제목", "저자", "출판사",
-					"ISBN", "주제", "상태","대출횟수");
-			System.out.println("└─────────────────────────────────────────────────────────────────────────┘");
+			System.out.println("┌──────────────────────────────────────────────────────────────────────────────────┐");
+			System.out.printf("       %s  | %s | %s | %s | %s | %s | %s | %s   %n", this.printHangle("인덱스",10), this.printHangle("제목",38), this.printHangle("저자",20), this.printHangle("출판사",20),
+					this.printHangle("ISBN",5), this.printHangle("주제",10), this.printHangle("상태",16),"대출횟수");
+			System.out.println("└──────────────────────────────────────────────────────────────────────────────────┘");
 			for (Book b : list) {// 인덱스(7), 제목(30), 저자(8), 출판사(8), ISBN(5), 주제(5)
-				System.out.printf(" %-7s | %-38s | %-16s | %-16s | %-5s | %-5s | %-7s | %-7s %n",b.index,this.printHangle(b.title,38),this.printHangle(b.author,16),this.printHangle(b.publisher,16),this.printHangle(b.isbn,5),this.printHangle(b.change_subject2(b.subject),5),this.printHangle(b.printStatus(b.status),5),b.getRentCount());
+				System.out.printf(" %s | %s | %s | %s | %s | %s | %s | %s %n",b.index,this.printHangle(b.title,38),this.printHangle(b.author,20),this.printHangle(b.publisher,20),this.printHangle(b.isbn,5),this.printHangle(b.change_subject2(b.subject),10),this.printHangle(b.printStatus(b.status),16),b.getRentCount());
 			}
 			System.out.println("┌──────────────────────────────────────────────────────────────────┐");
 			System.out.printf("                                            총 %2d개의 도서를 관리중입니다.%n", list.size());
@@ -318,7 +318,8 @@ public class Osystem {
             hangleCount++;
             }
         }//end hangleCount
-		for(int i=0;i<num-str.length()-hangleCount;i++) {
+		int strlength = str.length();
+		for(int i=0;i<num-strlength-hangleCount*2;i++) {
 			str += " ";
 		}
 		return str;
