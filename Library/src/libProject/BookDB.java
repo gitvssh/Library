@@ -311,19 +311,17 @@ public class BookDB extends DB {
 				System.out.println("이전화면으로 돌아갑니다.");
 				break check;
 			} else {// 정상입력일경우
-				String index = rent.substring(2, 7);// 인덱스 추출
+				String index = rent;// 인덱스 추출
 				System.out.println(index);
-				for (Book b : bookDB.bookList) {
-					if (b.isbn.equals(index) && b.status == true) {// 검색결과 확인,재고확인
+				for (Book b : bookList) {
+					if (b.index.equals(index) && b.status == true) {// 검색결과 확인,재고확인
 						System.out.println("선택하신 도서는 " + b.title + "입니다.");
 						selected = b;// 선택한 도서 샘플에 등록
 						return selected;
-					} else {// 재고가 없거나, 잘못된 입력일 경우
-						System.out.println("선택가능한 도서가 없습니다.");
-						break;
-					}
+					} 
 				}
-
+				System.out.println("선택가능한 도서가 없습니다.");
+				return null;
 			} // 인덱스 검색 끝
 		}
 		return selected;
